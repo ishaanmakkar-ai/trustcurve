@@ -1,239 +1,444 @@
 {
-  "runs": 65,
-  "distinct_tasks": 27,
-  "mean_runs_per_task": 2.41,
-  "benchmark_failures": 15,
-  "failure_icc": 0.588,
-  "effective_runs": 35.6,
-  "insured_loss_events": 0,
-  "insured_loss_events_incl_uncertain": 0,
-  "omission_runs": 11,
-  "loss_rate_95_upper_one_sided": 0.0808,
-  "cost_per_run_usd": 0.015,
-  "sec_per_run": 37.2,
-  "ceiling_effective_runs_50_tasks": 85.0,
-  "scenarios": [
-    {
-      "q": 0.02,
-      "cv2": 1.0,
-      "k": 0.05,
-      "claims_equiv": 2143,
-      "effective_runs_needed": 107146,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 85097,
-      "runs_at_2_each": 170194,
-      "api_cost_usd": 2561.25,
-      "wall_hours_at_conc": 220.01
-    },
-    {
-      "q": 0.02,
-      "cv2": 1.0,
-      "k": 0.1,
-      "claims_equiv": 536,
-      "effective_runs_needed": 26786,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 21275,
-      "runs_at_2_each": 42550,
-      "api_cost_usd": 640.34,
-      "wall_hours_at_conc": 55.0
-    },
-    {
-      "q": 0.02,
-      "cv2": 1.0,
-      "k": 0.2,
-      "claims_equiv": 134,
-      "effective_runs_needed": 6697,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 5319,
-      "runs_at_2_each": 10638,
-      "api_cost_usd": 160.09,
-      "wall_hours_at_conc": 13.75
-    },
-    {
-      "q": 0.02,
-      "cv2": 3.0,
-      "k": 0.05,
-      "claims_equiv": 4307,
-      "effective_runs_needed": 215373,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 171054,
-      "runs_at_2_each": 342108,
-      "api_cost_usd": 5148.39,
-      "wall_hours_at_conc": 442.24
-    },
-    {
-      "q": 0.02,
-      "cv2": 3.0,
-      "k": 0.1,
-      "claims_equiv": 1077,
-      "effective_runs_needed": 53843,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 42764,
-      "runs_at_2_each": 85528,
-      "api_cost_usd": 1287.11,
-      "wall_hours_at_conc": 110.56
-    },
-    {
-      "q": 0.02,
-      "cv2": 3.0,
-      "k": 0.2,
-      "claims_equiv": 269,
-      "effective_runs_needed": 13461,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 10691,
-      "runs_at_2_each": 21382,
-      "api_cost_usd": 321.78,
-      "wall_hours_at_conc": 27.64
-    },
-    {
-      "q": 0.05,
-      "cv2": 1.0,
-      "k": 0.05,
-      "claims_equiv": 2110,
-      "effective_runs_needed": 42209,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 33523,
-      "runs_at_2_each": 67046,
-      "api_cost_usd": 1008.98,
-      "wall_hours_at_conc": 86.67
-    },
-    {
-      "q": 0.05,
-      "cv2": 1.0,
-      "k": 0.1,
-      "claims_equiv": 528,
-      "effective_runs_needed": 10552,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 8381,
-      "runs_at_2_each": 16762,
-      "api_cost_usd": 252.25,
-      "wall_hours_at_conc": 21.67
-    },
-    {
-      "q": 0.05,
-      "cv2": 1.0,
-      "k": 0.2,
-      "claims_equiv": 132,
-      "effective_runs_needed": 2638,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 2096,
-      "runs_at_2_each": 4192,
-      "api_cost_usd": 63.09,
-      "wall_hours_at_conc": 5.42
-    },
-    {
-      "q": 0.05,
-      "cv2": 3.0,
-      "k": 0.05,
-      "claims_equiv": 4275,
-      "effective_runs_needed": 85500,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 67906,
-      "runs_at_2_each": 135812,
-      "api_cost_usd": 2043.84,
-      "wall_hours_at_conc": 175.56
-    },
-    {
-      "q": 0.05,
-      "cv2": 3.0,
-      "k": 0.1,
-      "claims_equiv": 1069,
-      "effective_runs_needed": 21375,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 16977,
-      "runs_at_2_each": 33954,
-      "api_cost_usd": 510.97,
-      "wall_hours_at_conc": 43.89
-    },
-    {
-      "q": 0.05,
-      "cv2": 3.0,
-      "k": 0.2,
-      "claims_equiv": 267,
-      "effective_runs_needed": 5344,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 4245,
-      "runs_at_2_each": 8490,
-      "api_cost_usd": 127.77,
-      "wall_hours_at_conc": 10.97
-    },
-    {
-      "q": 0.2,
-      "cv2": 1.0,
-      "k": 0.05,
-      "claims_equiv": 1948,
-      "effective_runs_needed": 9741,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 7737,
-      "runs_at_2_each": 15474,
-      "api_cost_usd": 232.87,
-      "wall_hours_at_conc": 20.0
-    },
-    {
-      "q": 0.2,
-      "cv2": 1.0,
-      "k": 0.1,
-      "claims_equiv": 487,
-      "effective_runs_needed": 2435,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 1935,
-      "runs_at_2_each": 3870,
-      "api_cost_usd": 58.24,
-      "wall_hours_at_conc": 5.0
-    },
-    {
-      "q": 0.2,
-      "cv2": 1.0,
-      "k": 0.2,
-      "claims_equiv": 122,
-      "effective_runs_needed": 609,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 484,
-      "runs_at_2_each": 968,
-      "api_cost_usd": 14.57,
-      "wall_hours_at_conc": 1.25
-    },
-    {
-      "q": 0.2,
-      "cv2": 3.0,
-      "k": 0.05,
-      "claims_equiv": 4113,
-      "effective_runs_needed": 20563,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 16332,
-      "runs_at_2_each": 32664,
-      "api_cost_usd": 491.56,
-      "wall_hours_at_conc": 42.22
-    },
-    {
-      "q": 0.2,
-      "cv2": 3.0,
-      "k": 0.1,
-      "claims_equiv": 1028,
-      "effective_runs_needed": 5141,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 4083,
-      "runs_at_2_each": 8166,
-      "api_cost_usd": 122.89,
-      "wall_hours_at_conc": 10.56
-    },
-    {
-      "q": 0.2,
-      "cv2": 3.0,
-      "k": 0.2,
-      "claims_equiv": 257,
-      "effective_runs_needed": 1285,
-      "feasible_with_50_tasks": false,
-      "distinct_tasks_needed_at_2_runs_each": 1021,
-      "runs_at_2_each": 2042,
-      "api_cost_usd": 30.73,
-      "wall_hours_at_conc": 2.64
-    }
-  ],
-  "option_A_50x20": {
-    "runs": 1000,
-    "api_cost_usd": 15.05,
-    "wall_hours_at_conc": 1.29,
-    "effective_runs": 82.1
+  "estimand_note": "Rates are for the \u03c4\u00b2-bench airline task distribution under this rating cell, not an insured's real traffic (bias not addressed by these numbers).",
+  "breadth_only": {
+    "runs": 50,
+    "distinct_tasks": 25,
+    "weighted_cluster_size": 2.0,
+    "insured_loss_events": 0,
+    "icc_db_mismatch": 0.422,
+    "icc_db_mismatch_boot95": [
+      -0.116,
+      0.87
+    ],
+    "icc_reward_failure_for_comparison": 0.607,
+    "effective_runs": 35.2,
+    "upper95_independent_runs": 0.0582,
+    "upper95_effective_runs": 0.0817,
+    "upper95_robust_tasks_as_units": 0.1129,
+    "cost_per_run_usd": 0.0147,
+    "user_sim_cost_share": 0.143,
+    "sec_per_run_mean": 36.4
+  },
+  "pooled_reference": {
+    "runs": 65,
+    "distinct_tasks": 27,
+    "weighted_cluster_size": 2.785,
+    "insured_loss_events": 0,
+    "icc_db_mismatch": 0.306,
+    "icc_db_mismatch_boot95": [
+      -0.07,
+      0.731
+    ],
+    "icc_reward_failure_for_comparison": 0.588,
+    "effective_runs": 42.0,
+    "upper95_independent_runs": 0.045,
+    "upper95_effective_runs": 0.0688,
+    "upper95_robust_tasks_as_units": 0.105,
+    "cost_per_run_usd": 0.015,
+    "user_sim_cost_share": 0.141,
+    "sec_per_run_mean": 37.2
+  },
+  "framing_a_finite_50_tasks": {
+    "note": "Target = the 50 tasks themselves: no ceiling; with 0 events, bound -> 1-0.05^(1/runs).",
+    "option_A_50x20_upper95_if_0_events": 0.003
+  },
+  "framing_b_large_task_pool": {
+    "note": "Tasks treated as a random sample from a large pool. Variants nested in a parent task are NOT independent new tasks: effective n is capped near P/rho_parent (unmeasured).",
+    "rho_used_[lo,point,hi]": [
+      0.01,
+      0.422,
+      0.87
+    ],
+    "scenarios": [
+      {
+        "q": 0.02,
+        "cv2": 0.0,
+        "standard": "frequency only",
+        "k": 0.1,
+        "effective_runs_needed": 13258,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0038,
+        "min_distinct_tasks_at_point_rho": 5595,
+        "tasks_at_2_runs_each": 9427
+      },
+      {
+        "q": 0.02,
+        "cv2": 0.0,
+        "standard": "frequency only",
+        "k": 0.2,
+        "effective_runs_needed": 3314,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0151,
+        "min_distinct_tasks_at_point_rho": 1399,
+        "tasks_at_2_runs_each": 2357
+      },
+      {
+        "q": 0.02,
+        "cv2": 1.0,
+        "standard": "pure premium CV2=1",
+        "k": 0.1,
+        "effective_runs_needed": 26786,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0019,
+        "min_distinct_tasks_at_point_rho": 11304,
+        "tasks_at_2_runs_each": 19046
+      },
+      {
+        "q": 0.02,
+        "cv2": 1.0,
+        "standard": "pure premium CV2=1",
+        "k": 0.2,
+        "effective_runs_needed": 6697,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0075,
+        "min_distinct_tasks_at_point_rho": 2826,
+        "tasks_at_2_runs_each": 4762
+      },
+      {
+        "q": 0.02,
+        "cv2": 3.0,
+        "standard": "pure premium CV2=3",
+        "k": 0.1,
+        "effective_runs_needed": 53843,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0009,
+        "min_distinct_tasks_at_point_rho": 22722,
+        "tasks_at_2_runs_each": 38283
+      },
+      {
+        "q": 0.02,
+        "cv2": 3.0,
+        "standard": "pure premium CV2=3",
+        "k": 0.2,
+        "effective_runs_needed": 13461,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0037,
+        "min_distinct_tasks_at_point_rho": 5681,
+        "tasks_at_2_runs_each": 9571
+      },
+      {
+        "q": 0.05,
+        "cv2": 0.0,
+        "standard": "frequency only",
+        "k": 0.1,
+        "effective_runs_needed": 5141,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0097,
+        "min_distinct_tasks_at_point_rho": 2170,
+        "tasks_at_2_runs_each": 3656
+      },
+      {
+        "q": 0.05,
+        "cv2": 0.0,
+        "standard": "frequency only",
+        "k": 0.2,
+        "effective_runs_needed": 1285,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0389,
+        "min_distinct_tasks_at_point_rho": 543,
+        "tasks_at_2_runs_each": 914
+      },
+      {
+        "q": 0.05,
+        "cv2": 1.0,
+        "standard": "pure premium CV2=1",
+        "k": 0.1,
+        "effective_runs_needed": 10552,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0047,
+        "min_distinct_tasks_at_point_rho": 4454,
+        "tasks_at_2_runs_each": 7503
+      },
+      {
+        "q": 0.05,
+        "cv2": 1.0,
+        "standard": "pure premium CV2=1",
+        "k": 0.2,
+        "effective_runs_needed": 2638,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.019,
+        "min_distinct_tasks_at_point_rho": 1114,
+        "tasks_at_2_runs_each": 1876
+      },
+      {
+        "q": 0.05,
+        "cv2": 3.0,
+        "standard": "pure premium CV2=3",
+        "k": 0.1,
+        "effective_runs_needed": 21375,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0023,
+        "min_distinct_tasks_at_point_rho": 9021,
+        "tasks_at_2_runs_each": 15198
+      },
+      {
+        "q": 0.05,
+        "cv2": 3.0,
+        "standard": "pure premium CV2=3",
+        "k": 0.2,
+        "effective_runs_needed": 5344,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0094,
+        "min_distinct_tasks_at_point_rho": 2256,
+        "tasks_at_2_runs_each": 3800
+      },
+      {
+        "q": 0.08,
+        "cv2": 0.0,
+        "standard": "frequency only",
+        "k": 0.1,
+        "effective_runs_needed": 3112,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0161,
+        "min_distinct_tasks_at_point_rho": 1314,
+        "tasks_at_2_runs_each": 2213
+      },
+      {
+        "q": 0.08,
+        "cv2": 0.0,
+        "standard": "frequency only",
+        "k": 0.2,
+        "effective_runs_needed": 778,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0643,
+        "min_distinct_tasks_at_point_rho": 329,
+        "tasks_at_2_runs_each": 554
+      },
+      {
+        "q": 0.08,
+        "cv2": 1.0,
+        "standard": "pure premium CV2=1",
+        "k": 0.1,
+        "effective_runs_needed": 6494,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0077,
+        "min_distinct_tasks_at_point_rho": 2741,
+        "tasks_at_2_runs_each": 4617
+      },
+      {
+        "q": 0.08,
+        "cv2": 1.0,
+        "standard": "pure premium CV2=1",
+        "k": 0.2,
+        "effective_runs_needed": 1623,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0308,
+        "min_distinct_tasks_at_point_rho": 686,
+        "tasks_at_2_runs_each": 1155
+      },
+      {
+        "q": 0.08,
+        "cv2": 3.0,
+        "standard": "pure premium CV2=3",
+        "k": 0.1,
+        "effective_runs_needed": 13258,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0038,
+        "min_distinct_tasks_at_point_rho": 5595,
+        "tasks_at_2_runs_each": 9427
+      },
+      {
+        "q": 0.08,
+        "cv2": 3.0,
+        "standard": "pure premium CV2=3",
+        "k": 0.2,
+        "effective_runs_needed": 3314,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0151,
+        "min_distinct_tasks_at_point_rho": 1399,
+        "tasks_at_2_runs_each": 2357
+      },
+      {
+        "q": 0.2,
+        "cv2": 0.0,
+        "standard": "frequency only",
+        "k": 0.1,
+        "effective_runs_needed": 1082,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0462,
+        "min_distinct_tasks_at_point_rho": 457,
+        "tasks_at_2_runs_each": 770
+      },
+      {
+        "q": 0.2,
+        "cv2": 0.0,
+        "standard": "frequency only",
+        "k": 0.2,
+        "effective_runs_needed": 271,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.1848,
+        "min_distinct_tasks_at_point_rho": 115,
+        "tasks_at_2_runs_each": 193
+      },
+      {
+        "q": 0.2,
+        "cv2": 1.0,
+        "standard": "pure premium CV2=1",
+        "k": 0.1,
+        "effective_runs_needed": 2435,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0205,
+        "min_distinct_tasks_at_point_rho": 1028,
+        "tasks_at_2_runs_each": 1732
+      },
+      {
+        "q": 0.2,
+        "cv2": 1.0,
+        "standard": "pure premium CV2=1",
+        "k": 0.2,
+        "effective_runs_needed": 609,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0821,
+        "min_distinct_tasks_at_point_rho": 257,
+        "tasks_at_2_runs_each": 433
+      },
+      {
+        "q": 0.2,
+        "cv2": 3.0,
+        "standard": "pure premium CV2=3",
+        "k": 0.1,
+        "effective_runs_needed": 5141,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0097,
+        "min_distinct_tasks_at_point_rho": 2170,
+        "tasks_at_2_runs_each": 3656
+      },
+      {
+        "q": 0.2,
+        "cv2": 3.0,
+        "standard": "pure premium CV2=3",
+        "k": 0.2,
+        "effective_runs_needed": 1285,
+        "ceiling_50_tasks_at_rho_[lo,point,hi]": [
+          5000,
+          118,
+          57
+        ],
+        "feasible_with_50_tasks_at_point_rho": false,
+        "max_rho_for_50_tasks": 0.0389,
+        "min_distinct_tasks_at_point_rho": 543,
+        "tasks_at_2_runs_each": 914
+      }
+    ]
+  },
+  "costs": {
+    "api_per_run_haiku_user_sim": 0.0147,
+    "api_per_run_sonnet_user_sim_est": 0.0546,
+    "note": "Excludes judge (~1%) and the cost of generating and validating new tasks, which dominates option B. Sonnet 5.5 is 20x Haiku per token."
   }
 }

@@ -59,3 +59,6 @@ Each loop records the expectation before checking, what broke, and the fix. A re
 
 ## Review-2 resolution (after loop 4)
 Dollar diff v3: content pairing of new reservations, net-per-reservation comparison, change attribution against the initial DB, stored-value forfeiture and a customer-facing service key. 40/40 tests pass. Re-scoring all 65 runs: 0 insured events unchanged. Omission sizes corrected (task 7 $2,440 → $296, task 32 $906 → $114, task 8 $500 → $348). The projection is unchanged (it depends only on events and ICC).
+
+## Review-3 resolution
+Projection rebuilt on the breadth batch only, with the DB-mismatch ICC and a cluster bootstrap. Two target-population framings. Robust zero-event bound 11.3%. Feasibility stated as "50 tasks suffice only if loss ICC < ~0.03 at q ≤ 8%". PILOT.md rewritten. 46/46 tests pass.

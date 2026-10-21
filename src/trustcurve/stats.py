@@ -35,6 +35,10 @@ def icc_binary(clusters: dict[str, list[int]]) -> float:
     return float("nan") if den == 0 else (msb - msw) / den
 
 
+def wilson_upper_one_sided(x: int, n: int) -> float:
+    return wilson(x, n, Z90)[1]
+
+
 def task_bootstrap(clusters: dict[str, list[float]], stat, B: int = 5000, seed: int = 1) -> tuple[float, float]:
     rng = random.Random(seed); keys = list(clusters)
     vals = []
@@ -62,3 +66,27 @@ def group(rows, key, val):
     for r in rows:
         d[str(r[key])].append(val(r))
     return d
+
+
+def icc_bootstrap(clusters: dict[str, list[int]], B: int = 5000, seed: int = 1) -> tuple[float, float, float]:
+    """Cluster-preserving bootstrap of the ANOVA ICC: (median, 2.5%, 97.5%). Resamples whole tasks."""
+    rng = random.Random(seed); keys = list(clusters); vals = []
+    for _ in range(B):
+        sample = {f"{i}": clusters[rng.choice(keys)] for i in range(len(keys))}
+        v = icc_binary(sample)
+        if v == v:  # drop NaN (degenerate resamples)
+            vals.append(v)
+    vals.sort()
+    if not vals:
+        return (float("nan"),) * 3
+    return (vals[len(vals) // 2], vals[int(0.025 * len(vals))], vals[int(0.975 * len(vals)) - 1])
+
+
+def zero_event_upper(n: float, conf: float = 0.95) -> float:
+    """One-sided upper bound on a rate after 0 events in n (independent) trials."""
+    return 1 - (1 - conf) ** (1 / n)
+
+
+def weighted_cluster_size(sizes: list[int]) -> float:
+    """m_w = sum(m^2)/sum(m): the cluster size that enters the design effect with unequal clusters."""
+    return sum(m * m for m in sizes) / sum(sizes)
