@@ -13,6 +13,9 @@ Research pass for the TrustCurve pilot (2026-10-21). `[U]` = unverified, `(d)` =
 - **Exposure base:** it must be proportional to expected loss, practical, and consistent with precedent [1, p.49]. For agents the candidates are per conversation, per transaction, or per $ of refund/payment authority. **One benchmark run counts as one exposure only if it matches a real-world unit in expected loss.**
 
 ## 2. How many observations: credibility
+- **Primary-text verification (2026-10-21, done directly, not delegated):**
+  - Werner & Modlin, *Basic Ratemaking* (CAS), Ch. 12, book pp. 218–220 (PDF pp. 230–232). Full standard E(Y) = (z/k)² = (1.645/0.05)² = 1,082. Square-root rule Z = √(Y/E(Y)), with their worked example 100 claims → Z = 0.30 → 0.30·$200 + 0.70·$300 = $270. Stated assumptions: homogeneous exposures, Poisson claims, no severity variation. The appendix exhibits use the 1,082 standard in practice (e.g. 683 claims → Z = 79.5%).
+  - *Loss Data Analytics* ch. 9: eq. 9.4 (frequency standard with σ²/μ; binomial 1−q in Ex. 9.2.3), eq. 9.8 (Bühlmann Z = n/(n+K), K = EPV/VHM), eq. 9.10 (Bühlmann–Straub Z = m/(m+K)).
 - **Limited-fluctuation full standard:** n_F = (z/k)². At P = 90% (z = 1.645) and k = 5%, n_F = **1,082 claims** (verified against the CAS text [1, Table 12.1; 5]).
   - Other points on the same table: k = 10% → 271 claims; 95%/5% → 1,537; 99%/5% → 2,654 (z = 2.576).
   - Assumptions: Poisson claim counts, homogeneous exposures. The count is of *claims*, not exposures.

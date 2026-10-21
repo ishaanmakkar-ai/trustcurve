@@ -497,6 +497,104 @@
     },
     "kish_weighting_design_effect": 2.037
   },
+  "full_credibility_1082_effective_failures": {
+    "budget_usd": 250.0,
+    "rho": 0.422,
+    "max_effective_failures_from_50_tasks_at_q_upper": 13.4,
+    "scenarios": [
+      {
+        "q": 0.1129,
+        "q_basis": "robust 95% upper bound (most favourable)",
+        "runs_per_task": 2,
+        "effective_runs": 9584,
+        "raw_runs": 13629,
+        "distinct_tasks": 6815,
+        "api_usd_haiku_sim": 200.0,
+        "api_usd_sonnet_sim": 745.0,
+        "wall_hours_at_8": 17.2,
+        "affordable_vs_budget": true,
+        "feasible_with_50_tasks": false
+      },
+      {
+        "q": 0.1129,
+        "q_basis": "robust 95% upper bound (most favourable)",
+        "runs_per_task": 20,
+        "effective_runs": 9584,
+        "raw_runs": 86426,
+        "distinct_tasks": 4322,
+        "api_usd_haiku_sim": 1270.0,
+        "api_usd_sonnet_sim": 4722.0,
+        "wall_hours_at_8": 109.2,
+        "affordable_vs_budget": false,
+        "feasible_with_50_tasks": false
+      },
+      {
+        "q": 0.05,
+        "q_basis": "plausible",
+        "runs_per_task": 2,
+        "effective_runs": 21640,
+        "raw_runs": 30773,
+        "distinct_tasks": 15387,
+        "api_usd_haiku_sim": 452.0,
+        "api_usd_sonnet_sim": 1681.0,
+        "wall_hours_at_8": 38.9,
+        "affordable_vs_budget": false,
+        "feasible_with_50_tasks": false
+      },
+      {
+        "q": 0.05,
+        "q_basis": "plausible",
+        "runs_per_task": 20,
+        "effective_runs": 21640,
+        "raw_runs": 195150,
+        "distinct_tasks": 9758,
+        "api_usd_haiku_sim": 2869.0,
+        "api_usd_sonnet_sim": 10663.0,
+        "wall_hours_at_8": 246.6,
+        "affordable_vs_budget": false,
+        "feasible_with_50_tasks": false
+      },
+      {
+        "q": 0.02,
+        "q_basis": "plausible",
+        "runs_per_task": 2,
+        "effective_runs": 54100,
+        "raw_runs": 76931,
+        "distinct_tasks": 38466,
+        "api_usd_haiku_sim": 1131.0,
+        "api_usd_sonnet_sim": 4203.0,
+        "wall_hours_at_8": 97.2,
+        "affordable_vs_budget": false,
+        "feasible_with_50_tasks": false
+      },
+      {
+        "q": 0.02,
+        "q_basis": "plausible",
+        "runs_per_task": 20,
+        "effective_runs": 54100,
+        "raw_runs": 487874,
+        "distinct_tasks": 24394,
+        "api_usd_haiku_sim": 7172.0,
+        "api_usd_sonnet_sim": 26657.0,
+        "wall_hours_at_8": 616.6,
+        "affordable_vs_budget": false,
+        "feasible_with_50_tasks": false
+      }
+    ],
+    "verdict": "Not affordable in tasks, and usually not in dollars: every scenario needs thousands of distinct validated tasks (tau2 airline has 50). Fallback: option A 50x20 (or 25x20)."
+  },
+  "fallback": {
+    "50x20": {
+      "runs": 1000,
+      "usd": 14.7,
+      "hours_at_8": 1.26
+    },
+    "25x20": {
+      "runs": 500,
+      "usd": 7.35,
+      "hours_at_8": 0.63
+    }
+  },
   "rate_limit_plan": {
     "observed": "concurrency 8, 50 runs, 0 errors/retries",
     "plan": "start at 8 concurrent sims; tau2 --max-retries 3 --retry-delay 1; if any 429, halve concurrency and resume with --auto-resume; Sonnet user simulator needs a separate per-model limit check",

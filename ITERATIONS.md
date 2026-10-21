@@ -62,3 +62,12 @@ Dollar diff v3: content pairing of new reservations, net-per-reservation compari
 
 ## Review-3 resolution
 Projection rebuilt on the breadth batch only, with the DB-mismatch ICC and a cluster bootstrap. Two target-population framings. Robust zero-event bound 11.3%. Feasibility stated as "50 tasks suffice only if loss ICC < ~0.03 at q ≤ 8%". PILOT.md rewritten. 46/46 tests pass.
+
+## Loop accounting
+Four run/analysis loops in total, within the goal's cap of 4:
+1. dollar-diff harness
+2. pilot batch
+3. breadth batch with the policy layer
+4. projection
+
+The review-1/2/3 resolutions re-analysed **existing** data and code. They ran no new batches and spent no money, so they're corrections within loops 2–4, not extra loops. Total API spend for the pilot stays at about $1.00 (smoke $0.02, pilot $0.24, breadth $0.74).

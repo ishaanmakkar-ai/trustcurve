@@ -107,6 +107,31 @@ def main(breadth_path, pilot_path=None, n_tasks=50):
                 "complement (manual/scenario rate). Strata absent from the sample cannot be priced from data.",
         "n_full_claims": round(n_full), "strata": per,
         "kish_weighting_design_effect": round(1 + cvw2, 3) if wts else None}
+    # Goal step 7 as literally specified: observe ~1,082 EFFECTIVE failures for the pooled rate.
+    BUDGET_USD = 250.0  # Ishaan's stated API budget for the Fulcrum week ($30-250)
+    thr = 8 * 3600 / s["sec_per_run_mean"]
+    full = []
+    for q, why in ((s["upper95_robust_tasks_as_units"] or 0.113, "robust 95% upper bound (most favourable)"),
+                   (0.05, "plausible"), (0.02, "plausible")):
+        eff = 1082 / q
+        for m in (2, 20):
+            runs = eff * (1 + (m - 1) * rho)
+            tasks = runs / m
+            full.append({"q": round(q, 4), "q_basis": why, "runs_per_task": m,
+                         "effective_runs": round(eff), "raw_runs": math.ceil(runs), "distinct_tasks": math.ceil(tasks),
+                         "api_usd_haiku_sim": round(runs * s["cost_per_run_usd"], 0),
+                         "api_usd_sonnet_sim": round(runs * s["cost_per_run_usd"] * ((1 - s["user_sim_cost_share"]) + s["user_sim_cost_share"] * 20), 0),
+                         "wall_hours_at_8": round(runs / thr, 1),
+                         "affordable_vs_budget": runs * s["cost_per_run_usd"] <= BUDGET_USD,
+                         "feasible_with_50_tasks": tasks <= 50})
+    out["full_credibility_1082_effective_failures"] = {
+        "budget_usd": BUDGET_USD, "rho": rho,
+        "max_effective_failures_from_50_tasks_at_q_upper": round((s["upper95_robust_tasks_as_units"] or 0.113) * n_tasks / rho, 1),
+        "scenarios": full,
+        "verdict": "Not affordable in tasks, and usually not in dollars: every scenario needs thousands of distinct "
+                   "validated tasks (tau2 airline has 50). Fallback: option A 50x20 (or 25x20)."}
+    out["fallback"] = {"50x20": {"runs": 1000, "usd": round(1000 * s["cost_per_run_usd"], 2), "hours_at_8": round(1000 / thr, 2)},
+                       "25x20": {"runs": 500, "usd": round(500 * s["cost_per_run_usd"], 2), "hours_at_8": round(500 / thr, 2)}}
     out["rate_limit_plan"] = {
         "observed": "concurrency 8, 50 runs, 0 errors/retries",
         "plan": "start at 8 concurrent sims; tau2 --max-retries 3 --retry-delay 1; if any 429, halve concurrency "
