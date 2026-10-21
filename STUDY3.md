@@ -833,3 +833,20 @@ The real-world costly-error frequency is **always a sweep, never asserted** (IER
 7. The drafts are delivered.
 
 Items 4–6 need Ishaan or the cap.
+
+### S1 addendum: filed anchors (pre-registered 2026-10-21, before any freeze; base values unchanged)
+**Source:** HSB Total Cyber+ rate and rule filing, SERFF HSTB-134954936 (Connecticut, 2026). It was extracted in the vault note "TrustCurve Insurance Research 2026-10-21/05 HSB Total Cyber+ 2026 Filing — Extracted Numbers", and every figure was read in the primary PDFs **[V]**. The figures are added as **cited sensitivity points**. S1's base values stay primary.
+
+| Parameter | S1 base | Filed value [V] | How it is used |
+|---|---|---|---|
+| Permissible LR | 0.60 | **0.548** (expenses 40.7% + profit 4.5%; commission 17.5%) | Added to the PLR sweep and reported as the "filed" point |
+| Catastrophe load | none | **10% on top of expected loss**, set judgmentally (matched to Travelers TRVD-133959943) | A new **rule (iii)**: gross = point × 1.10 ÷ PLR, reported alongside rules (i) and (ii) |
+| Return target | RoC ≥ 10% (cost of equity) | **ROE 15%** | "Profitable (filed)" = CR ≤ 95% **and** RoC ≥ 15%. It is reported beside the base test, which the filing shows is lenient |
+| Capital ÷ premium floor | 1.0 | **0.47** (premium-to-surplus 2.11) | Sensitivity |
+| Investment income | 2.5% | **0.4%** of premium | Sensitivity |
+| Expected CR | target ≤ 95% | 91.9% | Reference line only |
+| Risk modifier | 0.9–1.1 per item, product 0.35–3.5 | Same [V] | Confirms the F0q mapping |
+| Credibility | — | 1,082 claims for full credibility. With 0 claims, HSB prices entirely off the industry-complement LR (53.6%) | **Real-world precedent for F0's logic** (an industry average, no own data). Cited, not used numerically |
+
+- **Kill criteria KE1–KE3** are evaluated at S1's base values, as pre-registered. The filed-value versions are reported as sensitivities.
+- **Implementation:** `econ.py` gains `PLR_FILED`, rule "iii", `ROE_FILED` and the capital and investment-income sensitivities, without changing any base path.
