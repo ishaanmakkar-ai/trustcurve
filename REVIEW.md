@@ -196,3 +196,28 @@ A fresh-context reviewer verified the blinding:
 | 13 | Low | Author count (6 main + 3 burned = 9) | **Fixed** (the vault log said 7, now corrected) |
 | 14 | Low | The human label check was listed as met | **Fixed:** marked pending |
 | 15 | Low | "Intervals 3–8×": the observed median relative width is 3.0 (pre13) and 2.5 (all 24) | **Fixed** |
+
+## Review 10 — after Study 3 phase A′ loops 1–3, 2026-10-21
+A fresh-context reviewer:
+- regenerated every A′ table and decision file **byte-identically** from the committed JSON;
+- recomputed one cell of each simulation from source, each matching exactly;
+- found the decision rules applied literally, with STUDY3.md's numbers matching the tables.
+
+The problems are in interpretation.
+
+| # | Severity | Finding | Resolution |
+|---|---|---|---|
+| 1 | High | "Pricing superiority not testable" is an artefact. A perfect check forecaster (true expected loss) has median \|log error\| 0.27 against F1's 0.40, so H3 (≤ 0.20) is unreachable for anyone. With F1's triggers at 0.3·q (bias ≈ −0.78 log, near Study 2) H3b power rises from 0.06 to 0.62 | **Accepted.** The claim is withdrawn and restated as "not testable **if** F1 is representative". Loop 4 adds the check forecaster to every cell and judges decidability against its ceiling. The RQ2 test-vs-estimation decision is deferred to loop 4 |
+| 2 | High | F2's representative tasks are representative by construction too | **Accepted.** Loop 4 shifts F1's and F2-representative's trigger prevalence independently |
+| 3 | High | H2 is close to decided by design (P = 0.98–1.00 at R = 3). About half of Study 2's real effects sit below the simulated rate range | **Accepted.** Proposed primary RQ1 test: the **exposure-matched paired McNemar test** (F2 vs F1, both at R = 3), with H2 reported alongside. It goes to Ishaan because it changes a plan hypothesis. Loop 4 runs triggers at both rate ranges and reports detection-vs-rate curves |
+| 4 | High | Design is confounded with exposure (F2 at 300 rows vs F1 at 90) | **Accepted.** Loop 4 and the real design run F1 at R = 3, reported matched and unmatched. Headline (a) is restated as applying to the matched contrast only |
+| 5 | Medium | The sign-test unit was runs, but S0 says tasks | **Accepted.** The per-task sum across runs is primary, as S0 says; run level becomes a sensitivity. Loop-3 claim (b) is withdrawn pending loop 4 |
+| 6 | Medium | The 94.5% figure describes Study 2's own sandbox, fault catalogue and ledger (no statement peril). The 2.3% vs 1.2% figures compare different sets | **Accepted.** Reworded in STUDY3.md (correction note). The "pricing headroom is small" inference is dropped |
+| 7 | Medium | Deciding RQ4 from F2-vs-F1 results is a non sequitur | **Accepted.** RQ4 is descriptive with intervals on its own grounds (3–5 underwriters, "indicative" in the plan), not because of A′ |
+| 8 | Medium | RQ3 at 4 designed configurations is imprecise (SD 0.13–0.24) and conflates type mix with anticipation | **Accepted.** RQ3 is redefined as a difference-in-differences (F2 gap − F1 gap, exposure-matched), reported as an estimate with an interval. H5 is descriptive |
+| 9 | Medium | The n_e rule used F2 pooled after the split was adopted (with the split it gives 100). The split's 40-task pricing arm prices worse than F1 at R = 1 | **Accepted.** Loop 4 sets n_e by a power criterion at a Study-2-calibrated point, against the ceiling. The split's pricing arm (40 tasks × R = 3) is pinned in the F2 spec |
+| 10 | Medium | Git proves commit order, not authoring order. The loop-1 "clarification" first appears with the loop-1 results | **Accepted.** The clarification is relabelled post-hoc. From loop 4 on, each pre-registration is committed **alone**, and the code commit cites its hash |
+| 11 | Medium | False positives were barely tested (n = 1 clean-vs-clean), and loop 3 recorded neither false positives nor coverage | **Accepted.** Loop 4 uses 4 clean controls (3 comparisons against the reference) and records false positives and coverage |
+| 12 | Medium | The design costs $246–285+ against ≈ $126 left. The formula omits the judge, κ validation, planter, pilot and retries | **Accepted.** A full cost table goes to Ishaan before B′ |
+| 13 | Low | Some rule cells were chosen in code. φ was evaluated on 100 trap tasks. "Not evaluable ⇒ fires" is post-hoc | **Labelled** in STUDY3.md |
+| 14 | Low | The deployment rate is min(q, r) for about 20% of flaws; F3 counts any event; "below ~0.15" wording | **Fixed** in wording. Loop 4 draws r ≤ q, so the deployment rate is exactly r |

@@ -348,3 +348,91 @@ The loop-1/2 simulation does not model that: within-type trigger conditions, and
 | Size rule | **18 configurations** |
 | H5 informativeness at R = 3 | **Not informative** (P(H5) 0.97 vs 0.89). Reported descriptively with its interval |
 | H3b | **Not recommended as a test** (power 0.07). Pricing questions RQ2 and RQ4 become **estimation with intervals**, not pass/fail tests, unless the review or loop 4 shows otherwise |
+
+### Corrections after review 10 (2026-10-21, post-hoc; see REVIEW.md review 10)
+- **Loop-1 clarification relabelled.** The "implementation clarification written before any A′ run" first appears in the commit with the loop-1 results, so it is post-hoc.
+- **Loop 3 (c) withdrawn.**
+  - "Pricing superiority is not testable at an affordable n" holds only **if F1 is representative of deployment**, which the simulation imposed by construction.
+  - A perfect forecaster's median |log error| is 0.27 at n_e = 200, so H3's ≤ 0.20 bar is unreachable for anyone. P(H3) ≈ 0 says nothing about test design.
+  - With F1's triggers at 0.3·q, the reviewer found H3b power of 0.62.
+  - **RQ2 is not converted to estimation.** Loop 4 decides.
+  - **RQ4 is descriptive on its own grounds** (3–5 underwriters), not because of A′.
+- **Loop 3 (a) and (b) restated.**
+  - The F2-vs-F1 detection advantage mixes design with exposure (300 vs 90 task-runs).
+  - The sign-test unit was runs, not the tasks S0 specifies.
+  - Both are re-estimated in loop 4.
+- **Loop 2 real-data anchor reworded.**
+  - "94.5% cancellation refunds" describes **Study 2's own scenario mix, fault catalogue and ledger**, which had no statement peril. It is not a claim about "the real airline world".
+  - The 2.3% vs 1.2% event rates compare different configuration sets and task pools.
+  - The "pricing headroom is small" inference is dropped.
+- **Unlabelled choices, now labelled.**
+  - Implementation choices made in code: the rule cells e = 1 and n_e = 200; φ evaluated on 100 trap tasks.
+  - **Post-hoc:** the loop-2 n_e rule used F2 pooled after the split was adopted. With the split, the literal rule gives n_e = 100.
+  - **Post-hoc:** "not evaluable ⇒ the H3b trigger fires".
+- **Mechanism and wording.**
+  - Loop 3's deployment flaw rate is min(q, r), not r, for about 20% of flaws.
+  - "Below ~0.15 undetectable" means r ∈ [0.02, 0.15] at R = 1.
+
+## A′ loop 4 (pre-registered 2026-10-21, after review 10, before any loop-4 code; the final A′ loop)
+**Aims:** settle what loops 1–3 left as artefacts.
+1. Is pricing superiority testable when F1 or F2's representative tasks are unrepresentative, measured against a perfect-forecaster ceiling?
+2. What does exposure-matched detection look like at the S0 per-task unit?
+3. Choose n_e and the RQ1/RQ3 primary forms.
+
+**Mechanism** (`src/trustcurve/study3/sim_a4.py`; as loop 3 unless stated):
+- **Configurations:** 20, made up of **4 clean** (configuration 0 is the reference; the other 3 give the false-positive rate) and 4 per flaw source.
+- **Fixed settings:** λ = 0.5, φ = 0.10, severity S_A.
+- **Flaws:** trigger prevalence q ~ U(0.15, 0.6), and r is drawn as U(r_lo, min(r_hi, q)), so the deployment rate is exactly r.
+- **Representativeness:** benchmark tasks carry a flaw's trigger at ρ·q (traps that anticipated it: 0.9).
+  - F1 uses **ρ1 ∈ {0, 0.3, 0.6, 1}**.
+  - F2's 40 representative tasks use **ρ2 ∈ {0.3, 0.6, 1, 1.5}**.
+  - F2's unanticipated trap tasks stay at 0.5·q.
+- **Forecasters:**
+
+  | Forecaster | Definition |
+  |---|---|
+  | **O** | Perfect forecaster: true expected deployment loss. It shows the noise ceiling |
+  | **F1₁** | 90 tasks × 1 run (Study 2-equivalent); the first run of F1₃ |
+  | **F1₃** | 90 tasks × 3 runs |
+  | **F2** | 60 trap + 40 representative tasks × 3 runs, split pricing (the 40 × 3 representative rows) |
+  | F2p | Pooled pricing, reported only |
+
+- **Sign-test unit (S0):** per task, summing events across runs, configuration vs reference. The run-level test is a sensitivity.
+- **Grid:** ρ1 (4) × ρ2 (4) × r ∈ {[0.05, 0.4], [0.02, 0.15]} × n_e ∈ {100, 200, 400} = 96 cells, × 300 replications.
+
+**Measures (per cell):**
+- **Detection:**
+  - non-designed and designed detection for F1₁, F1₃ and F2;
+  - **exposure-matched McNemar power, F2 vs F1₃** (primary-candidate RQ1 test), and unmatched power vs F1₁;
+  - false-positive rate over the 3 clean comparisons.
+- **RQ3 as a difference-in-differences:** (F2 designed − non-designed) − (F1₃ designed − non-designed). Its mean, SD and 90% replication interval width.
+- **Pricing, for each of O, F1₁, F1₃ and F2:**
+  - median |log error|, Spearman, 90% coverage, and median log bias on flawed configurations;
+  - P(H3) for F2 and for O (the ceiling);
+  - **H3b power** (paired per-configuration |log error| sign test, F2 vs F1₃, one-sided α = 0.05), plus the same for O vs F1₃ (the ceiling).
+- **Detection-vs-rate curve:** flag rate by r bin (0.02–0.05, 0.05–0.1, 0.1–0.2, 0.2–0.4) for F1₃ and F2, pooled over the ρ1 = 1 cells.
+- **Cost:** the full line, which goes to Ishaan with prices rechecked before any spend.
+  - underwriting: 20 × (90 + 100) × 3 × $0.012;
+  - experience: 20 × n_e × $0.045;
+  - statement judge: ≈ $0.004 per scored conversation, an estimate to be rechecked;
+  - fidelity pilot + κ validation + planter: ≈ $25;
+  - retries: + 10%.
+
+**Calibration point (C2):** the ρ1 cell whose F1₁ median log bias on flawed configurations is closest to −0.7 (Study 2's underpricing order of magnitude), at ρ2 = 1.
+
+**Predictions:**
+- **A′-P8:** H3b power ≥ 0.5 at C2 with n_e = 200, and ≤ 0.15 at ρ1 = 1.
+- **A′-P9:** matched McNemar power (F2 vs F1₃) ≤ 0.6 at r ∈ [0.05, 0.4], i.e. well below the unmatched 0.85.
+- **A′-P10:** the difference-in-differences 90% width is > 0.4 at 4 designed configurations.
+
+**Decision rules:**
+- **n_e:** the smallest n_e ∈ {100, 200, 400} at which H3b power at C2 is ≥ 0.5 **and** ≥ 0.7 of the ceiling's power at the same n_e. If none qualifies, take n_e = 200, and RQ2 becomes estimation with intervals.
+- **RQ2 form:**
+  - **H3b is recommended as a pre-registered comparative pricing test** if it qualifies under the n_e rule. H3 stays as the plan states it and is reported as unreachable if O's P(H3) is < 0.2.
+  - Otherwise RQ2 is estimation.
+- **RQ1 form:**
+  - if matched McNemar power is ≥ 0.6 at r ∈ [0.05, 0.4] and ρ1 = 1, it is recommended as the primary RQ1 test, with H2 reported alongside;
+  - otherwise RQ1 is reported as detection-vs-rate curves with intervals, and H2 stays primary as the plan states.
+  - Either way, the change goes to Ishaan.
+- **RQ3:** reported as the difference-in-differences with its interval. If its 90% width is > 0.4, it is labelled as unable to distinguish "no shared-assumption effect" from a 20-point one.
+- **K1′** fires only if neither the matched McNemar power nor H3b power at C2 reaches 0.5 in any n_e ≤ 400 cell.
