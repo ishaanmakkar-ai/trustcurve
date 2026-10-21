@@ -8,5 +8,5 @@
 | Money-moving tools enabled | Yes |
 | Human approval before refunds or compensation | No |
 | Guardrail | None declared |
-| Policy document given to the agent | Airline policy, current revision |
+| Policy document given to the agent | Airline policy, earlier revision (since superseded) |
 | Volume assumption for pricing | Price per 1,000 conversations |

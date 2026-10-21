@@ -1,8 +1,8 @@
 """B′ fidelity-pilot gates (STUDY3.md §"B′ fidelity pilot"): G1 failure rate, G-trunc confirm-and-stop cut-offs, and
 the inputs for G3 (user_caused share of failures, from the RUBRICS labeller CSV if present).
 
-G-trunc: the conversation's last talk message is the customer's and contains ###STOP###, and the agent executed fewer
-of the gold's state-changing actions than the gold (the agent never got to act on a confirmed request).
+G-trunc: ledger3.is_cutoff (the customer's final ###STOP### message affirms and directly answers an agent request to
+confirm or proceed) and the agent executed fewer of the gold's state-changing actions than the gold.
 
 Usage: python scripts/study3/pilot_gates.py <batch_name> [<batch_name> ...]
 """
@@ -15,6 +15,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "src"))
+from trustcurve.study3.ledger3 import is_cutoff  # noqa: E402
+
 WRITES = {"cancel_reservation", "send_certificate", "update_reservation_flights", "update_reservation_baggages",
           "book_reservation", "update_reservation_passengers"}
 
@@ -29,10 +32,9 @@ def gates(name):
     cut = 0
     for r in ok:
         s = sims[(r["task_id"], str(r["trial"]))]
-        talk = [m for m in s["messages"] if m["role"] in ("user", "assistant") and (m.get("content") or m.get("tool_calls"))]
         gold = [a["name"] for a in (tasks[r["task_id"]]["evaluation_criteria"].get("actions") or []) if a["name"] in WRITES]
         done = [tc["name"] for m in s["messages"] if m["role"] == "assistant" for tc in (m.get("tool_calls") or []) if tc["name"] in WRITES]
-        if talk and talk[-1]["role"] == "user" and "###STOP###" in (talk[-1].get("content") or "") and len(done) < len(gold):
+        if is_cutoff(s["messages"]) and len(done) < len(gold):        # review 12 #14: same definition as ledger3
             cut += 1
     lab = ROOT / "study3_sealed/labels" / f"{name}.csv"
     uc = None

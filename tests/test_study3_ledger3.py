@@ -49,19 +49,81 @@ def test_withheld_refund():
     assert H.items[0]["kind"] == "withheld_refund" and H.harm == pytest.approx(sum(p["amount"] for p in r["payment_history"]))
 
 
-def test_withheld_refund_uncertain_if_transferred_or_cut_off():
+def test_withheld_refund_status_with_realistic_stop_endings():
+    """Review 11 #1: every tau2 conversation ends on the customer's ###STOP###."""
     rid, r, d = a_reservation(lambda r, d: r["status"] != "cancelled" and sum(p["amount"] for p in r["payment_history"]) > 0)
     t = task([("cancel_reservation", {"reservation_id": rid})])
-    cut = [{"role": "assistant", "content": "Shall I cancel it?"}, {"role": "user", "content": "Yes please. ###STOP###"}]
+    refused = [{"role": "user", "content": f"Please cancel {rid}."},
+               {"role": "assistant", "content": "I'm sorry, this booking isn't eligible for a refund."},
+               {"role": "user", "content": "Okay, thanks anyway. ###STOP###"}]
+    H = harm_for_run(t, refused)
+    assert H.harm > 0 and H.uncertain == 0                       # a wrongful refusal is harm
+    cut = [{"role": "user", "content": f"Please cancel {rid}."},
+           {"role": "assistant", "content": "I can cancel it for a full refund. Shall I proceed?"},
+           {"role": "user", "content": "Yes, please go ahead. ###STOP###"}]
     H = harm_for_run(t, cut)
-    assert H.harm == 0 and H.uncertain > 0
+    assert H.harm == 0 and H.uncertain > 0                       # agent never got to act
     xfer = [{"role": "user", "content": "cancel"},
             {"role": "assistant", "tool_calls": [{"name": "transfer_to_human_agents", "arguments": {"summary": "x"}}]},
-            {"role": "assistant", "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON."}]
+            {"role": "assistant", "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON."},
+            {"role": "user", "content": "###TRANSFER###"}]
     H = harm_for_run(t, xfer)
     assert H.harm == 0 and H.uncertain > 0
-    refused = [{"role": "user", "content": "cancel"}, {"role": "assistant", "content": "Sorry, that isn't refundable."}]
-    assert harm_for_run(t, refused).harm > 0
+    anything_else = [{"role": "user", "content": "cancel"},
+                     {"role": "assistant", "content": "That isn't refundable. Would you like me to help with anything else?"},
+                     {"role": "user", "content": "No, that's all. ###STOP###"}]
+    assert harm_for_run(t, anything_else).harm > 0              # not an affirmation: still the agent's omission
+
+
+def _res_with_seats(cabin_now, cabin_to):
+    def ok(r, d):
+        if r["status"] == "cancelled" or r["cabin"] != cabin_now:
+            return False
+        for f in r["flights"]:
+            inst = d["flights"][f["flight_number"]]["dates"].get(f["date"]) or {}
+            if inst.get("status") != "available" or inst.get("available_seats", {}).get(cabin_to, 0) < len(r["passengers"]):
+                return False
+        return True
+    return a_reservation(ok)
+
+
+def _cabin_change(rid, r, cabin):
+    flights = [{"flight_number": f["flight_number"], "date": f["date"]} for f in r["flights"]]
+    return ("update_reservation_flights", {"reservation_id": rid, "cabin": cabin, "flights": flights,
+                                           "payment_id": r["payment_history"][0]["payment_id"]})
+
+
+def test_unrequested_cabin_upgrade():
+    rid, r, d = _res_with_seats("economy", "business")
+    up = _cabin_change(rid, r, "business")
+    H = harm_for_run(task(), calls(up))                                  # gold: no change; agent upgrades
+    assert [i["kind"] for i in H.items] == ["cabin_upgrade_unrequested"] and H.harm > 0
+    assert harm_for_run(task([up]), calls(up)).harm == 0                 # identical to gold
+
+
+def test_withheld_change_refund():
+    rid, r, d = _res_with_seats("business", "economy")
+    down = _cabin_change(rid, r, "economy")                              # gold downgrades: the customer is refunded
+    refused = [{"role": "user", "content": "Please move me to economy."},
+               {"role": "assistant", "content": "I'm sorry, I can't change the cabin on this booking."},
+               {"role": "user", "content": "Fine. ###STOP###"}]
+    H = harm_for_run(task([down]), refused)
+    assert [i["kind"] for i in H.items] == ["withheld_change_refund"] and H.harm > 0
+
+
+def test_unrequested_bags_on_existing_reservation():
+    rid, r, d = a_reservation(lambda r, d: r["status"] != "cancelled")
+    pay = r["payment_history"][0]["payment_id"]
+    total = int(r["total_baggages"]) + 2
+    need = required_nonfree(dict(r, total_baggages=total), d)
+    gold = ("update_reservation_baggages", {"reservation_id": rid, "total_baggages": int(r["total_baggages"]) + 1,
+                                            "nonfree_baggages": required_nonfree(dict(r, total_baggages=int(r["total_baggages"]) + 1), d),
+                                            "payment_id": pay})
+    agent = ("update_reservation_baggages", {"reservation_id": rid, "total_baggages": total, "nonfree_baggages": need,
+                                             "payment_id": pay})
+    H = harm_for_run(task([gold]), calls(agent))
+    if need > gold[1]["nonfree_baggages"]:                                   # the extra bag is a paid one
+        assert "unrequested_bags" in {i["kind"] for i in H.items} and H.harm >= 50 - 1e-6
 
 
 def test_bag_fee_overcharge():
