@@ -489,6 +489,28 @@ At pilot-like clustering:
    E1's suggestive −6 to −8 points is real: **a stronger simulated customer lowers measured failure by about 10 points.** Simulator choice is a first-order pricing assumption.
 5. **Insured loss: the prediction fails as computed.** **33 / 1,000 flagged runs = 3.3%** (Wilson 90% 2.5–4.4%; task-level CP 95% upper 11.1%), on **9 of 50 tasks**, against the prediction ≤ 2%. The breadth slice (25 tasks × 2) had shown 0. 5 of the 9 tasks are in the breadth set, but on those 25 tasks REF-H flags only 10/500 runs (2.0%). The expected count in the breadth's 50 runs was about 1, so seeing 0 there was unremarkable (P ≈ 0.36). **The flags mix header artefacts, customer-requested bookings, gross-counted itinerary differences and plausibly genuine overcharges.** A per-event transcript audit (post-hoc) follows below.
 
+**Check 5 transcript audit (post-hoc; `results/phase1/audit/refH_events_audit.csv`):** a fresh-context Claude agent read all 33 flagged runs against their scenario, gold and tool outputs, and computed net dollars to the customer or airline.
+
+| Class | Runs | Net $ |
+|---|---|---|
+| Requested by the customer or permitted by policy | 18 | 0 |
+| Different itinerary, netted | 8 | 7 runs at +$9 to +$29, one at −$13 |
+| Other (judgment calls: basic-economy upgrade the customer agreed to, certificate split, 42/11 below the permitted payout) | 3 | 0 (23/4 up to $500 if certificates are worth less than cash) |
+| Header-only artefact | 2 | 0 |
+| Unrequested change that policy forbids (LGA→JFK in place; customer keeps the $30 insurance) | 2 | +$30 each (upper bound) |
+| Genuine wrongful payout by the airline | 0 | — |
+
+- **Genuine harm: $145 in 9 of 1,000 runs (0.9%), on 3 tasks (15, 29, 35), each $9–$30.** It is all small overcharges from the agent quoting a non-cheapest fare or misreading a date. If the retained insurance is worth its price: $85 in 7 runs.
+- **Flagged $14,071 vs genuine $145.** The audit found **4 systematic dollar-diff v3 bugs**:
+  1. A $0 change (a free bag) marks a reservation "agent-changed", so the whole gold gap becomes customer harm. This accounts for $4,095 on task 29.
+  2. No netting across reservations: cancel-and-rebook vs modify-in-place, and split vs combined bookings, are scored at gross.
+  3. Free-text header fields (origin, destination, flight_type) sit in the pairing key.
+  4. Consent and policy: change charges and bookings the customer asked for are scored as harm, and `wrongful_change_refund` gets no permission check.
+
+  Each has a precise fix in the audit report, summarised in REVIEW.md review 6.
+- **Simulator:** off-instruction in about 18 of 33 flagged runs, producing most of the "requested" flags.
+- **Reading:** on τ² airline with a Haiku agent, **agent-caused money harm is frequent-ish (≈ 1% of runs) but tiny ($9–$30)**, and **wrongful payouts are ~0**. The flagged "insured loss" metric overstated frequency about 4× and severity about 100×. **Any phase-2 loss estimate needs dollar-diff v4, validated on these 33 cases plus E2's two, before it is trusted.**
+
 **Post-hoc sensitivity (review 5 #5): E1x with contemporaneous baselines** (H×H := REF-H on the breadth tasks, H×S := REF-S; `results/phase1/review5_baseline_sensitivity.json`):
 - DB-mismatch gaps: Δ_H −0.10 [−0.16, −0.05] (sign test 0/8, p = 0.008), Δ_O +0.08 [+0.02, +0.16] (unchanged, 3 tasks, p = 0.25), Δ_S −0.07 [−0.14, −0.01].
 - I_O +0.18 [+0.08, +0.29].
