@@ -234,3 +234,19 @@ The review-1/2/3 resolutions re-analysed **existing** data and code. They ran no
 4. Get Ishaan's 30-transcript audit to validate the ledger, especially the flown-segment class.
 
 **Next:** a fresh-context review of phase C, then phase D (planted faults; runs only after this review is resolved).
+
+## Adapt memo after phase D (2026-10-21)
+**Findings:** mutation score 0.20, so K4 fires. The causes split cleanly:
+- 2 faults had zero exposure in the eval;
+- 1 was outside the loss accounting by design, and fired in half the conversations unseen;
+- 1 was customer harm the ledger doesn't price;
+- the 1 fault that was both exercised and in scope was found, and its rate recovered blind.
+
+**Surprise:** the exposure gap. A 90-task benchmark-derived eval never triggers a certificate issuance or a paid-bag addition by the base agent, so whole classes of money-moving behaviour are untested.
+
+**Strongest counter-explanation:** the planter chose the opportunities. With the experience pool (which has many certificate and bag tasks), D2 and D6 would have had opportunities. So the low score partly reflects the underwriting pool's narrowness, which is itself the finding: the eval doesn't cover the deployment's action space.
+
+**Proposed changes (Study 3):**
+1. Measure **action coverage** of an eval (which money-moving tools and arguments it exercises) before pricing.
+2. Add a **statement-level liability check** (misinformation about refunds and compensation).
+3. Price customer harm as a separate peril.
