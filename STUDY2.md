@@ -138,3 +138,47 @@ All configurations except CAP-X run on a stratified half of the underwriting poo
 
 ### B5. Power analysis → phase-C sizes
 Phase-A's simulator, re-parameterised with the screening rates (configuration relativities, stratum base rates, severity), gives the median and 10th-percentile Spearman and predictive coverage for candidate (n_u, n_e). Rule: choose the smallest design with median Spearman ≥ 0.7 under S0 that fits the phase-C budget ($250, stop at $375 projected); spend any remainder on n_e and the capability axis. If no affordable design reaches 0.7, report the expected Spearman and proceed at the budget cap (the result is then pre-declared as under-powered for K2).
+
+### Phase A loop 1 results (2026-10-21; `results/study2/phaseA/grid_loop1.json`, code as committed in `5fe32d1`)
+36 cells × 400 replications × 12 configurations, $0. Key cells (experience n_e = 200 tasks × 2 simulators):
+
+| Scenario, n_u | Method | Param cov | Pred cov | Upper-95 cov | Mean rel. bias | Median rel. bias | CRPS / θ | PIT max dev. | Median Spearman (p10) |
+|---|---|---|---|---|---|---|---|---|---|
+| S0, 45 | M1 | 0.88 | 0.88 | 0.91 | −0.00 | −0.10 | 0.46 | 0.16 | 0.84 (0.70) |
+| S0, 45 | M2 | 0.87 | 0.89 | 0.94 | +0.32 | +0.09 | 0.41 | 0.02 | 0.84 (0.70) |
+| S0, 90 | M1 | 0.84 | 0.86 | 0.90 | −0.01 | −0.07 | 0.35 | 0.10 | 0.87 (0.75) |
+| S0, 90 | **M2** | **0.86** | **0.89** | 0.93 | **+0.15** | +0.03 | 0.32 | 0.02 | 0.88 (0.77) |
+| S0, 90 | M2flat | 0.74 | 0.81 | 0.98 | +0.80 | +0.51 | 0.54 | 0.19 | 0.87 (0.75) |
+| S0, 180 | M1 | 0.81 | 0.87 | 0.91 | +0.02 | −0.03 | 0.28 | 0.05 | 0.90 (0.80) |
+| S0, 180 | M2 | 0.81 | 0.88 | 0.93 | +0.10 | +0.03 | 0.27 | 0.01 | 0.91 (0.82) |
+| S1 wrong mix, 90 | M2 | 0.85 | 0.88 | 0.91 | +0.08 | −0.03 | 0.30 | 0.05 | 0.88 (0.78) |
+| S2 author shift, 90 | M2 | 0.80 | 0.84 | 0.89 | +0.13 | −0.02 | 0.34 | 0.07 | 0.88 (0.78) |
+| S3 simulator shift, 90 | M2 | 0.83 | 0.86 | 0.92 | +0.18 | +0.03 | 0.34 | 0.03 | 0.87 (0.75) |
+| S4 unseen fault, 90 | M2 | 0.84 | 0.87 | 0.91 | +0.10 | −0.03 | 0.31 | 0.05 | 0.87 (0.76); faulty configs cov 0.78 vs 0.89 |
+| S5 rare, 90 | M1 | 0.92 | 0.92 | 0.94 | +0.03 | −0.13 | 0.63 | 0.21 | 0.75 (0.55) |
+| S5 rare, 90 | M2 | 0.87 | 0.90 | 0.94 | +0.50 | +0.17 | 0.58 | 0.01 | 0.74 (0.56) |
+
+**Against the pass rule (S0, n_u ≥ 90: predictive and parameter coverage ≥ 0.85, |mean relative bias| ≤ 10%):**
+- **M2 fails.** Mean bias is +15% at n_u = 90; parameter coverage is 0.81 at n_u = 180.
+- **M1 fails.** Parameter coverage is 0.84 / 0.81.
+- **K1 does not fire.** Predictive coverage is 0.86–0.89, above 0.80.
+- Per the decision rule, the method is fixed before any spend.
+
+**Predictions:**
+- **A-P1: partly.** M2's predictive coverage is in band. Its parameter coverage falls below the band at n_u = 180. M1 does *not* under-cover at n_u = 45.
+- **A-P2: confirmed.** M2 beats M2flat on interval score and CRPS, with no loss of Spearman.
+- **A-P3: mostly refuted, and the threats were milder than predicted.** S1 barely moves coverage (0.88). S2 gives 0.84. S4's faulty configurations still get 0.78, not < 0.5. The intervals are wide (median width ≈ 1.6 × θ), so moderate shifts stay inside them.
+- **A-P4: partly.** S0 Spearman is 0.88 (✓), but S5 stays at 0.74, not < 0.5.
+- **A-P5: formally refuted, practically close.** With 4,800 PIT values, χ² rejects (p < 0.01), but M2's maximum decile deviation is ≤ 0.02. M1's PIT is visibly non-uniform (deviation 0.10–0.21).
+
+**Diagnosis (post-hoc diagnostic, labelled; `scripts/study2/diag/sevc_check.py`, `results/study2/phaseA/diag_sevc.txt`):** setting the DGM's per-configuration severity heterogeneity (σ = 0.2) to 0 raises parameter coverage at n_u = 180 from 0.83 to 0.87 (M1) and 0.90 (M2). Both methods pool severity across configurations, so a configuration whose losses are systematically larger or smaller is biased by an amount the interval doesn't carry, and the problem grows as the frequency interval narrows. M2's mean bias is credibility shrinkage. Low-risk configurations are pulled up: the median is +3%, the mean +15%.
+
+## A2. Phase A loop 2 (pre-registered 2026-10-21, before any change to forecast.py)
+**Change (both M1 and M2):** a configuration-specific severity offset. Log-severity residuals (event log-loss minus its stratum's pooled mean log-loss) get an empirical-Bayes normal random effect per configuration. The between-configuration SD τ is estimated by method of moments with a **floor of 0.10** (an assumption: configurations differ in loss size by at least ~10%). The within SD is pooled. Each configuration's offset is drawn from its posterior (prior N(0, τ²) if it has no events) and multiplies its severity draws, which are re-capped at $2,000. Nothing else changes: frequency models, prior caps, pass rule, grid, seeds.
+
+**Predictions:**
+- **A2-P1:** S0 parameter coverage at n_u = 90 and 180 rises to ≥ 0.85 for both methods, and predictive coverage stays within 0.85–0.95.
+- **A2-P2:** M2's mean relative bias stays > 10% (shrinkage is untouched), so **M2 fails the pre-registered pass rule again and the decision rule selects M1 if M1 passes.** M2's forecasts are then frozen too and reported as a secondary method (it has the better-shaped predictive distribution).
+- **A2-P3:** Spearman is unchanged within ±0.02.
+
+This is loop 2 of at most 4.

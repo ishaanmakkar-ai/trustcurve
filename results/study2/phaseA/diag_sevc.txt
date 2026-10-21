@@ -1,0 +1,4 @@
+SIGMA_SEVC=0.2 M1: cov_param 0.831 cov_pred 0.870
+SIGMA_SEVC=0.2 M2: cov_param 0.826 cov_pred 0.883
+SIGMA_SEVC=0.0 M1: cov_param 0.872 cov_pred 0.901
+SIGMA_SEVC=0.0 M2: cov_param 0.896 cov_pred 0.910
