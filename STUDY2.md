@@ -209,3 +209,5 @@ This is loop 2 of at most 4.
 - The realistic threats cost a few points of coverage: author shift 0.84, unseen fault 0.77 on the affected configurations.
 - Rare events cost discrimination (Spearman 0.67–0.75 at S5), not calibration.
 - It does **not** show that real underwriting data look like the DGM. That is phase C's job.
+
+**Post-hoc fix after phase A (labelled, 2026-10-21):** a new unit test (`tests/test_study2_forecast.py`) found that `_config_offsets` divided by zero when every event has an identical loss (zero within-configuration log-severity variance, e.g. only $50 bag fees). The within variance is now floored at 0.01 on the log scale. This can't change the phase-A grids (lognormal severities never give zero variance), so they are not re-run.

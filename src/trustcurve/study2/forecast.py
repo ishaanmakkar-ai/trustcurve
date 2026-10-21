@@ -127,7 +127,7 @@ def _config_offsets(cols, by_h, allv, cfgs, B, rng, tau_floor=0.10, min_events=5
            for c in cfgs}
     within = [(r - np.mean(v)) ** 2 for v in res.values() if len(v) >= 2 for r in v]
     dfw = sum(len(v) - 1 for v in res.values() if len(v) >= 2)
-    sw2 = float(np.sum(within) / dfw) if dfw > 0 else 1.0
+    sw2 = max(float(np.sum(within) / dfw), 0.01) if dfw > 0 else 1.0  # floor: identical losses give 0 variance
     means = [(np.mean(v), len(v)) for v in res.values() if len(v) >= 1]
     if len(means) >= 3:
         m = np.array([x for x, _ in means]); n = np.array([k for _, k in means])
