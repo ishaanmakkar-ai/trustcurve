@@ -151,7 +151,7 @@ The review-1/2/3 resolutions re-analysed **existing** data and code. They ran no
 - **Primary method for phase C: M1** (stratified task bootstrap with pooled-plus-offset severity and a Clopper–Pearson zero-event fallback). **Secondary: M2** (empirical-Bayes credibility).
 
 **Surprises**
-1. The threats were milder than predicted (A-P3). Author shift: 0.84. Wrong mix: 0.87–0.90. Unseen fault on the affected configurations: 0.71–0.83, not < 0.5. The reason is that the intervals are **wide**: median 90% predictive width ≈ 1.5–2 × θ at n_e = 200. Calibrated-but-wide is a pricing problem in its own right. A premium quoted as "$X, 90% interval $0.3X–$2X" is honest but barely usable.
+1. The threats were milder than predicted (A-P3). Author shift: 0.84. Wrong mix: 0.87–0.90. Unseen fault on the affected configurations: 0.71–0.83, not < 0.5. The reason is that the intervals are **wide**: median 90% predictive width ≈ 1.3–1.6 × θ in S0 at n_e = 200, and 2.9 × θ in the rare-event S5. Calibrated-but-wide is a pricing problem in its own right. A premium quoted as "$X, 90% interval $0.3X–$2X" is honest but barely usable.
 2. M1 doesn't under-cover at n_u = 45. The Clopper–Pearson fallback is conservative.
 3. Credibility (M2) gave the best-shaped predictive distribution but failed the mean-bias rule. It overprices low-risk configurations, which is conservative from an insurer's point of view but fails the pre-registered rule.
 
