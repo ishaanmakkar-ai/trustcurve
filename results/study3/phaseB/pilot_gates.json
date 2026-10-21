@@ -1,0 +1,35 @@
+[
+ {
+  "batch": "pilot-C0-S",
+  "runs": 40,
+  "errors": 0,
+  "G1_failure_rate": 0.0,
+  "failures": 0,
+  "G_trunc_rate": 0.0,
+  "cutoffs": 0,
+  "G3_user_caused_of_failures": null
+ },
+ {
+  "batch": "pilot-C0-L",
+  "runs": 40,
+  "errors": 0,
+  "G1_failure_rate": 0.1,
+  "failures": 4,
+  "G_trunc_rate": 0.1,
+  "cutoffs": 4,
+  "G3_user_caused_of_failures": [
+   0,
+   4
+  ]
+ },
+ {
+  "batch": "pilot-C0-L-r1",
+  "runs": 40,
+  "errors": 0,
+  "G1_failure_rate": 0.0,
+  "failures": 0,
+  "G_trunc_rate": 0.0,
+  "cutoffs": 0,
+  "G3_user_caused_of_failures": null
+ }
+]

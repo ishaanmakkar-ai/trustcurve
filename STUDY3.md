@@ -943,3 +943,35 @@ Items 4–6 need Ishaan or the cap.
   - **G-trunc fails:** add the stop hint (§B′3 correction) for that simulator and re-run its pilot once.
   - **G3 fails for a simulator:** that simulator is dropped. If only one family remains, "≥ 2 simulator families" is reported as unmet. That is the Study 2 precedent.
   - **G1 fails:** reported, **not waived** (Study 2 precedent). The pool is not rewritten, because the pool is sealed and boundary-dense by spec. Difficulty is reported as a limitation.
+
+### B′ fidelity pilot results (2026-10-22; `results/study3/phaseB/pilot_gates.json`; spend $1.54 of Study 3's $600)
+**Runs:** C0 (Haiku 5.5, clean) × 40 sealed pilot tasks:
+- Sonnet 5.5 customer;
+- gpt-6-luna customer;
+- gpt-6-luna re-run with the stop hint.
+
+All with the date hint, 0 infrastructure errors, 0 unpriced runs.
+
+| Gate | Sonnet customer | luna customer | luna + stop hint | Verdict |
+|---|---|---|---|---|
+| G1: C0 fails ≥ 10% | 0/40 | 4/40 (all cut-offs) | 0/40 | **Fails.** Reported, **not waived**, as pre-registered |
+| G-trunc: < 3% | 0/40 | **4/40 = 10%** | 0/40 | **Passes after the pre-registered repair.** All luna experience runs use the stop hint |
+| G3: user_caused ≤ 30% of failures | no failures | 0/4 per the RUBRICS labeller | no failures | Passes, but vacuously |
+
+**Findings:**
+1. **The clean agent essentially never errs on this pool.** 0 of 80 genuine conversations failed, against Study 2's B0 at 5–9% on its harder pool. Loss in Study 3 will come almost entirely from the planted and natural flaws. That suits what Study 3 measures, but:
+   - clean-control base rates sit near zero;
+   - G1's difficulty criterion is unmet, and the write-up states it as a limitation;
+   - the pool was not rewritten, because it is sealed and pre-registered.
+2. **The RUBRICS labeller misses the luna cut-offs.** It attributed 0 of the 4 to the customer, although each was a customer confirming and ending the call before the agent could act.
+   - G3 alone would have passed a simulator with a 10% truncation artefact.
+   - **G-trunc is the operative fidelity gate.** This is evidence for keeping it.
+3. **Simulator set for C′:** both families pass. Experience runs use **Sonnet 5.5 (date hint) and gpt-6-luna (date hint + stop hint)**, 100 conversations each per configuration. Underwriting stays on the Haiku customer, as in Study 2, for comparability with F1.
+
+**B′ status:**
+- **Done:** flaw seals (overall `5297f6be…`); experience pool sealed (420 + E7 40); loss accounting v3 (ledger3 + judge rubric); cards; drafts; fidelity pilot.
+- **Waiting for Ishaan:**
+  1. **F2** (his build);
+  2. **labels** on the two 30-transcript audit packs, which gate the judge and the harm ledger (κ);
+  3. **underwriter outreach** (F3), drafted in the vault.
+- **C′ cannot start until F2 is frozen,** because F1 runs are deferred for blinding.

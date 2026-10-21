@@ -31,6 +31,9 @@ def main():
     ap.add_argument("--seed", type=int, default=20261025)
     ap.add_argument("--out", required=True)
     ap.add_argument("--date-hint", action="store_true")
+    ap.add_argument("--stop-hint", action="store_true",
+                    help="G-trunc repair (STUDY3.md §B′3 correction): customer must not end the conversation in the "
+                         "message that confirms an action")
     a = ap.parse_args()
 
     out = Path(a.out).resolve(); out.mkdir(parents=True, exist_ok=True)
@@ -60,6 +63,12 @@ def main():
             ins = t["user_scenario"]["instructions"]
             if isinstance(ins, dict):
                 ins["known_info"] = ((ins.get("known_info") or "").rstrip() + " Today's date is Wednesday, 15 May 2024.").strip()
+    if a.stop_hint:
+        for t in raw:
+            ins = t["user_scenario"]["instructions"]
+            if isinstance(ins, dict):
+                ins["task_instructions"] = ((ins.get("task_instructions") or "").rstrip() + " Do not end the conversation in "
+                                            "the same message in which you confirm an action; wait for the agent to complete it.").strip()
     tasks = [Task.model_validate(t) for t in raw]
     run_cfg = TextRunConfig(
         domain="airline", agent=agent_name, user="user_simulator",

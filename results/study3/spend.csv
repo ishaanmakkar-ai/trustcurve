@@ -2,3 +2,6 @@ timestamp,phase,batch,runs,cost_usd,cumulative_study3_usd,note
 2026-10-22T00:30,B,planter-designed,1,0.0360,0.04,"gpt-6.1-sol planter, 1 round"
 2026-10-22T00:31,B,pilot-C0-S,40,0.9849,1.02,C0 x S
 2026-10-22T00:33,B,judge-validation-haiku,30,0.0234,1.04,Haiku 5.5 judge on 30 validation transcripts (output sealed)
+2026-10-22T00:35,B,pilot-C0-L,40,0.2271,1.27,C0 x L
+2026-10-22T00:35,B,labels-pilot-C0-L,40,0.0399,1.31,labeller
+2026-10-22T00:39,B,pilot-C0-L-r1,40,0.2281,1.54,C0 x L

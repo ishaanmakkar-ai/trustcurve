@@ -11,6 +11,7 @@ OUT="$R/results/raw/study3/$NAME"; LOG="$R/results/study3/logs/$NAME.log"; mkdir
 ARGS=(--config "$CFG" --tasks "$TASKS" --user-llm "$SIM" --trials "${TRIALS:-1}" --conc "${CONC:-6}" --out "$OUT")
 [[ -n "$IDS" ]] && ARGS+=(--task-ids-file "$IDS")
 [[ "${DATE_HINT:-0}" == "1" ]] && ARGS+=(--date-hint)
+[[ "${STOP_HINT:-0}" == "1" ]] && ARGS+=(--stop-hint)
 for attempt in 1 2 3; do
   PYTHONPATH="$R/src" PYTHONDONTWRITEBYTECODE=1 "$R/scripts/with_keys.sh" "$PY" "$R/scripts/study3/run_config3.py" "${ARGS[@]}" >> "$LOG" 2>&1 && break
   echo "attempt $attempt failed; resuming from checkpoint" >> "$LOG"; sleep 20
