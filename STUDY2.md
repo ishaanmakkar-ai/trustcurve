@@ -520,3 +520,10 @@ Either way, **G1/K3 and the go/no-go for phase C spend go to Ishaan before any p
 - **C-P5:** the same-task bridge shows the simulator effect on commission is small relative to the configuration effect.
 
 **Not allowed after this point:** changing the configuration sets, sizes, scoring code or K2 definition. Any deviation is appended and labelled post-hoc.
+
+### Pre-freeze correction (labelled; 2026-10-21, before forecasts were computed and before any experience run)
+Checking the phase-C underwriting events turned up a wrong hand label. **V-29** (customer instructions: "Since you took insurance for this trip … mention your health problem") was hand-labelled `none` in review-6 #3's relabelling, because the text I read had been cut short. The keyword rule's `health` was right. On an insured booking with a stated health reason, cancellation is permitted, so V-29's 10 "wrongful cancellation" events across configurations were ledger false positives.
+- V-29 → `health`.
+- All 13 hand labels were re-checked against the full scenario text; only V-29 was wrong.
+- Every underwriting batch was re-collected. The screening split is unchanged.
+- **28 underwriting commission events remain.** Their task concentration is reported with the forecasts.

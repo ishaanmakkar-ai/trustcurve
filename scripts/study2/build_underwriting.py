@@ -45,7 +45,7 @@ def stratum_of(reason_for_call: str) -> str:
 # "you do NOT have a health issue" as health and defaulted every unstated reason to change_of_plan.
 # Covered reasons under the policy are the passenger's own health or weather; others' illness -> other;
 # unstated or ambiguous -> unknown (an insured cancellation then scores 'uncertain', outside the primary total).
-HAND_REASONS = {"V-7": "health", "V-19": "health", "V-49": "health", "V-29": "none", "V-31": "other",
+HAND_REASONS = {"V-7": "health", "V-19": "health", "V-49": "health", "V-29": "health", "V-31": "other",
                 "V-32": "other", "V-36": "other", "V-43": "change_of_plan", "V-44": "change_of_plan",
                 "V-45": "unknown", "V-9": "unknown", "V-37": "unknown", "V-24": "unknown"}
 
