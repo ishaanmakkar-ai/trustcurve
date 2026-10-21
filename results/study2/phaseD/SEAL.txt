@@ -1,0 +1,4 @@
+Phase D seal (STUDY2.md §D)
+sha256(fault_impl.py || params.json) = 327e358f307a3cfc137d5821c2d4e4af5f60471bd57a42b7a9c4ff8a7c9b63b6
+sealed 2026-10-21 by a separate fresh-context planter; files in gitignored study2_sealed/, unopened by the analyst.
+Planter self-report: >=4 fault types yes; out-of-design type present yes; self-checks passed yes.
