@@ -1,0 +1,266 @@
+[
+ {
+  "cell": "HxO",
+  "task_id": "7",
+  "trial": "0",
+  "raw": "results/raw/e1-O/results.json",
+  "reward": "0.0",
+  "db_match": "True"
+ },
+ {
+  "cell": "HxO",
+  "task_id": "32",
+  "trial": "0",
+  "raw": "results/raw/e1-O/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "HxO",
+  "task_id": "3",
+  "trial": "1",
+  "raw": "results/raw/e1-O/results.json",
+  "reward": "0.0",
+  "db_match": "True"
+ },
+ {
+  "cell": "HxO",
+  "task_id": "44",
+  "trial": "0",
+  "raw": "results/raw/e1-O/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "HxO",
+  "task_id": "32",
+  "trial": "1",
+  "raw": "results/raw/e1-O/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "HxO",
+  "task_id": "7",
+  "trial": "1",
+  "raw": "results/raw/e1-O/results.json",
+  "reward": "0.0",
+  "db_match": "True"
+ },
+ {
+  "cell": "HxO",
+  "task_id": "44",
+  "trial": "1",
+  "raw": "results/raw/e1-O/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "SxO",
+  "task_id": "7",
+  "trial": "0",
+  "raw": "results/raw/e1x-SO/results.json",
+  "reward": "0.0",
+  "db_match": "True"
+ },
+ {
+  "cell": "SxO",
+  "task_id": "32",
+  "trial": "0",
+  "raw": "results/raw/e1x-SO/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "SxO",
+  "task_id": "24",
+  "trial": "0",
+  "raw": "results/raw/e1x-SO/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "SxO",
+  "task_id": "35",
+  "trial": "0",
+  "raw": "results/raw/e1x-SO/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "SxO",
+  "task_id": "44",
+  "trial": "0",
+  "raw": "results/raw/e1x-SO/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "SxO",
+  "task_id": "7",
+  "trial": "1",
+  "raw": "results/raw/e1x-SO/results.json",
+  "reward": "0.0",
+  "db_match": "True"
+ },
+ {
+  "cell": "SxO",
+  "task_id": "32",
+  "trial": "1",
+  "raw": "results/raw/e1x-SO/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "SxO",
+  "task_id": "14",
+  "trial": "1",
+  "raw": "results/raw/e1x-SO/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "SxO",
+  "task_id": "35",
+  "trial": "1",
+  "raw": "results/raw/e1x-SO/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "SxO",
+  "task_id": "44",
+  "trial": "1",
+  "raw": "results/raw/e1x-SO/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "SxH",
+  "task_id": "7",
+  "trial": "0",
+  "raw": "results/raw/p1b-breadth/results.json",
+  "reward": "0.0",
+  "db_match": "True"
+ },
+ {
+  "cell": "SxH",
+  "task_id": "33",
+  "trial": "0",
+  "raw": "results/raw/p1b-breadth/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "SxH",
+  "task_id": "32",
+  "trial": "0",
+  "raw": "results/raw/p1b-breadth/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "SxH",
+  "task_id": "44",
+  "trial": "0",
+  "raw": "results/raw/p1b-breadth/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "SxH",
+  "task_id": "7",
+  "trial": "1",
+  "raw": "results/raw/p1b-breadth/results.json",
+  "reward": "0.0",
+  "db_match": "True"
+ },
+ {
+  "cell": "SxH",
+  "task_id": "35",
+  "trial": "1",
+  "raw": "results/raw/p1b-breadth/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "SxH",
+  "task_id": "44",
+  "trial": "1",
+  "raw": "results/raw/p1b-breadth/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "HxH",
+  "task_id": "14",
+  "trial": "0",
+  "raw": "results/raw/breadth-20261021-0149/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "HxH",
+  "task_id": "7",
+  "trial": "0",
+  "raw": "results/raw/breadth-20261021-0149/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "HxH",
+  "task_id": "32",
+  "trial": "0",
+  "raw": "results/raw/breadth-20261021-0149/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "HxH",
+  "task_id": "33",
+  "trial": "0",
+  "raw": "results/raw/breadth-20261021-0149/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "HxH",
+  "task_id": "42",
+  "trial": "0",
+  "raw": "results/raw/breadth-20261021-0149/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "HxH",
+  "task_id": "44",
+  "trial": "0",
+  "raw": "results/raw/breadth-20261021-0149/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "HxH",
+  "task_id": "7",
+  "trial": "1",
+  "raw": "results/raw/breadth-20261021-0149/results.json",
+  "reward": "0.0",
+  "db_match": "True"
+ },
+ {
+  "cell": "HxH",
+  "task_id": "32",
+  "trial": "1",
+  "raw": "results/raw/breadth-20261021-0149/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ },
+ {
+  "cell": "HxH",
+  "task_id": "44",
+  "trial": "1",
+  "raw": "results/raw/breadth-20261021-0149/results.json",
+  "reward": "0.0",
+  "db_match": "False"
+ }
+]

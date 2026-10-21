@@ -1,0 +1,142 @@
+{
+ "breadth_haiku": {
+  "runs": 50,
+  "tasks": 25,
+  "failure": {
+   "count": 9,
+   "rate": 0.18,
+   "wilson90": [
+    0.1078,
+    0.285
+   ]
+  },
+  "db_mismatch": {
+   "count": 8,
+   "rate": 0.16,
+   "wilson90": [
+    0.0926,
+    0.2623
+   ]
+  },
+  "insured_loss": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0513
+   ],
+   "robust_upper95_tasks": 0.1129
+  },
+  "omission_runs": 7,
+  "attribution": {
+   "unlabelled": 9
+  },
+  "icc_failure": 0.607,
+  "icc_db_mismatch": 0.422,
+  "cost_usd": 0.7347
+ },
+ "breadth_sonnet": {
+  "runs": 50,
+  "tasks": 25,
+  "failure": {
+   "count": 7,
+   "rate": 0.14,
+   "wilson90": [
+    0.0777,
+    0.2392
+   ]
+  },
+  "db_mismatch": {
+   "count": 5,
+   "rate": 0.1,
+   "wilson90": [
+    0.0495,
+    0.1915
+   ]
+  },
+  "insured_loss": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0513
+   ],
+   "robust_upper95_tasks": 0.1129
+  },
+  "omission_runs": 3,
+  "attribution": {
+   "unlabelled": 7
+  },
+  "icc_failure": 0.517,
+  "icc_db_mismatch": 0.351,
+  "cost_usd": 12.6095
+ },
+ "paired_failure_S_minus_H": {
+  "tasks": 25,
+  "mean_diff": -0.04,
+  "ci90": [
+   -0.1,
+   0.02
+  ],
+  "mde80_two_sided_alpha10": 0.0995,
+  "majority_flips": 3
+ },
+ "paired_db_mismatch_S_minus_H": {
+  "tasks": 25,
+  "mean_diff": -0.06,
+  "ci90": [
+   -0.14,
+   0.02
+  ],
+  "mde80_two_sided_alpha10": 0.1093,
+  "majority_flips": 4
+ },
+ "paired_omission_S_minus_H": {
+  "tasks": 25,
+  "mean_diff": -0.08,
+  "ci90": [
+   -0.18,
+   0.0
+  ],
+  "mde80_two_sided_alpha10": 0.1377,
+  "majority_flips": 5
+ },
+ "refusal_commission": {
+  "haiku_e3": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0221
+   ],
+   "robust_upper95_tasks": 0.0722
+  },
+  "sonnet_1b": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0634
+   ],
+   "robust_upper95_tasks": 0.0722
+  }
+ },
+ "refusal_failure": {
+  "haiku": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0221
+   ]
+  },
+  "sonnet": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0634
+   ]
+  }
+ }
+}

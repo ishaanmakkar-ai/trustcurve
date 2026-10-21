@@ -1,0 +1,138 @@
+{
+ "variants": {
+  "runs": 200,
+  "tasks": 100,
+  "failure": {
+   "count": 50,
+   "rate": 0.25,
+   "wilson90": [
+    0.2032,
+    0.3035
+   ]
+  },
+  "db_mismatch": {
+   "count": 47,
+   "rate": 0.235,
+   "wilson90": [
+    0.1894,
+    0.2877
+   ]
+  },
+  "insured_loss": {
+   "count": 2,
+   "rate": 0.01,
+   "wilson90": [
+    0.0033,
+    0.0298
+   ],
+   "robust_upper95_tasks": null
+  },
+  "omission_runs": 36,
+  "attribution": {
+   "unlabelled": 50
+  },
+  "icc_failure": 0.63,
+  "icc_db_mismatch": 0.586,
+  "cost_usd": 3.0601
+ },
+ "parents_unperturbed": {
+  "runs": 40,
+  "tasks": 20,
+  "failure": {
+   "count": 7,
+   "rate": 0.175,
+   "wilson90": [
+    0.0978,
+    0.2934
+   ]
+  },
+  "db_mismatch": {
+   "count": 6,
+   "rate": 0.15,
+   "wilson90": [
+    0.0796,
+    0.2647
+   ]
+  },
+  "insured_loss": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0634
+   ],
+   "robust_upper95_tasks": 0.1391
+  },
+  "omission_runs": 5,
+  "attribution": {
+   "unlabelled": 7
+  },
+  "icc_failure": 0.5,
+  "icc_db_mismatch": 0.24,
+  "cost_usd": 0.5692
+ },
+ "nested_db_mismatch": {
+  "s2_parent": 0.0794,
+  "s2_variant": 0.03,
+  "s2_run": 0.075,
+  "rho_parent": 0.4307,
+  "r_cross": 0.7258,
+  "rho_parent_ci90": [
+   0.225,
+   0.632
+  ],
+  "r_cross_ci90": [
+   0.464,
+   0.962
+  ],
+  "V_eff_of_5": 1.28
+ },
+ "nested_failure": {
+  "s2_parent": 0.1006,
+  "s2_variant": 0.0225,
+  "s2_run": 0.07,
+  "rho_parent": 0.521,
+  "r_cross": 0.8172,
+  "rho_parent_ci90": [
+   0.246,
+   0.732
+  ],
+  "r_cross_ci90": [
+   0.517,
+   1.0
+  ],
+  "V_eff_of_5": 1.17
+ },
+ "by_variant_type": {
+  "v5_rename_impatient": {
+   "runs": 40,
+   "failure_rate": 0.25,
+   "mean_diff_vs_parent": 0.075
+  },
+  "v4_topup": {
+   "runs": 30,
+   "failure_rate": 0.333,
+   "mean_diff_vs_parent": 0.167
+  },
+  "v2_impatient": {
+   "runs": 40,
+   "failure_rate": 0.2,
+   "mean_diff_vs_parent": 0.025
+  },
+  "v1_rename": {
+   "runs": 40,
+   "failure_rate": 0.225,
+   "mean_diff_vs_parent": 0.05
+  },
+  "v3_chatty": {
+   "runs": 40,
+   "failure_rate": 0.25,
+   "mean_diff_vs_parent": 0.075
+  },
+  "v4_topup_fallback_persona": {
+   "runs": 10,
+   "failure_rate": 0.3,
+   "mean_diff_vs_parent": 0.1
+  }
+ }
+}

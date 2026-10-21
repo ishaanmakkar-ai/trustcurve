@@ -1,0 +1,251 @@
+{
+ "note": "post-hoc, review 5; not pre-registered",
+ "sign_tests": {
+  "db_mismatch": {
+   "E1_O_minus_H": {
+    "pos": 0,
+    "neg": 4,
+    "ties": 21,
+    "p_two_sided": 0.125
+   },
+   "E1_S_minus_H": {
+    "pos": 1,
+    "neg": 4,
+    "ties": 20,
+    "p_two_sided": 0.375
+   },
+   "E1x_gap_H": {
+    "pos": 1,
+    "neg": 4,
+    "ties": 20,
+    "p_two_sided": 0.375
+   },
+   "E1x_gap_O": {
+    "pos": 3,
+    "neg": 0,
+    "ties": 22,
+    "p_two_sided": 0.25
+   },
+   "E1x_gap_S": {
+    "pos": 0,
+    "neg": 2,
+    "ties": 23,
+    "p_two_sided": 0.5
+   },
+   "E1x_interaction_O": {
+    "pos": 6,
+    "neg": 0,
+    "ties": 19,
+    "p_two_sided": 0.0312
+   },
+   "E1x_interaction_S": {
+    "pos": 2,
+    "neg": 2,
+    "ties": 21,
+    "p_two_sided": 1.0
+   },
+   "E1x_gap_O_per_task_nonzero": {
+    "14": 0.5,
+    "24": 0.5,
+    "35": 1
+   }
+  },
+  "failure": {
+   "E1_O_minus_H": {
+    "pos": 1,
+    "neg": 3,
+    "ties": 21,
+    "p_two_sided": 0.625
+   },
+   "E1_S_minus_H": {
+    "pos": 0,
+    "neg": 4,
+    "ties": 21,
+    "p_two_sided": 0.125
+   },
+   "E1x_gap_H": {
+    "pos": 1,
+    "neg": 3,
+    "ties": 21,
+    "p_two_sided": 0.625
+   },
+   "E1x_gap_O": {
+    "pos": 3,
+    "neg": 1,
+    "ties": 21,
+    "p_two_sided": 0.625
+   },
+   "E1x_gap_S": {
+    "pos": 0,
+    "neg": 1,
+    "ties": 24,
+    "p_two_sided": 1.0
+   },
+   "E1x_interaction_O": {
+    "pos": 5,
+    "neg": 1,
+    "ties": 19,
+    "p_two_sided": 0.2188
+   },
+   "E1x_interaction_S": {
+    "pos": 2,
+    "neg": 1,
+    "ties": 22,
+    "p_two_sided": 1.0
+   },
+   "E1x_gap_O_per_task_nonzero": {
+    "3": -0.5,
+    "14": 0.5,
+    "24": 0.5,
+    "35": 1
+   }
+  },
+  "omission": {
+   "E1_O_minus_H": {
+    "pos": 0,
+    "neg": 3,
+    "ties": 22,
+    "p_two_sided": 0.25
+   },
+   "E1_S_minus_H": {
+    "pos": 1,
+    "neg": 4,
+    "ties": 20,
+    "p_two_sided": 0.375
+   },
+   "E1x_gap_H": {
+    "pos": 1,
+    "neg": 4,
+    "ties": 20,
+    "p_two_sided": 0.375
+   },
+   "E1x_gap_O": {
+    "pos": 3,
+    "neg": 0,
+    "ties": 22,
+    "p_two_sided": 0.25
+   },
+   "E1x_gap_S": {
+    "pos": 1,
+    "neg": 2,
+    "ties": 22,
+    "p_two_sided": 1.0
+   },
+   "E1x_interaction_O": {
+    "pos": 6,
+    "neg": 0,
+    "ties": 19,
+    "p_two_sided": 0.0312
+   },
+   "E1x_interaction_S": {
+    "pos": 4,
+    "neg": 2,
+    "ties": 19,
+    "p_two_sided": 0.6875
+   },
+   "E1x_gap_O_per_task_nonzero": {
+    "14": 0.5,
+    "24": 0.5,
+    "35": 1
+   }
+  }
+ },
+ "cell_cluster_ci90": {
+  "HxH": {
+   "db_mismatch": [
+    0.06,
+    0.26
+   ],
+   "failure": [
+    0.08,
+    0.3
+   ]
+  },
+  "HxO": {
+   "db_mismatch": [
+    0.0,
+    0.16
+   ],
+   "failure": [
+    0.04,
+    0.26
+   ]
+  },
+  "HxS": {
+   "db_mismatch": [
+    0.02,
+    0.2
+   ],
+   "failure": [
+    0.02,
+    0.2
+   ]
+  },
+  "SxH": {
+   "db_mismatch": [
+    0.02,
+    0.18
+   ],
+   "failure": [
+    0.04,
+    0.24
+   ]
+  },
+  "SxO": {
+   "db_mismatch": [
+    0.06,
+    0.28
+   ],
+   "failure": [
+    0.08,
+    0.32
+   ]
+  },
+  "SxS": {
+   "db_mismatch": [
+    0.0,
+    0.12
+   ],
+   "failure": [
+    0.0,
+    0.2
+   ]
+  }
+ },
+ "e2_cluster_ci90": {
+  "variants_failure_parent_cluster": [
+   0.135,
+   0.37
+  ],
+  "variants_dbm_parent_cluster": [
+   0.13,
+   0.345
+  ]
+ },
+ "e2_veff_observed_scale": {
+  "1_run_per_variant": {
+   "V_eff": 1.84,
+   "ci90": [
+    1.42,
+    2.63
+   ],
+   "p_ge_2": 0.408,
+   "p_ge_3": 0.006
+  },
+  "2_run_per_variant": {
+   "V_eff": 1.58,
+   "ci90": [
+    1.27,
+    2.22
+   ],
+   "p_ge_2": 0.145,
+   "p_ge_3": 0.002
+  }
+ },
+ "e2_components": [
+  0.0794,
+  0.03,
+  0.075
+ ],
+ "omission_gap_O_without_artefact": 0.06
+}

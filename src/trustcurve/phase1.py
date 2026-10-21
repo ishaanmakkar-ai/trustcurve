@@ -321,6 +321,35 @@ def reference(refh_rows, refs_rows, n_slices=200, slice_tasks=25, slice_runs=2, 
     return out
 
 
+def sign_test(a_rows, b_rows, f):
+    """Exact two-sided sign test on per-task differences (b - a) of mean outcome; ties dropped.
+    Added after review 5 (post-hoc robustness check, not a pre-registered test)."""
+    A, Bt = by_task(a_rows, f), by_task(b_rows, f)
+    d = [mean(Bt[t]) - mean(A[t]) for t in sorted(set(A) & set(Bt))]
+    pos = sum(x > 0 for x in d); neg = sum(x < 0 for x in d); n = pos + neg
+    p = min(1.0, 2 * sum(math.comb(n, k) for k in range(min(pos, neg) + 1)) / 2 ** n) if n else 1.0
+    return {"pos": pos, "neg": neg, "ties": len(d) - n, "p_two_sided": round(p, 4)}
+
+
+def sign_test_diffs(d):
+    pos = sum(x > 1e-12 for x in d); neg = sum(x < -1e-12 for x in d); n = pos + neg
+    p = min(1.0, 2 * sum(math.comb(n, k) for k in range(min(pos, neg) + 1)) / 2 ** n) if n else 1.0
+    return {"pos": pos, "neg": neg, "ties": len(d) - n, "p_two_sided": round(p, 4)}
+
+
+def cluster_ci(rows, f, key=lambda r: str(r["task_id"]), B=2000, seed=1):
+    """Cluster (task or parent) bootstrap 90% percentile interval for a run-level rate."""
+    g = defaultdict(list)
+    for r in rows:
+        g[key(r)].append(f(r))
+    ks = list(g); rng = random.Random(seed); bs = []
+    for _ in range(B):
+        ys = [y for _ in ks for y in g[ks[rng.randrange(len(ks))]]]
+        bs.append(sum(ys) / len(ys))
+    bs.sort()
+    return [round(bs[int(0.05 * B)], 4), round(bs[int(0.95 * B) - 1], 4)]
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1]
     if cmd == "e1":

@@ -1,0 +1,58 @@
+1/40 (trial 1/1). Running task E3A-1, trial 1
+2/40 (trial 1/1). Running task E3A-2, trial 1
+3/40 (trial 1/1). Running task E3A-3, trial 1
+4/40 (trial 1/1). Running task E3A-4, trial 1
+0/40 (trial 1/1). Running task E3A-0, trial 1
+6/40 (trial 1/1). Running task E3A-6, trial 1
+5/40 (trial 1/1). Running task E3A-5, trial 1
+7/40 (trial 1/1). Running task E3A-7, trial 1
+8/40 (trial 1/1). Running task E3A-8, trial 1
+Status: 1/40 complete. Avg reward: 1.00 (N=1). 8 running: E3A-1.0(30s), 
+E3A-3.0(30s), E3A-4.0(30s), E3A-0.0(30s), E3A-6.0(30s), E3A-5.0(30s), 
+E3A-7.0(30s), E3A-8.0(0s)
+9/40 (trial 1/1). Running task E3A-9, trial 1
+10/40 (trial 1/1). Running task E3A-10, trial 1
+11/40 (trial 1/1). Running task E3A-11, trial 1
+12/40 (trial 1/1). Running task E3A-12, trial 1
+13/40 (trial 1/1). Running task E3A-13, trial 1
+14/40 (trial 1/1). Running task E3A-14, trial 1
+15/40 (trial 1/1). Running task E3A-15, trial 1
+16/40 (trial 1/1). Running task E3B-0, trial 1
+Status: 9/40 complete. Avg reward: 1.00 (N=9). 8 running: E3A-9.0(28s), 
+E3A-10.0(22s), E3A-11.0(22s), E3A-12.0(21s), E3A-13.0(14s), E3A-14.0(14s), 
+E3A-15.0(12s), E3B-0.0(11s)
+17/40 (trial 1/1). Running task E3B-1, trial 1
+18/40 (trial 1/1). Running task E3B-2, trial 1
+19/40 (trial 1/1). Running task E3B-3, trial 1
+20/40 (trial 1/1). Running task E3B-4, trial 1
+21/40 (trial 1/1). Running task E3B-5, trial 1
+22/40 (trial 1/1). Running task E3B-6, trial 1
+23/40 (trial 1/1). Running task E3B-7, trial 1
+24/40 (trial 1/1). Running task E3B-8, trial 1
+25/40 (trial 1/1). Running task E3B-9, trial 1
+Status: 18/40 complete. Avg reward: 1.00 (N=18). 8 running: E3B-1.0(24s), 
+E3B-3.0(20s), E3B-4.0(15s), E3B-5.0(14s), E3B-6.0(13s), E3B-7.0(11s), 
+E3B-8.0(9s), E3B-9.0(5s)
+26/40 (trial 1/1). Running task E3B-10, trial 1
+27/40 (trial 1/1). Running task E3B-11, trial 1
+28/40 (trial 1/1). Running task E3C-0, trial 1
+29/40 (trial 1/1). Running task E3C-1, trial 1
+30/40 (trial 1/1). Running task E3C-2, trial 1
+31/40 (trial 1/1). Running task E3C-3, trial 1
+32/40 (trial 1/1). Running task E3C-4, trial 1
+33/40 (trial 1/1). Running task E3C-5, trial 1
+34/40 (trial 1/1). Running task E3C-6, trial 1
+35/40 (trial 1/1). Running task E3C-7, trial 1
+36/40 (trial 1/1). Running task E3C-8, trial 1
+Status: 29/40 complete. Avg reward: 1.00 (N=29). 8 running: E3C-1.0(20s), 
+E3C-2.0(19s), E3C-3.0(18s), E3C-4.0(16s), E3C-5.0(12s), E3C-6.0(8s), 
+E3C-7.0(6s), E3C-8.0(5s)
+37/40 (trial 1/1). Running task E3C-9, trial 1
+38/40 (trial 1/1). Running task E3C-10, trial 1
+39/40 (trial 1/1). Running task E3C-11, trial 1
+Status: 39/40 complete. Avg reward: 1.00 (N=39). 1 running: E3C-10.0(28s)
+
+Successfully completed all simulations!
+To review the simulations, run: tau2 view
+{"runs": 40, "passed": 40, "out": "/Users/ishaanmakkar/Documents/Context for Agents/Tools/trustcurve/results/raw/p1b-refusal/results.json"}
+exit=0 name=p1b-refusal

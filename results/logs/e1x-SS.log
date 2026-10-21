@@ -1,0 +1,73 @@
+0/25 (trial 1/2). Running task 0, trial 1
+1/25 (trial 1/2). Running task 1, trial 1
+5/25 (trial 1/2). Running task 9, trial 1
+3/25 (trial 1/2). Running task 3, trial 1
+2/25 (trial 1/2). Running task 2, trial 1
+4/25 (trial 1/2). Running task 7, trial 1
+6/25 (trial 1/2). Running task 13, trial 1
+7/25 (trial 1/2). Running task 14, trial 1
+8/25 (trial 1/2). Running task 20, trial 1
+Status: 1/50 complete. Avg reward: 1.00 (N=1). 8 running: 0.0(30s), 9.0(30s), 
+3.0(30s), 2.0(30s), 7.0(30s), 13.0(30s), 14.0(30s), 20.0(3s)
+9/25 (trial 1/2). Running task 24, trial 1
+10/25 (trial 1/2). Running task 25, trial 1
+11/25 (trial 1/2). Running task 30, trial 1
+12/25 (trial 1/2). Running task 32, trial 1
+13/25 (trial 1/2). Running task 33, trial 1
+14/25 (trial 1/2). Running task 34, trial 1
+Status: 7/50 complete. Avg reward: 0.86 (N=7). 8 running: 14.0(60s), 20.0(33s), 
+24.0(27s), 25.0(27s), 30.0(25s), 32.0(12s), 33.0(6s), 34.0(5s)
+15/25 (trial 1/2). Running task 35, trial 1
+16/25 (trial 1/2). Running task 37, trial 1
+17/25 (trial 1/2). Running task 38, trial 1
+18/25 (trial 1/2). Running task 40, trial 1
+Status: 11/50 complete. Avg reward: 0.91 (N=11). 8 running: 14.0(90s), 
+32.0(42s), 33.0(36s), 34.0(35s), 35.0(24s), 37.0(23s), 38.0(22s), 40.0(6s)
+19/25 (trial 1/2). Running task 41, trial 1
+20/25 (trial 1/2). Running task 42, trial 1
+21/25 (trial 1/2). Running task 44, trial 1
+22/25 (trial 1/2). Running task 45, trial 1
+23/25 (trial 1/2). Running task 46, trial 1
+24/25 (trial 1/2). Running task 48, trial 1
+0/25 (trial 2/2). Running task 0, trial 2
+Status: 18/50 complete. Avg reward: 0.94 (N=18). 8 running: 35.0(54s), 
+41.0(27s), 42.0(21s), 44.0(21s), 45.0(17s), 46.0(10s), 48.0(1s), 0.1(0s)
+1/25 (trial 2/2). Running task 1, trial 2
+2/25 (trial 2/2). Running task 2, trial 2
+3/25 (trial 2/2). Running task 3, trial 2
+4/25 (trial 2/2). Running task 7, trial 2
+5/25 (trial 2/2). Running task 9, trial 2
+6/25 (trial 2/2). Running task 13, trial 2
+7/25 (trial 2/2). Running task 14, trial 2
+Status: 25/50 complete. Avg reward: 0.96 (N=25). 8 running: 44.0(51s), 1.1(23s),
+2.1(20s), 3.1(18s), 7.1(16s), 9.1(15s), 13.1(12s), 14.1(3s)
+8/25 (trial 2/2). Running task 20, trial 2
+9/25 (trial 2/2). Running task 24, trial 2
+10/25 (trial 2/2). Running task 25, trial 2
+11/25 (trial 2/2). Running task 30, trial 2
+12/25 (trial 2/2). Running task 32, trial 2
+13/25 (trial 2/2). Running task 33, trial 2
+Status: 31/50 complete. Avg reward: 0.94 (N=31). 8 running: 7.1(46s), 14.1(33s),
+20.1(27s), 24.1(24s), 25.1(23s), 30.1(16s), 32.1(9s), 33.1(4s)
+14/25 (trial 2/2). Running task 34, trial 2
+15/25 (trial 2/2). Running task 35, trial 2
+16/25 (trial 2/2). Running task 37, trial 2
+17/25 (trial 2/2). Running task 38, trial 2
+18/25 (trial 2/2). Running task 40, trial 2
+Status: 36/50 complete. Avg reward: 0.92 (N=36). 8 running: 14.1(63s), 
+32.1(39s), 33.1(34s), 34.1(24s), 35.1(23s), 37.1(16s), 38.1(13s), 40.1(3s)
+19/25 (trial 2/2). Running task 41, trial 2
+20/25 (trial 2/2). Running task 42, trial 2
+21/25 (trial 2/2). Running task 44, trial 2
+22/25 (trial 2/2). Running task 45, trial 2
+23/25 (trial 2/2). Running task 46, trial 2
+24/25 (trial 2/2). Running task 48, trial 2
+Status: 42/50 complete. Avg reward: 0.93 (N=42). 8 running: 35.1(53s), 
+38.1(43s), 41.1(16s), 42.1(13s), 44.1(11s), 45.1(8s), 46.1(7s), 48.1(4s)
+Status: 47/50 complete. Avg reward: 0.94 (N=47). 3 running: 44.1(41s), 
+45.1(38s), 48.1(34s)
+
+Successfully completed all simulations!
+To review the simulations, run: tau2 view
+{"runs": 50, "passed": 46, "out": "/Users/ishaanmakkar/Documents/Context for Agents/Tools/trustcurve/results/raw/e1x-SS/results.json"}
+exit=0 name=e1x-SS

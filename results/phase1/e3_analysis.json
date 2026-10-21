@@ -1,0 +1,142 @@
+{
+ "all": {
+  "runs": 120,
+  "tasks": 40,
+  "failure": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0221
+   ]
+  },
+  "db_mismatch": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0221
+   ]
+  },
+  "insured_loss": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0221
+   ],
+   "robust_upper95_tasks": 0.0722
+  },
+  "omission_runs": 0,
+  "attribution": {},
+  "icc_failure": NaN,
+  "icc_db_mismatch": NaN,
+  "cost_usd": 0.9583
+ },
+ "type_A": {
+  "runs": 48,
+  "tasks": 16,
+  "failure": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0534
+   ]
+  },
+  "db_mismatch": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0534
+   ]
+  },
+  "insured_loss": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0534
+   ],
+   "robust_upper95_tasks": 0.1707
+  },
+  "omission_runs": 0,
+  "attribution": {},
+  "icc_failure": NaN,
+  "icc_db_mismatch": NaN,
+  "cost_usd": 0.4208
+ },
+ "type_B": {
+  "runs": 36,
+  "tasks": 12,
+  "failure": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0699
+   ]
+  },
+  "db_mismatch": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0699
+   ]
+  },
+  "insured_loss": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0699
+   ],
+   "robust_upper95_tasks": 0.2209
+  },
+  "omission_runs": 0,
+  "attribution": {},
+  "icc_failure": NaN,
+  "icc_db_mismatch": NaN,
+  "cost_usd": 0.2846
+ },
+ "type_C": {
+  "runs": 36,
+  "tasks": 12,
+  "failure": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0699
+   ]
+  },
+  "db_mismatch": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0699
+   ]
+  },
+  "insured_loss": {
+   "count": 0,
+   "rate": 0.0,
+   "wilson90": [
+    0.0,
+    0.0699
+   ],
+   "robust_upper95_tasks": 0.2209
+  },
+  "omission_runs": 0,
+  "attribution": {},
+  "icc_failure": NaN,
+  "icc_db_mismatch": NaN,
+  "cost_usd": 0.2529
+ },
+ "near_miss": {
+  "count": 1,
+  "rate": 0.0083
+ }
+}
