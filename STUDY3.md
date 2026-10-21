@@ -928,3 +928,18 @@ Items 4–6 need Ishaan or the cap.
 - F1 underwriting runs only **after F2 is frozen**, because F1's per-configuration results would show the F2 designer which agents are flawed.
 - **Anything Ishaan could see before freezing F2 must not depend on the flawed configurations.**
   - **Allowed before then:** the fidelity pilot (on C0, a clean configuration), the designed-flaw planter (output sealed), and the judge's run on the validation sample (output sealed until Ishaan's labels are in, so his labels can't be anchored on the judge).
+
+### B′ fidelity pilot (pre-registered 2026-10-22, before any paid Study 3 call; amends "about 20 tasks")
+- **Sample:** 40 experience tasks, stratified by author (E1–E4 × 7, E5–E6 × 6) and round-robin over strata, seed 20261022 (`scripts/study3/merge_pool.py`).
+  - Their IDs are sealed in `tasks/study3_sealed/pilot_ids.txt` (sha256 `24d6a916…`). The merged pool is `pool.json` (sha256 `7a90862d…`).
+  - 40 rather than 20 because G1 at 10% can't be read from 20 tasks. The extra cost is about $1.
+  - **These 40 tasks stay in the experience pool.** The pilot uses only C0, a clean configuration, so it reveals nothing about any flaw.
+- **Runs:** C0 × {claude-sonnet-5-5 customer, gpt-6-luna customer}, both with Study 2's date hint, 1 trial. Projected ≈ $1.5, plus about $0.3 of labelling.
+- **Gates:**
+  - **G1 (difficulty):** C0 fails (reward < 1 or DB mismatch) on ≥ 10% of the pilot tasks under the Sonnet customer.
+  - **G3 (fidelity):** user_caused share of failures ≤ 30% per simulator, from the Goal 3 RUBRICS labeller (Haiku, `scripts/label_runs.py`).
+  - **G-trunc:** confirm-and-stop cut-offs < 3% per simulator.
+- **Repairs:**
+  - **G-trunc fails:** add the stop hint (§B′3 correction) for that simulator and re-run its pilot once.
+  - **G3 fails for a simulator:** that simulator is dropped. If only one family remains, "≥ 2 simulator families" is reported as unmet. That is the Study 2 precedent.
+  - **G1 fails:** reported, **not waived** (Study 2 precedent). The pool is not rewritten, because the pool is sealed and boundary-dense by spec. Difficulty is reported as a limitation.
