@@ -12,7 +12,9 @@ from __future__ import annotations
 
 import numpy as np
 
-PLR, PLR_SWEEP = 0.60, (0.50, 0.55, 0.60, 0.65)
+PLR, PLR_SWEEP = 0.60, (0.50, 0.548, 0.55, 0.60, 0.65)
+# S1 addendum: HSB Total Cyber+ 2026 filing (SERFF HSTB-134954936) [V], cited sensitivities only
+PLR_FILED, CAT_LOAD, ROE_FILED, CAP_FLOOR_FILED, INV_FILED = 0.548, 0.10, 0.15, 0.47, 0.004
 EXPENSE, INV_INCOME, COST_EQUITY, CAP_FLOOR, CR_TARGET = 0.37, 0.025, 0.10, 1.0, 0.95
 V, V_SWEEP = 10_000_000, (1_000_000, 10_000_000, 30_000_000)
 BETA, LAPSE = 5.0, (0.0, 0.3)
@@ -45,6 +47,8 @@ def add_outside_in(forecasts, cards, anchor="F1_3"):
 
 
 def premiums(fc, rule="ii", plr=PLR):
+    if rule == "iii":                                   # S1 addendum: filed-style catastrophe load on the point
+        return {c: v["point"] * (1 + CAT_LOAD) / plr for c, v in fc.items()}
     key = "point" if rule == "i" else "p75"
     return {c: v[key] / plr for c, v in fc.items()}
 
@@ -66,7 +70,7 @@ def correlated_excess(losses, base_model, clean):
     return modal, on, exc
 
 
-def book(prem, losses, boots, base_model, clean, v=V, insureds=None):
+def book(prem, losses, boots, base_model, clean, v=V, insureds=None, cap_floor=CAP_FLOOR, inv=INV_INCOME):
     """E2 for one forecaster's premiums over a set of insureds (default: all)."""
     ins = list(insureds if insureds is not None else prem)
     if not ins:
@@ -79,12 +83,13 @@ def book(prem, losses, boots, base_model, clean, v=V, insureds=None):
     modal, on, exc = correlated_excess(losses, base_model, clean)
     corr = EL + exc * v * len([c for c in ins if c in on])
     tail = max(q995, corr)
-    cap = max(CAP_FLOOR * P, tail - EL)
+    cap = max(cap_floor * P, tail - EL)
     uw = P * (1 - EXPENSE) - EL
-    roc = (uw + INV_INCOME * P) / cap
+    roc = (uw + inv * P) / cap
     return {"n": len(ins), "premium": P, "expected_loss": EL, "LR": lr, "CR": lr + EXPENSE, "uw_profit": uw,
             "q995_book": q995, "correlated_scenario": corr, "capital": cap, "RoC": roc,
             "profitable": bool(lr + EXPENSE <= CR_TARGET and roc >= COST_EQUITY),
+            "profitable_filed_roe": bool(lr + EXPENSE <= CR_TARGET and roc >= ROE_FILED),
             "LR_by_config": {c: losses[c].mean() / prem[c] for c in ins}}
 
 
@@ -148,7 +153,7 @@ def run_all(forecasts, losses, cards, base_model, clean, seed=0):
     boots = boot_means(losses, rng)
     out = {"card_modifiers": mods, "books": {}, "markets": {}, "gap": {}, "kill": None}
     prem = {}
-    for rule in ("i", "ii"):
+    for rule in ("i", "ii", "iii"):
         for plr in PLR_SWEEP:
             for v in V_SWEEP:
                 for f in fc:
@@ -156,6 +161,9 @@ def run_all(forecasts, losses, cards, base_model, clean, seed=0):
                     if plr == PLR:
                         prem[(rule, f)] = p
                     out["books"][f"{f}|{rule}|PLR{plr}|V{v}"] = book(p, losses, boots, base_model, clean, v)
+    for f in fc:                                         # S1 addendum: all-filed sensitivity (rule ii)
+        out["books"][f"{f}|ii|FILED"] = book(premiums(fc[f], "ii", PLR_FILED), losses, boots, base_model, clean, V,
+                                             cap_floor=CAP_FLOOR_FILED, inv=INV_FILED)
     P2 = {f: prem[("ii", f)] for f in fc}
     for other in ("F0", "F0q", "F1_3", "F3"):
         if other not in P2 or "F2" not in P2:

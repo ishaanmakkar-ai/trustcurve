@@ -74,3 +74,14 @@ def test_run_all_smoke():
     econ.B_BOOT = 300
     out = econ.run_all({"F1_3": noisy, "F2": perfect}, losses, cards, bm, cfgs[:4])
     assert set(out["kill"]) == {"KE1", "KE2", "KE3"} and out["kill"]["KE2"] is False
+
+
+def test_filed_sensitivities_present_and_base_unchanged():
+    cfgs, true, losses, cards, bm, perfect = world(conv=1500)
+    econ.B_BOOT = 300
+    out = econ.run_all({"F1_3": perfect, "F2": perfect}, losses, cards, bm, cfgs[:4])
+    assert "F2|ii|FILED" in out["books"] and "F2|iii|PLR0.6|V10000000" in out["books"]
+    b = out["books"]["F2|ii|PLR0.6|V10000000"]
+    assert "profitable_filed_roe" in b and (not b["profitable_filed_roe"] or b["profitable"])  # 15% is stricter
+    p3, p1 = econ.premiums(perfect, "iii"), econ.premiums(perfect, "i")
+    assert all(abs(p3[c] / p1[c] - 1.10) < 1e-9 for c in cfgs)
