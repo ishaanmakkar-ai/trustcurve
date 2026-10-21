@@ -81,6 +81,7 @@ CONFIGS = {c.id: c for c in [
     # B-L2: capability levels below Haiku 5.5 ("any weaker model if available", plan)
     Config("CAP-H4", model="anthropic/claude-haiku-4-5-20251001", factor="capability-"),
     Config("CAP-L", model="openai/responses/gpt-6-luna", factor="capability-"),
+    Config("H4-KB", model="anthropic/claude-haiku-4-5-20251001", knowledge="wrong_rule", factor="capability-"),  # B-L2 KB variant
 ] + [Config(f"D{k}", factor="planted", fault=True) for k in range(1, 7)]}
 
 SEALED_DIR = Path(__file__).resolve().parents[3] / "study2_sealed"
@@ -118,8 +119,10 @@ def policy_variant(policy: str, knowledge: str) -> str:
         return policy.replace(b, "").replace(a, "Compensate any user who complains about a delayed or cancelled flight.")
     if knowledge == "wrong_insurance":
         a = "- The user has travel insurance and the reason for cancellation is covered by insurance."
-        assert policy.count(a) == 1
-        return policy.replace(a, "- The user has travel insurance (it covers cancellation for any reason).")
+        b = "enables full refund if the user needs to cancel the flight given health or weather reasons."
+        assert policy.count(a) == 1 and policy.count(b) == 1  # review 7 #6: both insurance lines edited
+        return policy.replace(a, "- The user has travel insurance (it covers cancellation for any reason).").replace(
+            b, "enables full refund if the user needs to cancel the flight for any reason.")
     if knowledge == "wrong_baggage":
         a = ("- If the booking user is a regular member:\n  - 0 free checked bag for each basic economy passenger\n"
              "  - 1 free checked bag for each economy passenger")

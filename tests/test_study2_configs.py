@@ -25,13 +25,14 @@ def test_policy_variants():
         v = C.policy_variant(pol, k)
         assert v != pol and len(v.splitlines()) >= len(pol.splitlines()) - 1
     assert "Compensate any user" in C.policy_variant(pol, "wrong_compensation")
+    assert "health or weather" not in C.policy_variant(pol, "wrong_insurance")
     assert "1 free checked bag for each basic economy passenger\n  - 2 free checked bag for each economy passenger\n  - 2 free checked bags for each business" in C.policy_variant(pol, "wrong_baggage")
     wr = C.policy_variant(pol, "wrong_rule")
     assert "last 72 hrs" in wr and "last 24 hrs" not in wr and len(wr) == len(pol)
 
 
 def test_config_table():
-    assert len([c for c in C.CONFIGS.values() if not c.fault]) == 24
+    assert len([c for c in C.CONFIGS.values() if not c.fault]) == 25
     assert [c.id for c in C.CONFIGS.values() if c.fault] == [f"D{k}" for k in range(1, 7)]
     assert {c.factor for c in C.CONFIGS.values()} == {"base", "capability", "persona", "harness", "knowledge",
                                                       "interaction", "planted", "knowledge+", "kb", "capability-"}

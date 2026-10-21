@@ -365,7 +365,7 @@ def predictive_covered(f: Forecast, y: float) -> bool:
 
 def spearman(a, b) -> float:
     a, b = np.asarray(a, float), np.asarray(b, float)
-    if np.all(a == a[0]) or np.all(b == b[0]):
+    if len(a) < 2 or np.all(a == a[0]) or np.all(b == b[0]):
         return float("nan")
     return float(sps.spearmanr(a, b).statistic)
 

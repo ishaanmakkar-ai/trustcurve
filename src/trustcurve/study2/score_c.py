@@ -87,7 +87,7 @@ def spearman_block(F, R, key, tm, B=2000, seed=1):
     pts = np.array([F[c][key]["point"] for c in cfgs]); ys = np.array([R[c] for c in cfgs])
     rho = spearman(pts, ys); conc = concordance(pts, ys)
     # task bootstrap of realised (forecasts fixed): resample experience tasks jointly across configurations
-    tasks = sorted(set.intersection(*[set(tm[c]) for c in cfgs])) if tm else []
+    tasks = sorted(set.intersection(*[set(tm[c]) for c in cfgs])) if tm and cfgs else []
     rng = np.random.default_rng(seed); bs = []
     if tasks:
         M = np.array([[tm[c][t] for t in tasks] for c in cfgs])
@@ -159,7 +159,8 @@ def sharpness_block(F, R, key, Rev):
     """Median relative 90% predictive width, and coverage among configurations with >= 1 realised event
     (coverage of a [0, u] interval by a realised 0 is uninformative; adapt memo after phase A)."""
     cfgs = sorted(set(F) & set(R))
-    widths = [(F[c][key]["pred_hi90"] - F[c][key]["pred_lo90"]) / max(F[c][key]["point"], 1e-6) for c in cfgs]
+    # review 7 #5: relative to max(point, realised, $1), so a zero point forecast doesn't blow the ratio up
+    widths = [(F[c][key]["pred_hi90"] - F[c][key]["pred_lo90"]) / max(F[c][key]["point"], R[c], 1.0) for c in cfgs]
     ev = [c for c in cfgs if Rev.get(c, 0) > 0]
     cov_ev = [F[c][key]["pred_lo90"] - 1e-9 <= R[c] <= F[c][key]["pred_hi90"] + 1e-9 for c in ev]
     return {"median_relative_width": float(np.median(widths)) if widths else None,
@@ -206,48 +207,65 @@ def coverage_task_bootstrap(F, rows, key="combined", B=1000, seed=4):
     return [float(np.quantile(vals, 0.05)), float(np.quantile(vals, 0.95))]
 
 
+EXPERIENCE_SIMS = ("S", "L")  # Sonnet 5.5 + gpt-6-luna; "H" = Haiku-simulator bridge arm (review 7 #2)
+
+
+def score_set(F, rows, rng, label):
+    """RQ1/RQ2/K2 for one configuration set, realised over the experience simulators only."""
+    rows = [r for r in rows if r["config"] in F and r["sim"] in EXPERIENCE_SIMS]
+    R, n = realised(rows); tm = task_matrix(rows)
+    Fc = {c: {"combined": v["combined"]} for c, v in F.items() if c in R}
+    sp = spearman_block(Fc, R, "combined", tm); cov = coverage_block(Fc, R, "combined", rng)
+    Rev, _ = realised(rows, col="commission_event")
+    sharp = sharpness_block(Fc, R, "combined", Rev)
+    cov["coverage_ci90_task_bootstrap"] = coverage_task_bootstrap(Fc, rows)
+    out = {"set": label, "realised": R, "n_runs": n, "rq1": sp, "rq2": cov, "k2": k2(sp, cov, sharp), "sharpness": sharp,
+           "realised_event_counts": {c: int(round(Rev[c] * n[c])) for c in Rev}}
+    out["secondary"] = {}
+    for sec in ("m1c", "m1"):
+        Fm = {c: {"combined": v[sec]} for c, v in F.items() if c in R and sec in v}
+        out["secondary"][sec] = {"rq1": spearman_block(Fm, R, "combined", tm), "rq2": coverage_block(Fm, R, "combined", rng)}
+    Ro, _ = realised(rows, col="omission_usd")
+    Fo = {c: {"combined": v["omission"]} for c, v in F.items() if c in Ro and "omission" in v}
+    out["secondary"]["omission"] = {"rq1": spearman_block(Fo, Ro, "combined", task_matrix(rows, "omission_usd")),
+                                    "rq2": coverage_block(Fo, Ro, "combined", rng)}
+    return out, rows, tm
+
+
 def main(fc_path, out_path, run_paths, exp_meta=None):
     F = json.load(open(fc_path))["configs"]
     rows = load_runs(run_paths)
     rng = np.random.default_rng(11)
-    R, n = realised(rows)
-    tm = task_matrix(rows)
-    Fc = {c: {"combined": v["combined"]} for c, v in F.items()}
-    sp = spearman_block({c: v for c, v in Fc.items()}, R, "combined", tm)
-    cov = coverage_block(Fc, R, "combined", rng)
-    Rev, _ = realised(rows, col="commission_event")
-    sharp = sharpness_block(Fc, R, "combined", Rev)
-    cov["coverage_ci90_task_bootstrap"] = coverage_task_bootstrap(Fc, rows)
-    res = {"primary": {"realised": R, "n_runs": n, "rq1": sp, "rq2": cov, "k2": k2(sp, cov, sharp),
-                       "sharpness": sharp}}
+    pre13 = {c: v for c, v in F.items() if v.get("group", "pre13") == "pre13"}
+    prim, prim_rows, prim_tm = score_set(pre13, rows, rng, "pre-registered 13 (K2 set)")
+    ext, ext_rows, ext_tm = score_set(F, rows, rng, "all configurations (extended)")
+    res = {"primary": prim, "extended": ext}
+    # RQ5: per experience simulator against the single-run predictive; bridge (Haiku simulator) against "bridge"
+    res["rq5_by_simulator"] = {}
+    for s_, key in (("S", "single"), ("L", "single"), ("H", "bridge")):
+        rs = [r for r in rows if r["sim"] == s_ and r["config"] in F]
+        if not rs:
+            continue
+        Rs, ns = realised(rs); tms = task_matrix(rs)
+        Fs = {c: {key: v[key]} for c, v in F.items() if key in v and c in Rs}
+        res["rq5_by_simulator"][s_] = {"forecast_key": key, "realised": Rs, "n_runs": ns,
+                                      "rq1": spearman_block(Fs, Rs, key, tms), "rq2": coverage_block(Fs, Rs, key, rng)}
+    # same-task simulator comparison for bridge configurations (tasks run under H and under S/L)
+    bridge = {}
+    for c in F:
+        per = {s_: {r["task_id"]: _num(r[PRIMARY]) for r in rows if r["config"] == c and r["sim"] == s_} for s_ in ("H", "S", "L")}
+        shared = set(per["H"]) & set(per["S"]) & set(per["L"])
+        if shared:
+            bridge[c] = {"n_tasks": len(shared), **{s_: float(np.mean([per[s_][t] for t in shared])) for s_ in ("H", "S", "L")},
+                         "events": {s_: int(sum(per[s_][t] > 0 for t in shared)) for s_ in ("H", "S", "L")}}
+    res["bridge_same_tasks"] = bridge
+    res["rq3_factor_effects"] = factor_effects(ext_tm)
+    res["rq3_interactions"] = interaction_tests(ext_tm)
     if exp_meta:
         m = json.load(open(exp_meta))
-        res["realised_by_source"] = by_source(rows, {k: v.get("incident_source") for k, v in m.items()})
-    sims = sorted({r["sim"] for r in rows})
-    res["rq5_by_simulator"] = {}
-    for s in sims:
-        Rs, ns = realised(rows, sim=s)
-        tms = task_matrix([r for r in rows if r["sim"] == s])
-        Fs = {c: {"single": v["single"]} for c, v in F.items() if "single" in v}
-        res["rq5_by_simulator"][s] = {"realised": Rs, "n_runs": ns, "rq1": spearman_block(Fs, Rs, "single", tms),
-                                     "rq2": coverage_block(Fs, Rs, "single", rng)}
-    res["rq3_factor_effects"] = factor_effects(tm)
-    res["rq3_interactions"] = interaction_tests(tm)
-    # secondary: commission frequency and omission
-    Rf, _ = realised(rows, col="commission_event") if rows and "commission_event" in rows[0] else ({}, {})
-    res["secondary"] = {"commission_frequency": {c: v for c, v in Rf.items()}}
-    for sec in ("m1c", "m1", "m2"):  # pre-declared secondary methods (phase-A loop 3 decision: primary = M2)
-        if all(sec in v for v in F.values()):
-            Fm = {c: {"combined": v[sec]} for c, v in F.items()}
-            res["secondary"][sec] = {"rq1": spearman_block(Fm, R, "combined", tm),
-                                     "rq2": coverage_block(Fm, R, "combined", rng)}
-    if all("omission" in v for v in F.values()):
-        Ro, _ = realised(rows, col="omission_usd")
-        Fo = {c: {"combined": v["omission"]} for c, v in F.items()}
-        res["secondary"]["omission"] = {"rq1": spearman_block(Fo, Ro, "combined", task_matrix(rows, "omission_usd")),
-                                        "rq2": coverage_block(Fo, Ro, "combined", rng)}
+        res["realised_by_source"] = by_source(ext_rows, {k: v.get("incident_source") for k, v in m.items()})
     json.dump(res, open(out_path, "w"), indent=1, default=lambda o: None if (isinstance(o, float) and math.isnan(o)) else str(o))
-    print(json.dumps(res["primary"]["k2"]))
+    print(json.dumps({"K2_primary": res["primary"]["k2"], "K2_extended": res["extended"]["k2"]}))
 
 
 if __name__ == "__main__":

@@ -8,7 +8,7 @@ import numpy as np
 from trustcurve.study2 import score_c
 
 
-def _write(tmp_path, rates, n_tasks=60, sims=("H", "O"), seed=0):
+def _write(tmp_path, rates, n_tasks=60, sims=("S", "L"), seed=0):
     rng = np.random.default_rng(seed); rows = []
     for c, p in rates.items():
         for s in sims:
@@ -45,7 +45,7 @@ def test_perfect_ranking_and_k2(tmp_path):
     fe = r["rq3_factor_effects"]
     assert fe["PER-PL"]["diff"] > 0 and fe["PER-PL"]["diff_ci90"][0] > 0
     assert "INT-1" in r["rq3_interactions"]
-    assert set(r["rq5_by_simulator"]) == {"H", "O"}
+    assert set(r["rq5_by_simulator"]) == {"S", "L"}
 
 
 def test_reversed_ranking_fires_k2(tmp_path):
