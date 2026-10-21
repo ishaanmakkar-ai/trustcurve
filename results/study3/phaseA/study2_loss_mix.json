@@ -1,0 +1,59 @@
+{
+ "experience": {
+  "runs": 7700,
+  "usd": 135702.0,
+  "by_kind": {
+   "wrongful_cancellation_refund": {
+    "usd": 128256.0,
+    "share": 0.9451,
+    "events": 177.0
+   },
+   "wrongful_flight_change": {
+    "usd": 3170.0,
+    "share": 0.0234,
+    "events": 2.0
+   },
+   "certificate_over_permitted": {
+    "usd": 2860.0,
+    "share": 0.0211,
+    "events": 16.0
+   },
+   "bag_fee_undercharge": {
+    "usd": 1000.0,
+    "share": 0.0074,
+    "events": 12.0
+   },
+   "booking_on_other_account": {
+    "usd": 416.0,
+    "share": 0.0031,
+    "events": 4.0
+   }
+  }
+ },
+ "underwriting": {
+  "runs": 1125,
+  "usd": 10564.0,
+  "by_kind": {
+   "wrongful_cancellation_refund": {
+    "usd": 6791.0,
+    "share": 0.6428,
+    "events": 13.0
+   },
+   "third_party_cancellation": {
+    "usd": 2831.0,
+    "share": 0.268,
+    "events": 2.0
+   },
+   "certificate_over_permitted": {
+    "usd": 600.0,
+    "share": 0.0568,
+    "events": 2.0
+   },
+   "wrongful_flight_change": {
+    "usd": 342.0,
+    "share": 0.0324,
+    "events": 3.0
+   }
+  }
+ }
+}

@@ -228,3 +228,95 @@ None of them is adopted. Loop 2 replaces them, as pre-registered below.
 - **n_e:** the smallest n_e at which the paired pricing-sign-test power is within 0.1 of its n_e = 400 value, in the cell chosen above under S_A.
 - **H3 reformulation trigger:** if P(H3) is < 0.2 even in S_B cells with a blind-spot share ≥ 0.5, A′ recommends adding a decidable comparative H3b to the phase-B′ pre-registration. This happens before any data, and Ishaan decides. H3 itself stays as written.
 - **K1′** fires only if H2 discrimination is < 0.3 and the paired pricing power is < 0.5 in every λ = 0.5 cell.
+
+### A′ loop 2 results (2026-10-21; `results/study3/phaseA/sim_a2.json`, `tables2.md`, `decisions_loop2.json`)
+**Run:** 192 cells × 300 replications in 107 s.
+
+**Detection is limited by opportunity count, and runs per task is the lever:**
+- At λ = 0.5, φ = 0.10, r ∈ [0.05, 0.4], moving F2 from R = 1 to R = 3 runs per task changes:
+  - non-designed detection: 0.64 → 0.91;
+  - designed detection: 0.72 → 0.94;
+  - H2 discrimination against F1: +0.44 → +0.55;
+  - paired McNemar power (F2 > F1): 0.24 → 0.86;
+  - cost: +$43.
+- At r ∈ [0.02, 0.15], R = 3 moves non-designed detection from 0.24 to 0.66 and discrimination from +0.07 to +0.83.
+- F1, at 1 run per task, stays at 0.13–0.45.
+
+**Per-type detection at R = 3:**
+- with φ = 0.10: cabin, bags and book 0.68–0.72;
+- with φ = 0 (2–4 tasks on the thinnest types): 0.37–0.60;
+- F1: ≤ 0.04.
+
+**Pricing:** F2 is only modestly better.
+- At S_A, R = 3, n_e = 200: median |log error| is F1 0.40 vs F2 pooled 0.31, and Spearman 0.83 vs 0.90.
+- P(F2's error < F1's) is 0.78, but the power of the paired per-configuration sign test is only **0.28**. Its maximum over all λ = 0.5 cells is 0.42.
+- **P(H3) ≤ 0.07 in every cell**, including the flat-severity stress case S_B.
+- The blind-spot loss share was 0.08–0.21 in every cell. Only 81 of 57,600 replications reached ≥ 0.5, so the conditional H3 analysis was not evaluable.
+
+**Real-data anchor** (`scripts/study3/study2_loss_mix.py` → `study2_loss_mix.json`): in Study 2's 7,700 experience runs, **94.5% of realised commission dollars were wrongful cancellation refunds** (177 events). Certificates, bags and booking-on-another-account were 3.2%. So the real airline world is, if anything, more cancel-concentrated than S_A, and the pricing headroom from covering blind-spot *types* is small.
+
+Study 2's pricing failure was instead **within** the cancel type:
+- experience runs had 2.3% wrongful-cancellation events against 1.2% in underwriting;
+- its planted faults sat on conditions the benchmark never set up.
+
+The loop-1/2 simulation does not model that: within-type trigger conditions, and whether a designer anticipates them.
+
+**Trap enrichment:**
+- at e = 3, F2 pooled overprices by +0.68 to +0.71 log;
+- F2 split stays at +0.05 to +0.12 with nearly the same detection.
+
+**Loop-2 decision rules** (as pre-registered; `decisions_loop2.json`):
+
+| Rule | Outcome |
+|---|---|
+| Flaw-rate range | **[0.05, 0.4]** (discrimination +0.44 vs +0.07 at R = 1). At R = 3 the narrower range discriminates more (+0.83 vs +0.55), but the rule is evaluated at R = 1 as written |
+| R | **3** (McNemar power 0.24 → 0.86) |
+| Split | **Adopted.** At e = 3, R = 3: error 0.71 → 0.36, detection loss 0.02 |
+| φ | **0.** Cabin, bags and book each reach ≥ 0.3 at φ = 0, R = 3 (0.37–0.60). φ = 0.10 gives 0.68–0.72 |
+| n_e | **200** (sign-test power 0.28 vs 0.29 at 400) |
+| H3b trigger | **Fires by default.** No S_B cell had ≥ 20 replications with a blind share ≥ 0.5. The pre-registered condition was not evaluable, and the code treats "not evaluable" as firing. That is my interpretation: max P(H3) over all 192 cells is 0.07 |
+| K1′ | **Does not fire** (max H2 discrimination 0.99) |
+
+## A′ loop 3 (pre-registered 2026-10-21, after loop 2, before any loop-3 code)
+**Aims:**
+1. Model the mechanism that actually broke Study 2: flaws that fire only under a **within-type trigger condition**, which a benchmark covers only if its designer anticipated it. This gives the shared-assumption parameter λ real force.
+2. Compare 18 vs 30 configurations at the same experience budget.
+3. Measure the power of a candidate comparative H3b.
+
+**Mechanism changes** (`src/trustcurve/study3/sim_a3.py`; everything else as in loop 2 at S_A):
+- **Triggers.** Every flaw has a trigger condition with deployment prevalence q ~ U(0.15, 0.6) among opportunities of its type. It fires at min(1, r/q) on triggered opportunities, so its deployment rate per opportunity stays r.
+- **Generic and representative tasks.** F1 tasks and F2's representative tasks carry the trigger at prevalence q.
+- **F2 trap tasks on the flaw's type:**
+  - if the designer *anticipated* the trigger, a trap task carries it with probability 0.9;
+  - otherwise it carries it at 0.5·q, because the designer's traps crowd out other conditions.
+- **P(anticipated):**
+  - 0.8 for designed flaws;
+  - 0.8·λ for non-designed flaws, with λ ∈ {0.8, 0.5, 0.2}.
+- **No separate enrichment factor** (e = 1). Enrichment now arises from the anticipated triggers.
+- **Fixed settings:** r ∈ [0.05, 0.4]; φ ∈ {0, 0.10}; R ∈ {1, 3}.
+- **Size options, both with 3,600 experience conversations:**
+  - 18 configurations × n_e = 200;
+  - 30 configurations (2 clean + 7 per source) × n_e = 120.
+- H2 uses ≥ 50% of the non-designed configurations (≥ 6 of 12 or ≥ 11 of 21).
+- **F2 pricing** uses the adopted split (40 representative tasks × R). F2 pooled is reported alongside.
+- **Grid:** λ (3) × φ (2) × R (2) × size (2) = 24 cells × 400 replications.
+
+**Measures:** as in loop 2, plus:
+- P(H1);
+- P(H5: gap ≤ 0.25);
+- the mean RQ3 gap by λ;
+- H3b power = the one-sided paired sign test on per-configuration |log error| (F2 split vs F1), α = 0.05;
+- cost:
+  - 18 configurations: 18 × (90 + 100R) × $0.012 + 3,600 × $0.045;
+  - 30 configurations: 30 × (90 + 100R) × $0.012 + 3,600 × $0.045.
+
+**Predictions:**
+- **A′-P5:** the RQ3 gap grows as λ falls, by ≥ 0.15 between λ = 0.8 and λ = 0.2 at R = 3.
+- **A′-P6:** P(H5) falls below 0.5 at λ = 0.2.
+- **A′-P7:** 30 configurations raise H3b power by ≥ 0.1 over 18, with H2 discrimination within 0.05.
+
+**Decision rules:**
+- **Size:** 30 configurations are recommended if A′-P7 holds. The ≈ $55 extra underwriting at R = 3 goes to Ishaan as a budget choice. Otherwise 18.
+- **H5 informativeness:** if P(H5) differs by < 0.3 between λ = 0.8 and λ = 0.2, H5 cannot discriminate shared-assumption levels at this n. It is then reported descriptively, with its interval, rather than as a pass/fail test.
+- **H3b:** if H3b power is ≥ 0.5 in the λ = 0.5 cell of the chosen size, A′ recommends H3b as a decidable comparative pricing test, added at B′ before any data. Otherwise A′ reports that **pricing superiority is not testable at an affordable n in this domain**, and Study 3's pricing questions (RQ2, RQ4) become estimation with intervals rather than tests.
+- **This is the last A′ simulation loop** before the adapt memo and the fresh-context review.

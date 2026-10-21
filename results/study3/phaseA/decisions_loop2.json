@@ -1,0 +1,50 @@
+{
+ "flaw_rate_range": {
+  "choice": [
+   0.05,
+   0.4
+  ],
+  "H2_discrimination": {
+   "[0.05, 0.4]": 0.44,
+   "[0.02, 0.15]": 0.0733
+  }
+ },
+ "R": {
+  "choice": 3,
+  "mcnemar_power": {
+   "R1": 0.2367,
+   "R3": 0.86
+  }
+ },
+ "split": {
+  "adopt": true,
+  "medlog_gain": 0.35,
+  "detection_loss": 0.017
+ },
+ "phi": {
+  "choice": 0.0,
+  "per_type_at_0.10": {
+   "cabin": 0.6822,
+   "bags": 0.7176,
+   "book": 0.7222
+  }
+ },
+ "n_e": {
+  "choice": 200,
+  "pricing_sign_power": {
+   "100": 0.1633,
+   "200": 0.2833,
+   "400": 0.29
+  }
+ },
+ "H3b_trigger": {
+  "fires": true,
+  "n_cells_evaluable": 0,
+  "note": "no S_B cell had >= 20 replications with share >= 0.5"
+ },
+ "K1prime": {
+  "fires": false,
+  "max_H2_discrimination": 0.99,
+  "max_pricing_sign_power": 0.4167
+ }
+}
