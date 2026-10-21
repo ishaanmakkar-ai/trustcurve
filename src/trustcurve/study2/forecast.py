@@ -194,7 +194,7 @@ def _stratum_counts(col):
     return {h: (len(col.get(h, [])), float(sum(e for e, _ in col.get(h, [])))) for h in STRATA}
 
 
-def forecast(obs_by_cfg: dict[str, list[dict]], W: dict | None = None, n_e: int = 200, runs: int = 2,
+def forecast(obs_by_cfg: dict[str, list[dict]], W: dict | None = None, n_e: int | dict = 200, runs: int = 2,
              rho: float = 0.5, method: str = "M2", B: int = 1000, seed: int = 0,
              cap: float = BASIC_LIMIT, prior_cap: float = 200.0, exp_alloc: dict | None = None,
              config_severity: bool = True) -> dict[str, Forecast]:
@@ -204,7 +204,7 @@ def forecast(obs_by_cfg: dict[str, list[dict]], W: dict | None = None, n_e: int 
     counts = {c: _stratum_counts(col) for c, col in cols.items()}
     by_h, allv = _severity_pool(cols)
     sev = _severity_draws(by_h, allv, B, rng)
-    n_alloc = exp_alloc or allocation(W, n_e)
+    n_alloc_of = (lambda c: exp_alloc or allocation(W, n_e[c] if isinstance(n_e, dict) else n_e))
     cfgs = list(obs_by_cfg)
     mults, sev_fit = _config_offsets(cols, by_h, allv, cfgs, B, rng) if config_severity else ({}, None)
 
@@ -280,7 +280,7 @@ def forecast(obs_by_cfg: dict[str, list[dict]], W: dict | None = None, n_e: int 
             sev_c = {h: (sev[h][1] * np.minimum(sev[h][0][None, :] * mult[:, None], cap)).sum(axis=1) for h in STRATA}
             notes.append(f"severity offset x{np.median(mult):.2f} (tau={sev_fit[0]:.2f})")
         theta = sum(W.get(h, 0.0) * p_draws[h] * sev_c[h] for h in STRATA)
-        pred = _predictive(p_draws, sev, n_alloc, runs, rho, rng, mult)
+        pred = _predictive(p_draws, sev, n_alloc_of(c), runs, rho, rng, mult)
         n_tasks = sum(counts[c][h][0] for h in STRATA)
         n_ev = sum(counts[c][h][1] for h in STRATA)
         sev_mean = {h: float(sev_c[h].mean()) for h in STRATA}
