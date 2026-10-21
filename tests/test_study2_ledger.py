@@ -137,3 +137,11 @@ def test_failed_calls_are_ignored():
     L = ledger_for_run(task(), calls(("cancel_reservation", {"reservation_id": "NOPE00"})),
                        {"requester_user_id": "lei_rossi_3206"})
     assert L.commission == 0 and not L.items
+
+
+def test_certificate_before_cancel_is_judged_after_the_run():
+    """Review 6 #12: a delayed-flight certificate issued before the cancel is still permitted."""
+    m = {"requester_user_id": "liam_ito_4473", "cancel_reason_category": "health"}
+    L = ledger_for_run(task(), calls(("send_certificate", {"user_id": "liam_ito_4473", "amount": 50}),
+                                    ("cancel_reservation", {"reservation_id": "LWTEDF"})), m)
+    assert L.commission == 0

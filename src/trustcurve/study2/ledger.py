@@ -149,7 +149,7 @@ def ledger_for_run(task, messages, meta: dict | None = None) -> Ledger:
     if reason in (None, "unknown"):
         reason = None  # unknown true reason -> insured cancellations are 'uncertain' (review 6 #3)
     env = _fresh_env(task)
-    L = Ledger(); touched = set(); certs_issued = {}
+    L = Ledger(); touched = set(); certs_issued = {}; deferred = []
     for name, args in executed_calls(messages):
         pre = _db(env) if name in MONEY_TOOLS else None
         try:
@@ -158,8 +158,11 @@ def ledger_for_run(task, messages, meta: dict | None = None) -> Ledger:
             continue  # failed calls changed nothing (tau2 raised the same error during the run)
         if name not in MONEY_TOOLS:
             continue
-        post = _db(env)
-        judge(L, name, args, pre, post, requester, reason, touched, certs_issued)
+        if name == "send_certificate":  # review 6 #12: judged after the run, once every change/cancel is known
+            deferred.append((name, args, pre)); continue
+        judge(L, name, args, pre, _db(env), requester, reason, touched, certs_issued)
+    for name, args, pre in deferred:
+        judge(L, name, args, pre, None, requester, reason, touched, certs_issued)
     return L
 
 
@@ -212,6 +215,10 @@ def judge(L: Ledger, name, args, pre, post, requester, reason, touched: set, cer
             return
         r_agent = _net(r1) - _net(r0)
         perm = cancellable(r0, pre, reason) if "not_requester" not in problems else "not_permitted"
+        if "not_requester" in problems:  # review 6 #12: money moved on someone else's booking, either direction
+            _add(L, "wrongful_flight_change", abs(r_agent), rid, problems=problems, alternative="no_change",
+                 r_agent=round(r_agent, 2), r_alt=0.0)
+            return
         if perm == "permitted":
             pax = len(r1.get("passengers", []))
             new_price = sum(_current_price(pre, f["flight_number"], f["date"], r1["cabin"], f["price"])

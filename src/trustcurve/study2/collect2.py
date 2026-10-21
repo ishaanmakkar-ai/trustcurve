@@ -39,7 +39,7 @@ def harness_cost(harness_path: Path) -> tuple[float, int, int]:
     """Total harness check cost, number of checks and number of blocks in one run directory."""
     if not harness_path.exists():
         return 0.0, 0, 0
-    tot, n, blocked = 0.0, 0, 0
+    tot, n, blocked, unparsed = 0.0, 0, 0, 0
     for line in harness_path.read_text().splitlines():
         r = json.loads(line)
         u = r.get("usage") or {}
@@ -50,6 +50,8 @@ def harness_cost(harness_path: Path) -> tuple[float, int, int]:
                 pin, pout, _ = PRICES2[m]
                 tot += (int(u.get("prompt_tokens") or 0) * pin + int(u.get("completion_tokens") or 0) * pout) / 1e6
         blocked += r.get("allowed") is False
+        unparsed += bool(r.get("unparsed"))
+    harness_cost.unparsed = unparsed
     return tot, n, blocked
 
 
@@ -80,8 +82,10 @@ def collect_runs(results_path, meta_path, config_id, sim_label) -> list[dict]:
             g, a = gold_and_agent_dbs(task, msgs)
             dd = dollar_diff(g, a, initial_db(task))
             omission, dd_sev = dd.omission, dd.severity
-        except Exception as e:
-            omission = dd_sev = None; err += f" dd {type(e).__name__}: {e}"[:200]
+        except Exception as e:  # secondary metric: recorded separately so the primary row survives (review 6 #9)
+            omission = dd_sev = None; dd_err = f"{type(e).__name__}: {e}"[:200]
+        else:
+            dd_err = ""
         ta, tu = _usage(s["messages"], "assistant"), _usage(s["messages"], "user")
         ca, cu = cost_of(ta, agent_model), cost_of(tu, user_model)
         rows.append({
@@ -101,7 +105,7 @@ def collect_runs(results_path, meta_path, config_id, sim_label) -> list[dict]:
                                if x.get("role") == "assistant" for tc in (x.get("tool_calls") or [])),
             "agent_model": agent_model, "user_model": user_model,
             "cost_agent_usd": None if ca is None else round(ca, 6), "cost_user_usd": None if cu is None else round(cu, 6),
-            "error": err.strip(),
+            "error": err.strip(), "dd_error": dd_err,
         })
     return rows
 
@@ -121,5 +125,6 @@ if __name__ == "__main__":
     write_csv(rows, sys.argv[5])
     tot = sum((r["cost_agent_usd"] or 0) + (r["cost_user_usd"] or 0) for r in rows) + hc
     print(json.dumps({"runs": len(rows), "errors": sum(bool(r["error"]) for r in rows), "cost_usd": round(tot, 4),
-                      "harness_cost_usd": round(hc, 4), "harness_checks": n, "harness_blocks": b,
+                      "harness_cost_usd": round(hc, 4), "harness_checks": n, "harness_blocks": b, "harness_unparsed": getattr(harness_cost, "unparsed", 0),
+                      "dd_errors": sum(bool(r["dd_error"]) for r in rows),
                       "unpriced": sum(r["cost_agent_usd"] is None or r["cost_user_usd"] is None for r in rows)}))

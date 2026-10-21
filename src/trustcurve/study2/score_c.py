@@ -176,10 +176,34 @@ def by_source(rows, meta_src):
     return {s: {c: float(np.mean(v)) for c, v in d.items()} for s, d in out.items()}
 
 
-def k2(sp, cov):
-    fires = (sp["spearman"] == sp["spearman"] and sp["spearman"] <= 0.3) or (cov["coverage"] < 0.70)
-    return {"spearman": sp["spearman"], "coverage": cov["coverage"], "K2_fires": bool(fires),
-            "rule": "K2 fires if Spearman <= 0.3 or 90% predictive coverage < 0.70 (STUDY2.md S0)"}
+def k2(sp, cov, sharp):
+    """K2 (STUDY2.md S0), refined before any outcome (review 6 #6): a NaN Spearman (all realised equal, e.g. all
+    zero) can't show ranking ability, so it counts as firing ('undetermined'); coverage is also checked on
+    configurations with >= 1 realised event when there are >= 5 of them."""
+    rho = sp["spearman"]
+    rho_fires = (rho != rho) or rho <= 0.3
+    cov_fires = cov["coverage"] < 0.70
+    ev = sharp.get("configs_with_events") or []
+    cov_ev = sharp.get("coverage_configs_with_events")
+    ev_fires = len(ev) >= 5 and cov_ev is not None and cov_ev < 0.70
+    return {"spearman": rho, "coverage": cov["coverage"], "coverage_event_configs": cov_ev, "n_event_configs": len(ev),
+            "K2_fires": bool(rho_fires or cov_fires or ev_fires), "spearman_undetermined": rho != rho,
+            "rule": "K2 fires if Spearman <= 0.3 or NaN, or 90% predictive coverage < 0.70 (all configurations, or "
+                    "configurations with >= 1 realised event when there are >= 5)"}
+
+
+def coverage_task_bootstrap(F, rows, key="combined", B=1000, seed=4):
+    """Coverage CI that respects shared tasks: resample experience tasks jointly, recompute every R_c."""
+    tm = task_matrix(rows); cfgs = sorted(set(F) & set(tm))
+    tasks = sorted(set.intersection(*[set(tm[c]) for c in cfgs])) if cfgs else []
+    if not tasks:
+        return None
+    M = np.array([[tm[c][t] for t in tasks] for c in cfgs]); rng = np.random.default_rng(seed); vals = []
+    lo = np.array([F[c][key]["pred_lo90"] for c in cfgs]); hi = np.array([F[c][key]["pred_hi90"] for c in cfgs])
+    for _ in range(B):
+        y = M[:, rng.integers(0, len(tasks), len(tasks))].mean(1)
+        vals.append(float(np.mean((y >= lo - 1e-9) & (y <= hi + 1e-9))))
+    return [float(np.quantile(vals, 0.05)), float(np.quantile(vals, 0.95))]
 
 
 def main(fc_path, out_path, run_paths, exp_meta=None):
@@ -192,8 +216,10 @@ def main(fc_path, out_path, run_paths, exp_meta=None):
     sp = spearman_block({c: v for c, v in Fc.items()}, R, "combined", tm)
     cov = coverage_block(Fc, R, "combined", rng)
     Rev, _ = realised(rows, col="commission_event")
-    res = {"primary": {"realised": R, "n_runs": n, "rq1": sp, "rq2": cov, "k2": k2(sp, cov),
-                       "sharpness": sharpness_block(Fc, R, "combined", Rev)}}
+    sharp = sharpness_block(Fc, R, "combined", Rev)
+    cov["coverage_ci90_task_bootstrap"] = coverage_task_bootstrap(Fc, rows)
+    res = {"primary": {"realised": R, "n_runs": n, "rq1": sp, "rq2": cov, "k2": k2(sp, cov, sharp),
+                       "sharpness": sharp}}
     if exp_meta:
         m = json.load(open(exp_meta))
         res["realised_by_source"] = by_source(rows, {k: v.get("incident_source") for k, v in m.items()})

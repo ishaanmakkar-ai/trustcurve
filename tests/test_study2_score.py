@@ -56,3 +56,14 @@ def test_reversed_ranking_fires_k2(tmp_path):
     out = tmp_path / "out.json"
     score_c.main(str(fc), str(out), [str(runs)])
     assert json.loads(out.read_text())["primary"]["k2"]["K2_fires"] is True
+
+
+def test_all_zero_realised_fires_k2_undetermined(tmp_path):
+    """Review 6 #6: with no realised events, Spearman is NaN and coverage is trivially met; K2 must not pass."""
+    rates = {"B0": 0.0, "PER-PL": 0.0, "KNO-RM": 0.0, "HAR-PC": 0.0, "INT-1": 0.0}
+    runs = _write(tmp_path, rates, n_tasks=100)
+    fc = tmp_path / "fc.json"; fc.write_text(json.dumps(_fc({c: r + 0.01 for c, r in rates.items()})))
+    out = tmp_path / "out.json"
+    score_c.main(str(fc), str(out), [str(runs)])
+    k = json.loads(out.read_text())["primary"]["k2"]
+    assert k["K2_fires"] is True and k["spearman_undetermined"] is True
