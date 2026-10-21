@@ -19,4 +19,4 @@ study2_sealed/
 
 # Study 3 sealed material (flaw catalogues, experience pool); only SHA-256 is committed until unsealing
 study3_sealed
-tasks/study3_sealed/
+tasks/study3_sealed
