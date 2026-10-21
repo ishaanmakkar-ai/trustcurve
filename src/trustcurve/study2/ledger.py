@@ -146,8 +146,8 @@ def ledger_for_run(task, messages, meta: dict | None = None) -> Ledger:
     meta = meta or {}
     requester = meta.get("requester_user_id")
     reason = meta.get("cancel_reason_category")
-    if reason in (None, "none", "other_unknown"):
-        reason = None if reason is None else reason
+    if reason in (None, "unknown"):
+        reason = None  # unknown true reason -> insured cancellations are 'uncertain' (review 6 #3)
     env = _fresh_env(task)
     L = Ledger(); touched = set(); certs_issued = {}
     for name, args in executed_calls(messages):

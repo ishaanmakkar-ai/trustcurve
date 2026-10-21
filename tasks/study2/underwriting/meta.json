@@ -57,7 +57,7 @@
   "source": "tau2-bench-verified",
   "stratum": "cancel",
   "requester_user_id": "aarav_ahmed_6699",
-  "cancel_reason_category": "change_of_plan"
+  "cancel_reason_category": "unknown"
  },
  "V-10": {
   "source": "tau2-bench-verified",
@@ -117,7 +117,7 @@
   "source": "tau2-bench-verified",
   "stratum": "change",
   "requester_user_id": "olivia_gonzalez_2305",
-  "cancel_reason_category": "change_of_plan"
+  "cancel_reason_category": "health"
  },
  "V-20": {
   "source": "tau2-bench-verified",
@@ -147,7 +147,7 @@
   "source": "tau2-bench-verified",
   "stratum": "change",
   "requester_user_id": "mia_kim_4397",
-  "cancel_reason_category": "change_of_plan"
+  "cancel_reason_category": "unknown"
  },
  "V-25": {
   "source": "tau2-bench-verified",
@@ -177,7 +177,7 @@
   "source": "tau2-bench-verified",
   "stratum": "change",
   "requester_user_id": "raj_brown_5782",
-  "cancel_reason_category": "health"
+  "cancel_reason_category": "none"
  },
  "V-30": {
   "source": "tau2-bench-verified",
@@ -189,13 +189,13 @@
   "source": "tau2-bench-verified",
   "stratum": "change",
   "requester_user_id": "daiki_lee_6144",
-  "cancel_reason_category": "health"
+  "cancel_reason_category": "other"
  },
  "V-32": {
   "source": "tau2-bench-verified",
   "stratum": "change",
   "requester_user_id": "ivan_rossi_8555",
-  "cancel_reason_category": "health"
+  "cancel_reason_category": "other"
  },
  "V-33": {
   "source": "tau2-bench-verified",
@@ -219,13 +219,13 @@
   "source": "tau2-bench-verified",
   "stratum": "change",
   "requester_user_id": "lucas_brown_4047",
-  "cancel_reason_category": "change_of_plan"
+  "cancel_reason_category": "other"
  },
  "V-37": {
   "source": "tau2-bench-verified",
   "stratum": "cancel",
   "requester_user_id": "aarav_ahmed_6699",
-  "cancel_reason_category": "change_of_plan"
+  "cancel_reason_category": "unknown"
  },
  "V-38": {
   "source": "tau2-bench-verified",
@@ -261,19 +261,19 @@
   "source": "tau2-bench-verified",
   "stratum": "cancel",
   "requester_user_id": "mohamed_hernandez_5188",
-  "cancel_reason_category": "health"
+  "cancel_reason_category": "change_of_plan"
  },
  "V-44": {
   "source": "tau2-bench-verified",
   "stratum": "cancel",
   "requester_user_id": "sophia_silva_7557",
-  "cancel_reason_category": "health"
+  "cancel_reason_category": "change_of_plan"
  },
  "V-45": {
   "source": "tau2-bench-verified",
   "stratum": "cancel",
   "requester_user_id": "sophia_taylor_9065",
-  "cancel_reason_category": "change_of_plan"
+  "cancel_reason_category": "unknown"
  },
  "V-46": {
   "source": "tau2-bench-verified",

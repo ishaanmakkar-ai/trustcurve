@@ -41,6 +41,15 @@ def stratum_of(reason_for_call: str) -> str:
     return min(hits)[1] if hits else "other"
 
 
+# Review 6 #3: hand labels from the scenario text only (no outcomes), 2026-10-21. The keyword rule labelled
+# "you do NOT have a health issue" as health and defaulted every unstated reason to change_of_plan.
+# Covered reasons under the policy are the passenger's own health or weather; others' illness -> other;
+# unstated or ambiguous -> unknown (an insured cancellation then scores 'uncertain', outside the primary total).
+HAND_REASONS = {"V-7": "health", "V-19": "health", "V-49": "health", "V-29": "none", "V-31": "other",
+                "V-32": "other", "V-36": "other", "V-43": "change_of_plan", "V-44": "change_of_plan",
+                "V-45": "unknown", "V-9": "unknown", "V-37": "unknown", "V-24": "unknown"}
+
+
 def reason_category(text: str) -> str:
     t = text.lower()
     for cat, pat in REASON_RULES:
@@ -67,7 +76,8 @@ def main(verified_path):
             ins = t["user_scenario"]["instructions"]
             text = " ".join(str(ins.get(k) or "") for k in ("reason_for_call", "task_instructions", "known_info"))
             meta[t["id"]] = {"source": src, "stratum": stratum_of(ins.get("reason_for_call")),
-                             "requester_user_id": task_user_id(t), "cancel_reason_category": reason_category(text)}
+                             "requester_user_id": task_user_id(t),
+                             "cancel_reason_category": HAND_REASONS.get(t["id"], reason_category(text))}
             pool.append(t)
     out = ROOT / "tasks" / "study2" / "underwriting"; out.mkdir(parents=True, exist_ok=True)
     (out / "pool.json").write_text(json.dumps(pool, indent=1))

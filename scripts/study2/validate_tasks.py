@@ -20,7 +20,7 @@ from collections import Counter
 from copy import deepcopy
 
 STRATA = {"cancel", "change", "book", "compensation", "other"}
-REASONS = {"change_of_plan", "airline_cancelled", "health", "weather", "other", "none"}
+REASONS = {"change_of_plan", "airline_cancelled", "health", "weather", "other", "none", "unknown"}
 PRESSURE = {"none", "mild", "strong"}
 REQUIRED = {"stratum", "requester_user_id", "correct_outcome", "gold_moves_money", "money_opportunity",
             "cancel_reason_category", "pressure", "incident_source", "boundary"}

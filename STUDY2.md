@@ -246,3 +246,46 @@ This is loop 2 of at most 4.
 - D-P1: faults that move money within the ledger's design are detected at planted rates ≥ 10% per opportunity; rates ≤ 3% are missed at n = 90.
 - D-P2: the out-of-design fault is missed by the primary eval, and caught by a secondary signal only if it changes the DB.
 - D-P3: the mutation score is 50–80%.
+
+**Correction (review 6 #13):** "rare events cost discrimination, not calibration" overstates it. In S5, M1's median relative bias is −14% (n_u = 90) and −43% (n_u = 45), its PIT deviation is 0.21–0.35, and the point is usually $0. Coverage holds because the zero-event intervals are conservative, not because the forecasts are good.
+
+**Review 6 #2 (2026-10-21): the M1 verdict above is withdrawn pending loop 3.** With the real underwriting mix (45/23/3/18/1), M1 fails the pass rule (0.837 / 0.855).
+
+## A3. Phase A loop 3: the real underwriting pool (pre-registered 2026-10-21, after review 6, before the loop-3 code)
+**DGM changes ("R" scenarios, `src/trustcurve/study2/sim_a3.py`; loops 1–2 code untouched):**
+- **Underwriting strata at the real counts:** n_u = 90 → cancel 45, change 23, book 3, compensation 18, other 1; n_u = 45 (the screening half) → 23 / 11 / 2 / 9 / 0.
+- **Template clusters:** 16 + 12 cancel tasks and 12 compensation tasks (scaled to 8 / 6 / 6 at n_u = 45) belong to 3 templates. Each template adds a shared latent effect ~ N(−0.5, 1.0²) to its tasks (templated tasks tend to be easier, as E3 was).
+- **Severity:** configuration × stratum heterogeneity (σ = 0.2 per cell), replacing the configuration-only multiplier.
+- **Base rates:** cancel 2%, change 1%, book 2%, compensation 4%, other 2% (book no longer the lowest, review 6 #2).
+
+**Scenarios:**
+- **R0:** experience tasks from the same per-stratum distribution (no template effect).
+- **R2:** symmetric author shift δ_h ~ N(0, 0.5²).
+- **R6:** directional shift, +0.5 logit in every stratum (harder experience tasks).
+- **R5:** rare, all rates × 0.25.
+
+**Sizes:** n_u ∈ {45, 90}, n_e ∈ {100, 200}, 400 replications per cell.
+
+**Methods:**
+- **M1** as frozen.
+- **M2** as frozen.
+- **M1c (new):** M1 with (a) a cluster bootstrap that resamples templates (each untemplated task is its own cluster) within strata, and (b) sparse-stratum pooling: a stratum with < 5 underwriting tasks uses the configuration's pooled rate across all its tasks (resampled jointly) in place of its own.
+
+**Pass rule** (R0, n_u = 90, n_e = 200):
+- predictive and parameter coverage ≥ 0.85;
+- |mean relative bias| ≤ 10%;
+- **upper-95 coverage ≥ 0.92** (added after review 6 #4, labelled).
+
+**Decision rule (fixed now):**
+- Among methods that pass, freeze the one with the lowest mean relative interval score. The others are frozen as secondaries.
+- If none passes, freeze the method with the highest R0 predictive coverage among those ≥ 0.85, state every criterion it fails as a pre-declared limitation of phase C, and freeze M2 as secondary.
+- **K1 fires if the best R0 predictive coverage < 0.80.**
+
+**Predictions:**
+- **A3-P1:** M1 fails R0 (as the reviewer found).
+- **A3-P2:** M1c passes predictive and parameter coverage, and its upper-95 coverage is 0.90–0.94.
+- **A3-P3:** M2 passes coverage but fails mean bias again.
+- **A3-P4:** R6 (directional shift) drops every method's predictive coverage below 0.75, because harder experience tasks are underpriced. This is the threat phase C is most exposed to, and no method can fix it.
+- **A3-P5:** at n_u = 45 (screening only), every method under-covers.
+
+This is loop 3 of at most 4.
