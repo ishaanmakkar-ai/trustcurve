@@ -71,3 +71,36 @@ Four run/analysis loops in total, within the goal's cap of 4:
 4. projection
 
 The review-1/2/3 resolutions re-analysed **existing** data and code. They ran no new batches and spent no money, so they're corrections within loops 2–4, not extra loops. Total API spend for the pilot stays at about $1.00 (smoke $0.02, pilot $0.24, breadth $0.74).
+
+# Goal 3 v2
+
+## Phase 0, loop 1: smoke test, one cell (q = 5%, ICC 0.3, parent share 0.9, 2,000 runs, 30 reps)
+- **Expected:** see EXPERIMENTS.md Phase 0.
+- **Observed:**
+  - T0 naive: −16% bias (as predicted)
+  - T1 IS: +1.7% bias, coverage 0.90 (as predicted)
+  - T1-var: coverage 0.83 (under-covers, as predicted)
+  - **T2 Bühlmann: +12% bias**
+  - **T3 near-miss with R correct: −28%**
+  - **T4 control variate: −13%**
+- **Diagnosis:**
+  - **T4 was a bug in the truth.** The known score mean omitted the noise and clipping applied to the scores. Fixed.
+  - **T2 had a real pitfall.** The Bühlmann complement (collective mean) was the IS sample's exposure-weighted mean, which oversampling inflates. Fixed to the W-mixed stratum mean. Kept as a documented lesson: credibility complements must be mix-consistent.
+  - **T3 is a real limitation, not a bug.** Near-misses saturate at 1 per run, so p̂ = NM/R is biased downward whenever R·p isn't small (refusal p ≈ 18% → R·p capped). Reported as a result, not "fixed".
+
+## Phase 0, loop 2: full grid (36 cells × 150 reps), Wald intervals
+- **Result:** T1, T2 and T4 are unbiased (median |bias| ≤ 1.1%) but **under-cover** (0.85–0.88, worst at 500 runs). Pure premium covers 0.84. Near-miss fails everywhere.
+- **Fix:** log-scale delta-method intervals (suited to rare positive rates); Bühlmann bootstrap B 60 → 200.
+
+## Phase 0, loop 3: log intervals + capped pure premium
+- **Coverage medians:**
+  - T1: 0.89 (0.85 at 500 runs)
+  - T2: 0.87 (0.81 at 500 runs)
+  - T4: 0.88
+  - uncapped pure premium: 0.83 (fails)
+  - **pure premium capped at a $2,000 basic limit: 0.87 (0.89 at ≥2,000 runs), passes**
+- **Verdict:**
+  - **keep** T1, T2 (≥2,000 runs) and T4, and price a **capped** basic-limit pure premium
+  - **drop** T3 near-miss (−21% bias even with the correct R; saturation)
+  - T1-var confirms that errors must be clustered at the parent level
+- Iteration cap: 3 of 4 used in phase 0.

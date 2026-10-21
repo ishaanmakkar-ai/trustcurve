@@ -1,0 +1,125 @@
+{
+ "summary": {
+  "T0_naive": {
+   "median_abs_bias": 0.15,
+   "max_bias": -0.197,
+   "coverage_median": 0.74,
+   "coverage_by_runs": {
+    "500": 0.84,
+    "2000": 0.76,
+    "8000": 0.41
+   }
+  },
+  "T0w_bench_reweighted": {
+   "median_abs_bias": 0.011,
+   "max_bias": -0.081,
+   "coverage_median": 0.88,
+   "coverage_by_runs": {
+    "500": 0.83,
+    "2000": 0.89,
+    "8000": 0.89
+   }
+  },
+  "T1_IS": {
+   "median_abs_bias": 0.01,
+   "max_bias": -0.053,
+   "coverage_median": 0.89,
+   "coverage_by_runs": {
+    "500": 0.85,
+    "2000": 0.89,
+    "8000": 0.9
+   }
+  },
+  "T1var_IS_variant_cluster": {
+   "median_abs_bias": 0.01,
+   "max_bias": -0.053,
+   "coverage_median": 0.84,
+   "coverage_by_runs": {
+    "500": 0.83,
+    "2000": 0.85,
+    "8000": 0.86
+   }
+  },
+  "T1pp_IS_pure_premium": {
+   "median_abs_bias": 0.014,
+   "max_bias": -0.099,
+   "coverage_median": 0.83,
+   "coverage_by_runs": {
+    "500": 0.78,
+    "2000": 0.85,
+    "8000": 0.85
+   }
+  },
+  "T1ppL_IS_pure_premium_capped": {
+   "median_abs_bias": 0.009,
+   "max_bias": -0.083,
+   "coverage_median": 0.87,
+   "coverage_by_runs": {
+    "500": 0.82,
+    "2000": 0.89,
+    "8000": 0.89
+   }
+  },
+  "T2_buhlmann": {
+   "median_abs_bias": 0.009,
+   "max_bias": -0.058,
+   "coverage_median": 0.87,
+   "coverage_by_runs": {
+    "500": 0.81,
+    "2000": 0.88,
+    "8000": 0.89
+   }
+  },
+  "T3_nearmiss_Rtrue": {
+   "median_abs_bias": 0.213,
+   "max_bias": -0.486,
+   "coverage_median": 0.09,
+   "coverage_by_runs": {
+    "500": 0.52,
+    "2000": 0.04,
+    "8000": 0.0
+   }
+  },
+  "T3_nearmiss_R_x1.5": {
+   "median_abs_bias": 0.475,
+   "max_bias": -0.657,
+   "coverage_median": 0.0,
+   "coverage_by_runs": {
+    "500": 0.01,
+    "2000": 0.0,
+    "8000": 0.0
+   }
+  },
+  "T4_control_variate": {
+   "median_abs_bias": 0.009,
+   "max_bias": -0.098,
+   "coverage_median": 0.88,
+   "coverage_by_runs": {
+    "500": 0.87,
+    "2000": 0.89,
+    "8000": 0.91
+   }
+  }
+ },
+ "halfwidth_vs_T1": {
+  "T0w_bench_reweighted": 1.31,
+  "T2_buhlmann": 0.94,
+  "T4_control_variate": 0.86
+ },
+ "T1_runs_for_pm20pct_rate": {
+  "q0.02_icc0.1": 4473,
+  "q0.02_icc0.3": 5286,
+  "q0.02_icc0.6": 8724,
+  "q0.05_icc0.1": 1981,
+  "q0.05_icc0.3": 2609,
+  "q0.05_icc0.6": 4476
+ },
+ "T1L_runs_for_pm20pct_capped_pure_premium": {
+  "q0.02_icc0.1": 7620,
+  "q0.02_icc0.3": 8725,
+  "q0.02_icc0.6": 12458,
+  "q0.05_icc0.1": 3467,
+  "q0.05_icc0.3": 4132,
+  "q0.05_icc0.6": 6084
+ }
+}
