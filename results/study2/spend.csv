@@ -1,0 +1,2 @@
+timestamp,phase,batch,runs,cost_usd,cumulative_project_usd,note
+2026-10-21T06:30,pre,goal3_total,2125,83.00,83.00,Goal 3 runs $80.40 + labels $0.77 + judge/smoke ~$1.8 (reconciled from committed CSVs)
