@@ -112,25 +112,59 @@ def _severity_draws(by_h, allv, B, rng, min_events=5):
     return out
 
 
-def _sum_severities(counts, sup, wts, rng):
-    """For each draw b, sum counts[b] severities drawn from support with weights wts[b]."""
+def _config_offsets(cols, by_h, allv, cfgs, B, rng, tau_floor=0.10, min_events=5):
+    """Phase A loop 2: configuration-specific log-severity offsets (empirical-Bayes normal random effect).
+
+    Residual = log(event loss) - mean log loss of the stratum's pooled severity support. tau (between-configuration
+    SD) by method of moments, floored at ``tau_floor``; within-configuration variance pooled. Returns posterior
+    draws of exp(offset) per configuration (B,), and the fitted (tau, sigma_w)."""
+    ref = {}
+    for h in STRATA:
+        vals = by_h.get(h, [])
+        vals = vals if len(vals) >= min_events else allv
+        ref[h] = float(np.mean(np.log(vals))) if len(vals) else FALLBACK_SEVERITY[0]
+    res = {c: [float(np.log(x)) - ref[h] for h, tasks in cols[c].items() for _, ev in tasks for x in ev if x > 0]
+           for c in cfgs}
+    within = [(r - np.mean(v)) ** 2 for v in res.values() if len(v) >= 2 for r in v]
+    dfw = sum(len(v) - 1 for v in res.values() if len(v) >= 2)
+    sw2 = float(np.sum(within) / dfw) if dfw > 0 else 1.0
+    means = [(np.mean(v), len(v)) for v in res.values() if len(v) >= 1]
+    if len(means) >= 3:
+        m = np.array([x for x, _ in means]); n = np.array([k for _, k in means])
+        tau2 = float(m.var(ddof=1) - np.mean(sw2 / n))
+    else:
+        tau2 = 0.0
+    tau2 = max(tau2, tau_floor ** 2)
+    out = {}
+    for c in cfgs:
+        v = res[c]
+        if v:
+            prec = 1 / tau2 + len(v) / sw2
+            mu, var = (len(v) / sw2) * float(np.mean(v)) / prec, 1 / prec
+        else:
+            mu, var = 0.0, tau2
+        out[c] = np.exp(rng.normal(mu, np.sqrt(var), B))
+    return out, (float(np.sqrt(tau2)), float(np.sqrt(sw2)))
+
+
+def _sum_severities(counts, sup, wts, rng, mult=None, cap=BASIC_LIMIT):
+    """For each draw b, sum counts[b] severities drawn from support with weights wts[b] (x mult[b], re-capped)."""
     B = len(counts); tot = np.zeros(B)
     nz = np.nonzero(counts)[0]
     if len(nz) == 0:
         return tot
-    if wts.shape[1] == 1:
-        return counts * sup[0]
     cdf = np.cumsum(wts[nz], axis=1)
     k = counts[nz]
     rows = np.repeat(np.arange(len(nz)), k)
     u = rng.random(len(rows))
     idx = (cdf[rows] < u[:, None]).sum(axis=1)
     idx = np.minimum(idx, len(sup) - 1)
-    tot[nz] = np.bincount(rows, weights=sup[idx], minlength=len(nz))
+    vals = sup[idx] if mult is None else np.minimum(sup[idx] * mult[nz][rows], cap)
+    tot[nz] = np.bincount(rows, weights=vals, minlength=len(nz))
     return tot
 
 
-def _predictive(p_draws: dict, sev: dict, n_alloc: dict, runs: int, rho: float, rng) -> np.ndarray:
+def _predictive(p_draws: dict, sev: dict, n_alloc: dict, runs: int, rho: float, rng, mult=None) -> np.ndarray:
     """Simulate the realised mean loss per run over the experience period for each draw."""
     B = len(next(iter(p_draws.values())))
     total = np.zeros(B); n_runs = 0
@@ -151,7 +185,7 @@ def _predictive(p_draws: dict, sev: dict, n_alloc: dict, runs: int, rho: float, 
                 pt = rng.beta(a[:, None].repeat(n, 1), b[:, None].repeat(n, 1))
                 ev = rng.binomial(runs, pt).sum(axis=1)
         sup, wts, _ = sev[h]
-        total += _sum_severities(ev, sup, wts, rng)
+        total += _sum_severities(ev, sup, wts, rng, mult)
         n_runs += n * runs
     return total / max(n_runs, 1)
 
@@ -162,7 +196,8 @@ def _stratum_counts(col):
 
 def forecast(obs_by_cfg: dict[str, list[dict]], W: dict | None = None, n_e: int = 200, runs: int = 2,
              rho: float = 0.5, method: str = "M2", B: int = 1000, seed: int = 0,
-             cap: float = BASIC_LIMIT, prior_cap: float = 200.0, exp_alloc: dict | None = None) -> dict[str, Forecast]:
+             cap: float = BASIC_LIMIT, prior_cap: float = 200.0, exp_alloc: dict | None = None,
+             config_severity: bool = True) -> dict[str, Forecast]:
     W = W or W_DEPLOY
     rng = np.random.default_rng(seed)
     cols = {c: collapse(o, cap) for c, o in obs_by_cfg.items()}
@@ -171,6 +206,7 @@ def forecast(obs_by_cfg: dict[str, list[dict]], W: dict | None = None, n_e: int 
     sev = _severity_draws(by_h, allv, B, rng)
     n_alloc = exp_alloc or allocation(W, n_e)
     cfgs = list(obs_by_cfg)
+    mults, sev_fit = _config_offsets(cols, by_h, allv, cfgs, B, rng) if config_severity else ({}, None)
 
     # pooled stratum base rates m_h (shared across configurations)
     N_h = {h: sum(counts[c][h][0] for c in cfgs) for h in STRATA}
@@ -237,11 +273,17 @@ def forecast(obs_by_cfg: dict[str, list[dict]], W: dict | None = None, n_e: int 
         else:
             raise ValueError(method)
 
-        theta = sum(W.get(h, 0.0) * p_draws[h] * sev[h][2] for h in STRATA)
-        pred = _predictive(p_draws, sev, n_alloc, runs, rho, rng)
+        mult = mults.get(c)
+        if mult is None:
+            sev_c = {h: sev[h][2] for h in STRATA}
+        else:
+            sev_c = {h: (sev[h][1] * np.minimum(sev[h][0][None, :] * mult[:, None], cap)).sum(axis=1) for h in STRATA}
+            notes.append(f"severity offset x{np.median(mult):.2f} (tau={sev_fit[0]:.2f})")
+        theta = sum(W.get(h, 0.0) * p_draws[h] * sev_c[h] for h in STRATA)
+        pred = _predictive(p_draws, sev, n_alloc, runs, rho, rng, mult)
         n_tasks = sum(counts[c][h][0] for h in STRATA)
         n_ev = sum(counts[c][h][1] for h in STRATA)
-        sev_mean = {h: float(sev[h][2].mean()) for h in STRATA}
+        sev_mean = {h: float(sev_c[h].mean()) for h in STRATA}
         hi90 = float(np.quantile(theta, 0.95)); pred_hi = float(np.quantile(pred, 0.95)); pred_hi95 = pred_hi
         if method == "M1":
             col = cols[c]
