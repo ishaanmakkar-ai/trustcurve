@@ -376,3 +376,17 @@ Key cells (n_e = 200):
 4. **Power analysis (B5)** then runs on all screening rates, and phase C is sized from it.
 
 Budget: ≈ $15 more in phase B (projected total ≈ $40). This is loop 1 of at most 4 in phase B.
+
+### B-L1 results so far and the simulator decision (2026-10-21, before any phase-C run)
+**Date repair:** the OpenAI simulators' date invention is gone.
+- gpt-6-luna: 15 failures (6 user_caused) → 6 failures, 0 user_caused.
+- gpt-6.1-sol: 5 (3) → 3, 0.
+
+**G3 after the repair:**
+- **OpenAI family:** both pass at 0%. By the B3 choice rule (a tie within 5 points → the cheaper model), **the OpenAI experience simulator is `openai/gpt-6-luna`.**
+- **Haiku simulator:** **fails G3**. With the repair it has 6 failures, 4 user_caused, all genuine departures on reading: it refuses to confirm, rejects an offer its instructions say to accept, and adds conditions. Pooled over both Haiku pilots, the share is 6/11. Its user-caused rate per run is 4/70 = 5.7%, but the pre-registered gate uses the share of failures, so **Haiku is excluded as an experience simulator.**
+
+**Amendment:**
+- **The Anthropic experience simulator becomes `claude-sonnet-5-5`**, which had the highest fidelity in Goal 3 E1 (0 user_caused), *conditional on* passing G3 in a date-repaired pilot (B0 × 70 v1 tasks, running now).
+- Underwriting keeps the Haiku simulator, unchanged. So **the simulator changes between underwriting and experience for both experience families**: RQ5 becomes a test of the full setup change, not just a swap within one family.
+- If Sonnet fails G3, the fallback is gpt-6-luna plus gpt-6.1-sol. Both are OpenAI models, so that would be two models, not two families, and the plan's "≥ 2 simulator families" would then be reported as unmet.
