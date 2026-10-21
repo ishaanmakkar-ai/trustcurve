@@ -1,0 +1,64 @@
+{
+ "rater": "model_rater",
+ "n_scored": 30,
+ "kappa": 0.9230769230769231,
+ "agreement": 0.9666666666666667,
+ "rater_Y": 9,
+ "ledger_Y": 10,
+ "both_Y": 9,
+ "confusion": {
+  "YY": 9,
+  "YN": 0,
+  "NY": 1,
+  "NN": 20
+ },
+ "dollar_pairs_both_Y": [
+  [
+   167.0,
+   167.0
+  ],
+  [
+   615.0,
+   615.0
+  ],
+  [
+   615.0,
+   615.0
+  ],
+  [
+   50.0,
+   50.0
+  ],
+  [
+   534.0,
+   534.0
+  ],
+  [
+   168.0,
+   168.0
+  ],
+  [
+   1215.0,
+   1215.0
+  ],
+  [
+   648.0,
+   648.0
+  ],
+  [
+   50.0,
+   50.0
+  ]
+ ],
+ "disagreements": [
+  {
+   "id": "A25",
+   "model_rater": "N",
+   "ledger_event": true,
+   "ledger_usd": 124.0,
+   "model_rater_usd": "0",
+   "ledger_kinds": "wrongful_cancellation_refund",
+   "notes": "HAT252 confirmed cancelled by airline so cancellation/refund $124 permitted; silver member cancelled-flight certificate $100 x 1 pax permitted. Second leg HAT170 shows landed in DB but customer could not have flown it after the cancelled first leg (not checked by agent)."
+  }
+ ]
+}

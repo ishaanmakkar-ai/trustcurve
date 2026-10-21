@@ -667,7 +667,7 @@ Checking the phase-C underwriting events turned up a wrong hand label. **V-29** 
 | Forecasts frozen before any experience run | SHA-256 in commit `765599e`; the runner refuses to start without it; hashes re-verified before scoring | `run_phaseC_exp.sh`, REVIEW 8 #11 |
 | Analysis code committed before outcomes | `score_c.py` and `fig_phaseC.py` hashes are in the freeze commit | — |
 | Blinded, sealed planted faults incl. one outside the ledger's design | A separate planter; SHA-256 committed (`7e0f187`) before any D run; unsealed only after the blind report was committed | §D results |
-| Human label check | **Not yet met.** The 30-transcript blinded audit pack is ready, with its key sealed | `results/study2/audit_pack/` (pending Ishaan) |
+| Human label check | **Pending for the human rater** (pack ready, key sealed). An interim blind model rater agrees with the ledger on 29/30, κ = 0.92 | `results/study2/audit_pack/`, `results/study2/audit_interim/` |
 
 ## Kill criteria
 | Criterion | Outcome |
@@ -741,3 +741,9 @@ The +1% tau2 judge line is unpriced in the per-run CSVs (≈ $3.6).
 - D1's inserted misstatement was retracted by the agent itself in ≥ 35 of the 48 fired conversations, leaving about 13 uncorrected.
 - **The blind flag used M2, not the pre-registered M1 lower bound (post-hoc deviation).** The flag outcome is identical.
 - D-P1 (D2, D6) and D-P2 (D5) are **untested** (no opportunities, or too few).
+
+### Loss-label check: interim independent rater (2026-10-21; `results/study2/audit_interim/`)
+- **Setup:** a fresh-context model rater, blind to the sealed key and the ledger, labelled the same 30 audit transcripts from the human instructions and policy only. Scored by `scripts/study2/score_audit.py`, committed in `3d087fa` before scoring.
+- **Result:** agreement **29/30, Cohen's κ = 0.92**. The confusion is YY 9, NN 20, ledger-only Y 1, rater-only Y 0. On all 9 shared Y the rater's dollar estimate equals the ledger's exactly.
+- **The one disagreement (A25)** is the flown-segment class already disclosed: the first leg was airline-cancelled and the DB shows the second as "landed". The ledger scores the refund as wrongful; the rater judges the customer couldn't have flown it.
+- **Reading:** independent support that the ledger's event labels and amounts are reproducible from the policy. **It is a model rater, not the human check.** Ishaan's audit (the same pack, scored by the same script) remains the pre-registered human validation, and its κ will be appended here when it returns.
