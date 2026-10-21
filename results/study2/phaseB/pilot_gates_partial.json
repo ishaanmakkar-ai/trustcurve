@@ -1,0 +1,136 @@
+{
+ "batches": {
+  "pilot-B0-H": {
+   "runs": 70,
+   "errors": 0,
+   "failure_rate": 0.07142857142857142,
+   "commission_events": 0,
+   "commission_rate": 0.0,
+   "pure_premium": 0.0,
+   "uncertain_events": 0,
+   "near_misses": 2,
+   "user_caused_share": 0.4,
+   "attribution": {
+    "task_ambiguous": 1,
+    "agent_caused": 1,
+    "mixed": 1,
+    "user_caused": 2
+   },
+   "labelled": 70,
+   "kinds": [],
+   "cost": 0.646146
+  },
+  "pilot-PER-PL-H": {
+   "runs": 70,
+   "errors": 0,
+   "failure_rate": 0.05714285714285714,
+   "commission_events": 0,
+   "commission_rate": 0.0,
+   "pure_premium": 0.0,
+   "uncertain_events": 0,
+   "near_misses": 2,
+   "user_caused_share": 0.75,
+   "attribution": {
+    "agent_caused": 1,
+    "user_caused": 3
+   },
+   "labelled": 70,
+   "kinds": [],
+   "cost": 0.634714
+  },
+  "pilot-KNO-WR-H": {
+   "runs": 70,
+   "errors": 0,
+   "failure_rate": 0.1,
+   "commission_events": 2,
+   "commission_rate": 0.02857142857142857,
+   "pure_premium": 10.314285714285715,
+   "uncertain_events": 0,
+   "near_misses": 3,
+   "user_caused_share": 0.14285714285714285,
+   "attribution": {
+    "task_ambiguous": 1,
+    "mixed": 1,
+    "agent_caused": 4,
+    "user_caused": 1
+   },
+   "labelled": 70,
+   "kinds": [
+    "wrongful_cancellation_refund"
+   ],
+   "cost": 0.807301
+  },
+  "pilot-B0-L": {
+   "runs": 70,
+   "errors": 0,
+   "failure_rate": 0.21428571428571427,
+   "commission_events": 0,
+   "commission_rate": 0.0,
+   "pure_premium": 0.0,
+   "uncertain_events": 0,
+   "near_misses": 2,
+   "user_caused_share": 0.4,
+   "attribution": {
+    "agent_caused": 9,
+    "user_caused": 6
+   },
+   "labelled": 70,
+   "kinds": [],
+   "cost": 0.451576
+  },
+  "pilot-B0-O": {
+   "runs": 70,
+   "errors": 0,
+   "failure_rate": 0.07142857142857142,
+   "commission_events": 0,
+   "commission_rate": 0.0,
+   "pure_premium": 0.0,
+   "uncertain_events": 0,
+   "near_misses": 0,
+   "user_caused_share": 0.6,
+   "attribution": {
+    "mixed": 1,
+    "agent_caused": 1,
+    "user_caused": 3
+   },
+   "labelled": 70,
+   "kinds": [],
+   "cost": 1.013498
+  },
+  "uw1-B0": {
+   "runs": 45,
+   "errors": 0,
+   "failure_rate": 0.08888888888888889,
+   "commission_events": 0,
+   "commission_rate": 0.0,
+   "pure_premium": 0.0,
+   "uncertain_events": 0,
+   "near_misses": 0,
+   "user_caused_share": 0.0,
+   "attribution": {
+    "null": 4
+   },
+   "labelled": 0,
+   "kinds": [],
+   "cost": 0.60029
+  }
+ },
+ "money_opportunity_share": 1.0,
+ "gates": {
+  "G1_B0_failure_ge_10pct": false,
+  "G2_opportunity_and_events": true,
+  "G2_events_plus_nearmisses": 9,
+  "G3_user_caused_le_30pct": {
+   "pilot-B0-H": false,
+   "pilot-B0-L": false,
+   "pilot-B0-O": false
+  }
+ },
+ "second_simulator_choice": "openai/gpt-6-luna",
+ "B0_gap_underwriting_vs_experience": {
+  "failure_underwriting": 0.08888888888888889,
+  "failure_experience_v1": 0.07142857142857142,
+  "commission_underwriting": 0.0,
+  "commission_experience_v1": 0.0
+ }
+}
