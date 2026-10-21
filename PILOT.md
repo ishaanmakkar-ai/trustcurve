@@ -21,7 +21,7 @@
 | Runs | 15 | 50 | 65 |
 | Benchmark pass^1 | 0.60 | 0.82 | — |
 | DB mismatch | 4 | 8 | 12 |
-| Omission runs ($ recorded, not insured) | 6 | 7 | 11 (some failures are COMMUNICATE-only) |
+| Omission runs ($ recorded, not insured; v3 sizes $114–3,180) | 6 | 6 | 11 (other failures are COMMUNICATE-only) |
 | Raw commission divergences | 0 | 1 ($4,418, policy-permitted) | 1 |
 | **Insured loss events** | 0 | 0 | **0** |
 | Cost | $0.243 | $0.735 | **$0.98** (+$0.02 smoke) |
@@ -51,6 +51,7 @@ A cheap next step (about $1.50): **all 50 tasks × 2** to finish breadth, plus a
 - **Loop 1:** the integration tests were vacuous (tasks 0–4 move no money) and the replay outputs were blank. Fixed, with non-vacuity guards.
 - **Loop 2:** the netted dollar diff scored **missed bookings as payouts**. Rebuilt it to classify by transaction (payout / harm / omission). Review 1 also found **gift-card downgrade refunds double-counted** ($10,488 vs the true $5,244); fixed and regression-tested.
 - **Loop 3:** a divergence from gold isn't a wrongful act. Added a **policy-compliance layer** (tau2 cancellation rules) that separates wrongful from permitted payouts.
+- **Review 2 (8 + 5 points):** exact-entry matching and ID pairing made a different route, payment method or booking order to the same correct state look like loss, and certificates were double counted. **Dollar diff v3** uses content pairing, net-per-reservation comparison, change attribution against the initial DB and certificate forfeiture. 40 tests. Omission sizes are corrected (e.g. task 7 $2,440 → $296).
 - **Review 1 (15 points):** a unit error in the credibility ceiling (effective runs vs claims), a too-small pilot design, strata defined from gold, the same model used for user and judge, the seed dropped by LiteLLM, weak tests and a z-value typo. All resolved or documented.
 
 ## Open problems

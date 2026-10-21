@@ -56,3 +56,6 @@ Each loop records the expectation before checking, what broke, and the fix. A re
 - **Expected:** the τ² airline clustering ceiling makes a credible frequency impossible by repetition.
 - **Checked:** with ρ = 0.59, the ceiling is about 85 effective runs. No scenario in `results/pilot/projection.json` is feasible with 50 tasks. The loosest (±20%, q = 20%) needs 484 distinct tasks.
 - **Result:** the main-run recommendation shifts from "more repeats" to "more distinct tasks + refusal/adversarial tasks + credibility blending". Iteration cap reached (4 loops), so the report follows.
+
+## Review-2 resolution (after loop 4)
+Dollar diff v3: content pairing of new reservations, net-per-reservation comparison, change attribution against the initial DB, stored-value forfeiture and a customer-facing service key. 40/40 tests pass. Re-scoring all 65 runs: 0 insured events unchanged. Omission sizes corrected (task 7 $2,440 → $296, task 32 $906 → $114, task 8 $500 → $348). The projection is unchanged (it depends only on events and ICC).

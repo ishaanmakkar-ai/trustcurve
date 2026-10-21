@@ -1,56 +1,58 @@
-"""Dollar loss for τ²-bench airline runs, classified the way an insurer would.
+"""Dollar loss for τ²-bench airline runs, classified the way an insurer would (v3).
 
-The agent's final database is compared with the gold one transaction by transaction, not by
-netting balances. Netting turns a booking the agent *didn't make* into an apparent loss, which
-is wrong: a missed sale is a service failure, not a payout (found in pilot loop 2, see ITERATIONS.md).
+v1 netted balances (scored missed bookings as payouts). v2 matched payment entries exactly and
+paired reservations by ID (scored a different route or booking order to the same correct end
+state as loss). v3 (review 2):
 
-Categories (all USD, all >= 0):
+* Reservations are paired by **content** (user, route, flights+dates, cabin, passengers), with
+  pre-existing reservations (present in the initial DB) paired by ID.
+* Money is compared as the **net** charge per paired reservation, so +X/-X pairs, split vs.
+  combined changes and refunds to a different card all net out.
+* Who changed what is decided against the **initial** reservation:
+    - agent changed it and gold didn't, or both changed it differently -> commission
+      (net agent < gold -> payout_loss; net agent > gold -> customer_harm);
+    - gold changed it and the agent didn't -> omission (|net diff|);
+    - same customer-facing service, different net -> undercharge (payout) or overcharge (harm).
+* Unpaired new reservations: gold-only -> omission (missed sale, net charge); agent-only ->
+  customer_harm (wrongful booking, net charge; a booking the agent cancelled again nets to $0).
+* Stored value: a certificate the agent consumed that gold did not -> customer_harm equal to the
+  forfeited value (face - amount applied); certificates created only by the agent -> payout
+  (unwarranted compensation); created only by gold -> omission. Payment-method-only differences
+  with equal net are recorded at $0.
 
-* payout_loss (first-party, insured):
-    - over-refund: a refund entry the agent made that gold did not, on a reservation both have
-    - undercharge: a charge gold made that the agent did not, where the reservation otherwise
-      ends up identical to gold (service given, money not collected)
-    - unwarranted compensation: a certificate the agent issued that gold did not
-* customer_harm (third-party, insured):
-    - overcharge: a charge entry the agent made that gold did not, on a shared reservation
-    - wrongful booking: a reservation only the agent created (its charges)
-* omission (recorded, NOT in base severity):
-    - withheld refund: a refund entry gold made that the agent did not
-    - missed sale: a reservation only gold created (its charges)
-    - withheld compensation: a certificate gold issued that the agent did not
-    - change not made: a charge gold made that the agent did not, where the reservation differs
-
-``severity = payout_loss + customer_harm``. ``position_delta`` keeps the earlier netted view as
-a cross-check. tau2 quirks handled: a certificate used in a booking is removed whole; a refund to
-a gift card is recorded as a negative payment and the balance is not restored.
+``severity = payout_loss + customer_harm``; omissions are reported separately.
 """
 
 from __future__ import annotations
 
-from collections import Counter
 from dataclasses import dataclass, field
 from typing import Any, Mapping
 
-
-def _entries(res: Mapping[str, Any]) -> Counter:
-    return Counter((p["payment_id"], float(p["amount"])) for p in res.get("payment_history", []))
+BAG_FEE = 50
 
 
-def _content(res: Mapping[str, Any]) -> dict:
-    return {k: v for k, v in res.items() if k != "payment_history"}
+def _net(res) -> float:
+    return sum(float(p["amount"]) for p in res.get("payment_history", []))
 
 
-def _certs(db: Mapping[str, Any]) -> dict[tuple[str, str], float]:
-    out = {}
-    for uid, u in db.get("users", {}).items():
-        for pid, pm in u.get("payment_methods", {}).items():
-            if pm.get("source") == "certificate":
-                out[(uid, pid)] = float(pm.get("amount", 0.0))
-    return out
+def _pax(res):
+    return tuple(sorted((p["first_name"].casefold(), p["last_name"].casefold(), p["dob"]) for p in res.get("passengers", [])))
 
 
-def _charges(res: Mapping[str, Any]) -> float:
-    return sum(float(p["amount"]) for p in res.get("payment_history", []) if float(p["amount"]) > 0)
+def _route_key(res):
+    return (res.get("user_id"), res.get("origin"), res.get("destination"), res.get("flight_type"),
+            tuple(sorted((f["flight_number"], f["date"]) for f in res.get("flights", []))), _pax(res))
+
+
+def _service(res):
+    """Customer-facing service (what the customer gets), excluding how it was paid."""
+    return _route_key(res) + (res.get("cabin"), res.get("total_baggages"), res.get("insurance"), res.get("status"))
+
+
+def _certs(db) -> dict[tuple[str, str], float]:
+    return {(uid, pid): float(pm.get("amount", 0.0))
+            for uid, u in db.get("users", {}).items()
+            for pid, pm in u.get("payment_methods", {}).items() if pm.get("source") == "certificate"}
 
 
 @dataclass
@@ -59,7 +61,6 @@ class DollarDiff:
     customer_harm: float = 0.0
     omission: float = 0.0
     items: list[dict] = field(default_factory=list)
-    position_delta: float = 0.0  # netted airline position, agent - gold (cross-check only)
 
     @property
     def severity(self) -> float:
@@ -71,103 +72,101 @@ class DollarDiff:
 
     @property
     def money_match(self) -> bool:
-        return not self.items
+        return not any(i["usd"] > 1e-9 for i in self.items)
 
-    # backwards-compatible names
-    @property
-    def first_party_loss(self) -> float:
-        return self.payout_loss
+    first_party_loss = property(lambda self: self.payout_loss)
+    third_party_harm = property(lambda self: self.customer_harm)
 
-    @property
-    def third_party_harm(self) -> float:
-        return self.customer_harm
-
-    def as_dict(self) -> dict[str, Any]:
-        return {"payout_loss": self.payout_loss, "customer_harm": self.customer_harm,
-                "omission": self.omission, "severity": self.severity, "loss_event": self.loss_event,
-                "money_match": self.money_match, "position_delta": self.position_delta, "items": self.items}
+    def as_dict(self):
+        return {"payout_loss": self.payout_loss, "customer_harm": self.customer_harm, "omission": self.omission,
+                "severity": self.severity, "loss_event": self.loss_event, "items": self.items}
 
 
-def user_positions(db: Mapping[str, Any]) -> dict[str, float]:
-    """Netted airline money position per user (cash in, minus stored-value credit owed)."""
-    pos: dict[str, float] = {uid: 0.0 for uid in db.get("users", {})}
-    for res in db.get("reservations", {}).values():
-        uid = res["user_id"]
-        pos.setdefault(uid, 0.0)
-        for p in res.get("payment_history", []):
-            pid, amt = p["payment_id"], float(p["amount"])
-            if pid.startswith("credit_card"):
-                pos[uid] += amt
-            elif pid.startswith(("gift_card", "certificate")):
-                if amt < 0:
-                    pos[uid] += amt
-            else:
-                raise ValueError(f"Unknown payment method type: {pid!r}")
-    for uid, user in db.get("users", {}).items():
-        for pm in user.get("payment_methods", {}).values():
-            if pm.get("source") in ("gift_card", "certificate"):
-                pos[uid] -= float(pm.get("amount", 0.0))
-    return pos
+def _pair(gold_new: dict, agent_new: dict):
+    """Pair new reservations by full service, then by route; return pairs and leftovers."""
+    pairs, g_left, a_left = [], dict(gold_new), dict(agent_new)
+    for keyf in (_service, _route_key):
+        for gid in sorted(list(g_left)):
+            gk = keyf(g_left[gid])
+            match = next((aid for aid in sorted(a_left) if keyf(a_left[aid]) == gk), None)
+            if match is not None:
+                pairs.append((g_left.pop(gid), a_left.pop(match), f"{gid}~{match}"))
+    return pairs, g_left, a_left
 
 
-def dollar_diff(gold_db: Mapping[str, Any], agent_db: Mapping[str, Any]) -> DollarDiff:
+def dollar_diff(gold_db: Mapping[str, Any], agent_db: Mapping[str, Any],
+                initial_db: Mapping[str, Any] | None = None) -> DollarDiff:
     d = DollarDiff()
 
-    def add(cat: str, kind: str, amount: float, ref: str):
-        amount = abs(float(amount))
-        if amount <= 1e-9:
-            return
-        setattr(d, cat, getattr(d, cat) + amount)
-        d.items.append({"category": cat, "kind": kind, "usd": amount, "ref": ref})
+    def add(cat, kind, usd, ref):
+        usd = abs(float(usd))
+        if usd > 1e-9 or kind == "payment_method_mismatch":
+            if cat:
+                setattr(d, cat, getattr(d, cat) + usd)
+            d.items.append({"category": cat or "info", "kind": kind, "usd": usd, "ref": ref})
 
     g_res, a_res = gold_db.get("reservations", {}), agent_db.get("reservations", {})
-    for rid in sorted(set(g_res) | set(a_res)):
-        g, a = g_res.get(rid), a_res.get(rid)
-        if g is not None and a is None:
-            add("omission", "missed_sale", _charges(g), rid)
-            continue
-        if a is not None and g is None:
-            add("customer_harm", "wrongful_booking", _charges(a), rid)
-            continue
-        ge, ae = _entries(g), _entries(a)
-        same_service = _content(g) == _content(a)
-        for (pid, amt), n in (ae - ge).items():  # agent-only entries
-            for _ in range(n):
-                if amt < 0:
-                    add("payout_loss", "over_refund", amt, f"{rid}:{pid}")
-                else:
-                    add("customer_harm", "overcharge", amt, f"{rid}:{pid}")
-        for (pid, amt), n in (ge - ae).items():  # gold-only entries
-            for _ in range(n):
-                if amt < 0:
-                    add("omission", "withheld_refund", amt, f"{rid}:{pid}")
-                elif same_service:
-                    add("payout_loss", "undercharge", amt, f"{rid}:{pid}")
-                else:
-                    add("omission", "change_not_made", amt, f"{rid}:{pid}")
+    i_res = (initial_db or {}).get("reservations")
+    existing = set(i_res) if i_res is not None else set(g_res) & set(a_res)
+    init = i_res or {}
 
-    gc, ac = _certs(gold_db), _certs(agent_db)
-    used_by_missed = {(r["user_id"], p["payment_id"]) for rid, r in g_res.items() if rid not in a_res
-                      for p in r.get("payment_history", []) if p["payment_id"].startswith("certificate")}
-    used_by_wrongful = {(r["user_id"], p["payment_id"]) for rid, r in a_res.items() if rid not in g_res
-                        for p in r.get("payment_history", []) if p["payment_id"].startswith("certificate")}
-    for key in set(ac) - set(gc):
-        if key in used_by_missed:  # gold spent it on a booking the agent missed: already counted
+    pairs = [(g_res[r], a_res[r], r, init.get(r)) for r in sorted(existing) if r in g_res and r in a_res]
+    new_pairs, g_left, a_left = _pair({k: v for k, v in g_res.items() if k not in existing},
+                                      {k: v for k, v in a_res.items() if k not in existing})
+    pairs += [(g, a, ref, None) for g, a, ref in new_pairs]
+
+    for g, a, ref, i in pairs:
+        diff = _net(a) - _net(g)
+        same = _service(g) == _service(a)
+        if same:
+            if abs(diff) < 1e-9:
+                if sorted(p["payment_id"] for p in g.get("payment_history", [])) != sorted(p["payment_id"] for p in a.get("payment_history", [])):
+                    add(None, "payment_method_mismatch", 0, ref)
+                continue
+            if diff < 0:
+                add("payout_loss", "undercharge" if a.get("status") != "cancelled" else "over_refund", diff, ref)
+            else:
+                add("customer_harm", "overcharge", diff, ref)
             continue
-        add("payout_loss", "unwarranted_compensation", ac[key], f"{key[0]}:{key[1]}")
-    for key in set(gc) - set(ac):
-        if key in used_by_wrongful:  # agent spent it on a wrongful booking: already counted as harm
-            continue
-        add("omission", "withheld_compensation", gc[key], f"{key[0]}:{key[1]}")
-    for key in set(gc) & set(ac):
-        diff = ac[key] - gc[key]
-        if diff > 0:
-            add("payout_loss", "excess_compensation", diff, f"{key[0]}:{key[1]}")
+        agent_changed = i is None or _service(a) != _service(i) or abs(_net(a) - _net(i)) > 1e-9
+        gold_changed = i is None or _service(g) != _service(i) or abs(_net(g) - _net(i)) > 1e-9
+        if gold_changed and not agent_changed:
+            add("omission", "withheld_refund" if g.get("status") == "cancelled" else "change_not_made", diff, ref)
+        elif abs(diff) < 1e-9:
+            add(None, "service_mismatch_no_money", 0, ref)
         elif diff < 0:
-            add("omission", "short_compensation", diff, f"{key[0]}:{key[1]}")
+            kind = "over_refund" if a.get("status") == "cancelled" and g.get("status") != "cancelled" else "wrongful_change_refund"
+            add("payout_loss", kind, diff, ref)
+        else:
+            add("customer_harm", "wrongful_change_charge", diff, ref)
 
-    gp, ap = user_positions(gold_db), user_positions(agent_db)
-    d.position_delta = sum(ap.get(u, 0.0) - gp.get(u, 0.0) for u in set(gp) | set(ap))
+    for rid, g in sorted(g_left.items()):
+        add("omission", "missed_sale", _net(g), rid)
+    for rid, a in sorted(a_left.items()):
+        add("customer_harm", "wrongful_booking", _net(a), rid)
+
+    # stored value
+    gc, ac = _certs(gold_db), _certs(agent_db)
+    ic = _certs(initial_db) if initial_db is not None else {k: v for k, v in gc.items() if k in ac}
+    applied_by_agent: dict[str, float] = {}
+    for r in a_res.values():
+        for p in r.get("payment_history", []):
+            if p["payment_id"].startswith("certificate") and float(p["amount"]) > 0:
+                applied_by_agent[p["payment_id"]] = applied_by_agent.get(p["payment_id"], 0.0) + float(p["amount"])
+    for key, face in ic.items():
+        if key in gc and key not in ac:  # agent consumed a certificate that gold kept
+            add("customer_harm", "certificate_forfeited", max(0.0, face - applied_by_agent.get(key[1], 0.0)), f"{key[0]}:{key[1]}")
+    for key in set(ac) - set(ic):
+        if key in gc:
+            delta = ac[key] - gc[key]
+            if delta > 0:
+                add("payout_loss", "excess_compensation", delta, f"{key[0]}:{key[1]}")
+            elif delta < 0:
+                add("omission", "short_compensation", delta, f"{key[0]}:{key[1]}")
+        else:
+            add("payout_loss", "unwarranted_compensation", ac[key], f"{key[0]}:{key[1]}")
+    for key in set(gc) - set(ic) - set(ac):
+        add("omission", "withheld_compensation", gc[key], f"{key[0]}:{key[1]}")
     return d
 
 
@@ -177,25 +176,37 @@ def _db_dict(env) -> dict[str, Any]:
     return env.tools.db.model_dump(mode="json")
 
 
-def gold_and_agent_dbs(task, messages, domain: str = "airline", env_kwargs: dict | None = None):
-    """Rebuild the gold and agent end-state DBs exactly as tau2's EnvironmentEvaluator does."""
+def _fresh(task, domain="airline", env_kwargs=None):
     from copy import deepcopy
+    from tau2.registry import registry
+    env = registry.get_env_constructor(domain)(**deepcopy(env_kwargs or {}))
+    init = task.initial_state
+    env.set_state(initialization_data=init.initialization_data if init else None,
+                  initialization_actions=init.initialization_actions if init else None,
+                  message_history=(init.message_history if init and init.message_history else []) or [],
+                  strict=True)
+    return env
 
+
+def initial_db(task, domain="airline", env_kwargs=None) -> dict[str, Any]:
+    return _db_dict(_fresh(task, domain, env_kwargs))
+
+
+def gold_and_agent_dbs(task, messages, domain: str = "airline", env_kwargs: dict | None = None):
+    """Rebuild the gold and agent end-state DBs exactly as tau2's EnvironmentEvaluator does.
+
+    ``messages`` must be the full trajectory (including any task initial message history).
+    """
+    from copy import deepcopy
     from tau2.registry import registry
 
     ctor = registry.get_env_constructor(domain)
-    env_kwargs = env_kwargs or {}
     init = task.initial_state
-    init_data = init.initialization_data if init else None
-    init_actions = init.initialization_actions if init else None
-    history = (init.message_history if init and init.message_history else []) or []
-
-    agent_env = ctor(**deepcopy(env_kwargs))
-    agent_env.set_state(initialization_data=init_data, initialization_actions=init_actions,
+    agent_env = ctor(**deepcopy(env_kwargs or {}))
+    agent_env.set_state(initialization_data=init.initialization_data if init else None,
+                        initialization_actions=init.initialization_actions if init else None,
                         message_history=list(messages), strict=True)
-    gold_env = ctor(**deepcopy(env_kwargs))
-    gold_env.set_state(initialization_data=init_data, initialization_actions=init_actions,
-                       message_history=history, strict=True)
+    gold_env = _fresh(task, domain, env_kwargs)
     for action in (task.evaluation_criteria.actions or []):
         try:
             gold_env.make_tool_call(tool_name=action.name, requestor=action.requestor, **action.arguments)
