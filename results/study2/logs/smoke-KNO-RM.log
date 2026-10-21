@@ -1,0 +1,7 @@
+0/1 (trial 1/1). Running task V-48, trial 1
+
+Successfully completed all simulations!
+To review the simulations, run: tau2 view
+{"config": "KNO-RM", "runs": 1, "passed": 1, "out": "/Volumes/T7/trustcurve-study2-raw/smoke-KNO-RM/results.json"}
+{"runs": 1, "errors": 0, "cost_usd": 0.0076, "harness_cost_usd": 0.0, "harness_checks": 0, "harness_blocks": 0, "harness_unparsed": 0, "dd_errors": 0, "unpriced": 0}
+cumulative $83.46; phase B $0.45 of $40

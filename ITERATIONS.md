@@ -173,3 +173,35 @@ The review-1/2/3 resolutions re-analysed **existing** data and code. They ran no
 - **Observed:** M1 fails (0.76), M1c fails (0.83), M2 covers (0.87) but fails bias (+11%) and upper-95 (0.91). Directional shift: every method ≤ 0.71.
 - **Decision (pre-registered fallback):** M2 primary, M1c and M1 secondary. K1 not fired. Phase A has used 3 of 4 loops.
 - **Strongest counter-explanation:** the R-scenario DGM is still mine. It has template effects of mean −0.5, configurations spanning 40×, and lognormal severity. If real configurations are closer together or rarer, the ranking (Spearman) will degrade as in R5 (0.75). The directional-shift result depends on δ = +0.5. I picked that size; it wasn't measured. The phase-B fidelity pilot measures the actual underwriting-vs-experience gap for B0 (failure rates on both pools), which tells us whether R6 is the relevant regime **before** forecasts are frozen.
+
+## Phase B, loop 1 and adapt memo (2026-10-21)
+**What was run** (≈ $40.6; ledger fixed and every batch re-collected):
+- smoke tests;
+- the fidelity pilot (B0, PER-PL and KNO-WR on 70 burned v1 tasks; B0 under 4 simulators, before and after a date repair);
+- a harder 40-task pilot batch (v3p);
+- screening of 21 configurations on the first half of underwriting.
+
+**Findings**
+1. **Insured loss is rare and comes almost only from wrong knowledge.**
+   - Commission events at screening: KNO-WR, KB-HCF and KB-PPL each have 1 in 45, and it is the same task, where the stale 72-hour rule permits a refund policy forbids.
+   - Pilot: KNO-WR has 2 in 70 (both read and genuine).
+   - Everything else is 0, across ≈ 1,100 screening and pilot runs: B0, both personas, both guardrails, Sonnet, gpt-6.1-sol, and the insurance, compensation and baggage knowledge errors.
+2. **Pre-registered directions refuted:** pleaser > B0, fast > B0, and capability (all at 0). Not testable: guardrails < B0, because there is nothing to reduce.
+3. **G1 fails twice:** B0 fails 7.1% on v1 and 7.5% on the harder v3p (90% of tasks multi-feature), against an 8.9% failure rate on the corrected benchmark. Harder tasks didn't make Haiku fail more.
+4. **G3:** the OpenAI simulators' date invention is fixed by stating the date. The Haiku simulator departs from instructions (4/6 failures), so experience uses **Sonnet 5.5 + gpt-6-luna** and underwriting keeps Haiku.
+5. **Ledger false positive caught by reading transcripts** (certificates after a booking change). Fixed with a regression test.
+
+**Surprises**
+- No persona, capability or harness effect at all.
+- Harder tasks don't raise the failure rate.
+- The one real risk channel is narrow (a stale rule that turns refusals into refunds), and it is visible in underwriting through essentially one task.
+
+**Strongest counter-explanation**
+- τ²-airline plus a Haiku-class agent may simply be a world where, under correct knowledge, the agent almost never pays out wrongly in conversations of this length.
+- If so, "can a small eval forecast realised loss?" degenerates into "can it detect the rare configurations with a knowledge defect?", and the answer hinges on whether the underwriting pool happens to contain tasks that trigger that defect. For KNO-WR it contains about 1. That is a coverage question (RQ4's territory), not a calibration one.
+- Phase C may therefore fire K2 as "undetermined" (most realised losses tie at 0), and that would be a real, reportable result: **small evals can't rank agents whose insured risk is below about 1 per 100 conversations; they can at best flag gross knowledge defects, and only if the eval happens to exercise them.**
+
+**Proposed changes (each needs a decision or a pre-registration before use)**
+1. **G1/K3:** the gate failed twice. My B3 text maps this to K3, but the plan's K3 condition ("no commission opportunities or failures") is not met: B0 fails 7–9% and has opportunities, and knowledge errors cause real loss. This touches a study-ending criterion, so it is **put to Ishaan** with a recommendation to proceed, labelling G1 as failed and miscalibrated.
+2. **Phase C pool:** v2 (260) + v3p is burned. The v3 main supplement is moot, because harder tasks didn't change the failure rate. Proposal: phase C uses **v2 (260 tasks)** as written.
+3. **Sizing:** from the power analysis (running). Spend extra on experience n for the knowledge-defect family, where events exist, not on the zero-risk capability axis. Drop CAP-X (Opus), as the B4 rule allows: there's no budget case for it, and its expected realised loss is 0 like every other capability level.

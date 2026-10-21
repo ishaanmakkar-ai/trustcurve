@@ -1,0 +1,56 @@
+2/30 (trial 1/1). Running task E3A-15, trial 1
+0/30 (trial 1/1). Running task E3A-13, trial 1
+1/30 (trial 1/1). Running task E3A-14, trial 1
+3/30 (trial 1/1). Running task E3A-2, trial 1
+4/30 (trial 1/1). Running task E3A-4, trial 1
+5/30 (trial 1/1). Running task E3A-5, trial 1
+Status: 2/30 complete. Avg reward: 1.00 (N=2). 4 running: E3A-13.0(30s), 
+E3A-14.0(30s), E3A-4.0(2s), E3A-5.0(2s)
+6/30 (trial 1/1). Running task E3A-9, trial 1
+7/30 (trial 1/1). Running task E3B-1, trial 1
+8/30 (trial 1/1). Running task E3B-11, trial 1
+Status: 5/30 complete. Avg reward: 1.00 (N=5). 4 running: E3A-4.0(33s), 
+E3A-9.0(26s), E3B-1.0(25s), E3B-11.0(1s)
+9/30 (trial 1/1). Running task E3B-7, trial 1
+10/30 (trial 1/1). Running task E3C-0, trial 1
+11/30 (trial 1/1). Running task E3C-10, trial 1
+12/30 (trial 1/1). Running task E3C-4, trial 1
+13/30 (trial 1/1). Running task E3C-5, trial 1
+14/30 (trial 1/1). Running task E3C-9, trial 1
+15/30 (trial 1/1). Running task V-0, trial 1
+Status: 12/30 complete. Avg reward: 1.00 (N=12). 4 running: E3C-4.0(9s), 
+E3C-5.0(7s), E3C-9.0(5s), V-0.0(5s)
+16/30 (trial 1/1). Running task V-10, trial 1
+17/30 (trial 1/1). Running task V-15, trial 1
+18/30 (trial 1/1). Running task V-17, trial 1
+19/30 (trial 1/1). Running task V-18, trial 1
+Status: 16/30 complete. Avg reward: 1.00 (N=16). 4 running: V-10.0(22s), 
+V-15.0(15s), V-17.0(12s), V-18.0(8s)
+20/30 (trial 1/1). Running task V-19, trial 1
+21/30 (trial 1/1). Running task V-2, trial 1
+Status: 18/30 complete. Avg reward: 1.00 (N=18). 4 running: V-10.0(52s), 
+V-18.0(38s), V-19.0(12s), V-2.0(8s)
+22/30 (trial 1/1). Running task V-20, trial 1
+Status: 19/30 complete. Avg reward: 1.00 (N=19). 4 running: V-10.0(82s), 
+V-19.0(42s), V-2.0(38s), V-20.0(16s)
+23/30 (trial 1/1). Running task V-22, trial 1
+24/30 (trial 1/1). Running task V-24, trial 1
+Status: 21/30 complete. Avg reward: 1.00 (N=21). 4 running: V-19.0(72s), 
+V-2.0(68s), V-22.0(25s), V-24.0(13s)
+25/30 (trial 1/1). Running task V-37, trial 1
+26/30 (trial 1/1). Running task V-38, trial 1
+Status: 23/30 complete. Avg reward: 0.96 (N=23). 4 running: V-2.0(98s), 
+V-24.0(43s), V-37.0(20s), V-38.0(11s)
+27/30 (trial 1/1). Running task V-42, trial 1
+28/30 (trial 1/1). Running task V-47, trial 1
+29/30 (trial 1/1). Running task V-5, trial 1
+Status: 26/30 complete. Avg reward: 0.96 (N=26). 4 running: V-38.0(41s), 
+V-42.0(28s), V-47.0(16s), V-5.0(15s)
+Status: 29/30 complete. Avg reward: 0.97 (N=29). 1 running: V-5.0(45s)
+Status: 29/30 complete. Avg reward: 0.97 (N=29). 1 running: V-5.0(75s)
+
+Successfully completed all simulations!
+To review the simulations, run: tau2 view
+{"config": "CAP-S", "runs": 30, "passed": 29, "out": "/Volumes/T7/trustcurve-study2-raw/uw1-CAP-S/results.json"}
+{"runs": 30, "errors": 0, "cost_usd": 6.0089, "harness_cost_usd": 0.0, "harness_checks": 0, "harness_blocks": 0, "harness_unparsed": 0, "dd_errors": 0, "unpriced": 0}
+cumulative $99.86; phase B $16.84 of $40

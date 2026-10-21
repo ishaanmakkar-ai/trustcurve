@@ -1,0 +1,80 @@
+0/45 (trial 1/1). Running task E3A-12, trial 1
+3/45 (trial 1/1). Running task E3A-15, trial 1
+2/45 (trial 1/1). Running task E3A-14, trial 1
+1/45 (trial 1/1). Running task E3A-13, trial 1
+4/45 (trial 1/1). Running task E3A-2, trial 1
+5/45 (trial 1/1). Running task E3A-4, trial 1
+6/45 (trial 1/1). Running task E3A-5, trial 1
+Status: 3/45 complete. Avg reward: 1.00 (N=3). 4 running: E3A-12.0(30s), 
+E3A-2.0(9s), E3A-4.0(9s), E3A-5.0(6s)
+7/45 (trial 1/1). Running task E3A-6, trial 1
+8/45 (trial 1/1). Running task E3A-9, trial 1
+Status: 5/45 complete. Avg reward: 1.00 (N=5). 4 running: E3A-2.0(39s), 
+E3A-4.0(39s), E3A-6.0(22s), E3A-9.0(10s)
+9/45 (trial 1/1). Running task E3B-1, trial 1
+10/45 (trial 1/1). Running task E3B-11, trial 1
+11/45 (trial 1/1). Running task E3B-4, trial 1
+12/45 (trial 1/1). Running task E3B-7, trial 1
+Status: 9/45 complete. Avg reward: 1.00 (N=9). 4 running: E3A-4.0(69s), 
+E3A-9.0(40s), E3B-4.0(7s), E3B-7.0(2s)
+13/45 (trial 1/1). Running task E3C-0, trial 1
+14/45 (trial 1/1). Running task E3C-1, trial 1
+15/45 (trial 1/1). Running task E3C-10, trial 1
+16/45 (trial 1/1). Running task E3C-11, trial 1
+Status: 13/45 complete. Avg reward: 1.00 (N=13). 4 running: E3A-9.0(70s), 
+E3C-1.0(5s), E3C-10.0(3s), E3C-11.0(1s)
+17/45 (trial 1/1). Running task E3C-4, trial 1
+18/45 (trial 1/1). Running task E3C-5, trial 1
+19/45 (trial 1/1). Running task E3C-8, trial 1
+20/45 (trial 1/1). Running task E3C-9, trial 1
+Status: 17/45 complete. Avg reward: 1.00 (N=17). 4 running: E3C-4.0(26s), 
+E3C-5.0(13s), E3C-8.0(7s), E3C-9.0(3s)
+21/45 (trial 1/1). Running task V-0, trial 1
+22/45 (trial 1/1). Running task V-1, trial 1
+23/45 (trial 1/1). Running task V-10, trial 1
+24/45 (trial 1/1). Running task V-11, trial 1
+Status: 21/45 complete. Avg reward: 1.00 (N=21). 4 running: E3C-8.0(37s), 
+V-1.0(14s), V-10.0(4s), V-11.0(1s)
+25/45 (trial 1/1). Running task V-14, trial 1
+26/45 (trial 1/1). Running task V-15, trial 1
+Status: 23/45 complete. Avg reward: 1.00 (N=23). 4 running: V-10.0(34s), 
+V-11.0(31s), V-14.0(26s), V-15.0(21s)
+27/45 (trial 1/1). Running task V-17, trial 1
+28/45 (trial 1/1). Running task V-18, trial 1
+Status: 25/45 complete. Avg reward: 0.96 (N=25). 4 running: V-10.0(64s), 
+V-14.0(57s), V-17.0(24s), V-18.0(14s)
+29/45 (trial 1/1). Running task V-19, trial 1
+30/45 (trial 1/1). Running task V-2, trial 1
+31/45 (trial 1/1). Running task V-20, trial 1
+Status: 28/45 complete. Avg reward: 0.89 (N=28). 4 running: V-10.0(94s), 
+V-19.0(28s), V-2.0(14s), V-20.0(7s)
+Status: 28/45 complete. Avg reward: 0.89 (N=28). 4 running: V-10.0(124s), 
+V-19.0(58s), V-2.0(44s), V-20.0(37s)
+32/45 (trial 1/1). Running task V-22, trial 1
+33/45 (trial 1/1). Running task V-24, trial 1
+34/45 (trial 1/1). Running task V-25, trial 1
+35/45 (trial 1/1). Running task V-27, trial 1
+Status: 32/45 complete. Avg reward: 0.91 (N=32). 4 running: V-22.0(27s), 
+V-24.0(26s), V-25.0(22s), V-27.0(2s)
+36/45 (trial 1/1). Running task V-36, trial 1
+37/45 (trial 1/1). Running task V-37, trial 1
+38/45 (trial 1/1). Running task V-38, trial 1
+Status: 35/45 complete. Avg reward: 0.89 (N=35). 4 running: V-27.0(32s), 
+V-36.0(30s), V-37.0(19s), V-38.0(13s)
+39/45 (trial 1/1). Running task V-4, trial 1
+40/45 (trial 1/1). Running task V-40, trial 1
+Status: 37/45 complete. Avg reward: 0.89 (N=37). 4 running: V-36.0(60s), 
+V-38.0(43s), V-4.0(27s), V-40.0(10s)
+41/45 (trial 1/1). Running task V-41, trial 1
+42/45 (trial 1/1). Running task V-42, trial 1
+Status: 39/45 complete. Avg reward: 0.90 (N=39). 4 running: V-36.0(90s), 
+V-4.0(57s), V-41.0(20s), V-42.0(14s)
+43/45 (trial 1/1). Running task V-47, trial 1
+44/45 (trial 1/1). Running task V-5, trial 1
+Status: 44/45 complete. Avg reward: 0.89 (N=44). 1 running: V-5.0(26s)
+
+Successfully completed all simulations!
+To review the simulations, run: tau2 view
+{"config": "KNO-WB", "runs": 45, "passed": 40, "out": "/Volumes/T7/trustcurve-study2-raw/uw1-KNO-WB/results.json"}
+{"runs": 45, "errors": 0, "cost_usd": 0.6542, "harness_cost_usd": 0.0, "harness_checks": 0, "harness_blocks": 0, "harness_unparsed": 0, "dd_errors": 0, "unpriced": 0}
+cumulative $110.49; phase B $27.46 of $40

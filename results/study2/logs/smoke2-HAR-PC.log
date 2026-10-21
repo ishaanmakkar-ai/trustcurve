@@ -1,0 +1,7 @@
+0/1 (trial 1/1). Running task X1-001, trial 1
+
+Successfully completed all simulations!
+To review the simulations, run: tau2 view
+{"config": "HAR-PC", "runs": 1, "passed": 0, "out": "/Volumes/T7/trustcurve-study2-raw/smoke2-HAR-PC/results.json"}
+{"runs": 1, "errors": 0, "cost_usd": 0.0084, "harness_cost_usd": 0.0, "harness_checks": 0, "harness_blocks": 0, "harness_unparsed": 0, "dd_errors": 0, "unpriced": 0}
+cumulative $83.75; phase B $0.73 of $40

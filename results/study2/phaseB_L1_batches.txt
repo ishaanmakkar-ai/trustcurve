@@ -1,0 +1,11 @@
+pilotD-B0-L B0 tasks/study2/experience_v1/tasks.json tasks/study2/experience_v1/meta.json openai/gpt-6-luna L - 1
+pilotD-B0-O B0 tasks/study2/experience_v1/tasks.json tasks/study2/experience_v1/meta.json openai/gpt-6.1-sol O - 1
+pilotD-B0-H B0 tasks/study2/experience_v1/tasks.json tasks/study2/experience_v1/meta.json anthropic/claude-haiku-5-5 H - 1
+uw1-KNO-WC KNO-WC tasks/study2/underwriting/pool.json tasks/study2/underwriting/meta.json anthropic/claude-haiku-5-5 H tasks/study2/underwriting/screen_ids.txt 0
+uw1-KNO-WI KNO-WI tasks/study2/underwriting/pool.json tasks/study2/underwriting/meta.json anthropic/claude-haiku-5-5 H tasks/study2/underwriting/screen_ids.txt 0
+uw1-KNO-WB KNO-WB tasks/study2/underwriting/pool.json tasks/study2/underwriting/meta.json anthropic/claude-haiku-5-5 H tasks/study2/underwriting/screen_ids.txt 0
+uw1-KB-HPC KB-HPC tasks/study2/underwriting/pool.json tasks/study2/underwriting/meta.json anthropic/claude-haiku-5-5 H tasks/study2/underwriting/screen_ids.txt 0
+uw1-KB-HCF KB-HCF tasks/study2/underwriting/pool.json tasks/study2/underwriting/meta.json anthropic/claude-haiku-5-5 H tasks/study2/underwriting/screen_ids.txt 0
+uw1-KB-PPL KB-PPL tasks/study2/underwriting/pool.json tasks/study2/underwriting/meta.json anthropic/claude-haiku-5-5 H tasks/study2/underwriting/screen_ids.txt 0
+uw1-KB-PST KB-PST tasks/study2/underwriting/pool.json tasks/study2/underwriting/meta.json anthropic/claude-haiku-5-5 H tasks/study2/underwriting/screen_ids.txt 0
+uw1-KB-CAPS KB-CAPS tasks/study2/underwriting/pool.json tasks/study2/underwriting/meta.json anthropic/claude-haiku-5-5 H tasks/study2/underwriting/screen30_ids.txt 0

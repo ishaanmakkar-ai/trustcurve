@@ -1,0 +1,6 @@
+2026-10-21 08:28:13.216 | DEBUG    | tau2.registry:<module>:297 - Voice dependencies not installed, skipping voice user registration
+ANTHROPIC_API_KEY is set and takes precedence over the SDK's profile / federation auto-discovery; unset ANTHROPIC_API_KEY to use the auto-discovered credential.
+2026-10-21 08:28:24.575 | DEBUG    | tau2.registry:<module>:297 - Voice dependencies not installed, skipping voice user registration
+ANTHROPIC_API_KEY is set and takes precedence over the SDK's profile / federation auto-discovery; unset ANTHROPIC_API_KEY to use the auto-discovered credential.
+{"labelled": 70, "errors": 0, "label_cost_usd": 0.0685}
+{"labelled": 70, "errors": 0, "label_cost_usd": 0.0696}

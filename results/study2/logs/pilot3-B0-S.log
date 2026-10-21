@@ -1,0 +1,66 @@
+0/40 (trial 1/1). Running task X3p-001, trial 1
+1/40 (trial 1/1). Running task X3p-002, trial 1
+2/40 (trial 1/1). Running task X3p-003, trial 1
+3/40 (trial 1/1). Running task X3p-004, trial 1
+4/40 (trial 1/1). Running task X3p-005, trial 1
+5/40 (trial 1/1). Running task X3p-006, trial 1
+6/40 (trial 1/1). Running task X3p-007, trial 1
+Status: 3/40 complete. Avg reward: 1.00 (N=3). 4 running: X3p-003.0(30s), 
+X3p-005.0(5s), X3p-006.0(4s), X3p-007.0(1s)
+7/40 (trial 1/1). Running task X3p-008, trial 1
+8/40 (trial 1/1). Running task X3p-009, trial 1
+9/40 (trial 1/1). Running task X3p-010, trial 1
+10/40 (trial 1/1). Running task X3p-011, trial 1
+Status: 7/40 complete. Avg reward: 1.00 (N=7). 4 running: X3p-007.0(31s), 
+X3p-009.0(7s), X3p-010.0(5s), X3p-011.0(2s)
+11/40 (trial 1/1). Running task X3p-012, trial 1
+12/40 (trial 1/1). Running task X3p-013, trial 1
+13/40 (trial 1/1). Running task X3p-014, trial 1
+14/40 (trial 1/1). Running task X3p-015, trial 1
+Status: 11/40 complete. Avg reward: 1.00 (N=11). 4 running: X3p-011.0(32s), 
+X3p-013.0(12s), X3p-014.0(7s), X3p-015.0(4s)
+15/40 (trial 1/1). Running task X3p-016, trial 1
+16/40 (trial 1/1). Running task X3p-017, trial 1
+17/40 (trial 1/1). Running task X3p-018, trial 1
+18/40 (trial 1/1). Running task X3p-019, trial 1
+Status: 15/40 complete. Avg reward: 1.00 (N=15). 4 running: X3p-016.0(16s), 
+X3p-017.0(9s), X3p-018.0(4s), X3p-019.0(2s)
+19/40 (trial 1/1). Running task X3p-020, trial 1
+20/40 (trial 1/1). Running task X3p-021, trial 1
+Status: 17/40 complete. Avg reward: 1.00 (N=17). 4 running: X3p-018.0(34s), 
+X3p-019.0(32s), X3p-020.0(7s), X3p-021.0(1s)
+21/40 (trial 1/1). Running task X3p-022, trial 1
+22/40 (trial 1/1). Running task X3p-023, trial 1
+23/40 (trial 1/1). Running task X3p-024, trial 1
+Status: 20/40 complete. Avg reward: 1.00 (N=20). 4 running: X3p-021.0(31s), 
+X3p-022.0(29s), X3p-023.0(27s), X3p-024.0(14s)
+24/40 (trial 1/1). Running task X3p-025, trial 1
+25/40 (trial 1/1). Running task X3p-026, trial 1
+26/40 (trial 1/1). Running task X3p-027, trial 1
+27/40 (trial 1/1). Running task X3p-028, trial 1
+28/40 (trial 1/1). Running task X3p-029, trial 1
+Status: 25/40 complete. Avg reward: 1.00 (N=25). 4 running: X3p-026.0(26s), 
+X3p-027.0(16s), X3p-028.0(13s), X3p-029.0(3s)
+29/40 (trial 1/1). Running task X3p-030, trial 1
+30/40 (trial 1/1). Running task X3p-031, trial 1
+31/40 (trial 1/1). Running task X3p-032, trial 1
+32/40 (trial 1/1). Running task X3p-033, trial 1
+33/40 (trial 1/1). Running task X3p-034, trial 1
+Status: 30/40 complete. Avg reward: 1.00 (N=30). 4 running: X3p-031.0(12s), 
+X3p-032.0(10s), X3p-033.0(2s), X3p-034.0(1s)
+34/40 (trial 1/1). Running task X3p-035, trial 1
+35/40 (trial 1/1). Running task X3p-036, trial 1
+Status: 32/40 complete. Avg reward: 1.00 (N=32). 4 running: X3p-031.0(42s), 
+X3p-033.0(33s), X3p-035.0(14s), X3p-036.0(6s)
+36/40 (trial 1/1). Running task X3p-037, trial 1
+37/40 (trial 1/1). Running task X3p-038, trial 1
+38/40 (trial 1/1). Running task X3p-039, trial 1
+39/40 (trial 1/1). Running task X3p-040, trial 1
+Status: 38/40 complete. Avg reward: 0.97 (N=38). 2 running: X3p-039.0(18s), 
+X3p-040.0(14s)
+
+Successfully completed all simulations!
+To review the simulations, run: tau2 view
+{"config": "B0", "runs": 40, "passed": 39, "out": "/Volumes/T7/trustcurve-study2-raw/pilot3-B0-S/results.json"}
+{"runs": 40, "errors": 0, "cost_usd": 1.3417, "harness_cost_usd": 0.0, "harness_checks": 0, "harness_blocks": 0, "harness_unparsed": 0, "dd_errors": 0, "unpriced": 0}
+cumulative $121.33; phase B $38.30 of $40

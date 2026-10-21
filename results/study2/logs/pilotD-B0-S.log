@@ -1,0 +1,103 @@
+1/70 (trial 1/1). Running task X1-002, trial 1
+0/70 (trial 1/1). Running task X1-001, trial 1
+2/70 (trial 1/1). Running task X1-003, trial 1
+3/70 (trial 1/1). Running task X1-004, trial 1
+4/70 (trial 1/1). Running task X1-005, trial 1
+5/70 (trial 1/1). Running task X1-006, trial 1
+6/70 (trial 1/1). Running task X1-007, trial 1
+7/70 (trial 1/1). Running task X1-008, trial 1
+Status: 4/70 complete. Avg reward: 1.00 (N=4). 4 running: X1-005.0(9s), 
+X1-006.0(8s), X1-007.0(6s), X1-008.0(4s)
+8/70 (trial 1/1). Running task X1-009, trial 1
+9/70 (trial 1/1). Running task X1-010, trial 1
+10/70 (trial 1/1). Running task X1-011, trial 1
+11/70 (trial 1/1). Running task X1-012, trial 1
+12/70 (trial 1/1). Running task X1-013, trial 1
+Status: 9/70 complete. Avg reward: 1.00 (N=9). 4 running: X1-009.0(24s), 
+X1-011.0(15s), X1-012.0(7s), X1-013.0(0s)
+13/70 (trial 1/1). Running task X1-014, trial 1
+14/70 (trial 1/1). Running task X1-015, trial 1
+15/70 (trial 1/1). Running task X1-016, trial 1
+16/70 (trial 1/1). Running task X1-017, trial 1
+17/70 (trial 1/1). Running task X1-018, trial 1
+Status: 14/70 complete. Avg reward: 1.00 (N=14). 4 running: X1-015.0(23s), 
+X1-016.0(8s), X1-017.0(7s), X1-018.0(3s)
+18/70 (trial 1/1). Running task X1-019, trial 1
+19/70 (trial 1/1). Running task X1-020, trial 1
+20/70 (trial 1/1). Running task X1-021, trial 1
+21/70 (trial 1/1). Running task X1-022, trial 1
+22/70 (trial 1/1). Running task X1-023, trial 1
+23/70 (trial 1/1). Running task X1-024, trial 1
+Status: 20/70 complete. Avg reward: 1.00 (N=20). 4 running: X1-020.0(20s), 
+X1-022.0(12s), X1-023.0(9s), X1-024.0(4s)
+24/70 (trial 1/1). Running task X1-025, trial 1
+25/70 (trial 1/1). Running task X1-026, trial 1
+26/70 (trial 1/1). Running task X1-027, trial 1
+27/70 (trial 1/1). Running task X1-028, trial 1
+Status: 24/70 complete. Avg reward: 1.00 (N=24). 4 running: X1-025.0(23s), 
+X1-026.0(20s), X1-027.0(14s), X1-028.0(13s)
+28/70 (trial 1/1). Running task X1-029, trial 1
+29/70 (trial 1/1). Running task X1-030, trial 1
+30/70 (trial 1/1). Running task X1-031, trial 1
+31/70 (trial 1/1). Running task X1-032, trial 1
+32/70 (trial 1/1). Running task X1-033, trial 1
+33/70 (trial 1/1). Running task X1-034, trial 1
+Status: 30/70 complete. Avg reward: 0.97 (N=30). 4 running: X1-030.0(28s), 
+X1-032.0(13s), X1-033.0(11s), X1-034.0(2s)
+34/70 (trial 1/1). Running task X1-035, trial 1
+35/70 (trial 1/1). Running task X1-036, trial 1
+36/70 (trial 1/1). Running task X1-037, trial 1
+37/70 (trial 1/1). Running task X1-038, trial 1
+38/70 (trial 1/1). Running task X1-039, trial 1
+39/70 (trial 1/1). Running task X1-040, trial 1
+Status: 36/70 complete. Avg reward: 0.97 (N=36). 4 running: X1-037.0(17s), 
+X1-038.0(10s), X1-039.0(9s), X1-040.0(4s)
+40/70 (trial 1/1). Running task X1-041, trial 1
+41/70 (trial 1/1). Running task X1-042, trial 1
+42/70 (trial 1/1). Running task X1-043, trial 1
+43/70 (trial 1/1). Running task X1-044, trial 1
+Status: 40/70 complete. Avg reward: 0.97 (N=40). 4 running: X1-041.0(25s), 
+X1-042.0(12s), X1-043.0(12s), X1-044.0(11s)
+44/70 (trial 1/1). Running task X1-045, trial 1
+45/70 (trial 1/1). Running task X1-046, trial 1
+46/70 (trial 1/1). Running task X1-047, trial 1
+47/70 (trial 1/1). Running task X1-048, trial 1
+Status: 44/70 complete. Avg reward: 0.98 (N=44). 4 running: X1-045.0(26s), 
+X1-046.0(22s), X1-047.0(11s), X1-048.0(10s)
+48/70 (trial 1/1). Running task X1-049, trial 1
+49/70 (trial 1/1). Running task X1-050, trial 1
+50/70 (trial 1/1). Running task X1-051, trial 1
+51/70 (trial 1/1). Running task X1-052, trial 1
+52/70 (trial 1/1). Running task X1-053, trial 1
+53/70 (trial 1/1). Running task X1-054, trial 1
+Status: 50/70 complete. Avg reward: 0.96 (N=50). 4 running: X1-051.0(15s), 
+X1-052.0(15s), X1-053.0(4s), X1-054.0(1s)
+54/70 (trial 1/1). Running task X1-055, trial 1
+55/70 (trial 1/1). Running task X1-056, trial 1
+56/70 (trial 1/1). Running task X1-057, trial 1
+57/70 (trial 1/1). Running task X1-058, trial 1
+58/70 (trial 1/1). Running task X1-059, trial 1
+Status: 55/70 complete. Avg reward: 0.96 (N=55). 4 running: X1-056.0(16s), 
+X1-057.0(9s), X1-058.0(9s), X1-059.0(3s)
+59/70 (trial 1/1). Running task X1-060, trial 1
+60/70 (trial 1/1). Running task X1-061, trial 1
+Status: 57/70 complete. Avg reward: 0.95 (N=57). 4 running: X1-056.0(47s), 
+X1-057.0(39s), X1-060.0(21s), X1-061.0(11s)
+61/70 (trial 1/1). Running task X1-062, trial 1
+62/70 (trial 1/1). Running task X1-063, trial 1
+63/70 (trial 1/1). Running task X1-064, trial 1
+64/70 (trial 1/1). Running task X1-065, trial 1
+65/70 (trial 1/1). Running task X1-066, trial 1
+66/70 (trial 1/1). Running task X1-067, trial 1
+67/70 (trial 1/1). Running task X1-068, trial 1
+Status: 64/70 complete. Avg reward: 0.95 (N=64). 4 running: X1-065.0(18s), 
+X1-066.0(14s), X1-067.0(5s), X1-068.0(1s)
+68/70 (trial 1/1). Running task X1-069, trial 1
+69/70 (trial 1/1). Running task X1-070, trial 1
+Status: 69/70 complete. Avg reward: 0.96 (N=69). 1 running: X1-067.0(35s)
+
+Successfully completed all simulations!
+To review the simulations, run: tau2 view
+{"config": "B0", "runs": 70, "passed": 67, "out": "/Volumes/T7/trustcurve-study2-raw/pilotD-B0-S/results.json"}
+{"runs": 70, "errors": 0, "cost_usd": 1.799, "harness_cost_usd": 0.0, "harness_checks": 0, "harness_blocks": 0, "harness_unparsed": 0, "dd_errors": 0, "unpriced": 0}
+cumulative $113.59; phase B $30.56 of $40

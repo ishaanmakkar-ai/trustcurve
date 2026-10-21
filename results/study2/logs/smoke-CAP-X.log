@@ -1,0 +1,8 @@
+0/1 (trial 1/1). Running task V-48, trial 1
+Status: 0/1 complete. Avg reward: N/A. 1 running: V-48.0(30s)
+
+Successfully completed all simulations!
+To review the simulations, run: tau2 view
+{"config": "CAP-X", "runs": 1, "passed": 1, "out": "/Volumes/T7/trustcurve-study2-raw/smoke-CAP-X/results.json"}
+{"runs": 1, "errors": 0, "cost_usd": 0.2272, "harness_cost_usd": 0.0, "harness_checks": 0, "harness_blocks": 0, "harness_unparsed": 0, "dd_errors": 0, "unpriced": 0}
+cumulative $83.41; phase B $0.41 of $40

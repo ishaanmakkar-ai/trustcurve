@@ -1,0 +1,19 @@
+pilot-B0-H rc=0 cumulative $84.41; phase B $1.38 of $40
+pilot-B0-L rc=0 cumulative $84.86; phase B $1.83 of $40
+pilot-PER-PL-H rc=0 cumulative $85.49; phase B $2.47 of $40
+pilot-KNO-WR-H rc=0 cumulative $86.37; phase B $3.35 of $40
+uw1-B0 rc=0 cumulative $87.19; phase B $4.17 of $40
+uw1-PER-ST rc=0 cumulative $87.75; phase B $4.73 of $40
+uw1-PER-PL rc=0 cumulative $88.35; phase B $5.33 of $40
+pilot-B0-O rc=0 cumulative $89.36; phase B $6.35 of $40
+uw1-PER-FA rc=0 cumulative $89.98; phase B $6.96 of $40
+uw1-HAR-PC rc=0 cumulative $90.66; phase B $7.65 of $40
+uw1-KNO-RM rc=0 cumulative $91.39; phase B $8.38 of $40
+uw1-KNO-WR rc=0 cumulative $91.99; phase B $8.98 of $40
+uw1-INT-1 rc=0 cumulative $92.55; phase B $9.53 of $40
+uw1-HAR-CF rc=0 cumulative $93.29; phase B $10.27 of $40
+uw1-INT-3 rc=0 cumulative $93.85; phase B $10.83 of $40
+uw1-CAP-S rc=0 cumulative $99.86; phase B $16.84 of $40
+uw1-INT-2 rc=0 cumulative $105.48; phase B $22.46 of $40
+uw1-CAP-O rc=0 cumulative $106.33; phase B $23.31 of $40
+PHASEB_DONE

@@ -1,0 +1,15 @@
+cumulative $83.01; phase B $0.01 of $40
+cumulative $83.02; phase B $0.02 of $40
+cumulative $83.03; phase B $0.03 of $40
+cumulative $83.03; phase B $0.03 of $40
+cumulative $83.18; phase B $0.18 of $40
+cumulative $83.41; phase B $0.41 of $40
+cumulative $83.43; phase B $0.42 of $40
+cumulative $83.44; phase B $0.43 of $40
+cumulative $83.45; phase B $0.44 of $40
+cumulative $83.46; phase B $0.45 of $40
+cumulative $83.47; phase B $0.46 of $40
+cumulative $83.48; phase B $0.47 of $40
+cumulative $83.70; phase B $0.69 of $40
+cumulative $83.71; phase B $0.69 of $40
+SMOKE_DONE

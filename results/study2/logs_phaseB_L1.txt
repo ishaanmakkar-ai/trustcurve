@@ -1,0 +1,12 @@
+uw1-KNO-WC rc=0 cumulative $106.95; phase B $23.92 of $40
+pilotD-B0-L rc=0 cumulative $107.37; phase B $24.34 of $40
+pilotD-B0-O rc=0 cumulative $108.36; phase B $25.33 of $40
+pilotD-B0-H rc=0 cumulative $109.08; phase B $26.05 of $40
+uw1-KNO-WI rc=0 cumulative $109.84; phase B $26.81 of $40
+uw1-KNO-WB rc=0 cumulative $110.49; phase B $27.46 of $40
+uw1-KB-HCF rc=0 cumulative $111.03; phase B $28.01 of $40
+uw1-KB-HPC rc=0 cumulative $111.79; phase B $28.76 of $40
+uw1-KB-CAPS rc=0 cumulative $119.45; phase B $36.42 of $40
+uw1-KB-PST rc=0 cumulative $119.99; phase B $36.96 of $40
+uw1-KB-PPL rc=0 cumulative $123.63; phase B $40.60 of $40
+PHASEB_L1_DONE
