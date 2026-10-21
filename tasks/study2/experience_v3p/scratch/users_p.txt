@@ -1,0 +1,259 @@
+== aarav_ahmed_6699 [silver] Aarav Ahmed dob 1981-05-26 | credit_card_9074831(mastercard 7334), certificate_9645872($250.0), credit_card_4959530(mastercard 5018)
+   M20IZO one_way economy pax2 ins=no bags=1/0 created=2024-05-12T09:36:29 st=None | HAT268:JFK-ATL@2024-05-22$136 HAT010:ATL-MCO@2024-05-22$109 | credit_card_4959530:490
+   N6F783 round_trip business pax1 ins=no bags=2/0 created=2024-05-08T09:17:09 st=None | HAT195:IAH-EWR@2024-05-18$1268 HAT166:EWR-IAH@2024-05-21$867 | credit_card_9074831:2135
+   IFOYYZ round_trip basic_economy pax1 ins=no bags=0/0 created=2024-05-12T00:14:30 st=None | HAT157:CLT-EWR@2024-05-28$51 HAT215:EWR-CLT@2024-05-30$65 | credit_card_4959530:116
+   NQNU5R one_way business pax2 ins=no bags=1/0 created=2024-05-13T05:37:57 st=None | HAT214:MCO-PHX@2024-05-13$1377 HAT045:PHX-SEA@2024-05-14$1712 | credit_card_4959530:6178
+== aarav_moore_6921 [silver] Aarav Moore dob 1980-02-17 | gift_card_5376431($27.0), certificate_1823062($150.0)
+   CR1OCF one_way business pax3 ins=yes bags=3/0 created=2024-05-01T11:11:20 st=None | HAT057:JFK-ATL@2024-05-21$544 HAT281:ATL-LAS@2024-05-21$1104 | gift_card_5376431:5034
+   SK4399 one_way economy pax1 ins=yes bags=1/0 created=2024-05-02T05:54:53 st=None | HAT002:LGA-PHX@2024-05-26$150 HAT181:PHX-MCO@2024-05-27$143 | gift_card_5376431:323
+   KGJBQH one_way business pax1 ins=yes bags=1/0 created=2024-05-14T17:47:25 st=None | HAT038:DFW-SEA@2024-05-17$782 HAT236:SEA-PHX@2024-05-17$938 | gift_card_5376431:1750
+   W3DJ0R round_trip basic_economy pax2 ins=yes bags=0/0 created=2024-05-14T12:08:15 st=None | HAT296:PHL-LGA@2024-05-14$76 HAT150:LGA-PHX@2024-05-14$71 HAT081:PHX-LGA@2024-05-15$91 HAT132:LGA-PHL@2024-05-15$97 | gift_card_5376431:730
+   X14C8Y one_way economy pax2 ins=yes bags=0/0 created=2024-05-06T20:19:28 st=None | HAT118:ORD-DEN@2024-05-09$105 | gift_card_5376431:270
+== aarav_rossi_9663 [regular] Aarav Rossi dob 1961-10-13 | certificate_7776391($500.0), credit_card_6235784(visa 6557), credit_card_7584883(mastercard 2861)
+   IAANOV one_way basic_economy pax1 ins=yes bags=0/0 created=2024-05-05T19:17:33 st=None | HAT282:DFW-ATL@2024-05-19$71 HAT110:ATL-LGA@2024-05-19$56 | credit_card_7584883:157
+   H5MJJI one_way economy pax1 ins=yes bags=1/0 created=2024-05-10T06:00:18 st=None | HAT078:IAH-ORD@2024-05-19$141 HAT271:ORD-PHL@2024-05-19$176 | credit_card_7584883:347
+   XYUIT4 one_way economy pax2 ins=no bags=2/0 created=2024-05-06T11:55:54 st=None | HAT213:EWR-DFW@2024-05-07$147 HAT067:DFW-SEA@2024-05-07$199 | credit_card_7584883:692
+   7CPKXA round_trip basic_economy pax2 ins=no bags=0/0 created=2024-05-03T19:37:17 st=None | HAT210:DTW-MSP@2024-05-09$86 HAT036:MSP-MCO@2024-05-09$98 HAT214:MCO-PHX@2024-05-16$93 HAT073:PHX-DTW@2024-05-17$93 | credit_card_7584883:740
+== amelia_li_2415 [silver] Amelia Li dob 1964-10-15 | certificate_5431423($500.0), credit_card_1605369(visa 4846)
+   NUCNX0 one_way business pax3 ins=no bags=1/0 created=2024-05-01T16:35:29 st=None | HAT138:IAH-ORD@2024-05-16$1725 HAT271:ORD-PHL@2024-05-16$1505 | credit_card_1605369:9690
+   QDAPM3 one_way economy pax2 ins=no bags=2/0 created=2024-05-01T19:21:18 st=None | HAT149:IAH-EWR@2024-05-09$128 | credit_card_1605369:256
+   Q3Q17C round_trip business pax1 ins=yes bags=2/0 created=2024-05-07T00:05:58 st=None | HAT289:ORD-PHL@2024-05-08$1164 HAT096:PHL-LGA@2024-05-08$532 HAT264:LGA-PHL@2024-05-13$723 HAT197:PHL-ORD@2024-05-14$1353 | credit_card_1605369:3802
+   ZZF2YA round_trip basic_economy pax1 ins=yes bags=0/0 created=2024-05-12T15:27:49 st=None | HAT270:EWR-CLT@2024-05-19$52 HAT064:CLT-BOS@2024-05-19$53 HAT247:BOS-MIA@2024-05-22$78 HAT192:MIA-EWR@2024-05-22$88 | credit_card_1605369:301
+== amelia_sanchez_4739 [gold] Amelia Sanchez dob 1955-02-01 | credit_card_4065275(mastercard 3658)
+   3FRNFB one_way basic_economy pax2 ins=no bags=0/0 created=2024-05-06T13:25:06 st=None | HAT028:MCO-BOS@2024-05-28$79 HAT277:BOS-CLT@2024-05-28$64 | credit_card_4065275:286
+   Q4L9HS one_way business pax1 ins=no bags=0/0 created=2024-05-12T20:47:43 st=None | HAT213:EWR-DFW@2024-05-17$1839 HAT067:DFW-SEA@2024-05-17$1566 | credit_card_4065275:3405
+== anya_garcia_5901 [silver] Anya Garcia dob 1992-11-12 | gift_card_2550356($149.0), certificate_7583008($150.0)
+   82K959 round_trip business pax2 ins=no bags=2/0 created=2024-05-03T09:59:50 st=None | HAT090:LAX-ORD@2024-05-18$1735 HAT049:ORD-DEN@2024-05-18$515 HAT130:DEN-MIA@2024-05-24$1424 HAT120:MIA-LAX@2024-05-24$654 | gift_card_2550356:8656
+   790JYN round_trip basic_economy pax1 ins=no bags=0/0 created=2024-05-12T01:29:06 st=None | HAT260:BOS-CLT@2024-05-28$84 HAT087:CLT-LGA@2024-05-28$65 HAT065:LGA-CLT@2024-05-30$100 HAT064:CLT-BOS@2024-05-30$91 | gift_card_2550356:340
+   BE2L57 one_way business pax2 ins=yes bags=3/0 created=2024-05-01T12:50:04 st=None | HAT228:LAX-EWR@2024-05-17$1155 HAT202:EWR-MIA@2024-05-18$1089 | gift_card_2550356:4548
+   CXBB4L one_way business pax1 ins=no bags=0/0 created=2024-05-03T03:15:49 st=None | HAT275:DTW-PHX@2024-05-27$1996 HAT259:PHX-LAS@2024-05-27$1259 | gift_card_2550356:3255
+   TAMSDK round_trip basic_economy pax3 ins=yes bags=0/0 created=2024-05-11T10:34:59 st=None | HAT033:JFK-DTW@2024-05-20$71 HAT035:DTW-PHX@2024-05-20$97 HAT156:PHX-SEA@2024-05-24$91 HAT100:SEA-JFK@2024-05-24$81 | gift_card_2550356:1110
+   3RK2T9 one_way basic_economy pax2 ins=no bags=0/0 created=2024-05-02T06:02:56 st=None | HAT214:MCO-PHX@2024-05-19$57 HAT009:PHX-SFO@2024-05-20$83 | gift_card_2550356:280
+   VAOW1B round_trip economy pax1 ins=yes bags=1/0 created=2024-05-02T09:31:05 st=None | HAT045:PHX-SEA@2024-05-07$117 HAT276:SEA-JFK@2024-05-08$172 HAT212:JFK-DTW@2024-05-08$188 HAT097:DTW-PHX@2024-05-08$108 | gift_card_2550356:615
+   Q4MCUF round_trip basic_economy pax2 ins=yes bags=0/0 created=2024-05-12T11:30:29 st=None | HAT121:SEA-PHX@2024-05-13$93 HAT256:PHX-LGA@2024-05-13$58 HAT114:LGA-PHX@2024-05-18$97 HAT156:PHX-SEA@2024-05-19$59 | gift_card_2550356:674
+   JMO1MG one_way economy pax2 ins=yes bags=1/0 created=2024-05-13T23:20:29 st=None | HAT255:DEN-MIA@2024-05-16$149 | gift_card_2550356:358
+== anya_lee_4334 [regular] Anya Lee dob 1978-03-16 | gift_card_3984025($10.0), gift_card_8100670($105.0), gift_card_3770713($280.0)
+   ZZV53R round_trip economy pax4 ins=yes bags=1/0 created=2024-05-14T17:50:53 st=None | HAT258:SEA-SFO@2024-05-23$162 HAT273:SFO-LAX@2024-05-23$115 HAT187:LAX-DFW@2024-05-27$134 HAT234:DFW-SEA@2024-05-27$169 | gift_card_8100670:2440
+   1H4NY9 round_trip economy pax1 ins=yes bags=1/0 created=2024-05-03T04:03:48 st=None | HAT073:PHX-DTW@2024-05-16$200 HAT254:DTW-MSP@2024-05-16$163 HAT127:MSP-DTW@2024-05-27$190 HAT035:DTW-PHX@2024-05-28$200 | gift_card_3984025:783
+   LO71IO round_trip basic_economy pax1 ins=yes bags=0/0 created=2024-05-08T16:45:42 st=None | HAT220:SEA-ATL@2024-05-09$58 HAT004:ATL-DFW@2024-05-09$91 HAT222:DFW-SEA@2024-05-18$91 | gift_card_8100670:270
+   TFU61T round_trip basic_economy pax2 ins=yes bags=0/0 created=2024-05-08T06:32:10 st=None | HAT220:SEA-ATL@2024-05-13$71 HAT133:ATL-SEA@2024-05-15$76 | gift_card_3770713:354
+== ava_garcia_2940 [gold] Ava Garcia dob 2000-02-02 | certificate_4396051($500.0), credit_card_3598735(visa 9769), gift_card_2715237($296.0), credit_card_6013820(mastercard 9116), certificate_9166510($150.0), credit_card_4025240(visa 8815)
+   INCB2U round_trip business pax2 ins=no bags=4/0 created=2024-05-12T11:20:10 st=None | HAT111:DTW-MSP@2024-05-20$1558 HAT141:MSP-EWR@2024-05-20$1250 HAT208:EWR-MSP@2024-05-27$1113 HAT248:MSP-DTW@2024-05-27$1511 | credit_card_6013820:10864
+   4SW7R4 round_trip economy pax4 ins=yes bags=4/0 created=2024-05-05T21:46:48 st=None | HAT144:SFO-PHX@2024-05-06$138 HAT251:PHX-SEA@2024-05-06$134 HAT258:SEA-SFO@2024-05-16$125 | credit_card_4025240:1708
+   L5QA5T one_way basic_economy pax1 ins=yes bags=0/0 created=2024-04-30T13:08:05 st=None | HAT062:MIA-LAS@2024-05-01$55 HAT266:LAS-IAH@2024-05-02$54 | gift_card_2715237:139
+== ava_kovacs_2694 [silver] Ava Kovacs dob 1977-12-20 | gift_card_5592340($89.0), gift_card_4519474($147.0), gift_card_7091770($245.0), certificate_9386414($250.0)
+   GT73N4 one_way economy pax1 ins=no bags=1/0 created=2024-05-11T12:07:48 st=None | HAT038:DFW-SEA@2024-05-27$111 HAT037:SEA-DFW@2024-05-27$108 | gift_card_7091770:219
+   5EBCF0 round_trip economy pax1 ins=no bags=0/0 created=2024-05-05T04:09:28 st=None | HAT156:PHX-SEA@2024-05-18$170 HAT117:SEA-DFW@2024-05-18$146 HAT038:DFW-SEA@2024-05-25$126 HAT236:SEA-PHX@2024-05-25$163 | gift_card_5592340:605
+   8VAY5B round_trip business pax2 ins=yes bags=3/0 created=2024-05-03T07:06:29 st=None | HAT299:MCO-LAS@2024-05-12$481 HAT137:LAS-MCO@2024-05-14$1411 | gift_card_7091770:3844
+   KJ9GJB round_trip basic_economy pax1 ins=no bags=0/0 created=2024-05-10T06:30:08 st=None | HAT215:EWR-CLT@2024-05-12$54 HAT087:CLT-LGA@2024-05-12$78 HAT065:LGA-CLT@2024-05-20$75 HAT157:CLT-EWR@2024-05-20$85 | gift_card_7091770:292
+== ava_sanchez_4455 [gold] Ava Sanchez dob 1972-11-18 | certificate_2878399($100.0)
+== chen_martin_5489 [gold] Chen Martin dob 1954-04-11 | credit_card_3964469(mastercard 6289)
+   LYSE93 one_way economy pax1 ins=no bags=1/0 created=2024-05-05T23:35:03 st=None | HAT006:BOS-SEA@2024-05-09$176 HAT100:SEA-JFK@2024-05-09$196 | credit_card_3964469:372
+== chen_taylor_3219 [gold] Chen Taylor dob 1969-01-18 | gift_card_8608365($68.0), certificate_4765255($250.0)
+   3JMYP3 one_way economy pax2 ins=no bags=1/0 created=2024-05-02T23:58:45 st=None | HAT158:DEN-PHL@2024-05-19$139 | gift_card_8608365:278
+   OHAJLI one_way business pax1 ins=yes bags=1/0 created=2024-05-02T05:12:30 st=None | HAT065:LGA-CLT@2024-05-28$1313 HAT262:CLT-DEN@2024-05-28$1286 | gift_card_8608365:2629
+   PAJY3L round_trip economy pax1 ins=no bags=1/0 created=2024-04-30T21:02:19 st=None | HAT213:EWR-DFW@2024-05-01$152 HAT099:DFW-SEA@2024-05-01$115 HAT055:SEA-DFW@2024-05-08$173 HAT142:DFW-EWR@2024-05-08$172 | gift_card_8608365:612
+   RBAT3I round_trip basic_economy pax1 ins=yes bags=0/0 created=2024-05-05T06:55:11 st=None | HAT238:ORD-DEN@2024-05-06$100 HAT140:DEN-DFW@2024-05-06$77 HAT170:DFW-LAX@2024-05-15$58 HAT104:LAX-ORD@2024-05-15$76 | gift_card_8608365:341
+   OUF2OL one_way business pax2 ins=no bags=4/0 created=2024-05-12T21:11:06 st=None | HAT148:MIA-DEN@2024-05-23$1060 HAT290:DEN-LAS@2024-05-24$456 | gift_card_8608365:3032
+   EDRBXN round_trip economy pax1 ins=no bags=0/0 created=2024-05-03T06:42:46 st=None | HAT285:ATL-JFK@2024-05-12$200 HAT014:JFK-MIA@2024-05-12$175 HAT062:MIA-LAS@2024-05-20$192 HAT005:LAS-ATL@2024-05-21$189 | gift_card_8608365:756
+== emma_johansson_6252 [silver] Emma Johansson dob 1977-02-26 | credit_card_4255859(visa 4149), certificate_2345492($150.0)
+   3AU451 one_way basic_economy pax1 ins=yes bags=0/0 created=2024-05-05T12:22:08 st=None | HAT176:CLT-DTW@2024-05-19$58 HAT254:DTW-MSP@2024-05-19$96 | credit_card_4255859:184
+   WI1J36 one_way business pax2 ins=yes bags=2/0 created=2024-05-05T20:47:51 st=None | HAT057:JFK-ATL@2024-05-20$1786 | credit_card_4255859:3632
+   50BXOU round_trip basic_economy pax1 ins=no bags=0/0 created=2024-05-04T02:11:12 st=None | HAT082:SFO-IAH@2024-05-20$68 HAT207:IAH-EWR@2024-05-21$80 HAT166:EWR-IAH@2024-05-30$80 HAT072:IAH-SFO@2024-05-30$71 | credit_card_4255859:299
+   MJ0YB6 one_way economy pax1 ins=yes bags=0/0 created=2024-05-10T07:30:24 st=None | HAT238:ORD-DEN@2024-05-20$128 HAT140:DEN-DFW@2024-05-20$158 | credit_card_4255859:316
+   HNKDS5 round_trip basic_economy pax2 ins=yes bags=0/0 created=2024-05-01T17:21:57 st=None | HAT144:SFO-PHX@2024-05-14$93 HAT259:PHX-LAS@2024-05-14$76 HAT244:LAS-PHX@2024-05-15$77 HAT159:PHX-SFO@2024-05-15$88 | credit_card_4255859:728
+== ethan_johnson_9800 [silver] Ethan Johnson dob 1970-08-12 | gift_card_9428868($221.0), gift_card_4073446($284.0)
+   SANMNF one_way business pax2 ins=yes bags=0/0 created=2024-05-01T20:13:57 st=None | HAT211:LGA-CLT@2024-05-27$1188 HAT205:CLT-PHL@2024-05-27$459 | gift_card_9428868:3354
+   B5A030 round_trip basic_economy pax2 ins=yes bags=0/0 created=2024-05-03T15:17:21 st=None | HAT147:ORD-IAH@2024-05-19$73 HAT044:IAH-ORD@2024-05-19$97 HAT165:ORD-IAH@2024-05-29$96 HAT138:IAH-ORD@2024-05-29$84 | gift_card_4073446:760
+   ZLH3FX one_way economy pax3 ins=no bags=0/0 created=2024-05-05T17:40:29 st=None | HAT128:DFW-ATL@2024-05-06$106 HAT010:ATL-MCO@2024-05-06$184 | gift_card_4073446:870
+   I4KH56 one_way basic_economy pax2 ins=no bags=0/0 created=2024-05-14T19:04:47 st=None | HAT282:DFW-ATL@2024-05-14$51 HAT010:ATL-MCO@2024-05-14$55 | gift_card_4073446:212
+   ZRTK0F one_way economy pax2 ins=no bags=2/0 created=2024-05-03T21:48:41 st=None | HAT230:ORD-DTW@2024-05-04$175 HAT035:DTW-PHX@2024-05-04$110 | gift_card_4073446:570
+   74RX8B round_trip economy pax1 ins=yes bags=1/0 created=2024-05-08T06:52:43 st=None | HAT176:CLT-DTW@2024-05-12$180 HAT240:DTW-JFK@2024-05-12$141 HAT212:JFK-DTW@2024-05-22$124 HAT191:DTW-CLT@2024-05-22$195 | gift_card_9428868:670
+== evelyn_ahmed_8438 [gold] Evelyn Ahmed dob 1997-06-25 | certificate_5299806($250.0), certificate_4092501($150.0)
+== evelyn_moore_5127 [gold] Evelyn Moore dob 1992-03-15 | gift_card_1863763($297.0), certificate_3950539($150.0)
+   OBN1RB round_trip business pax2 ins=yes bags=1/0 created=2024-05-06T06:03:31 st=None | HAT097:DTW-PHX@2024-05-07$437 HAT265:PHX-DTW@2024-05-11$1829 | gift_card_1863763:4592
+   9920V7 one_way economy pax1 ins=yes bags=0/0 created=2024-05-08T08:32:42 st=None | HAT204:SFO-SEA@2024-05-09$199 HAT021:SEA-JFK@2024-05-09$167 | gift_card_1863763:396
+   QK3BYR one_way economy pax1 ins=yes bags=1/0 created=2024-05-11T03:12:53 st=None | HAT030:LAX-ORD@2024-05-18$166 HAT271:ORD-PHL@2024-05-19$171 | gift_card_1863763:367
+   0SWGHW one_way basic_economy pax1 ins=no bags=0/0 created=2024-05-06T02:41:17 st=None | HAT206:LGA-PHL@2024-05-07$87 | gift_card_1863763:87
+== fatima_ito_3977 [silver] Fatima Ito dob 1983-09-19 | credit_card_4481781(visa 4391), gift_card_2858570($228.0), certificate_5753608($500.0), gift_card_6112402($54.0)
+   RVKGA6 one_way economy pax1 ins=yes bags=0/0 created=2024-05-06T16:36:44 st=None | HAT221:SEA-DFW@2024-05-21$100 | gift_card_6112402:130
+   66V59A round_trip business pax1 ins=no bags=1/0 created=2024-05-11T01:27:14 st=None | HAT205:CLT-PHL@2024-05-21$662 HAT243:PHL-CLT@2024-05-22$1344 | credit_card_4481781:2006
+   LYZ2U6 one_way economy pax1 ins=yes bags=1/0 created=2024-05-04T05:14:55 st=None | HAT024:CLT-LGA@2024-05-23$168 HAT211:LGA-CLT@2024-05-23$199 | credit_card_4481781:397
+   5U3JYB round_trip basic_economy pax2 ins=yes bags=0/0 created=2024-05-11T17:47:13 st=None | HAT160:DEN-CLT@2024-05-23$99 HAT087:CLT-LGA@2024-05-23$84 HAT065:LGA-CLT@2024-05-30$81 HAT262:CLT-DEN@2024-05-30$85 | credit_card_4481781:758
+   H4DULU one_way basic_economy pax3 ins=no bags=0/0 created=2024-05-05T14:31:06 st=None | HAT298:MCO-MSP@2024-05-26$83 HAT196:MSP-EWR@2024-05-26$73 | gift_card_6112402:468
+   YX38CU one_way basic_economy pax1 ins=yes bags=0/0 created=2024-05-05T13:43:33 st=None | HAT245:LGA-PHX@2024-05-24$83 HAT173:PHX-LAS@2024-05-24$81 | credit_card_4481781:194
+   5T6UI2 round_trip basic_economy pax1 ins=no bags=0/0 created=2024-05-05T03:31:16 st=None | HAT276:SEA-JFK@2024-05-16$80 HAT088:JFK-DTW@2024-05-17$85 HAT275:DTW-PHX@2024-05-20$93 HAT156:PHX-SEA@2024-05-20$55 | gift_card_6112402:313
+== fatima_sanchez_8117 [silver] Fatima Sanchez dob 1995-01-11 | certificate_8563442($500.0)
+== harper_davis_5069 [silver] Harper Davis dob 1986-06-15 | credit_card_7396423(mastercard 5038), gift_card_7215260($282.0), credit_card_2048050(visa 8797), gift_card_8498369($74.0)
+   WLXS0L one_way basic_economy pax1 ins=yes bags=0/0 created=2024-05-04T12:33:49 st=None | HAT016:PHL-CLT@2024-05-09$79 | credit_card_7396423:109
+   W0I4AJ one_way basic_economy pax1 ins=yes bags=0/0 created=2024-05-08T14:44:43 st=None | HAT184:MIA-BOS@2024-05-09$94 | credit_card_2048050:124
+== harper_kovacs_3082 [regular] Harper Kovacs dob 1959-05-01 | credit_card_1977273(mastercard 7184), certificate_3414992($250.0), credit_card_1779448(mastercard 2526), gift_card_8509260($256.0), certificate_4833059($150.0), gift_card_9252600($235.0)
+   AYVIYO round_trip business pax2 ins=yes bags=0/0 created=2024-05-03T18:55:40 st=None | HAT235:BOS-MCO@2024-05-23$528 HAT298:MCO-MSP@2024-05-24$1686 HAT151:MSP-MCO@2024-05-26$647 HAT017:MCO-BOS@2024-05-26$856 | credit_card_1779448:7494
+   I45O37 one_way basic_economy pax1 ins=no bags=0/0 created=2024-05-11T10:06:24 st=None | HAT294:SFO-BOS@2024-05-16$50 HAT145:BOS-MCO@2024-05-16$77 | gift_card_9252600:127
+   25ZPDU one_way basic_economy pax2 ins=yes bags=0/0 created=2024-05-01T16:31:00 st=None | HAT084:DEN-LAS@2024-05-19$94 HAT154:LAS-MCO@2024-05-19$58 | gift_card_8509260:364
+   Q32WJB round_trip business pax1 ins=no bags=2/0 created=2024-05-13T21:26:37 st=None | HAT083:JFK-SEA@2024-05-17$490 HAT055:SEA-DFW@2024-05-17$1040 HAT282:DFW-ATL@2024-05-21$1678 HAT233:ATL-JFK@2024-05-21$732 | gift_card_9252600:3940
+   RI4I9D round_trip basic_economy pax2 ins=yes bags=0/0 created=2024-05-03T10:43:08 st=None | HAT176:CLT-DTW@2024-05-04$68 HAT240:DTW-JFK@2024-05-04$57 HAT033:JFK-DTW@2024-05-10$56 HAT053:DTW-CLT@2024-05-10$61 | credit_card_1977273:544
+== isabella_anderson_9682 [silver] Isabella Anderson dob 1967-09-24 | credit_card_3277516(visa 7228), gift_card_1748671($217.0)
+   ZLVH5N round_trip basic_economy pax3 ins=yes bags=0/0 created=2024-05-07T13:26:22 st=None | HAT006:BOS-SEA@2024-05-28$80 HAT107:SEA-SFO@2024-05-29$90 HAT026:SFO-BOS@2024-05-29$78 | credit_card_3277516:834
+   I5QZWG one_way business pax2 ins=yes bags=1/0 created=2024-05-05T19:02:13 st=None | HAT228:LAX-EWR@2024-05-21$883 HAT043:EWR-CLT@2024-05-22$1122 | gift_card_1748671:4070
+   U898WZ round_trip economy pax3 ins=no bags=0/0 created=2024-05-08T11:09:44 st=None | HAT205:CLT-PHL@2024-05-18$121 HAT197:PHL-ORD@2024-05-18$165 HAT238:ORD-DEN@2024-05-26$130 HAT143:DEN-CLT@2024-05-26$144 | gift_card_1748671:1680
+   QDGWHB round_trip business pax1 ins=no bags=1/0 created=2024-05-02T12:06:56 st=None | HAT216:CLT-BOS@2024-05-09$1013 HAT247:BOS-MIA@2024-05-09$1976 HAT148:MIA-DEN@2024-05-12$1599 HAT058:DEN-CLT@2024-05-13$1555 | credit_card_3277516:6143
+   7ME483 one_way economy pax3 ins=no bags=1/0 created=2024-05-02T15:13:14 st=None | HAT275:DTW-PHX@2024-05-07$149 HAT152:PHX-IAH@2024-05-07$117 | credit_card_3277516:798
+== isabella_khan_8788 [silver] Isabella Khan dob 1961-03-05 | gift_card_5137301($76.0), gift_card_6452202($236.0)
+   DCZ13Q round_trip business pax2 ins=yes bags=0/0 created=2024-05-09T11:29:25 st=None | HAT248:MSP-DTW@2024-05-23$1149 HAT237:DTW-MSP@2024-05-23$1259 HAT127:MSP-DTW@2024-05-26$718 HAT125:DTW-MSP@2024-05-27$1988 | gift_card_5137301:10288
+   VZUVGA one_way basic_economy pax2 ins=yes bags=0/0 created=2024-05-14T14:06:11 st=None | HAT002:LGA-PHX@2024-05-24$62 HAT027:PHX-LAS@2024-05-25$85 | gift_card_5137301:354
+   03LG23 one_way economy pax4 ins=no bags=3/0 created=2024-04-30T22:13:42 st=None | HAT179:EWR-IAH@2024-05-01$194 | gift_card_5137301:776
+   2M27GS round_trip basic_economy pax3 ins=no bags=0/0 created=2024-05-06T06:10:23 st=None | HAT235:BOS-MCO@2024-05-07$77 HAT298:MCO-MSP@2024-05-08$73 HAT098:MSP-MCO@2024-05-14$71 HAT028:MCO-BOS@2024-05-14$56 | gift_card_5137301:831
+   PUJAHP one_way basic_economy pax1 ins=yes bags=0/0 created=2024-05-05T20:08:45 st=None | HAT192:MIA-EWR@2024-05-13$94 | gift_card_6452202:124
+== ivan_davis_4522 [silver] Ivan Davis dob 1958-09-03 | certificate_2400984($250.0), certificate_6726597($100.0), certificate_1603113($100.0)
+== ivan_johnson_5613 [regular] Ivan Johnson dob 1966-05-16 | certificate_8483219($150.0), gift_card_8286569($43.0), certificate_6505545($250.0)
+   6YDOA1 round_trip business pax2 ins=no bags=4/0 created=2024-05-14T02:05:43 st=None | HAT135:PHL-LGA@2024-05-16$405 HAT211:LGA-CLT@2024-05-27$492 HAT205:CLT-PHL@2024-05-27$1127 | gift_card_8286569:4048
+   9GMJ4A one_way economy pax3 ins=no bags=0/0 created=2024-05-09T19:59:04 st=None | HAT114:LGA-PHX@2024-05-17$141 HAT009:PHX-SFO@2024-05-18$183 | gift_card_8286569:972
+   9ZS656 round_trip economy pax2 ins=no bags=0/0 created=2024-05-06T21:39:09 st=None | HAT147:ORD-IAH@2024-05-25$128 HAT085:IAH-JFK@2024-05-29$147 HAT261:JFK-ORD@2024-05-29$166 | gift_card_8286569:882
+   O3W0TY round_trip basic_economy pax2 ins=yes bags=0/0 created=2024-05-14T18:08:32 st=None | HAT032:PHX-SFO@2024-05-24$52 HAT123:SFO-PHX@2024-05-26$50 | gift_card_8286569:264
+   U021C8 round_trip economy pax3 ins=yes bags=0/0 created=2024-05-02T10:34:21 st=None | HAT165:ORD-IAH@2024-05-25$136 HAT044:IAH-ORD@2024-05-28$164 | gift_card_8286569:990
+   MEL7ER round_trip basic_economy pax3 ins=yes bags=0/0 created=2024-05-09T11:41:52 st=None | HAT063:DFW-EWR@2024-05-18$62 HAT231:EWR-DFW@2024-05-19$53 | gift_card_8286569:435
+   EMZ7JS round_trip business pax2 ins=yes bags=4/0 created=2024-05-08T13:02:08 st=None | HAT247:BOS-MIA@2024-05-11$614 HAT250:MIA-LAX@2024-05-11$515 HAT094:LAX-SFO@2024-05-13$1218 HAT294:SFO-BOS@2024-05-13$1638 | gift_card_8286569:8030
+   ZQPTCG one_way business pax3 ins=no bags=4/0 created=2024-05-08T03:02:40 st=None | HAT262:CLT-DEN@2024-05-09$1611 HAT241:DEN-DFW@2024-05-09$926 | gift_card_8286569:7611
+   ABYXP3 one_way economy pax1 ins=no bags=0/0 created=2024-05-06T16:00:45 st=None | HAT127:MSP-DTW@2024-05-09$174 | gift_card_8286569:174
+== ivan_silva_9292 [gold] Ivan Silva dob 1984-12-23 | credit_card_8803766(mastercard 9364)
+   QATWRO round_trip business pax1 ins=yes bags=0/0 created=2024-05-08T20:02:34 st=None | HAT243:PHL-CLT@2024-05-21$686 HAT167:CLT-DTW@2024-05-21$1244 HAT119:DTW-ORD@2024-05-22$427 HAT271:ORD-PHL@2024-05-22$1416 | credit_card_8803766:3803
+   3PQDP7 round_trip business pax2 ins=no bags=4/0 created=2024-05-08T12:52:46 st=None | HAT157:CLT-EWR@2024-05-21$526 HAT270:EWR-CLT@2024-05-22$1990 HAT157:CLT-EWR@2024-05-26$901 HAT215:EWR-CLT@2024-05-27$1249 | credit_card_8803766:9332
+   TWW1VV one_way basic_economy pax3 ins=yes bags=0/0 created=2024-05-08T20:58:17 st=None | HAT165:ORD-IAH@2024-05-09$83 HAT068:IAH-JFK@2024-05-09$66 | credit_card_8803766:537
+   K41IE7 one_way basic_economy pax3 ins=no bags=0/0 created=2024-05-10T23:45:24 st=None | HAT222:DFW-SEA@2024-05-11$96 HAT194:SEA-BOS@2024-05-11$58 | credit_card_8803766:462
+   C6X779 round_trip economy pax2 ins=yes bags=2/0 created=2024-05-04T03:01:24 st=None | HAT112:IAH-LAS@2024-05-05$151 HAT154:LAS-MCO@2024-05-06$179 HAT101:MCO-LAS@2024-05-11$168 HAT175:LAS-IAH@2024-05-11$170 | credit_card_8803766:1396
+   Y1BFSP one_way economy pax3 ins=no bags=3/0 created=2024-05-04T03:17:46 st=None | HAT023:JFK-SFO@2024-05-05$197 | credit_card_8803766:591
+== james_jackson_8771 [regular] James Jackson dob 1959-04-13 | certificate_6170901($500.0)
+== james_li_5992 [regular] James Li dob 1983-07-04 | credit_card_8972239(mastercard 5020), certificate_3412363($250.0)
+   7TFQ8S round_trip basic_economy pax1 ins=yes bags=0/0 created=2024-05-06T19:14:23 st=None | HAT128:DFW-ATL@2024-05-22$51 HAT102:ATL-LAS@2024-05-22$84 HAT162:LAS-DEN@2024-05-26$98 HAT140:DEN-DFW@2024-05-26$72 | credit_card_8972239:335
+   HJ63VG one_way economy pax2 ins=yes bags=1/0 created=2024-05-07T21:47:52 st=None | HAT266:LAS-IAH@2024-05-21$166 HAT044:IAH-ORD@2024-05-21$162 | credit_card_8972239:716
+   V7NYQ3 round_trip economy pax1 ins=yes bags=1/0 created=2024-05-07T20:13:12 st=None | HAT146:ATL-MCO@2024-05-24$184 HAT101:MCO-LAS@2024-05-29$174 HAT077:LAS-ATL@2024-05-29$176 | credit_card_8972239:564
+   4QDCZ0 round_trip business pax2 ins=yes bags=3/0 created=2024-05-01T23:03:24 st=None | HAT100:SEA-JFK@2024-05-09$626 HAT069:JFK-SEA@2024-05-17$1791 | credit_card_8972239:4894
+   R2G81O one_way business pax1 ins=no bags=0/0 created=2024-05-02T11:15:33 st=None | HAT062:MIA-LAS@2024-05-09$1410 HAT047:LAS-SEA@2024-05-10$505 | credit_card_8972239:1915
+   10RJ1S round_trip economy pax4 ins=yes bags=0/0 created=2024-05-04T13:24:45 st=None | HAT298:MCO-MSP@2024-05-05$171 HAT054:MSP-MCO@2024-05-06$106 | credit_card_8972239:1228
+   TJRV7S round_trip basic_economy pax3 ins=yes bags=0/0 created=2024-05-05T20:05:05 st=None | HAT115:LAS-MIA@2024-05-09$85 HAT148:MIA-DEN@2024-05-12$90 HAT084:DEN-LAS@2024-05-13$86 | credit_card_8972239:873
+   YHL9PL round_trip economy pax4 ins=yes bags=0/0 created=2024-05-04T15:07:13 st=None | HAT167:CLT-DTW@2024-05-22$154 HAT168:DTW-CLT@2024-05-24$143 | credit_card_8972239:1308
+== juan_brown_2465 [silver] Juan Brown dob 1995-12-23 | certificate_6417493($150.0)
+== juan_muller_6989 [silver] Juan Muller dob 1990-05-04 | credit_card_7668338(visa 5805), gift_card_8288091($136.0), gift_card_5807094($179.0)
+   TPN0ET one_way basic_economy pax2 ins=yes bags=0/0 created=2024-05-03T00:39:45 st=None | HAT230:ORD-DTW@2024-05-12$80 HAT035:DTW-PHX@2024-05-12$58 | credit_card_7668338:336
+   B861YZ one_way basic_economy pax2 ins=no bags=0/0 created=2024-05-08T10:44:12 st=None | HAT225:DEN-CLT@2024-05-18$87 HAT287:CLT-BOS@2024-05-18$69 | credit_card_7668338:312
+== juan_taylor_8806 [silver] Juan Taylor dob 1998-12-02 | certificate_5896676($500.0), credit_card_2217221(mastercard 2923), gift_card_9072362($2.0), credit_card_1484148(visa 6118)
+   018BE2 round_trip business pax1 ins=no bags=2/0 created=2024-05-13T17:59:06 st=None | HAT176:CLT-DTW@2024-05-27$1756 HAT263:DTW-JFK@2024-05-27$1823 HAT212:JFK-DTW@2024-05-28$935 HAT053:DTW-CLT@2024-05-28$714 | credit_card_2217221:5228
+   EQUHOI round_trip business pax1 ins=no bags=2/0 created=2024-05-14T02:32:26 st=None | HAT171:MSP-MCO@2024-05-27$735 HAT153:MCO-PHX@2024-05-27$1174 HAT265:PHX-DTW@2024-05-29$1613 HAT254:DTW-MSP@2024-05-29$543 | credit_card_1484148:4065
+   6VOH1R one_way basic_economy pax1 ins=no bags=0/0 created=2024-05-10T22:21:16 st=None | HAT245:LGA-PHX@2024-05-13$56 HAT152:PHX-IAH@2024-05-13$71 | gift_card_9072362:127
+== liam_ito_7857 [gold] Liam Ito dob 2000-12-03 | certificate_8445756($150.0), certificate_8179659($250.0), certificate_3150897($150.0), certificate_5732892($500.0)
+== liam_smith_7283 [silver] Liam Smith dob 1964-07-21 | credit_card_1383118(mastercard 8081), gift_card_8121110($63.0)
+   PKQ6L7 round_trip business pax1 ins=no bags=0/0 created=2024-05-05T18:28:43 st=None | HAT240:DTW-JFK@2024-05-17$1720 HAT126:JFK-MIA@2024-05-17$1372 HAT292:MIA-JFK@2024-05-29$614 HAT088:JFK-DTW@2024-05-29$1969 | credit_card_1383118:5675
+   QETCEK round_trip business pax1 ins=no bags=2/0 created=2024-05-13T06:45:45 st=None | HAT286:IAH-LAS@2024-05-26$1706 HAT266:LAS-IAH@2024-05-27$1100 | gift_card_8121110:2806
+   3SHBFW one_way economy pax3 ins=no bags=3/0 created=2024-05-02T06:49:56 st=None | HAT017:MCO-BOS@2024-05-18$178 HAT235:BOS-MCO@2024-05-18$160 | credit_card_1383118:1014
+   2E9Z3O round_trip business pax3 ins=yes bags=3/0 created=2024-05-10T15:52:59 st=None | HAT097:DTW-PHX@2024-05-27$1033 HAT081:PHX-LGA@2024-05-27$1515 HAT114:LGA-PHX@2024-05-29$703 HAT073:PHX-DTW@2024-05-30$975 | gift_card_8121110:12768
+   3CBPXM round_trip economy pax2 ins=yes bags=1/0 created=2024-05-06T03:25:44 st=None | HAT255:DEN-MIA@2024-05-24$160 HAT129:MIA-ORD@2024-05-24$169 HAT049:ORD-DEN@2024-05-26$169 | credit_card_1383118:1056
+   9ETV1S round_trip basic_economy pax1 ins=no bags=0/0 created=2024-05-08T11:49:29 st=None | HAT156:PHX-SEA@2024-05-22$90 HAT089:SEA-JFK@2024-05-22$63 HAT083:JFK-SEA@2024-05-26$89 HAT236:SEA-PHX@2024-05-26$56 | credit_card_1383118:298
+   TGUAG2 one_way business pax2 ins=yes bags=3/0 created=2024-05-13T01:06:41 st=None | HAT279:JFK-IAH@2024-05-19$703 HAT112:IAH-LAS@2024-05-19$1507 | gift_card_8121110:4480
+   OWKA4O one_way economy pax1 ins=yes bags=0/0 created=2024-05-01T05:36:45 st=None | HAT248:MSP-DTW@2024-05-02$112 HAT119:DTW-ORD@2024-05-02$132 | gift_card_8121110:274
+== liam_wilson_9173 [silver] Liam Wilson dob 1995-01-15 | gift_card_3863533($204.0), gift_card_6723569($51.0), certificate_5401485($150.0), credit_card_2767730(mastercard 5500)
+   238F2V one_way business pax1 ins=yes bags=0/0 created=2024-05-13T16:01:37 st=None | HAT079:JFK-ORD@2024-05-23$1932 | credit_card_2767730:1962
+   8PSKPZ one_way basic_economy pax1 ins=yes bags=0/0 created=2024-05-03T22:24:13 st=None | HAT082:SFO-IAH@2024-05-19$54 HAT207:IAH-EWR@2024-05-20$66 | credit_card_2767730:150
+   PZDAN1 round_trip business pax1 ins=no bags=1/0 created=2024-05-04T06:58:50 st=None | HAT105:DEN-ORD@2024-05-05$1452 HAT020:ORD-DTW@2024-05-05$580 HAT191:DTW-CLT@2024-05-07$1078 HAT262:CLT-DEN@2024-05-07$1270 | gift_card_3863533:4380
+   HY4UPB round_trip basic_economy pax1 ins=yes bags=0/0 created=2024-05-04T22:05:56 st=None | HAT158:DEN-PHL@2024-05-09$67 HAT199:PHL-SFO@2024-05-09$97 HAT074:SFO-PHL@2024-05-15$88 HAT076:PHL-DEN@2024-05-15$93 | gift_card_3863533:375
+   9RWK8C round_trip business pax2 ins=no bags=3/0 created=2024-05-03T20:46:54 st=None | HAT272:LGA-CLT@2024-05-20$825 HAT024:CLT-LGA@2024-05-24$604 | gift_card_6723569:2858
+   LMAG80 round_trip business pax3 ins=no bags=0/0 created=2024-05-10T07:01:06 st=None | HAT079:JFK-ORD@2024-05-23$1346 HAT093:ORD-ATL@2024-05-24$1941 HAT285:ATL-JFK@2024-05-24$1634 | credit_card_2767730:14763
+   FCI6L9 one_way business pax2 ins=yes bags=2/0 created=2024-05-05T01:18:11 st=None | HAT296:PHL-LGA@2024-05-06$1646 HAT272:LGA-CLT@2024-05-06$1906 | gift_card_3863533:7164
+== lucas_rossi_9391 [silver] Lucas Rossi dob 1958-05-06 | certificate_1332190($100.0), gift_card_7445211($214.0), credit_card_2242408(mastercard 7352), gift_card_6521629($104.0)
+   FDEBWQ round_trip basic_economy pax3 ins=yes bags=0/0 created=2024-05-09T19:08:35 st=None | HAT275:DTW-PHX@2024-05-26$79 HAT027:PHX-LAS@2024-05-26$91 HAT284:LAS-PHX@2024-05-27$86 HAT106:PHX-DTW@2024-05-27$50 | gift_card_6521629:1008
+== mason_johansson_5154 [regular] Mason Johansson dob 1955-01-07 | credit_card_5590177(visa 2961), credit_card_3358561(visa 1242)
+   RB9S17 one_way business pax1 ins=no bags=0/0 created=2024-05-10T18:57:54 st=None | HAT262:CLT-DEN@2024-05-28$962 | credit_card_3358561:962
+   2OQQI6 one_way economy pax1 ins=yes bags=1/0 created=2024-05-01T23:31:57 st=None | HAT139:ORD-PHL@2024-05-02$124 | credit_card_5590177:154
+== mei_hernandez_9827 [silver] Mei Hernandez dob 1960-04-13 | certificate_3080156($100.0), credit_card_9355028(mastercard 1382)
+   Z65U3F one_way basic_economy pax1 ins=no bags=0/0 created=2024-05-07T12:47:32 st=None | HAT082:SFO-IAH@2024-05-16$98 HAT068:IAH-JFK@2024-05-17$76 | credit_card_9355028:174
+   672VDE one_way economy pax1 ins=yes bags=0/0 created=2024-05-13T07:14:37 st=None | HAT103:LAX-ORD@2024-05-17$195 HAT271:ORD-PHL@2024-05-17$187 | credit_card_9355028:412
+== mei_kovacs_2340 [silver] Mei Kovacs dob 1985-04-05 | gift_card_3218754($229.0), credit_card_1607193(mastercard 1041), gift_card_3803708($117.0), credit_card_9794500(visa 8456)
+   TL4GH4 one_way business pax2 ins=no bags=2/0 created=2024-05-06T18:37:17 st=None | HAT057:JFK-ATL@2024-05-12$1518 HAT146:ATL-MCO@2024-05-12$1374 | credit_card_9794500:5784
+   XLPP2L one_way basic_economy pax1 ins=yes bags=0/0 created=2024-05-04T07:54:51 st=None | HAT215:EWR-CLT@2024-05-11$72 HAT262:CLT-DEN@2024-05-11$82 | credit_card_9794500:184
+== mei_thomas_2630 [silver] Mei Thomas dob 1959-07-12 | gift_card_1173609($171.0), credit_card_1347098(visa 8387)
+   U1YV6I one_way business pax1 ins=yes bags=0/0 created=2024-05-05T21:26:25 st=None | HAT101:MCO-LAS@2024-05-14$742 | gift_card_1173609:772
+   YPMTQZ one_way business pax1 ins=no bags=1/0 created=2024-05-06T05:39:37 st=None | HAT180:IAH-SFO@2024-05-06$998 | gift_card_1173609:998
+== mia_hernandez_2149 [silver] Mia Hernandez dob 1962-06-24 | certificate_2347516($250.0), credit_card_2367440(mastercard 1120), credit_card_4842794(mastercard 9343), gift_card_2109041($268.0)
+   J8LCSR one_way economy pax1 ins=no bags=0/0 created=2024-05-12T07:09:48 st=None | HAT255:DEN-MIA@2024-05-17$161 HAT148:MIA-DEN@2024-05-17$158 | credit_card_4842794:319
+   T1VXC7 round_trip basic_economy pax2 ins=yes bags=0/0 created=2024-05-03T19:01:03 st=None | HAT040:LAS-SEA@2024-05-20$80 HAT021:SEA-JFK@2024-05-20$64 HAT083:JFK-SEA@2024-05-23$80 HAT018:SEA-LAS@2024-05-23$90 | credit_card_2367440:688
+== mia_kim_4397 [silver] Mia Kim dob 1965-06-09 | gift_card_7359776($39.0), gift_card_7773485($203.0)
+   C4GP7M round_trip economy pax1 ins=yes bags=0/0 created=2024-05-08T02:07:34 st=None | HAT198:MIA-JFK@2024-05-17$194 HAT136:JFK-ATL@2024-05-17$150 HAT285:ATL-JFK@2024-05-19$184 HAT060:JFK-MIA@2024-05-19$193 | gift_card_7359776:751
+   XL2C75 round_trip business pax2 ins=yes bags=2/0 created=2024-05-09T23:34:07 st=None | HAT127:MSP-DTW@2024-05-16$1633 HAT210:DTW-MSP@2024-05-17$723 HAT248:MSP-DTW@2024-05-21$1718 HAT125:DTW-MSP@2024-05-21$831 | gift_card_7773485:9870
+   H9ZU1C one_way economy pax3 ins=no bags=0/0 created=2024-05-01T04:50:18 st=None | HAT192:MIA-EWR@2024-05-24$174 HAT166:EWR-IAH@2024-05-25$125 | gift_card_7359776:897
+== mia_li_8815 [silver] Mia Li dob 1998-03-11 | gift_card_2772678($37.0), certificate_4683527($100.0), credit_card_6719194(mastercard 3329)
+   C07GF3 one_way business pax1 ins=no bags=1/0 created=2024-05-14T07:00:46 st=None | HAT267:PHX-SEA@2024-05-28$1076 HAT194:SEA-BOS@2024-05-28$476 | credit_card_6719194:1552
+   VD4VDF round_trip business pax3 ins=yes bags=0/0 created=2024-05-01T23:38:48 st=None | HAT072:IAH-SFO@2024-05-23$1829 HAT082:SFO-IAH@2024-05-28$789 | credit_card_6719194:7944
+   MLPSXM round_trip economy pax4 ins=no bags=1/0 created=2024-05-14T11:37:11 st=None | HAT004:ATL-DFW@2024-05-15$199 HAT177:DFW-ATL@2024-05-16$176 | credit_card_6719194:1500
+   GTHDBH round_trip economy pax1 ins=yes bags=1/0 created=2024-05-07T01:16:57 st=None | HAT203:ATL-MCO@2024-05-10$154 HAT101:MCO-LAS@2024-05-15$160 HAT005:LAS-ATL@2024-05-15$164 | credit_card_6719194:508
+   25WE2C round_trip basic_economy pax1 ins=no bags=0/0 created=2024-04-30T22:05:18 st=None | HAT214:MCO-PHX@2024-05-01$64 HAT009:PHX-SFO@2024-05-02$84 HAT295:SFO-BOS@2024-05-03$100 HAT235:BOS-MCO@2024-05-03$84 | credit_card_6719194:332
+   65B54G one_way business pax1 ins=no bags=1/0 created=2024-05-07T18:06:46 st=None | HAT247:BOS-MIA@2024-05-17$1089 | credit_card_6719194:1089
+   ZHPKHF one_way basic_economy pax1 ins=no bags=0/0 created=2024-05-01T13:28:06 st=None | HAT275:DTW-PHX@2024-05-02$79 HAT009:PHX-SFO@2024-05-02$87 | gift_card_2772678:166
+== mia_silva_4267 [silver] Mia Silva dob 1996-02-23 | credit_card_7747326(visa 9091), credit_card_8649838(visa 8838), certificate_6950078($100.0), credit_card_2722912(mastercard 2920)
+   42NIFZ round_trip business pax2 ins=yes bags=3/0 created=2024-05-10T06:05:48 st=None | HAT244:LAS-PHX@2024-05-16$1228 HAT256:PHX-LGA@2024-05-16$1978 HAT114:LGA-PHX@2024-05-27$817 HAT173:PHX-LAS@2024-05-28$1057 | credit_card_2722912:10220
+   LHQT1Z one_way business pax1 ins=no bags=1/0 created=2024-05-01T03:17:43 st=None | HAT084:DEN-LAS@2024-05-28$732 HAT137:LAS-MCO@2024-05-28$1963 | credit_card_2722912:2695
+   F6ISUN one_way basic_economy pax2 ins=no bags=0/0 created=2024-05-08T13:19:35 st=None | HAT093:ORD-ATL@2024-05-09$67 HAT039:ATL-SEA@2024-05-09$77 | credit_card_7747326:288
+   DOEXJ5 round_trip business pax2 ins=no bags=0/0 created=2024-05-04T16:16:49 st=None | HAT213:EWR-DFW@2024-05-05$1255 HAT142:DFW-EWR@2024-05-07$1347 | credit_card_8649838:5204
+   VII5EK round_trip business pax1 ins=no bags=2/0 created=2024-05-09T16:57:07 st=None | HAT116:IAH-ORD@2024-05-10$417 HAT139:ORD-PHL@2024-05-10$1154 HAT291:PHL-SFO@2024-05-13$1899 HAT278:SFO-IAH@2024-05-13$757 | credit_card_2722912:4227
+   RZ3G2B round_trip economy pax1 ins=no bags=0/0 created=2024-05-06T04:14:48 st=None | HAT275:DTW-PHX@2024-05-07$157 HAT265:PHX-DTW@2024-05-08$116 | credit_card_7747326:273
+== mohamed_garcia_9415 [silver] Mohamed Garcia dob 1983-03-24 | certificate_6464845($100.0)
+== mohamed_patel_4472 [silver] Mohamed Patel dob 1958-09-27 | gift_card_2705471($234.0), gift_card_1192775($269.0), gift_card_8523200($299.0), credit_card_3559098(visa 4810)
+   MQS6FV one_way basic_economy pax3 ins=no bags=0/0 created=2024-05-13T17:11:12 st=None | HAT296:PHL-LGA@2024-05-19$58 HAT091:LGA-PHL@2024-05-19$51 | gift_card_2705471:327
+   0QOP4M one_way business pax4 ins=yes bags=5/0 created=2024-05-14T23:07:52 st=None | HAT215:EWR-CLT@2024-05-24$1018 HAT262:CLT-DEN@2024-05-24$1277 | credit_card_3559098:9300
+   QU82YE one_way economy pax1 ins=yes bags=1/0 created=2024-05-03T06:42:45 st=None | HAT130:DEN-MIA@2024-05-14$130 | gift_card_8523200:160
+   6JTGOH one_way basic_economy pax1 ins=no bags=0/0 created=2024-05-02T17:12:11 st=None | HAT201:LGA-PHX@2024-05-02$60 HAT152:PHX-IAH@2024-05-02$99 | credit_card_3559098:159
+   5U9JWB one_way basic_economy pax1 ins=no bags=0/0 created=2024-05-03T01:26:31 st=None | HAT247:BOS-MIA@2024-05-08$52 HAT120:MIA-LAX@2024-05-08$71 | gift_card_8523200:123
+== noah_gonzalez_5087 [silver] Noah Gonzalez dob 1985-03-13 | certificate_8459651($500.0), gift_card_4106771($170.0), credit_card_4178310(mastercard 5168)
+   DP6J8S round_trip basic_economy pax2 ins=no bags=0/0 created=2024-05-02T16:18:25 st=None | HAT297:ATL-DFW@2024-05-07$60 HAT128:DFW-ATL@2024-05-15$53 | credit_card_4178310:226
+== noah_martin_7498 [silver] Noah Martin dob 1967-02-28 | gift_card_6232761($267.0), gift_card_7019751($132.0)
+   6UJKDA round_trip business pax1 ins=yes bags=2/0 created=2024-05-10T13:43:46 st=None | HAT118:ORD-DEN@2024-05-26$1478 HAT241:DEN-DFW@2024-05-26$1225 HAT170:DFW-LAX@2024-05-30$1154 HAT030:LAX-ORD@2024-05-30$584 | gift_card_6232761:4471
+   REWEX4 round_trip business pax2 ins=yes bags=4/0 created=2024-05-02T08:51:51 st=None | HAT275:DTW-PHX@2024-05-03$851 HAT259:PHX-LAS@2024-05-03$1361 HAT284:LAS-PHX@2024-05-12$1550 HAT265:PHX-DTW@2024-05-12$795 | gift_card_6232761:9174
+== olivia_lopez_1398 [regular] Olivia Lopez dob 1958-08-18 | gift_card_7723490($82.0)
+   27MC51 one_way basic_economy pax1 ins=no bags=0/0 created=2024-05-06T11:38:25 st=None | HAT108:CLT-EWR@2024-05-26$72 HAT041:EWR-LAX@2024-05-26$58 | gift_card_7723490:130
+   1HBVZU one_way economy pax1 ins=no bags=1/0 created=2024-05-07T09:47:35 st=None | HAT211:LGA-CLT@2024-05-08$157 HAT157:CLT-EWR@2024-05-08$104 | gift_card_7723490:261
+   Y2MHRW round_trip business pax1 ins=no bags=1/0 created=2024-05-05T19:44:19 st=None | HAT300:MSP-EWR@2024-05-16$496 HAT215:EWR-CLT@2024-05-16$1103 HAT167:CLT-DTW@2024-05-20$1646 HAT237:DTW-MSP@2024-05-20$1383 | gift_card_7723490:4628
+== omar_brown_9300 [gold] Omar Brown dob 1978-12-06 | credit_card_4120592(visa 2094), certificate_3868666($250.0), credit_card_3683435(visa 4701), credit_card_1709578(visa 4707)
+   X4ZXW5 one_way economy pax2 ins=yes bags=2/0 created=2024-05-11T00:03:02 st=None | HAT018:SEA-LAS@2024-05-16$174 | credit_card_4120592:408
+   3Y4GQ1 round_trip basic_economy pax2 ins=yes bags=0/0 created=2024-05-04T05:13:36 st=None | HAT014:JFK-MIA@2024-05-05$71 HAT288:MIA-LAS@2024-05-05$100 HAT040:LAS-SEA@2024-05-09$96 HAT021:SEA-JFK@2024-05-09$50 | credit_card_4120592:694
+== omar_patel_2218 [silver] Omar Patel dob 1987-09-27 | credit_card_7019609(visa 9565), certificate_9633193($250.0), gift_card_4194895($234.0), certificate_5815185($150.0), credit_card_5087987(visa 8811), credit_card_9103032(mastercard 2563)
+   B8WY4K round_trip basic_economy pax2 ins=no bags=0/0 created=2024-05-08T03:47:35 st=None | HAT171:MSP-MCO@2024-05-25$63 HAT153:MCO-PHX@2024-05-25$92 HAT073:PHX-DTW@2024-05-30$95 HAT125:DTW-MSP@2024-05-30$79 | credit_card_5087987:658
+   ETUGNL one_way business pax1 ins=yes bags=1/0 created=2024-05-14T12:34:18 st=None | HAT137:LAS-MCO@2024-05-22$1189 | credit_card_5087987:1219
+   32ZS5N round_trip economy pax1 ins=yes bags=1/0 created=2024-05-12T11:36:09 st=None | HAT123:SFO-PHX@2024-05-17$189 HAT181:PHX-MCO@2024-05-17$187 HAT214:MCO-PHX@2024-05-29$177 HAT159:PHX-SFO@2024-05-30$107 | credit_card_5087987:690
+   OQ9DDP round_trip basic_economy pax2 ins=no bags=0/0 created=2024-05-13T12:58:16 st=None | HAT229:DEN-LAS@2024-05-27$100 HAT070:LAS-ATL@2024-05-27$55 HAT102:ATL-LAS@2024-05-29$71 HAT003:LAS-DEN@2024-05-30$100 | credit_card_7019609:652
+   DVAVQN one_way business pax2 ins=no bags=1/0 created=2024-05-11T16:50:14 st=None | HAT262:CLT-DEN@2024-05-12$761 | credit_card_7019609:1522
+   2IN6PV one_way business pax1 ins=yes bags=2/0 created=2024-05-10T03:36:47 st=None | HAT202:EWR-MIA@2024-05-11$1163 HAT120:MIA-LAX@2024-05-11$1948 | credit_card_7019609:3141
+== raj_muller_5942 [regular] Raj Muller dob 1974-01-07 | credit_card_3719965(mastercard 7990), gift_card_2496311($276.0), gift_card_1681181($111.0)
+   0Y69KK round_trip business pax1 ins=no bags=1/0 created=2024-05-12T07:31:25 st=None | HAT165:ORD-IAH@2024-05-21$1579 HAT207:IAH-EWR@2024-05-21$1214 HAT179:EWR-IAH@2024-05-23$1305 HAT116:IAH-ORD@2024-05-23$527 | gift_card_1681181:4625
+   41X7CX one_way economy pax3 ins=no bags=2/0 created=2024-05-06T04:32:40 st=None | HAT245:LGA-PHX@2024-05-21$178 HAT265:PHX-DTW@2024-05-21$150 | gift_card_2496311:984
+   TR30XR one_way basic_economy pax2 ins=yes bags=0/0 created=2024-05-05T18:48:41 st=None | HAT226:PHX-LGA@2024-05-22$82 HAT002:LGA-PHX@2024-05-22$92 | gift_card_1681181:408
+   5Q85YP one_way business pax1 ins=no bags=2/0 created=2024-05-13T23:52:31 st=None | HAT235:BOS-MCO@2024-05-13$1552 HAT298:MCO-MSP@2024-05-14$1721 | gift_card_2496311:3273
+   QJJE3F one_way basic_economy pax2 ins=yes bags=0/0 created=2024-05-12T19:32:13 st=None | HAT194:SEA-BOS@2024-05-13$58 HAT260:BOS-CLT@2024-05-14$55 | gift_card_1681181:286
+   2KDSUE round_trip business pax2 ins=yes bags=3/0 created=2024-05-07T01:24:51 st=None | HAT265:PHX-DTW@2024-05-18$669 HAT119:DTW-ORD@2024-05-18$433 HAT230:ORD-DTW@2024-05-20$656 HAT097:DTW-PHX@2024-05-20$1263 | credit_card_3719965:6102
+== sofia_ahmed_2732 [silver] Sofia Ahmed dob 1979-01-07 | gift_card_5374894($103.0), certificate_3796007($250.0)
+   VRWM8U round_trip business pax2 ins=no bags=0/0 created=2024-05-12T07:14:33 st=None | HAT214:MCO-PHX@2024-05-25$1170 HAT081:PHX-LGA@2024-05-26$1152 HAT219:LGA-PHX@2024-05-30$1672 HAT181:PHX-MCO@2024-05-30$489 | gift_card_5374894:8966
+   87JCNC one_way business pax1 ins=yes bags=1/0 created=2024-05-07T04:35:13 st=None | HAT236:SEA-PHX@2024-05-16$896 | gift_card_5374894:926
+   QYESBM one_way economy pax2 ins=no bags=0/0 created=2024-05-05T17:33:00 st=None | HAT076:PHL-DEN@2024-05-22$122 | gift_card_5374894:244
+   OTY1WZ one_way basic_economy pax2 ins=yes bags=0/0 created=2024-05-02T20:29:52 st=None | HAT270:EWR-CLT@2024-05-03$68 HAT064:CLT-BOS@2024-05-03$84 | gift_card_5374894:364
+   2O1R2B round_trip economy pax3 ins=no bags=1/0 created=2024-05-01T03:12:18 st=None | HAT248:MSP-DTW@2024-05-15$188 HAT191:DTW-CLT@2024-05-15$110 HAT176:CLT-DTW@2024-05-18$122 HAT237:DTW-MSP@2024-05-18$112 | gift_card_5374894:1596
+   J0U5FA round_trip basic_economy pax3 ins=no bags=0/0 created=2024-05-02T20:31:07 st=None | HAT199:PHL-SFO@2024-05-03$56 HAT042:SFO-PHL@2024-05-05$78 | gift_card_5374894:402
+== sophia_davis_8874 [regular] Sophia Davis dob 1997-04-14 | certificate_1654224($500.0), gift_card_2075462($199.0), credit_card_4801844(visa 4373), certificate_9507611($250.0), credit_card_3309619(visa 5962), gift_card_6874494($134.0), gift_card_5896248($264.0)
+   ZVWQ08 round_trip business pax1 ins=no bags=0/0 created=2024-05-03T08:54:58 st=None | HAT238:ORD-DEN@2024-05-04$441 HAT255:DEN-MIA@2024-05-04$1379 HAT050:MIA-LAX@2024-05-08$410 HAT104:LAX-ORD@2024-05-09$1927 | gift_card_6874494:4157
+   HFMJKS round_trip economy pax1 ins=no bags=1/0 created=2024-05-05T19:45:49 st=None | HAT174:ATL-LAS@2024-05-11$174 HAT115:LAS-MIA@2024-05-11$111 HAT292:MIA-JFK@2024-05-12$103 HAT057:JFK-ATL@2024-05-12$172 | gift_card_6874494:560
+   NVLFIW round_trip economy pax2 ins=no bags=2/0 created=2024-05-02T01:06:17 st=None | HAT212:JFK-DTW@2024-05-09$142 HAT263:DTW-JFK@2024-05-21$184 | gift_card_2075462:652
+== sophia_nguyen_1995 [silver] Sophia Nguyen dob 1981-03-16 | gift_card_3369847($114.0), gift_card_4661360($35.0), certificate_4717085($150.0)
+   VDRMS2 round_trip business pax3 ins=no bags=3/0 created=2024-05-03T18:23:25 st=None | HAT184:MIA-BOS@2024-05-22$864 HAT247:BOS-MIA@2024-05-26$536 | gift_card_3369847:4200
+== sophia_wilson_1550 [gold] Sophia Wilson dob 1993-07-22 | gift_card_5914430($101.0), gift_card_5084861($276.0), certificate_1810837($150.0)
+   ADY1RZ one_way business pax3 ins=no bags=2/0 created=2024-05-02T02:48:34 st=None | HAT194:SEA-BOS@2024-05-17$838 HAT235:BOS-MCO@2024-05-18$703 | gift_card_5914430:4623
+   B1SKNU one_way economy pax2 ins=no bags=1/0 created=2024-05-07T06:46:08 st=None | HAT173:PHX-LAS@2024-05-14$138 | gift_card_5084861:276
+== yara_sanchez_8382 [regular] Yara Sanchez dob 1996-11-13 | gift_card_8371729($161.0), gift_card_8541816($247.0), certificate_6409849($100.0)
+   H43D2Y round_trip basic_economy pax1 ins=yes bags=0/0 created=2024-05-11T21:50:15 st=None | HAT276:SEA-JFK@2024-05-25$62 HAT060:JFK-MIA@2024-05-26$78 HAT198:MIA-JFK@2024-05-30$77 HAT069:JFK-SEA@2024-05-30$81 | gift_card_8541816:328
+   H6TTA1 round_trip business pax1 ins=yes bags=1/0 created=2024-05-05T01:49:56 st=None | HAT159:PHX-SFO@2024-05-10$1111 HAT278:SFO-IAH@2024-05-10$1399 HAT112:IAH-LAS@2024-05-17$1921 HAT242:LAS-PHX@2024-05-18$1976 | gift_card_8371729:6437
+   33BKWP one_way business pax1 ins=yes bags=1/0 created=2024-05-05T02:07:16 st=None | HAT018:SEA-LAS@2024-05-18$1805 | gift_card_8371729:1835
+   74Z4C8 one_way business pax1 ins=yes bags=2/0 created=2024-05-01T12:10:40 st=None | HAT214:MCO-PHX@2024-05-08$743 HAT032:PHX-SFO@2024-05-09$742 | gift_card_8371729:1515
+== yusuf_garcia_2058 [regular] Yusuf Garcia dob 1967-06-05 | gift_card_3416495($213.0)
+   VJ03FR one_way business pax1 ins=yes bags=2/0 created=2024-05-11T22:41:46 st=None | HAT253:SEA-BOS@2024-05-21$1821 HAT260:BOS-CLT@2024-05-22$420 | gift_card_3416495:2271
+   ZUY46D round_trip business pax4 ins=yes bags=8/0 created=2024-05-12T04:00:28 st=None | HAT134:SFO-PHX@2024-05-12$1362 HAT081:PHX-LGA@2024-05-12$1236 HAT201:LGA-PHX@2024-05-13$498 HAT283:PHX-SFO@2024-05-13$822 | gift_card_3416495:15792
+   3C4BUQ one_way economy pax2 ins=no bags=1/0 created=2024-05-04T07:37:17 st=None | HAT064:CLT-BOS@2024-05-12$166 | gift_card_3416495:332
+== yusuf_santos_9228 [regular] Yusuf Santos dob 1952-03-15 | credit_card_7033490(visa 6832), credit_card_4262665(visa 7414)
+   AHSPQL round_trip basic_economy pax1 ins=yes bags=0/0 created=2024-05-09T16:59:30 st=None | HAT062:MIA-LAS@2024-05-10$56 HAT115:LAS-MIA@2024-05-13$92 | credit_card_4262665:178
+   AZ46IR round_trip business pax4 ins=no bags=3/0 created=2024-05-02T19:09:58 st=None | HAT071:MSP-MCO@2024-05-22$1656 HAT298:MCO-MSP@2024-05-24$1078 | credit_card_7033490:10936
+   20KH5U round_trip economy pax1 ins=no bags=1/0 created=2024-05-10T13:17:37 st=None | HAT105:DEN-ORD@2024-05-13$116 HAT020:ORD-DTW@2024-05-13$184 HAT191:DTW-CLT@2024-05-20$175 HAT262:CLT-DEN@2024-05-20$145 | credit_card_7033490:620
