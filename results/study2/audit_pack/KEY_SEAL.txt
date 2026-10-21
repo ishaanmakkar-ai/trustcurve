@@ -1,0 +1,2 @@
+Answer key: study2_sealed/audit_key.json (gitignored; open only after audit_sheet.csv is filled)
+sha256=22c485eaa523f517f31ea89268ea5d21b1c77fb09cd949c8e1a49c0f8df3566c
