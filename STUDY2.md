@@ -605,3 +605,12 @@ Checking the phase-C underwriting events turned up a wrong hand label. **V-29** 
 2. **Excluding all 32 tasks whose boundary is a flown segment:** pre13 ρ = −0.41; extended ρ = 0.55, coverage 1.00.
 
 **The conclusions are robust to both.**
+
+### Phase C, corrected reading after review 8 (post-hoc, labelled; the frozen primary result is unchanged)
+- **Primary (pre-registered, frozen): the pre-registered 13 give ρ = 0.006 (Poisson-bootstrap 90% CI −0.41 to 0.22). K2 FIRES.** This survives every sensitivity check: excluding X2a-059 gives −0.41, excluding flown-segment tasks −0.41, flown-segment repricing 0.003.
+- **The 11 configurations added after screening** (each forecast from a disjoint underwriting half): **ρ = 0.75 (0.53–0.77), coverage 9/11 = 0.82.** The two misses are both Haiku-4.5 configurations, realised 2.6–4.0× their forecast. The pooled-24 ρ (0.55) falls below a group-membership baseline (0.61), so it is **not** reported as a forecasting result.
+- **Factor effects that survive Holm correction:** only **CAP-H4** (+$55.8/conversation vs B0) and **H4-KB** (+$76.1). Knowledge errors (KNO-WR, KNO-WI) point upwards, with CIs crossing 0.
+- **Guardrail:** an **oracle** policy checker (it knows the correct policy) cut stale-rule commission from $22.0 to $0.4 but raised omission from $27.7 to $41.6. **Net ≈ $8 per conversation.** The confirmation step and the personas showed no effect.
+- **Simulators:** no detectable effect on commission events (paired H vs S p = 0.24, H vs L p = 0.86). **C-P5 is inconclusive** (earlier text claiming the underwriting simulator elicits less risk is withdrawn).
+- **C-P4 corrected:** realised/forecast is up to 4.0×, not 3.4×. Among configurations forecast ≥ $12 it spans 0.03–4.0×, so the forecasts under- **and** over-price.
+- **Design limitation (disclosed):** the boundary-judgement addendum (HARD2) was written after screening showed KNO-WR as the only risky base, and it asks for 25–30 h bookings, exactly where the stale 72 h rule bites. **The realised level of stale-rule loss therefore partly reflects how densely the experience authors planted those traps.** It is not a deployment estimate.
