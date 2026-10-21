@@ -164,6 +164,82 @@ def e3(csv_path, labels=None):
     return out
 
 
+def omission(r):
+    return int(float(r.get("omission_usd") or 0) > 0)
+
+
+def e1x(cells, B=2000, seed=1):
+    """E1x 2 x 3 grid analysis, exactly as pre-registered in EXPERIMENTS.md.
+
+    cells: {(agent, sim): rows} with agent in {"H", "S"} and sim in {"H", "O", "S"}; rows carry lab_* labels.
+    Per-task cell rate = mean over its runs. Tasks are resampled jointly across all 6 cells (B = 2,000).
+    Sign convention (fixed before any Sonnet-agent outcome was seen): a zero difference has sign 0, and
+    "same sign under all three simulators" requires all three strictly negative or all three strictly positive.
+    """
+    sims = ("H", "O", "S")
+    tasks = sorted(set.intersection(*(set(by_task(r, dbm)) for r in cells.values())), key=int)
+    out = {"tasks": len(tasks), "cells": {}}
+    for (a, c), rows in sorted(cells.items()):
+        sm = rate_summary(rows)
+        nf = sum(fail(r) for r in rows)
+        out["cells"][f"{a}x{c}"] = {"runs": sm["runs"], "db_mismatch": sm["db_mismatch"], "failure": sm["failure"],
+                                    "omission_rate": round(mean(omission(r) for r in rows), 4),
+                                    "insured_loss": sm["insured_loss"], "attribution": sm["attribution"],
+                                    "user_caused_share_of_failures": round(sum(fail(r) and r.get("lab_attribution") == "user_caused"
+                                                                               for r in rows) / nf, 3) if nf else None,
+                                    "cost_usd": sm["cost_usd"]}
+
+    def sgn(x):
+        return (x > 1e-12) - (x < -1e-12)
+
+    def stats(per, idx):
+        m = {k: mean(per[k][i] for i in idx) for k in per}
+        d = {c: m[("S", c)] - m[("H", c)] for c in sims}
+        i_ = {c: d[c] - d["H"] for c in ("O", "S")}
+        main = {c: mean(m[(a, c)] - m[(a, "H")] for a in ("H", "S")) for c in ("O", "S")}
+        sg = [sgn(d[c]) for c in sims]
+        return d, i_, main, (sg[0] != 0 and len(set(sg)) == 1)
+
+    def pct(v):
+        v = sorted(v); return [round(v[int(0.05 * len(v))], 4), round(v[int(0.95 * len(v)) - 1], 4)]
+
+    for name, f in (("db_mismatch", dbm), ("failure", fail), ("omission", omission)):
+        per = {k: [mean(by_task(rows, f)[t]) for t in tasks] for k, rows in cells.items()}
+        d, i_, main, same = stats(per, range(len(tasks)))
+        rng = random.Random(seed); bd = defaultdict(list); bi = defaultdict(list); bm = defaultdict(list); bsame = 0
+        b_all_neg = b_all_pos = 0
+        for _ in range(B):
+            idx = [rng.randrange(len(tasks)) for _ in tasks]
+            dd, ii, mm, ss = stats(per, idx)
+            for c in sims: bd[c].append(dd[c])
+            for c in ("O", "S"): bi[c].append(ii[c]); bm[c].append(mm[c])
+            bsame += ss; b_all_neg += all(dd[c] < -1e-12 for c in sims); b_all_pos += all(dd[c] > 1e-12 for c in sims)
+        res = {"agent_gap": {}, "interaction": {}, "sim_main_effect_avg_over_agents": {}}
+        for c in sims:
+            diffs = [per[("S", c)][i] - per[("H", c)][i] for i in range(len(tasks))]
+            sd = (sum((x - mean(diffs)) ** 2 for x in diffs) / (len(diffs) - 1)) ** 0.5
+            ci = pct(bd[c])
+            res["agent_gap"][c] = {"delta": round(d[c], 4), "ci90": ci, "excludes_0": ci[0] > 0 or ci[1] < 0,
+                                   "mde80": round((Z90 + Z80) * sd / math.sqrt(len(tasks)), 4),
+                                   "tasks_to_resolve_point_estimate": (math.ceil(len(tasks) * ((Z90 + Z80) * sd / math.sqrt(len(tasks)) / abs(d[c])) ** 2)
+                                                                       if abs(d[c]) > 1e-12 else None)}
+        for c in ("O", "S"):
+            res["interaction"][c] = {"I": round(i_[c], 4), "ci90": pct(bi[c])}
+            res["sim_main_effect_avg_over_agents"][c + "_minus_H"] = {"effect": round(main[c], 4), "ci90": pct(bm[c])}
+        signs = {c: sgn(d[c]) for c in sims}
+        res["ranking"] = {"point_signs": signs, "same_sign_all_three": same,
+                          "boot_p_same_sign": round(bsame / B, 3), "boot_p_all_negative": round(b_all_neg / B, 3),
+                          "boot_p_all_positive": round(b_all_pos / B, 3)}
+        gaps = res["agent_gap"]
+        hard = any(gaps[a]["excludes_0"] and gaps[b]["excludes_0"] and gaps[a]["ci90"][1] < 0 < gaps[b]["ci90"][0]
+                   for a in sims for b in sims if a != b)
+        soft = (not hard) and len({s for s in signs.values() if s != 0}) > 1
+        res["kill"] = {"hard": hard, "soft": soft}
+        out[name] = res
+    out["primary_outcome"] = "db_mismatch"
+    return out
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1]
     if cmd == "e1":
@@ -172,3 +248,10 @@ if __name__ == "__main__":
         print(json.dumps(e2(sys.argv[2], sys.argv[3]), indent=1))
     elif cmd == "e3":
         print(json.dumps(e3(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else None), indent=1))
+    elif cmd == "e1x":
+        # args: six "AxC=runs.csv[:labels.csv]" pairs, e.g. HxH=results/pilot/breadth_runs.csv:results/phase1/e1_H_labels.csv
+        cells = {}
+        for arg in sys.argv[2:]:
+            key, paths = arg.split("=", 1); runs, _, lab = paths.partition(":")
+            a, c = key.split("x"); cells[(a, c)] = attach_labels(load(runs), lab or None)
+        print(json.dumps(e1x(cells), indent=1))

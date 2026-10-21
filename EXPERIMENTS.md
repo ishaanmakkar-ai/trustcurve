@@ -230,6 +230,13 @@ Paired per-task differences (arm − H), task bootstrap 90% CI; MDE at 80% power
 
 **Dependency:** if E1's kill rule fires (the Haiku simulator is setup-inflated), the S×S and S×O cells become the main basis for comparing agents, and the S×H cell is reported only for completeness.
 
+**Implementation notes (written 2026-10-21 about 03:45 BST, while E1x-SO was running and before any Sonnet-agent outcome had been seen; `phase1.e1x`, tests in `tests/test_phase1_e1x.py`):**
+- Cells: H×H = pilot breadth (`results/pilot/breadth_runs.csv`), H×O and H×S = E1, S×H = phase-1b breadth part (`p1b-breadth`), S×O and S×S = E1x.
+- Tasks are those present in all 6 cells (expected 25). The bootstrap uses percentile 90% intervals (5th and 95th).
+- **Sign convention:** a zero point estimate has sign 0. "Same sign under all three" requires all three strictly negative or all strictly positive. A 0 next to non-zero signs counts as not the same, but not as a flip. The soft rule fires only if two non-zero signs disagree.
+- **The hard and soft rules are applied to the primary outcome (DB mismatch).** Failure and omission get the same three analyses as pre-registered secondaries, and their kill-rule status is shown but labelled secondary.
+- For the soft rule's "task count needed": n × (MDE / |Δ_c|)², with the MDE at 80% power, two-sided α = 0.10.
+
 ## E2: variant nesting (gate input), pre-registered 2026-10-21, before any E2 run
 **Design:**
 - 20 seeded parents × 5 validated variants (`tasks/e2_variants.json`; `tasks/e2_validation.json` shows all 100 valid) × 2 runs.
