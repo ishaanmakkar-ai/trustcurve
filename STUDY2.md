@@ -464,3 +464,8 @@ Either way, **G1/K3 and the go/no-go for phase C spend go to Ishaan before any p
   - `breach_kinds` is a zero-loss diagnostic only.
 - **KNO-WI's first screening is void** (contradictory policy text). It is re-screened with both insurance lines edited (`uw1b-KNO-WI`).
 - **KB-CAPS's screening direction is untested:** screen30 excludes V-1, the only task that triggers KNO-WR.
+
+### G1 loop 2 test (pre-registered 2026-10-21, before the v3q run)
+- **Run:** B0 × the 40 v3q tasks × Haiku simulator with the date hint. This is the pre-registered G1 test. The same 40 under the Sonnet simulator are reported for information only.
+- **G1 = B0 failures / 40 ≥ 10% (≥ 4 failures)**, where every failed task is checked by an independent fresh-context gold auditor. **A failure caused by a verified gold error does not count**, and that task's gold is corrected. (Review 7 #3 found exactly such an error in v3p.)
+- **Pass → phase C** (full scope, per Ishaan). **Fail → K3 fires (B3) and the study ends with that negative result.** Phase D (planted faults) and the write-up E still run, because the plan's RQ4 and the write-up don't depend on phase C.
