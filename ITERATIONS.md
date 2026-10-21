@@ -133,3 +133,37 @@ The review-1/2/3 resolutions re-analysed **existing** data and code. They ran no
   - Dollar-diff v4 is specified, not built (GATE step 1).
   - A blinded second rater (κ 0.45) and transcript audits were added.
 - **Result:** GATE.md. The recommendation is no-go on phase 2 as specified, with a staged validation path instead.
+
+# Study 2 (Goal 4)
+
+## Phase A, loops 1–2: known-truth simulation of the premium pipeline ($0)
+- **Loop 1 expected** (STUDY2.md §A): M2 calibrated at n_u ≥ 90, and threats cutting coverage to 0.70–0.85.
+- **Loop 1 observed:**
+  - M2's predictive coverage was fine (0.89), but parameter coverage fell to 0.81 at n_u = 180, and mean bias was +15% (credibility shrinkage of low-risk configurations).
+  - M1 was unbiased but its parameter coverage was 0.81–0.84.
+  - The pass rule failed for both. K1 did not fire.
+- **Diagnosis (a check that could have failed, and passed):** removing the DGM's per-configuration severity heterogeneity restored parameter coverage to 0.87–0.90. Pooled severity was the cause.
+- **Loop 2** (pre-registered as A2): an empirical-Bayes configuration severity offset, τ floored at 0.10. M1 now passes (0.87 / 0.88, bias −1%). M2 still fails on mean bias, as predicted.
+
+## Adapt memo after phase A (2026-10-21)
+**Findings**
+- The pipeline is internally valid. With known truth it covers both the true pure premium and the realised experience loss at 0.86–0.91, and ranks configurations at Spearman 0.87–0.91.
+- **Primary method for phase C: M1** (stratified task bootstrap with pooled-plus-offset severity and a Clopper–Pearson zero-event fallback). **Secondary: M2** (empirical-Bayes credibility).
+
+**Surprises**
+1. The threats were milder than predicted (A-P3). Author shift: 0.84. Wrong mix: 0.87–0.90. Unseen fault on the affected configurations: 0.71–0.83, not < 0.5. The reason is that the intervals are **wide**: median 90% predictive width ≈ 1.5–2 × θ at n_e = 200. Calibrated-but-wide is a pricing problem in its own right. A premium quoted as "$X, 90% interval $0.3X–$2X" is honest but barely usable.
+2. M1 doesn't under-cover at n_u = 45. The Clopper–Pearson fallback is conservative.
+3. Credibility (M2) gave the best-shaped predictive distribution but failed the mean-bias rule. It overprices low-risk configurations, which is conservative from an insurer's point of view but fails the pre-registered rule.
+
+**Strongest counter-explanation**
+- Phase A is calibrated because its world matches the pipeline's assumptions: logit-normal task heterogeneity shared across configurations, lognormal severity, configurations spanning 40× in risk, and underwriting and experience tasks from one distribution (S0).
+- The Goal 3 runs re-scored with the new ledger show **0 commission events in about 900 Haiku-agent τ² runs** (1 in 150 Sonnet-agent runs, $114). So real configurations may sit near zero and close together.
+- That would put the real study in S5 or worse: Spearman dominated by ties at zero, and coverage satisfied trivially by [0, upper] intervals that contain a realised 0.
+- So a phase-C "pass" on coverage alone could be vacuous.
+
+**Proposed changes (pre-registered in phase B/C before use)**
+1. Freeze both M1 (primary) and M2 (secondary) forecasts.
+2. Phase-C pre-registration adds **sharpness** (median relative interval width) and the **number of configurations with zero realised events**. Coverage counts as informative only for configurations with ≥ 1 realised event, which is reported separately from all-configuration coverage.
+3. The power analysis (B5) uses the screening rates, including near-zero configurations, so the expected Spearman under ties is known before spending.
+4. Report RQ2 separately for author-written vs incident-derived experience tasks, because S2 is the threat that bit hardest.
+5. Freeze a "single-run" predictive per configuration for RQ5 (per-simulator scoring).

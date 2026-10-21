@@ -48,10 +48,11 @@ def main(grid_path, out_dir):
             style(ax, f"underwriting n_u = {nu} tasks")
         axes[0].set_ylabel(ylab, color=INK2)
         axes[0].set_ylim(0, 1.0)
-        axes[-1].legend(frameon=False, fontsize=9, loc="lower right")
-        fig.suptitle(f"Phase A: {ylab} by scenario (experience n_e = 200 tasks x 2 simulators; dashed = target,"
-                     f" dotted = kill/K level)", fontsize=10, color=INK2, x=0.01, ha="left")
-        fig.tight_layout(); fig.savefig(out / fname, dpi=150); plt.close(fig)
+        h, l = axes[0].get_legend_handles_labels()
+        fig.legend(h, l, frameon=False, fontsize=9, loc="upper right", ncol=3)
+        fig.suptitle(f"Phase A: {ylab} by scenario (n_e = 200 tasks x 2 simulators; dashed = target, dotted = kill level)",
+                     fontsize=10, color=INK2, x=0.01, y=0.99, ha="left")
+        fig.tight_layout(rect=(0, 0, 1, 0.93)); fig.savefig(out / fname, dpi=150); plt.close(fig)
     fig, axes = plt.subplots(1, 3, figsize=(12, 3.2), sharey=True)
     for ax, m in zip(axes, SERIES):
         h = g["S0|nu=90|ne=200"][m]["pit_hist"]; tot = sum(h)
