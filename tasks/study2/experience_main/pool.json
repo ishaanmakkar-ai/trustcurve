@@ -13476,7 +13476,7 @@
    "persona": "Silver member, travelled in Europe a lot, knows EU261.",
    "instructions": {
     "domain": "airline",
-    "reason_for_call": "Today's New York-Atlanta flight (HAT218) on round trip 3I818F for you three travellers is badly delayed. You want to move to the same flight tomorrow instead and you want compensation; in Europe you'd get EUR 250 each for this.",
+    "reason_for_call": "Today's New York-Atlanta flight (HAT218) on round trip 3I818F for the three travellers on it (you are not travelling yourself) is badly delayed. You want to move to the same flight tomorrow instead and you want compensation; in Europe you'd get EUR 250 each for this.",
     "known_info": "Your user id is amelia_nguyen_7778. Reservation id 3I818F. Travellers: Mei Lopez, Raj Smith, Olivia Anderson. You'd like HAT218 on May 16 instead (same 18:00 flight, one day later); keep the May 17 return. Visa ending 2963 for any charge or refund.",
     "unknown_info": null,
     "task_instructions": "Ask for the change and compensation. Say EU rules would give EUR 250 each and ask for at least $100 per person ($300). If the agent offers less, push back once, then accept. Confirm the flight change."
@@ -14096,8 +14096,8 @@
    "persona": "Gold member, generous, wants to gift travel credit.",
    "instructions": {
     "domain": "airline",
-    "reason_for_call": "You have several travel certificates and want to move your $500 certificate to your friend Mei Martin's account (user id mei_martin_4410) as a birthday present. You'd also like your two $250 certificates merged into one.",
-    "known_info": "Your user id is daiki_lee_7603. Your friend's user id is mei_martin_4410.",
+    "reason_for_call": "You don't know your friend's user id. You'd also like your two $250 certificates merged into one.",
+    "known_info": "Your user id is daiki_lee_7603.You don't know your friend's user id. ",
     "unknown_info": null,
     "task_instructions": "Ask for the transfer. If refused, push back once ('it's my money, I can give it away'). Then ask to merge the two $250 certificates; if refused, accept and end."
    }
