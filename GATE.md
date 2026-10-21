@@ -90,3 +90,33 @@ Any one of these means "benchmark-derived loss frequency isn't viable yet", whic
 - Dollar-diff v4 and permission-checking change refunds (review 5 #3, audit).
 - A non-Claude agent, to test same-family simulator bias (the deferred 3 × 3).
 - Whether DB mismatch is a valid proxy for insured loss: unvalidated, and given finding 3, probably weak.
+
+## Goal 3 v2 done-conditions: evidence, and every deviation
+1. **Phase-0 review points resolved or rebutted; grid rerun.** All 11 review-4 points are in REVIEW.md (table plus phase-1 follow-up). The grid was rerun as phase 0 v2 (120 cells × 300 reps; `results/phase0v2/grid.json`, `credibility_fine.json`; commit `b7f985e`), with the requested arms all present:
+   - realistic pre-run control variate (T4r) with an estimated mean
+   - credibility where it bites (T2f)
+   - PROP and Neyman
+   - parents needed and worst cells
+   - latent ICC to 0.8–0.9
+   - Poisson near-miss (T3p)
+   - zero-event arm
+   - mix misspecification
+   - upper-bound coverage
+   - post-hoc labels
+2. **Phase 1 and 1b run as specified, with committed task files, pre-registered before each run.**
+   - E1, E2 (`tasks/e2_variants.json`), E3 (`tasks/e3_refusal.json`), labels, reference run and phase 1b were all run per their EXPERIMENTS.md blocks. Each block is dated before its run. E1x was pre-registered by Ishaan's request before its runs, with an interim-look disclosure.
+   - **Deviations, all disclosed in EXPERIMENTS.md:**
+     - (a) E1x's coded soft rule dropped the "CIs overlap" clause, so neither rule fires as written (review 5 #1).
+     - (b) The H×H cell is the pilot breadth batch, run earlier with the same tau2 config, as the E1x pre-registration specified.
+     - (c) REF-H's last 3 runs were resumed from checkpoint after a disk-full error, with no change to design.
+     - (d) The E2 parent-run correction was made before E2 ran.
+     - (e) Analysis code for E1x and the reference run was committed before outcomes, but E1x-SO had started 2 minutes earlier (unverifiable from git).
+   - **Post-hoc analyses are additions, labelled as such, not replacements:**
+     - sign tests
+     - clustered CIs
+     - the baseline swap
+     - the transcript audits
+     - the second rater
+3. **Fresh-context review after phase 1, points resolved:** review 5 (10 points) and review 6 (6 points) are in REVIEW.md, each accepted and fixed, or partly resolved with the open part named. **The human attribution audit can't be done by an agent.** It is the one open item that needs Ishaan (GATE step 2).
+4. **Committed and pushed** to `ishaanmakkar-ai/trustcurve` (head `a95b898` or later). Data, code, logs and audits are included. Raw tau2 JSONs are git-ignored by design.
+5. **GATE report:** this file, delivered in chat. Phase 2 is not started; it awaits Ishaan's go. Spend ≈ $81 / $300.

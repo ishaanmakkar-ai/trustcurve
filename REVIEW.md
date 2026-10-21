@@ -73,6 +73,12 @@ A `.gitignore` comment in the first commit named a third party. It was removed f
 | 10 | Minor | Multinomial allocation left strata empty | **Fixed.** Fixed stratified allocation, ≥ 2 parents per stratum |
 | 11 | Minor | Thin tests | **Partly fixed.** A numpy-int ICC regression test added (it found a real bug). The simstudy2 estimators are validated by the grid itself. A dedicated unit test of the zero-event fallback was added |
 
+**Review 4 follow-up (after phase 1, 2026-10-21):**
+- #11 (thin tests) is now **fixed**: 57 tests, including a dedicated zero-event-fallback test (`test_simstudy.py`), E1x kill-rule tests (`test_phase1_e1x.py`) and reference-run estimator tests (`test_phase1_reference.py`).
+- All 11 review-4 points are resolved or rebutted above.
+- The phase-0 grid was rerun as phase 0 v2: 120 cells × 300 reps, `results/phase0v2/grid.json`, commit `b7f985e`.
+- Review 3 #12 (user-caused failures in ρ, "open"): attribution is now automated (Haiku labeller) and second-rated (blinded, κ 0.45). On the breadth tasks, user_caused is 0–22% of Haiku-agent/Haiku-customer failures, and the E1 kill rule (≥ 30%) doesn't fire. ρ is therefore not materially setup-inflated. **Resolved, with the human audit as a stated open item.**
+
 ## Review 5 — after Goal 3 v2 phase 1 (E1, E1x, E2, E3, 1b), 2026-10-21
 Fresh-context reviewer, repo only, no paid calls. It recomputed every cell rate, Δ_c, I_c, the Wilson/CP bounds and the E2 components from the CSVs, and **all matched**. The findings concern interpretation.
 
