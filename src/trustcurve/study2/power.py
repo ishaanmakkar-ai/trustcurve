@@ -53,18 +53,21 @@ def estimate_truth(rows, pseudo=0.5):
     N = {h: sum(n[c][h] for c in n) for h in STRATA}; X = {h: sum(x[c][h] for c in n) for h in STRATA}
     overall = (sum(X.values()) + pseudo) / (sum(N.values()) + 1)
     m = {h: (X[h] + pseudo * overall * 10) / (N[h] + 10) if N[h] else overall for h in STRATA}
-    truth = {}
+    truth = {}; post = {}
     for c in n:
         E = sum(n[c][h] * m[h] for h in STRATA); Xc = sum(x[c][h] for h in STRATA)
         r_c = (Xc + pseudo) / (E + pseudo)
         truth[c] = {h: min(m[h] * r_c, 0.9) for h in STRATA}
+        post[c] = (Xc + pseudo, E + pseudo)  # Gamma posterior of the relativity (review 7 #4)
+    estimate_truth.posterior = post; estimate_truth.base = m
     return truth, (np.array(sev) if sev else None)
 
 
-def simulate(truth, sev, design, reps=200, shift=0.0, seed=0, U_mix=None):
+def simulate(truth, sev, design, reps=200, shift=0.0, seed=0, U_mix=None, directional=0.0, posterior=True):
     rng = np.random.default_rng(seed)
     cfgs = sorted(design)
-    A = {c: {h: _intercept(truth[c][h]) for h in STRATA} for c in cfgs}
+    post = getattr(estimate_truth, "posterior", {}); base = getattr(estimate_truth, "base", {})
+    A0 = {c: {h: _intercept(truth[c][h]) for h in STRATA} for c in cfgs}
     if sev is None or len(sev) < 3:
         sev_draw = lambda k: np.minimum(np.exp(rng.normal(np.log(300), 1.0, k)), BASIC_LIMIT)  # noqa: E731
     else:
@@ -72,7 +75,15 @@ def simulate(truth, sev, design, reps=200, shift=0.0, seed=0, U_mix=None):
     U_mix = U_mix or {"cancel": 0.50, "change": 0.26, "book": 0.03, "compensation": 0.20, "other": 0.01}
     out = []
     for _ in range(reps):
+        if posterior and post:  # truth drawn from the posterior each replication, not fixed at a point
+            A = {}
+            for c in cfgs:
+                r = rng.gamma(post[c][0], 1.0) / post[c][1]
+                A[c] = {h: _intercept(min(base[h] * r, 0.9)) for h in STRATA}
+        else:
+            A = A0
         delta = rng.normal(0, shift, len(STRATA)) if shift else np.zeros(len(STRATA))
+        delta = delta + directional
         nu_max = max(d[0] for d in design.values()); ne_max = max(d[1] for d in design.values())
         us = np.concatenate([np.full(k, i) for i, k in enumerate(allocation(U_mix, nu_max).values())])
         es = np.concatenate([np.full(k, i) for i, k in enumerate(allocation(W_DEPLOY, ne_max).values())])
@@ -116,14 +127,16 @@ def main():
     ap.add_argument("runs", nargs="+"); ap.add_argument("--design", required=True); ap.add_argument("--out", required=True)
     ap.add_argument("--reps", type=int, default=200)
     a = ap.parse_args()
-    rows = [r for p in a.runs for r in csv.DictReader(open(p)) if not r.get("error")]
+    rows = [r for p in a.runs for r in csv.DictReader(open(p)) if not r.get("error") and r.get("sim", "H") == "H"]
     truth, sev = estimate_truth(rows)
     designs = json.load(open(a.design))
     res = {"truth_freq_under_W": {c: sum(W_DEPLOY[h] * p for h, p in t.items()) for c, t in truth.items()},
            "n_severity_events": 0 if sev is None else int(len(sev)), "designs": {}}
     for name, d in designs.items():
         d = {c: tuple(v) for c, v in d.items() if c in truth}
-        res["designs"][name] = {s: simulate(truth, sev, d, a.reps, shift=s, seed=7) for s in (0.0, 0.5)}
+        res["designs"][name] = {"R0": simulate(truth, sev, d, a.reps, shift=0.0, seed=7),
+                                "R2_sym0.5": simulate(truth, sev, d, a.reps, shift=0.5, seed=8),
+                                "R6_dir+0.5": simulate(truth, sev, d, a.reps, directional=0.5, seed=9)}
         print(name, json.dumps(res["designs"][name]))
     json.dump(res, open(a.out, "w"), indent=1)
 
