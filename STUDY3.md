@@ -908,3 +908,23 @@ Items 4–6 need Ishaan or the cap.
 **New fidelity gate for the B′ pilot (G-trunc).** In each simulator family, the share of conversations ending in a customer confirmation plus stop, with no agent turn after it, must be **< 3%**. If it isn't, the customer gets one repair hint ("Do not end the conversation in the same message in which you confirm an action; wait for the agent to complete it"). This is the same kind of repair as Study 2's date hint. The pilot is then re-run once.
 
 **Observation about Study 2** (not a change to its results): about 4% of B0's luna-customer experience runs had this truncation. Those conversations could not record an action, so luna-customer commission is slightly undercounted there.
+
+## Ishaan's decisions (2026-10-22; pre-registered amendments, before any paid Study 3 run)
+1. **Statement judge.**
+   - **claude-haiku-5-5** runs first on the 30-transcript validation sample against Ishaan's labels. It is used if **κ ≥ 0.6**.
+   - Otherwise the pre-registered **claude-sonnet-5-5 runs via the Batch API**, and the $540 gate applies: stop and ask if the projected spend would cross it.
+   - The rubric (sha256 c9f5f02e…) is unchanged and shared by both judges.
+2. **F2 is built by Ishaan himself,** from the F2 Build Kit (vault). The study waits for his frozen F2.
+3. **F2's 40-task pricing arm = the held E7 set.** It was written by an independent author from the frozen experience spec (POOL_SEAL `b9125d6b…`).
+   - It is **representative by construction** (ρ2 ≈ 1), which the write-up states openly.
+   - E7 is unsealed to Ishaan only as part of F2, when he freezes it. E1–E6 stay sealed from him.
+4. **Framing.**
+   - **H2 stays primary,** as the plan states. Its non-designed set is the 11 configurations in `configs.H2_SET`, also reported with N2 excluded (10).
+   - **RQ2 (pricing), RQ3 (as a difference-in-differences against F1₃) and RQ4 (underwriters) are estimation with intervals.**
+   - **H3, H3b (sign test as pre-registered) and H5 are secondary tests**, reported with their A′ powers.
+   - H1 stays as stated.
+
+**Blinding consequences (pre-registered now):**
+- F1 underwriting runs only **after F2 is frozen**, because F1's per-configuration results would show the F2 designer which agents are flawed.
+- **Anything Ishaan could see before freezing F2 must not depend on the flawed configurations.**
+  - **Allowed before then:** the fidelity pilot (on C0, a clean configuration), the designed-flaw planter (output sealed), and the judge's run on the validation sample (output sealed until Ishaan's labels are in, so his labels can't be anchored on the judge).
