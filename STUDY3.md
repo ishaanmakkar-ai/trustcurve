@@ -100,7 +100,7 @@ Prices are rechecked before the first paid run.
   - Tasks are allocated to a primary type in proportion to max(π_D,k, φ), renormalised. The coverage floor φ ∈ {0, 0.05, 0.10}.
   - A task's primary type is present with probability 0.9. Other types appear at 0.5 × d.
   - **Trap enrichment e ∈ {1, 3}:** on a trap task's primary type, the flaw fires at min(1, e·r), because boundary traps over-sample trigger conditions.
-  - Two pricing variants:
+  - Two pricing variants (implementation clarification written 2026-10-21, before any A′ run: these are two **alternative 100-task benchmark designs at the same cost**, not two readings of one benchmark):
     - **F2 pooled:** rates from all 100 tasks.
     - **F2 split:** 60 trap tasks are used for detection, and 40 deployment-representative tasks (opportunities = d, e = 1) for pricing. Detection uses all 100 tasks.
 - **F3 (4 underwriters).** Underwriter u prices configuration c as clean_mean × v_c × B × ε_uc, where:
@@ -156,3 +156,75 @@ Prices are rechecked before the first paid run.
 - **Split rule:** if F2 split beats F2 pooled on P(H3 holds) at e = 3, the split (trap tasks for detection, representative tasks for pricing) becomes the frozen F2 pricing method.
 - **Flaw-rate range:** the sealed catalogues use the narrowest range at which H2 is decidable at λ = 0.5. If neither range is decidable, they use [0.05, 0.4].
 - **K1′** fires if no cell at λ = 0.5 makes either H2 or H3 decidable within an n_e of 400.
+
+### A′ loop 1 results (2026-10-21; `results/study3/phaseA/sim_a.json`, tables in `results/study3/phaseA/tables.md`)
+**Run:** 108 cells × 300 replications in 61 s, at $0 cost. Monte Carlo SE ≤ 0.03 on every rate below.
+
+**Detection** (depends on benchmark and firing rate, not on n_e):
+- At r ∈ [0.05, 0.4], F2 flags 0.72–0.76 of designed and 0.59–0.69 of non-designed flaws. F1 flags 0.54–0.59 and 0.40–0.48.
+- At r ∈ [0.02, 0.15], every benchmark flags ≤ 0.35 of every source.
+- False positives (clean 2 vs clean 1) are 0.00 everywhere.
+- The shared-assumption gap (RQ3) ranges from +0.02 to +0.17. It grows as λ falls, but the effect is small.
+
+**Single-target flaws by type:**
+- F1 is almost blind to cabin, bags, book and certificate flaws (0.00–0.02).
+- F2's coverage floor φ = 0.10 lifts cabin, bags and book only from 0.08–0.16 to 0.18–0.27. Ten tasks per type gives too few firings for the sign test.
+
+**Pricing:**
+- **F2 does not price better than F1.** At λ = 0.5, φ = 0.10, e = 1:
+  - median |log error| is F1 0.39 and F2 pooled 0.38 at r ∈ [0.05, 0.4], n_e = 200;
+  - Spearman is 0.83 vs 0.86.
+- The reason is that flaws on F1's blind-spot types (bags $83, certificate $165) carry little deployment loss relative to cancel ($651) and statement ($408) flaws, which F1 already sees.
+- **P(H3 holds) ≤ 0.01 in every one of the 108 cells.**
+- Trap enrichment e = 3 raises F2 pooled's detection from 0.63 to 0.86, but doubles its median log error from 0.38 to 0.75 (a +0.70 log overprice on flawed configurations). F2 split keeps detection at 0.80 and its error at 0.47.
+- **F3:** the underwriter model has no information on flaw magnitude, so it underprices flawed configurations by e^2.4. That is an artefact of my assumption, not evidence. A′ cannot inform H4.
+
+**Predictions:**
+
+| Prediction | Verdict |
+|---|---|
+| A′-P1 (λ = 0.8 → ≥ 80% detection; λ = 0.2, φ = 0 → < 50%) | **Not confirmed.** 0.75/0.68 and 0.59. The coverage floor barely moves the non-designed total |
+| A′-P2 (F1 < 40% on bags, book and certificate) | **Confirmed** (0.00–0.02) |
+| A′-P3 (F2 error ≤ ½ F1's; e = 3 pooled overprices; F3 in between) | **Not confirmed** / confirmed / not confirmed (an F3 model artefact) |
+| A′-P4 (P(H3) < 0.7) | **Confirmed, but for a different reason:** under this world F2 is not truly better at pricing, and the +0.3 Spearman margin is unreachable when F1 already reaches 0.6–0.85 |
+
+**Decision rules applied literally:**
+- **H2** is "decidable" in every λ = 0.5 cell. P(H2) is 0.82–0.88 at r ∈ [0.05, 0.4] and 0.09–0.12 at r ∈ [0.02, 0.15]. So the narrowest-range rule picks [0.02, 0.15].
+- **φ** = 0, because φ = 0 already gives 0.62 non-designed detection.
+- **n_e** = 100 (P(H3) is 0 at every n_e).
+- **The split rule does not trigger** (both P(H3) are 0).
+- **K1′ does not fire** (H2 is decidable).
+
+**These literal outcomes are degenerate:**
+- the r ∈ [0.02, 0.15] verdict is decided by the firing rate, not by test design;
+- the φ, n_e and split rules were keyed to an H3 probability that is 0 everywhere.
+
+None of them is adopted. Loop 2 replaces them, as pre-registered below.
+
+## A′ loop 2 (pre-registered 2026-10-21, after loop 1, before any loop-2 code)
+**Aim:** find out when test design *can* matter, and make the decision rules informative. This is an adaptation of the simulation design. No real data exists yet, and no Study 3 primary outcome is frozen.
+
+**Changes to the data-generating mechanism** (`src/trustcurve/study3/sim_a2.py`, which reuses `sim_a.py`):
+1. **Severity profile S:**
+   - S_A is loop 1's profile.
+   - S_B is flat: every type has a median of $300, so blind-spot flaws cost as much per event as cancel flaws. This is a stress case, not a claim about airline fares.
+2. **Runs per F2 task R ∈ {1, 3}.** F1 stays at 1 run per task (the Study 2 pipeline). R = 3 adds ≈ $43 at $0.012 per run.
+3. **Grid:** λ ∈ {0.5, 0.2} × φ ∈ {0, 0.10} × e ∈ {1, 3} × r ∈ {[0.05, 0.4], [0.02, 0.15]} × n_e ∈ {100, 200, 400} × S ∈ {A, B} × R ∈ {1, 3}. That is 192 cells, with 300 replications each.
+
+**New measures:**
+- **H2 discrimination** = P(H2 verdict | F2) − P(H2 verdict | F1 used as the benchmark), using F1's own non-designed detection ≥ 6/12.
+- **Paired detection power:** an exact one-sided McNemar test, F2 vs F1, over the 16 flawed configurations at α = 0.05.
+- **Pricing comparisons:**
+  - P(median |log error| of F2 < F1's);
+  - the power of a one-sided paired sign test on per-configuration |log error| over 18 configurations at α = 0.05;
+  - P(Spearman(F2) − Spearman(F1) ≥ 0.1).
+- **Blind-spot loss share:** the share of true expected flaw loss on types where F1 has < 5 opportunities. P(H3) and the paired pricing power are reported for replications with a share ≥ 0.5.
+
+**Decision rules (these replace loop 1's):**
+- **Flaw-rate range:** the range with the larger H2 discrimination at λ = 0.5, S_A, R = 1, φ = 0.10.
+- **R:** R = 3 is recommended if it raises the paired detection power by ≥ 0.15 at that range.
+- **Split rule:** at e = 3, adopt F2 split if its median log error is lower than F2 pooled's by ≥ 0.1 and its non-designed detection is lower by ≤ 0.1.
+- **φ:** the smallest φ at which single-target detection of cabin, bags and book is each ≥ 0.3 at the chosen range (and R). If none reaches it, report that per-type detection needs more opportunities, and recommend multi-opportunity tasks or a higher R.
+- **n_e:** the smallest n_e at which the paired pricing-sign-test power is within 0.1 of its n_e = 400 value, in the cell chosen above under S_A.
+- **H3 reformulation trigger:** if P(H3) is < 0.2 even in S_B cells with a blind-spot share ≥ 0.5, A′ recommends adding a decidable comparative H3b to the phase-B′ pre-registration. This happens before any data, and Ishaan decides. H3 itself stays as written.
+- **K1′** fires only if H2 discrimination is < 0.3 and the paired pricing power is < 0.5 in every λ = 0.5 cell.
