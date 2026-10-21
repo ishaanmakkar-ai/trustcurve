@@ -71,7 +71,7 @@ A `.gitignore` comment in the first commit named a third party. It was removed f
 | 8 | Major/Minor | Monte Carlo error made some verdicts unrobust | **Fixed.** 300 reps per cell; pooled coverage reported with MC SE (≈ 0.002–0.003) |
 | 9 | Minor | Post-hoc changes not labelled | **Fixed.** "Post-hoc deviations" block added to EXPERIMENTS.md. Phase 0 v2 was pre-registered before any code change |
 | 10 | Minor | Multinomial allocation left strata empty | **Fixed.** Fixed stratified allocation, ≥ 2 parents per stratum |
-| 11 | Minor | Thin tests | **Partly fixed.** A numpy-int ICC regression test added (it found a real bug). The simstudy2 estimators are validated by the grid itself. A dedicated unit test of the zero-event fallback was added |
+| 11 | Minor | Thin tests | **Fixed** (completed after phase 1). A numpy-int ICC regression test was added (it found a real bug), plus a dedicated zero-event-fallback test, E1x kill-rule tests and reference-estimator tests: 57 tests in all. The simstudy2 estimators are also validated by the grid itself |
 
 **Review 4 follow-up (after phase 1, 2026-10-21):**
 - #11 (thin tests) is now **fixed**: 57 tests, including a dedicated zero-event-fallback test (`test_simstudy.py`), E1x kill-rule tests (`test_phase1_e1x.py`) and reference-run estimator tests (`test_phase1_reference.py`).

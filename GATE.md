@@ -92,7 +92,7 @@ Any one of these means "benchmark-derived loss frequency isn't viable yet", whic
 - Whether DB mismatch is a valid proxy for insured loss: unvalidated, and given finding 3, probably weak.
 
 ## Goal 3 v2 done-conditions: evidence, and every deviation
-1. **Phase-0 review points resolved or rebutted; grid rerun.** All 11 review-4 points are in REVIEW.md (table plus phase-1 follow-up). The grid was rerun as phase 0 v2 (120 cells × 300 reps; `results/phase0v2/grid.json`, `credibility_fine.json`; commit `b7f985e`), with the requested arms all present:
+1. **Phase-0 review points resolved or rebutted; grid rerun.** The grid arms present in `grid.json` are T1_PROP, T1_NEYMAN_oracle, T1_NEYMAN_plugin, T1_IS, T1_PROP_mix_misspecified, T1_PROP_design_1x1/1x2, T4r_r0.3/0.6_PROP (realistic pre-run score with an estimated mean), T3p_R_known/calibrated/x1.5 and PP_capped_PROP. Credibility where it bites is in `credibility_fine.json`. All 11 review-4 points are in REVIEW.md (table plus phase-1 follow-up). The grid was rerun as phase 0 v2 (120 cells × 300 reps; `results/phase0v2/grid.json`, `credibility_fine.json`; commit `b7f985e`), with the requested arms all present:
    - realistic pre-run control variate (T4r) with an estimated mean
    - credibility where it bites (T2f)
    - PROP and Neyman
