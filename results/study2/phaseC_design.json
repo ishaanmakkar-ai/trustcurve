@@ -1,0 +1,122 @@
+{
+ "B0": {
+  "n_e": 150,
+  "group": "pre13",
+  "bridge_n": 60
+ },
+ "PER-PL": {
+  "n_e": 150,
+  "group": "pre13",
+  "bridge_n": 60
+ },
+ "PER-ST": {
+  "n_e": 150,
+  "group": "pre13",
+  "bridge_n": 60
+ },
+ "PER-FA": {
+  "n_e": 150,
+  "group": "pre13",
+  "bridge_n": 60
+ },
+ "HAR-PC": {
+  "n_e": 150,
+  "group": "pre13",
+  "bridge_n": 60
+ },
+ "HAR-CF": {
+  "n_e": 150,
+  "group": "pre13",
+  "bridge_n": 60
+ },
+ "KNO-RM": {
+  "n_e": 150,
+  "group": "pre13",
+  "bridge_n": 60
+ },
+ "KNO-WR": {
+  "n_e": 150,
+  "group": "pre13",
+  "bridge_n": 60
+ },
+ "INT-1": {
+  "n_e": 150,
+  "group": "pre13",
+  "bridge_n": 60
+ },
+ "INT-3": {
+  "n_e": 150,
+  "group": "pre13",
+  "bridge_n": 60
+ },
+ "CAP-S": {
+  "n_e": 50,
+  "group": "pre13",
+  "bridge_n": 0
+ },
+ "INT-2": {
+  "n_e": 50,
+  "group": "pre13",
+  "bridge_n": 0
+ },
+ "CAP-O": {
+  "n_e": 100,
+  "group": "pre13",
+  "bridge_n": 0
+ },
+ "KNO-WC": {
+  "n_e": 150,
+  "group": "extended",
+  "bridge_n": 60
+ },
+ "KNO-WI": {
+  "n_e": 150,
+  "group": "extended",
+  "bridge_n": 60
+ },
+ "KNO-WB": {
+  "n_e": 150,
+  "group": "extended",
+  "bridge_n": 60
+ },
+ "KB-HPC": {
+  "n_e": 150,
+  "group": "extended",
+  "bridge_n": 60
+ },
+ "KB-HCF": {
+  "n_e": 150,
+  "group": "extended",
+  "bridge_n": 60
+ },
+ "KB-PPL": {
+  "n_e": 150,
+  "group": "extended",
+  "bridge_n": 60
+ },
+ "KB-PST": {
+  "n_e": 150,
+  "group": "extended",
+  "bridge_n": 60
+ },
+ "CAP-L": {
+  "n_e": 150,
+  "group": "extended",
+  "bridge_n": 60
+ },
+ "CAP-H4": {
+  "n_e": 150,
+  "group": "extended",
+  "bridge_n": 60
+ },
+ "H4-KB": {
+  "n_e": 150,
+  "group": "extended",
+  "bridge_n": 60
+ },
+ "KB-CAPS": {
+  "n_e": 50,
+  "group": "extended",
+  "bridge_n": 0
+ }
+}
