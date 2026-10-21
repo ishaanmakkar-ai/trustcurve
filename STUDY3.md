@@ -850,3 +850,48 @@ Items 4–6 need Ishaan or the cap.
 
 - **Kill criteria KE1–KE3** are evaluated at S1's base values, as pre-registered. The filed-value versions are reported as sensitivities.
 - **Implementation:** `econ.py` gains `PLR_FILED`, rule "iii", `ROE_FILED` and the capital and investment-income sensitivities, without changing any base path.
+
+## Budget decision (Ishaan, 2026-10-21)
+- **Study 3 cap: $600.** It covers Study 3's own spend only.
+  - Study 2's $373.63 does not count against it, so cumulative TrustCurve spend may reach about $973.63.
+  - It replaces the old $500 cumulative cap for Study 3.
+- **Stop-and-ask gate at $540 (90%).** At the gate, stop all paid runs and post spend to date, what's left and the projected cost to finish. Wait for Ishaan's go-ahead.
+- **Hard stop at $600.** No paid call may start that could take spend past $600.
+- **Ledger:** `results/study3/spend.csv`, kept per phase (B′, C′, D′) with the same method as Study 2's `spend.csv`.
+  - Costs come from tau2's per-message cost on every run, plus logged judge and harness usage.
+  - The guard is `scripts/study3/spend.py`. It returns exit 3 if cumulative spend is ≥ $540, or if spend + the next batch's projected cost would pass $600.
+- **Every forecast (F0, F0q, F1, F2, F3) is still frozen and hash-committed before any experience run.**
+
+### Cost re-check against the 20-configuration design (2026-10-21, before any paid Study 3 call)
+**Prices:** the Anthropic list in the claude-api reference, cached 2026-10-06:
+- Sonnet 5.5: $2 / $10 per M tokens, cache read $0.20;
+- Haiku 5.5: $0.10 / $0.50;
+- Haiku 4.5: $1 / $5.
+
+**Per-run costs:** measured in Study 2's `spend.csv`, by agent model and simulator:
+
+| Agent | Underwriting run (Haiku customer) | Experience conversation (mean of Sonnet and luna customers) |
+|---|---|---|
+| Haiku 5.5 | $0.012 | $0.016 |
+| Haiku 5.5 + checker | $0.018 | $0.017 |
+| Sonnet 5.5 | ≈ $0.10 (estimated) | $0.12 |
+| Haiku 4.5 | $0.113 | $0.058 |
+| gpt-6-luna | $0.003 | $0.009 |
+
+**Estimate:**
+
+| Component | Cost | Notes |
+|---|---|---|
+| Underwriting (20 × 570 runs, F1 and F2 at R = 3) | ≈ $300 | Includes the Haiku 4.5 configurations N1 and N4 at $129 and Sonnet C3 at $57 |
+| Experience (20 × 200) | ≈ $100 | |
+| Statement judge (≈ 15,400 conversations × ≈ 8k input tokens, 3k cached policy prefix) | Sonnet 5.5 via Batch API ≈ $128; Haiku 5.5 ≈ $17 | |
+| Fixed: designed-flaw planter, fidelity pilot, κ validation calls | ≈ $10 | |
+| **Total incl. 10% retries** | **≈ $470 with a Haiku 5.5 judge; ≈ $590 with a Sonnet 5.5 judge** | |
+
+- The ≈ $444 A′ figure is superseded. Its $0.004-per-conversation judge price was too low for Sonnet, and its flat per-run cost missed the expensive Haiku 4.5 configurations.
+- **The Sonnet-judge design exceeds the $540 gate.** Per Ishaan's instruction this goes to him before any paid run.
+- **Levers:**
+  1. Pre-register "Haiku 5.5 judge if its κ ≥ 0.6 on the validation sample, else Sonnet 5.5 via batch".
+  2. Replace N4's Haiku 4.5 fallback with an older or smaller OpenAI model, if one exists on the Hexa key (≈ −$60).
+  3. Use n_e = 100 (≈ −$50).
+  4. Judge only conversations that a regex flags for statement talk (≈ −30%).

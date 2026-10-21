@@ -1,0 +1,14 @@
+Study 3 sealed flaw catalogues (STUDY3.md §B′2). sha256(fault_impl.py || params.json) per source; written before any
+benchmark run. The analyst has not opened these files; check_sealed.py (blind, pass/fail only) passed for all 8.
+
+2026-10-21  external    f17c630bcce4ff26b45470d9d4530a4dc78a59668944f444726cd8e61857a7f3   (X1-X4; curator agent; 4 incident sources)
+2026-10-21  mechanical  e08bb86366b58bac5fa9588cd02c2c72f7500e4cb24824978a57f951a501ef86   (M1-M4; seeded mutation engine)
+2026-10-21  mechanical/build_params.py  04880aa39372d74ae8566eb1851ec7e63ae33a25fa56a08f6588cdc021664441   (the seeded draw script)
+pending     designed    (OpenAI planter; paid, waits for Ishaan's go-ahead on the judge/budget question)
+pending     overall     sha256 over designed || external || mechanical || roster (configs.py), committed before any benchmark run
+
+Deviation (labelled, 2026-10-21): the first mechanical author was stopped by a safety check while writing operators that
+would generate abusive text or disclose personal details; its partial file was deleted unread. The re-run restricted
+"outside-accounting" operators to non-monetary data-integrity errors (wrong passenger details; wrong date at the same
+price), and the external curator was given the same restriction mid-task. Outside-accounting coverage is kept; harmful
+content generation is excluded by design.
