@@ -4,8 +4,10 @@ benchmark run. The analyst has not opened these files; check_sealed.py (blind, p
 2026-10-21  external    f17c630bcce4ff26b45470d9d4530a4dc78a59668944f444726cd8e61857a7f3   (X1-X4; curator agent; 4 incident sources)
 2026-10-21  mechanical  e08bb86366b58bac5fa9588cd02c2c72f7500e4cb24824978a57f951a501ef86   (M1-M4; seeded mutation engine)
 2026-10-21  mechanical/build_params.py  04880aa39372d74ae8566eb1851ec7e63ae33a25fa56a08f6588cdc021664441   (the seeded draw script)
-pending     designed    (OpenAI planter; paid, waits for Ishaan's go-ahead on the judge/budget question)
-pending     overall     sha256 over designed || external || mechanical || roster (configs.py), committed before any benchmark run
+2026-10-22  designed    30276613f1c79da62a9d5fe103274e2e64d9ebaeddd3b18c46b387b5cd0d7ed6   (D1-D4; gpt-6.1-sol planter, 1 round, $0.036; blind checks PASS)
+2026-10-22  roster      d9bb2873c7ac4380ebe5e96e1f120b3a92aedd5ff165efb7dabf30dab2991b17   (src/trustcurve/study3/configs.py at seal time)
+2026-10-22  overall     5297f6be3b9823e21fd7beaac8b157595603694479d6cb82452cdd6cfa1867ee   (sha256 of the four hex digests concatenated in that order; scripts/study3/seal_all.py)
+No benchmark (F1 or F2) run has happened at this commit.
 
 Deviation (labelled, 2026-10-21): the first mechanical author was stopped by a safety check while writing operators that
 would generate abusive text or disclose personal details; its partial file was deleted unread. The re-run restricted
