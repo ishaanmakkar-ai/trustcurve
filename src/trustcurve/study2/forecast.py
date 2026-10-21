@@ -32,7 +32,8 @@ from scipy import stats as sps
 STRATA = ("cancel", "change", "book", "compensation", "other")
 W_DEPLOY = {"cancel": 0.30, "change": 0.30, "book": 0.15, "compensation": 0.15, "other": 0.10}
 BASIC_LIMIT = 2000.0
-FALLBACK_SEVERITY = (np.log(400.0), 1.0)  # lognormal (mu, sigma) used only if no event exists anywhere
+FALLBACK_SEVERITY = (np.log(400.0), 1.0)
+SPARSE_MIN = 5  # M1c: strata with fewer underwriting tasks use the configuration's pooled rate  # lognormal (mu, sigma) used only if no event exists anywhere
 
 
 @dataclass
@@ -83,6 +84,27 @@ def collapse(obs: list[dict], cap: float = BASIC_LIMIT):
         ev = [x for x in losses if x > 1e-9]
         out[h].append((len(ev) / len(losses), ev))
     return out
+
+
+def task_clusters(obs: list[dict], cap: float = BASIC_LIMIT):
+    """-> {stratum: {cluster: (n_tasks, sum of task event shares)}}; cluster = obs["cluster"] or the task id."""
+    by_task = defaultdict(list); clus = {}
+    for o in obs:
+        k = (o["stratum"], str(o["task_id"]))
+        by_task[k].append(min(float(o["loss"]), cap))
+        clus[k] = str(o.get("cluster") or o["task_id"])
+    out = defaultdict(lambda: defaultdict(lambda: [0, 0.0]))
+    for (h, t), losses in by_task.items():
+        c = out[h][clus[(h, t)]]
+        c[0] += 1; c[1] += sum(x > 1e-9 for x in losses) / len(losses)
+    return out
+
+
+def _cluster_boot(cl: dict, B: int, rng) -> np.ndarray:
+    """Cluster-bootstrap draws of a rate: resample clusters with replacement, rate = events / tasks."""
+    n = np.array([v[0] for v in cl.values()], float); t = np.array([v[1] for v in cl.values()], float)
+    idx = rng.integers(0, len(n), (B, len(n)))
+    return t[idx].sum(1) / np.maximum(n[idx].sum(1), 1e-12)
 
 
 def _severity_pool(collapsed_by_cfg):
@@ -260,6 +282,16 @@ def forecast(obs_by_cfg: dict[str, list[dict]], W: dict | None = None, n_e: int 
                 p_draws[h] = rng.beta(0.5 + x, 0.5 + n - x, B)
                 if n == 0:
                     notes.append(f"no tasks in {h}: Jeffreys prior only")
+        elif method == "M1c":  # phase-A loop 3 (review 6 #2, #8): cluster bootstrap + sparse-stratum pooling
+            tc = task_clusters(obs_by_cfg[c], cap)
+            allcl = {f"{h}|{k}": v for h, d in tc.items() for k, v in d.items()}
+            pooled = _cluster_boot(allcl, B, rng) if allcl else np.zeros(B)
+            for h in STRATA:
+                n_h = sum(v[0] for v in tc.get(h, {}).values())
+                if n_h >= SPARSE_MIN:
+                    p_draws[h] = _cluster_boot(tc[h], B, rng)
+                else:
+                    p_draws[h] = pooled; notes.append(f"{h}: {n_h} tasks < {SPARSE_MIN}, pooled rate")
         elif method == "M1":
             col = cols[c]
             n_c = sum(counts[c][h][0] for h in STRATA)
@@ -285,10 +317,11 @@ def forecast(obs_by_cfg: dict[str, list[dict]], W: dict | None = None, n_e: int 
         n_ev = sum(counts[c][h][1] for h in STRATA)
         sev_mean = {h: float(sev_c[h].mean()) for h in STRATA}
         hi90 = float(np.quantile(theta, 0.95)); pred_hi = float(np.quantile(pred, 0.95)); pred_hi95 = pred_hi
-        if method == "M1":
+        if method in ("M1", "M1c"):
             col = cols[c]
             pooled_rate = n_ev / max(n_tasks, 1)
-            point = float(sum(W.get(h, 0.0) * (np.mean([e for e, _ in col[h]]) if col.get(h) else pooled_rate)
+            thin = (lambda h: len(col.get(h, [])) < SPARSE_MIN) if method == "M1c" else (lambda h: not col.get(h))
+            point = float(sum(W.get(h, 0.0) * (pooled_rate if thin(h) else np.mean([e for e, _ in col[h]]))
                               * sev_mean[h] for h in STRATA))
             if n_ev == 0:  # zero-event fallback: CP 95% upper on tasks x pooled mean severity
                 ub = (1 - 0.05 ** (1 / max(n_tasks, 1))) * float(np.mean(list(sev_mean.values())))
