@@ -233,8 +233,14 @@ def e1x(cells, B=2000, seed=1):
         gaps = res["agent_gap"]
         hard = any(gaps[a]["excludes_0"] and gaps[b]["excludes_0"] and gaps[a]["ci90"][1] < 0 < gaps[b]["ci90"][0]
                    for a in sims for b in sims if a != b)
-        soft = (not hard) and len({s for s in signs.values() if s != 0}) > 1
-        res["kill"] = {"hard": hard, "soft": soft}
+        # Soft (as pre-registered): the point-estimate sign flips "but the CIs overlap". Fixed after review 5 #1:
+        # the first version dropped the overlap clause. Fires if some pair with opposite non-zero signs has overlapping CIs.
+        def overlap(a, b):
+            return gaps[a]["ci90"][0] <= gaps[b]["ci90"][1] and gaps[b]["ci90"][0] <= gaps[a]["ci90"][1]
+        flips = [(a, b) for a in sims for b in sims if a < b and signs[a] * signs[b] < 0]
+        soft = (not hard) and any(overlap(a, b) for a, b in flips)
+        res["kill"] = {"hard": hard, "soft": soft, "sign_flip": bool(flips),
+                       "neither_fires_despite_flip": bool(flips) and not hard and not soft}
         out[name] = res
     out["primary_outcome"] = "db_mismatch"
     return out

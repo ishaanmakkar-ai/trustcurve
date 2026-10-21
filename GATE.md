@@ -106,7 +106,7 @@ Any one of these means "benchmark-derived loss frequency isn't viable yet", whic
 2. **Phase 1 and 1b run as specified, with committed task files, pre-registered before each run.**
    - E1, E2 (`tasks/e2_variants.json`), E3 (`tasks/e3_refusal.json`), labels, reference run and phase 1b were all run per their EXPERIMENTS.md blocks. Each block is dated before its run. E1x was pre-registered by Ishaan's request before its runs, with an interim-look disclosure.
    - **Deviations, all disclosed in EXPERIMENTS.md:**
-     - (a) E1x's coded soft rule dropped the "CIs overlap" clause, so neither rule fires as written (review 5 #1).
+     - (a) E1x's first coded soft rule dropped the "CIs overlap" clause (review 5 #1). **The code is now fixed to the pre-registered wording and the analysis rerun.** Primary: neither rule fires. Secondary failure and omission: soft fires.
      - (b) The H×H cell is the pilot breadth batch, run earlier with the same tau2 config, as the E1x pre-registration specified.
      - (c) REF-H's last 3 runs were resumed from checkpoint after a disk-full error, with no change to design.
      - (d) The E2 parent-run correction was made before E2 ran.

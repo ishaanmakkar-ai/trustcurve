@@ -18,7 +18,7 @@ def test_no_gap_gives_zero_delta_and_no_kill():
     cells = {(a, c): rows(base) for a in "HS" for c in "HOS"}
     r = e1x(cells, B=200)["db_mismatch"]
     assert all(g["delta"] == 0 for g in r["agent_gap"].values())
-    assert r["kill"] == {"hard": False, "soft": False} and r["ranking"]["boot_p_same_sign"] == 0
+    assert not r["kill"]["hard"] and not r["kill"]["soft"] and r["ranking"]["boot_p_same_sign"] == 0
 
 
 def test_opposite_significant_gaps_fire_hard_kill():
@@ -40,4 +40,15 @@ def test_sign_flip_with_overlapping_cis_is_soft():
              ("H", "S"): rows(a), ("S", "S"): rows(b)}
     r = e1x(cells, B=500)["db_mismatch"]
     assert r["ranking"]["point_signs"] == {"H": -1, "O": 1, "S": -1}
-    assert r["kill"] == {"hard": False, "soft": True}
+    assert not r["kill"]["hard"] and r["kill"]["soft"]
+
+
+def test_flip_with_disjoint_cis_but_no_hard_fires_neither():
+    # H: Sonnet better (CI touches 0); O: Sonnet worse (CI excludes 0) -> disjoint CIs, no hard, no soft
+    n = 25
+    hh = [1] * 5 + [0] * 20; sh = [0] * 25
+    ho = [0] * 25; so = [2] * 4 + [0] * 21
+    cells = {("H", "H"): rows(hh), ("S", "H"): rows(sh), ("H", "O"): rows(ho), ("S", "O"): rows(so),
+             ("H", "S"): rows(hh), ("S", "S"): rows(sh)}
+    k = e1x(cells, B=500)["db_mismatch"]["kill"]
+    assert k["sign_flip"] and not k["soft"]

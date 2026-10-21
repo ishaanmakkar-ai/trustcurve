@@ -293,7 +293,9 @@
   },
   "kill": {
    "hard": false,
-   "soft": true
+   "soft": false,
+   "sign_flip": true,
+   "neither_fires_despite_flip": true
   }
  },
  "failure": {
@@ -374,7 +376,9 @@
   },
   "kill": {
    "hard": false,
-   "soft": true
+   "soft": true,
+   "sign_flip": true,
+   "neither_fires_despite_flip": false
   }
  },
  "omission": {
@@ -455,7 +459,9 @@
   },
   "kill": {
    "hard": false,
-   "soft": true
+   "soft": true,
+   "sign_flip": true,
+   "neither_fires_despite_flip": false
   }
  },
  "primary_outcome": "db_mismatch"
