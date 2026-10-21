@@ -16,3 +16,35 @@ Each loop records the expectation before checking, what broke, and the fix. A re
 - **Also found:** task 12's gold action adds *free* bags, so it moves no money. The first guard ("money must move") wrongly failed on it and was relaxed to "the DB must change".
 - **Result:** 15/15 tests pass.
 - **Still open:** the dollar model values money only. Wrong flights or seats with no price change score $0 even when the DB doesn't match. Report these separately as non-monetary failures.
+
+## Loop 2 — pilot batch 1 (5 tasks × 3 runs) and loss classification (2026-10-21)
+- **Batch:** tasks 1, 7, 8, 11, 14 × 3 runs. All 15 stopped normally with 0 infrastructure errors. Pass^1 0.60, pass^2 0.47, pass^3 0.40 (0.6³ = 0.22 if independent, so failures cluster by task). DB match 11/15. Cost $0.243 total ($0.010–0.034 per run); token cost matched tau2's per-message cost on every run.
+- **Expectations, checked:**
+  1. Costs were in range ✓
+  2. No run with a matching DB showed $ ✓
+  3. ≥1 failure ✓
+  4. Clustering: suggestive only, as 5 clusters is too few
+  5. COMMUNICATE-only failures had $0 ✓
+- **What broke:** v1 of the dollar diff netted balances and reported 4 "loss events" ($500, $500, $2,046 and $296). Reading the transcripts showed three were **the agent not doing something**: two missed bookings (task 8) and a change never requested (task 14). The fourth was a partial job that was handed to a human. A missed sale is not a payout. The independent reviewer reached the same finding (REVIEW.md #2), and also found gift-card downgrade refunds double-counted (#1).
+- **Fix:** dollar diff v2 classifies every difference by transaction:
+  - **payout_loss:** over-refund, undercharge, unwarranted compensation
+  - **customer_harm:** overcharge, wrongful booking
+  - **omission:** missed sale, withheld refund, change not made, withheld compensation
+
+  Base severity = payout_loss + customer_harm; omissions are recorded separately. There are new exact-amount tests, including the task-11 $5,244 gift-card downgrade and the task-8 missed booking. 22/22 pass.
+- **Re-scored result:** **0 insured loss events in 15 runs. All 6 failures were omissions** ($348–3,180 each, 3 of them handed to a human).
+- **Failure attribution (transcripts read):**
+  - task 8 ×2: mixed. The simulated customer insisted on seat assignments that no tool supports, and the agent handed off.
+  - task 14: the **user simulator** ended the call without requesting the change.
+  - task 7 trial 2: **agent**. It cancelled one reservation and handed the other to a human.
+  - task 7 ×2: COMMUNICATE only (one figure never stated), so the agent, at $0.
+- **Implication:** with 0 events, the rule-of-three 95% upper bound on the loss-event rate is about 3/15 = 20% (naive), and wider with clustering. The commission peril is rare on these tasks. It mainly lives on tasks where the correct action is refusal (REVIEW.md #5), so the next batch must cover them.
+
+## Loop 3 — breadth batch (planned): many tasks, few repeats
+- **Why:** reviewer #4. 5 clusters can't estimate the ICC, and the hand-picked tasks bias q.
+- **Design:** a seeded random 25 of the 50 airline tasks × 2 runs = 50 runs, about $0.9. This deliberately includes tasks whose correct action is refusal or no action.
+- **Expectations, written before running:**
+  - ≥10 failures
+  - the commission share of failures is low (<25%)
+  - the loss-event rate is at most 10%
+  - the failure ICC across 25 clusters is clearly above 0

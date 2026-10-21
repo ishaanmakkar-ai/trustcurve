@@ -2,7 +2,6 @@
 
 import copy
 import json
-import os
 from pathlib import Path
 
 import pytest
@@ -16,64 +15,100 @@ def base_db():
             "u1": {"payment_methods": {
                 "credit_card_1": {"source": "credit_card", "id": "credit_card_1"},
                 "gift_card_1": {"source": "gift_card", "id": "gift_card_1", "amount": 200.0},
+                "certificate_7": {"source": "certificate", "id": "certificate_7", "amount": 300.0},
             }},
             "u2": {"payment_methods": {"credit_card_2": {"source": "credit_card", "id": "credit_card_2"}}},
         },
         "reservations": {
-            "R1": {"user_id": "u1", "payment_history": [{"payment_id": "credit_card_1", "amount": 500}]},
-            "R2": {"user_id": "u2", "payment_history": [{"payment_id": "credit_card_2", "amount": 300}]},
+            "R1": {"user_id": "u1", "cabin": "economy", "payment_history": [{"payment_id": "credit_card_1", "amount": 500}]},
+            "R2": {"user_id": "u2", "cabin": "economy", "payment_history": [{"payment_id": "credit_card_2", "amount": 300}]},
         },
     }
 
 
 def test_identical_dbs_have_zero_loss():
     d = dollar_diff(base_db(), base_db())
-    assert d.money_match and d.severity == 0 and d.delta == 0
+    assert d.money_match and d.severity == 0 and d.omission == 0
 
 
-def test_known_wrong_double_refund_is_first_party_loss():
-    gold = base_db()
-    gold["reservations"]["R1"]["payment_history"].append({"payment_id": "credit_card_1", "amount": -500})
-    agent = copy.deepcopy(gold)
+def test_wrongful_cancellation_is_over_refund_payout():
+    gold = base_db(); agent = copy.deepcopy(gold)
     agent["reservations"]["R1"]["payment_history"].append({"payment_id": "credit_card_1", "amount": -500})
     d = dollar_diff(gold, agent)
-    assert d.first_party_loss == 500 and d.third_party_harm == 0 and d.delta == -500
+    assert d.payout_loss == 500 and d.customer_harm == 0 and d.omission == 0
 
 
-def test_unwarranted_certificate_is_loss():
-    gold = base_db()
-    agent = copy.deepcopy(gold)
+def test_unwarranted_certificate_is_payout():
+    gold = base_db(); agent = copy.deepcopy(gold)
     agent["users"]["u2"]["payment_methods"]["certificate_9"] = {"source": "certificate", "id": "certificate_9", "amount": 150.0}
     d = dollar_diff(gold, agent)
-    assert d.first_party_loss == 150 and d.per_user == {"u2": -150}
+    assert d.payout_loss == 150 and d.items[0]["kind"] == "unwarranted_compensation"
 
 
-def test_overcharge_is_third_party_harm():
-    gold = base_db()
-    agent = copy.deepcopy(gold)
+def test_overcharge_is_customer_harm():
+    gold = base_db(); agent = copy.deepcopy(gold)
     agent["reservations"]["R2"]["payment_history"].append({"payment_id": "credit_card_2", "amount": 120})
     d = dollar_diff(gold, agent)
-    assert d.third_party_harm == 120 and d.first_party_loss == 0
+    assert d.customer_harm == 120 and d.payout_loss == 0
 
 
-def test_offsetting_errors_across_users_are_not_netted():
-    gold = base_db()
-    agent = copy.deepcopy(gold)
+def test_offsetting_errors_are_not_netted():
+    gold = base_db(); agent = copy.deepcopy(gold)
     agent["reservations"]["R1"]["payment_history"].append({"payment_id": "credit_card_1", "amount": -100})
     agent["reservations"]["R2"]["payment_history"].append({"payment_id": "credit_card_2", "amount": 100})
     d = dollar_diff(gold, agent)
-    assert d.delta == 0 and d.severity == 200 and not d.money_match
+    assert d.payout_loss == 100 and d.customer_harm == 100 and d.severity == 200
 
 
-def test_gift_card_refund_counts_as_credit_owed():
-    # tau2 cancel appends a negative gift-card payment but does not restore the balance.
-    gold = base_db()
-    gold["reservations"]["R3"] = {"user_id": "u1", "payment_history": [{"payment_id": "gift_card_1", "amount": 80}]}
-    gold["users"]["u1"]["payment_methods"]["gift_card_1"]["amount"] = 120.0
-    agent = copy.deepcopy(gold)
-    agent["reservations"]["R3"]["payment_history"].append({"payment_id": "gift_card_1", "amount": -80})
+def test_missed_booking_is_omission_not_loss():
+    # Loop-2 bug: gold books R3 with a certificate (removed whole); agent books nothing.
+    gold = base_db(); agent = copy.deepcopy(gold)
+    gold["reservations"]["R3"] = {"user_id": "u1", "cabin": "economy",
+                                  "payment_history": [{"payment_id": "certificate_7", "amount": 250}]}
+    del gold["users"]["u1"]["payment_methods"]["certificate_7"]
     d = dollar_diff(gold, agent)
-    assert d.first_party_loss == 80
+    assert d.severity == 0 and d.omission == 250 and d.items[0]["kind"] == "missed_sale"
+
+
+def test_withheld_refund_is_omission_not_loss():
+    gold = base_db(); agent = copy.deepcopy(gold)
+    gold["reservations"]["R2"]["payment_history"].append({"payment_id": "credit_card_2", "amount": -300})
+    d = dollar_diff(gold, agent)
+    assert d.severity == 0 and d.omission == 300
+
+
+def test_wrongful_booking_is_customer_harm():
+    gold = base_db(); agent = copy.deepcopy(gold)
+    agent["reservations"]["R9"] = {"user_id": "u2", "cabin": "economy",
+                                   "payment_history": [{"payment_id": "credit_card_2", "amount": 410}]}
+    d = dollar_diff(gold, agent)
+    assert d.customer_harm == 410 and d.items[0]["kind"] == "wrongful_booking"
+
+
+def test_upgrade_given_without_charge_is_undercharge():
+    gold = base_db(); agent = copy.deepcopy(gold)
+    for db in (gold, agent):
+        db["reservations"]["R2"]["cabin"] = "business"
+    gold["reservations"]["R2"]["payment_history"].append({"payment_id": "credit_card_2", "amount": 200})
+    d = dollar_diff(gold, agent)
+    assert d.payout_loss == 200 and d.items[0]["kind"] == "undercharge"
+
+
+def test_change_not_made_is_omission():
+    gold = base_db(); agent = copy.deepcopy(gold)
+    gold["reservations"]["R2"]["cabin"] = "business"
+    gold["reservations"]["R2"]["payment_history"].append({"payment_id": "credit_card_2", "amount": 200})
+    d = dollar_diff(gold, agent)
+    assert d.severity == 0 and d.omission == 200
+
+
+def test_gift_card_refund_counted_once():
+    # Reviewer finding #1: a gift-card downgrade restores the balance AND appends a negative entry.
+    gold = base_db(); agent = copy.deepcopy(gold)
+    agent["reservations"]["R1"]["payment_history"].append({"payment_id": "gift_card_1", "amount": -80})
+    agent["users"]["u1"]["payment_methods"]["gift_card_1"]["amount"] = 280.0
+    d = dollar_diff(gold, agent)
+    assert d.payout_loss == 80
 
 
 def test_unknown_payment_type_raises():
@@ -131,7 +166,13 @@ def test_real_money_task_gold_replay_has_zero_loss(j):
     from trustcurve.dollar_diff import user_positions
     initial = registry.get_env_constructor("airline")().tools.db.model_dump(mode="json")
     assert agent != initial, "replay did not change the DB"
-    assert dollar_diff(gold, agent).money_match
+    d = dollar_diff(gold, agent)
+    assert d.money_match and d.severity == 0 and d.omission == 0
+    # and the same task with NO agent actions must differ from gold when gold moves money
+    gold2, none = gold_and_agent_dbs(task, [])
+    moved = user_positions(gold2) != user_positions(initial)
+    if moved:
+        assert not dollar_diff(gold2, none).money_match
 
 
 def test_most_money_tasks_really_move_money():
@@ -160,16 +201,43 @@ def test_real_task_extra_certificate_is_detected():
     assert d.first_party_loss == 100 and d.third_party_harm == 0
 
 
-def test_real_task_wrong_cancellation_is_detected():
+def test_real_task_wrong_cancellation_is_exact():
     from tau2.data_model.tasks import Action
     from trustcurve.dollar_diff import gold_and_agent_dbs
+    chosen = None
     for task in _money_tasks(25):
         acts = list(task.evaluation_criteria.actions)
-        if not any(a.name == "cancel_reservation" for a in acts):
-            res = next((a.arguments.get("reservation_id") for a in acts if a.arguments.get("reservation_id")), None)
-            if res:
-                break
+        if any(a.name == "cancel_reservation" for a in acts):
+            continue
+        res = next((a.arguments.get("reservation_id") for a in acts if a.arguments.get("reservation_id")), None)
+        if res:
+            chosen = (task, acts, res); break
+    if chosen is None:
+        pytest.fail("no candidate task found for the wrong-cancellation test")
+    task, acts, res = chosen
     wrong = Action(action_id="w", name="cancel_reservation", arguments={"reservation_id": res}, requestor="assistant")
     gold, agent = gold_and_agent_dbs(task, _messages_for(task, acts + [wrong]))
+    expected = sum(float(p["amount"]) for p in gold["reservations"][res]["payment_history"])
     d = dollar_diff(gold, agent)
-    assert d.first_party_loss > 0
+    assert d.payout_loss == pytest.approx(expected) and d.customer_harm == 0
+
+
+def _task(tid):
+    return next(t for t in _airline_tasks() if str(t.id) == str(tid))
+
+
+def test_task11_skipped_gift_card_downgrade_is_exact_omission():
+    """Reviewer finding #1 regression: gold refunds $5,244 to a gift card; agent does nothing."""
+    from trustcurve.dollar_diff import gold_and_agent_dbs
+    task = _task(11)
+    gold, agent = gold_and_agent_dbs(task, [])
+    d = dollar_diff(gold, agent)
+    refunds = [i for i in d.items if i["kind"] == "withheld_refund"]
+    assert sum(i["usd"] for i in refunds) == pytest.approx(5244) and d.severity == 0
+
+
+def test_task8_missed_booking_is_omission():
+    from trustcurve.dollar_diff import gold_and_agent_dbs
+    gold, agent = gold_and_agent_dbs(_task(8), [])
+    d = dollar_diff(gold, agent)
+    assert d.severity == 0 and d.omission > 0 and all(i["category"] == "omission" for i in d.items)

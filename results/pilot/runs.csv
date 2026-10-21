@@ -1,0 +1,16 @@
+task_id,trial,seed,reward,db_reward,communicate_reward,db_match,money_match,loss_event,non_monetary_db_mismatch,payout_loss_usd,customer_harm_usd,severity_usd,omission_usd,loss_kinds,position_delta_legacy,diff_error,stratum,agent_in_tok,agent_out_tok,agent_calls,user_in_tok,user_out_tok,user_calls,long_prompt_calls,cost_usd_from_tokens,cost_usd_tau2,duration_s,termination,transferred
+1,0,572728,1.0,1.0,1.0,True,True,False,False,0.0,0.0,0.0,0.0,,0.0,,no_money,74919,2494,8,14269,595,7,0,0.010463,0.010463,28.88355299993418,user_stop,False
+8,0,572728,1.0,1.0,1.0,True,True,False,False,0.0,0.0,0.0,0.0,,0.0,,money,120119,3773,12,15051,1384,7,0,0.016096,0.016095,37.370385958929546,user_stop,True
+11,0,572728,1.0,1.0,1.0,True,True,False,False,0.0,0.0,0.0,0.0,,0.0,,money,122477,4311,13,18183,1303,8,0,0.016873,0.016873,41.16723012493458,user_stop,False
+7,0,572728,0.0,1.0,0.0,True,True,False,False,0.0,0.0,0.0,0.0,,0.0,,money,140845,5672,13,12008,1148,6,0,0.018695,0.018695,43.4133998749312,user_stop,False
+1,1,403560,1.0,1.0,1.0,True,True,False,False,0.0,0.0,0.0,0.0,,0.0,,no_money,81765,2055,9,14822,463,8,0,0.010918,0.010918,23.085760291898623,user_stop,False
+14,0,572728,1.0,1.0,1.0,True,True,False,False,0.0,0.0,0.0,0.0,,0.0,,money,200599,8695,16,30987,2330,10,0,0.028671,0.028671,65.57133774994873,user_stop,False
+8,1,403560,0.0,0.0,1.0,False,False,False,False,0.0,0.0,0.0,348.0,missed_sale,-500.0,,money,86491,2683,9,11731,1371,6,0,0.011849,0.011849,29.381139874923974,user_stop,True
+7,1,403560,0.0,1.0,0.0,True,True,False,False,0.0,0.0,0.0,0.0,,0.0,,money,126279,5032,12,11319,442,6,0,0.016497,0.016497,34.694726875051856,user_stop,False
+11,1,403560,1.0,1.0,1.0,True,True,False,False,0.0,0.0,0.0,0.0,,0.0,,money,83164,3126,9,9639,897,5,0,0.011292,0.011292,29.101195416995324,user_stop,False
+1,2,608527,1.0,1.0,1.0,True,True,False,False,0.0,0.0,0.0,0.0,,0.0,,no_money,74509,2212,8,13836,630,7,0,0.010256,0.010255,22.45123033307027,user_stop,False
+14,1,403560,0.0,0.0,0.0,False,False,False,False,0.0,0.0,0.0,3180.0,missed_sale;withheld_refund,-2046.0,,money,116473,6384,12,16076,1715,7,0,0.017304,0.017304,48.02293624996673,user_stop,False
+11,2,608527,1.0,1.0,1.0,True,True,False,False,0.0,0.0,0.0,0.0,,0.0,,money,93586,3012,10,11898,706,6,0,0.012407,0.012407,26.600574790965766,user_stop,False
+8,2,608527,0.0,0.0,1.0,False,False,False,False,0.0,0.0,0.0,348.0,missed_sale,-500.0,,money,87555,3121,9,12930,2462,6,0,0.01284,0.01284,35.52769716701005,user_stop,True
+7,2,608527,0.0,0.0,0.0,False,False,False,False,0.0,0.0,0.0,2440.0,change_not_made;withheld_refund,296.0,,money,98196,6601,10,15016,819,7,0,0.015031,0.015031,43.504907833994366,user_stop,True
+14,2,608527,1.0,1.0,1.0,True,True,False,False,0.0,0.0,0.0,0.0,,0.0,,money,234502,13977,18,27942,2134,9,0,0.0343,0.0343,88.92100266704801,user_stop,False

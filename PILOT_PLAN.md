@@ -9,7 +9,7 @@ One configuration:
 - communicate judge `anthropic/claude-haiku-5-5`
 - tau2 v2.0.0 (commit recorded), `llm_agent`, airline policy, provider-default sampling
 
-Haiku 5.5 rejects non-default temperature, and the default is also what a deployment would run. **Nothing is pooled across configurations.**
+Haiku 5.5 rejects non-default temperature, and the default is also what a deployment would run. Haiku 5.5 runs with adaptive thinking on at effort `medium`, its provider defaults. The seed is dropped by LiteLLM for Anthropic, so it's a label only; reproducibility comes from the saved transcripts. **Nothing is pooled across configurations.**
 
 ## Exposure unit
 One run (one customer conversation). This is valid only if real traffic has a similar per-conversation loss profile. The workflow mix will be reweighted with labelled assumptions.
@@ -50,7 +50,9 @@ Prices: Haiku 5.5 is $0.10 / $0.50 per million input/output tokens for prompts �
 - Give three options:
   - **A.** all 50 tasks × 20 runs, the affordable fallback
   - **B.** what it takes to reach k = ±10% or ±20% on frequency
-  - **C.** what reaching 1,082 effective failures would need, likely more distinct tasks (generated variants or other domains), not repeats
+  - **C.** what reaching the full standard needs, stated in effective runs (1,082·(1−q+CV²)/q vs the N/ρ ceiling, with ρ of the loss-event indicator). This likely means more distinct tasks, not repeats
+
+**Correction after review 1:** batch 1 (5×3) is plumbing and cost only. Estimates of q, ρ and CV² come from loop 3 (a random 25 tasks × 2, with a task-level bootstrap). Strata are the customer's request type, not gold actions. Loss = payout_loss + customer_harm; omissions are reported separately.
 
 ## Commercial framing
 - **Who uses this output:** an MGA or Lloyd's syndicate deciding whether to write agent liability cover for a customer-service deployment, at what limit and deductible.

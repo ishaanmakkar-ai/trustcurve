@@ -14,7 +14,7 @@ Research pass for the TrustCurve pilot (2026-10-21). `[U]` = unverified, `(d)` =
 
 ## 2. How many observations: credibility
 - **Limited-fluctuation full standard:** n_F = (z/k)². At P = 90% (z = 1.645) and k = 5%, n_F = **1,082 claims** (verified against the CAS text [1, Table 12.1; 5]).
-  - Other points on the same table: k = 10% → 271 claims; 95%/5% → 1,537; 99%/5% → 2,652.
+  - Other points on the same table: k = 10% → 271 claims; 95%/5% → 1,537; 99%/5% → 2,654 (z = 2.576).
   - Assumptions: Poisson claim counts, homogeneous exposures. The count is of *claims*, not exposures.
 - **General frequency:** n_F = (z/k)²·σ²/μ. σ²/μ is **1 − q for binomial** [2, eq. 9.4].
 - **Pure premium including severity:** (z/k)²·[σ²/μ + CV_X²] [1, p.219; 2, eq. 9.5]. **Severity variance usually dominates.**
@@ -31,8 +31,8 @@ Research pass for the TrustCurve pilot (2026-10-21). `[U]` = unverified, `(d)` =
   - As m grows, effective n tends to **N/ρ** (d). With **50 airline tasks** [16]:
     - ρ = 0.3: ceiling ≈ 167
     - ρ = 0.5: ceiling ≈ 100
-  - **So repeats alone cannot reach 1,082 effective observations for a failure rate that should generalise beyond these 50 tasks.** Repeats only shrink within-task noise. More distinct tasks (variants, perturbations) is the lever.
-  - Evidence that ρ is large: in τ-bench, pass^1 0.46 vs pass^4 0.225 for one model, against 0.045 if trials were independent [17, secondary] (d). Clustered errors inflated standard errors up to ~3× on public evals [11].
+  - **Unit correction (review 1, #3):** the ceiling N/ρ is in effective **runs**. Effective **loss events** ≈ q·N/ρ. Example: q = 0.4, ρ = 0.3 gives about 67 effective failures, against 1,082·(1−q) = 649 needed for frequency alone. **Repeats alone cannot reach the full standard.** Compare runs needed, 1,082·(1−q+CV²)/q, with N/ρ, and use ρ of the *loss-event* indicator.
+  - Evidence that ρ is large (indirect: τ-bench retail on another model): in τ-bench, pass^1 0.46 vs pass^4 0.225 for one model, against 0.045 if trials were independent [17, secondary] (d). Clustered errors inflated standard errors up to ~3× on public evals [11].
 - **Link between ICC and Bühlmann:** for a beta-binomial model, ρ = 1/(α+β+1), so K = (1−ρ)/ρ (d). The pilot's ICC estimate both sizes the main run and sets the credibility weights.
 - **Workflow mix:** post-stratify, E[L] = Σ_h w_h·q_h·μ_h, using the insured's real mix w_h. Unequal weights add a Kish design effect ≈ 1 + CV_w² [13]. Credibility then has to hold per heavily weighted stratum.
 - **Is 1,082 right?** It's a convention.
