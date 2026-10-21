@@ -331,6 +331,17 @@ def sign_test(a_rows, b_rows, f):
     return {"pos": pos, "neg": neg, "ties": len(d) - n, "p_two_sided": round(p, 4)}
 
 
+def mcnemar_majority(a_rows, b_rows, f):
+    """Exact McNemar on task-level majority outcomes (mean >= 0.5), as pre-registered for E1."""
+    A, Bt = by_task(a_rows, f), by_task(b_rows, f)
+    ts = sorted(set(A) & set(Bt))
+    a_only = sum(mean(A[t]) >= 0.5 and mean(Bt[t]) < 0.5 for t in ts)
+    b_only = sum(mean(Bt[t]) >= 0.5 and mean(A[t]) < 0.5 for t in ts)
+    n = a_only + b_only
+    p = min(1.0, 2 * sum(math.comb(n, k) for k in range(min(a_only, b_only) + 1)) / 2 ** n) if n else 1.0
+    return {"a_only": a_only, "b_only": b_only, "p_exact": round(p, 4)}
+
+
 def sign_test_diffs(d):
     pos = sum(x > 1e-12 for x in d); neg = sum(x < -1e-12 for x in d); n = pos + neg
     p = min(1.0, 2 * sum(math.comb(n, k) for k in range(min(pos, neg) + 1)) / 2 ** n) if n else 1.0

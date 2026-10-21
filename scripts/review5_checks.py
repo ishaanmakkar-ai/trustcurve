@@ -8,7 +8,7 @@ import random
 from collections import defaultdict
 from statistics import mean
 
-from trustcurve.phase1 import (by_task, cluster_ci, dbm, fail, load, omission, sign_test, sign_test_diffs)
+from trustcurve.phase1 import (by_task, cluster_ci, dbm, fail, load, mcnemar_majority, omission, sign_test, sign_test_diffs)
 
 P = "results/phase1/"
 cells = {"HxH": "results/pilot/breadth_runs.csv", "HxO": P + "e1_O_runs.csv", "HxS": P + "e1_S_runs.csv",
@@ -29,6 +29,8 @@ for name, f in (("db_mismatch", dbm), ("failure", fail), ("omission", omission))
         st[f"E1x_interaction_{c}"] = sign_test_diffs(d)
     st["E1x_gap_O_per_task_nonzero"] = {t: tm["SxO"][t] - tm["HxO"][t] for t in tasks if tm["SxO"][t] != tm["HxO"][t]}
     out["sign_tests"][name] = st
+
+out["e1_mcnemar_majority"] = {n: {a: mcnemar_majority(C["HxH"], C[f"Hx{a}"], f) for a in "OS"} for n, f in (("failure", fail), ("db_mismatch", dbm))}
 
 # 2. Cluster-bootstrap 90% intervals for every cell rate (replacing run-level Wilson in tables)
 out["cell_cluster_ci90"] = {k: {"db_mismatch": cluster_ci(v, dbm), "failure": cluster_ci(v, fail)} for k, v in C.items()}

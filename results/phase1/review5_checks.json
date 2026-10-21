@@ -150,6 +150,32 @@
    }
   }
  },
+ "e1_mcnemar_majority": {
+  "failure": {
+   "O": {
+    "a_only": 3,
+    "b_only": 1,
+    "p_exact": 0.625
+   },
+   "S": {
+    "a_only": 3,
+    "b_only": 0,
+    "p_exact": 0.25
+   }
+  },
+  "db_mismatch": {
+   "O": {
+    "a_only": 4,
+    "b_only": 0,
+    "p_exact": 0.125
+   },
+   "S": {
+    "a_only": 3,
+    "b_only": 0,
+    "p_exact": 0.25
+   }
+  }
+ },
  "cell_cluster_ci90": {
   "HxH": {
    "db_mismatch": [
