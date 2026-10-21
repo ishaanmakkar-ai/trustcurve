@@ -436,3 +436,98 @@ The loop-1/2 simulation does not model that: within-type trigger conditions, and
   - Either way, the change goes to Ishaan.
 - **RQ3:** reported as the difference-in-differences with its interval. If its 90% width is > 0.4, it is labelled as unable to distinguish "no shared-assumption effect" from a 20-point one.
 - **K1′** fires only if neither the matched McNemar power nor H3b power at C2 reaches 0.5 in any n_e ≤ 400 cell.
+
+### A′ loop 4 results (2026-10-21; `results/study3/phaseA/sim_a4.json`, `tables4.md`, `decisions_loop4.json`; pre-registration 9bbf26c)
+**Run:** 96 cells × 300 replications in 79 s.
+
+**Pricing against the perfect-forecaster ceiling (n_e = 200):**
+- The perfect forecaster O has median |log error| **0.33** at r ∈ [0.05, 0.4] and **0.46** at [0.02, 0.15]. That is the experience-noise floor.
+- **With F1 representative (ρ1 = 1):**
+  - F1₃ has 0.43 and F2 has 0.47;
+  - H3b power is ≤ 0.01 (ceiling 0.14–0.20).
+  - There is no pricing advantage to detect.
+- **At the Study-2-calibrated point C2 (ρ1 = 0.3; F1₁ bias −0.93 log at r ∈ [0.05, 0.4]):**
+  - F2's error is less than half of F1₃'s (0.45 vs 1.01; Spearman 0.84 vs 0.72; coverage 0.88 vs 0.56);
+  - but **H3b power is only 0.25** (ceiling 0.79). At n_e = 400 it is 0.34 (ceiling 0.86).
+  - The bottleneck is the precision of F2's 40-task × 3-run pricing arm, not the size of the true difference.
+- **With F1 fully unrepresentative (ρ1 = 0):** F1's Spearman is 0.05, close to Study 2's 0.006. Here P(H3) for F2 is 0.88–0.96 and H3b power 0.51–0.72.
+  - **So the plan's H3 is reachable, but only in a world where the generic pool is as unrepresentative as Study 2's was.**
+- **F2's representativeness cuts both ways.**
+  - At ρ2 = 1.5 (over-represented triggers), F2 overprices by +0.40 log.
+  - At ρ2 = 0.3, it underprices by −0.89 log, and its error is ≈ F1's.
+  - **The representative arm must be written to match deployment. Over-trapping it destroys the advantage.**
+
+**Detection** (exposure-matched, S0 per-task unit, ρ2 = 1):
+- **With F1 representative (r ∈ [0.05, 0.4]):**
+  - F2 detects 0.76 of non-designed flaws, against F1₃ 0.52 and F1₁ 0.39;
+  - **matched McNemar power is 0.35** (run-level 0.39), against 0.68 unmatched.
+- With F1 unrepresentative, matched power rises to 0.64 (ρ1 = 0.6), 0.92 (0.3) and 1.00 (0).
+- **False positives** over 3 clean-vs-reference comparisons are ≤ 0.014.
+- **Detection vs realised firing rate (ρ1 = 1):**
+
+  | r | F2 | F1₃ |
+  |---|---|---|
+  | 0.02–0.05 | 0.25 | 0.15 |
+  | 0.05–0.1 | 0.53 | 0.36 |
+  | 0.1–0.2 | 0.72 | 0.52 |
+  | 0.2–0.4 | 0.86 | 0.65 |
+
+- **RQ3 difference-in-differences:**
+  - its mean is +0.01 to +0.18;
+  - its SD across replications is 0.20–0.31;
+  - **its 90% width is 0.67–1.00.**
+  - At 4 designed configurations, RQ3 cannot distinguish "no shared-assumption effect" from a large one.
+
+**Cost** (full line, estimate; prices to be rechecked):
+
+| n_e | Total incl. 10% retries | Underwriting | Experience | Judge | Pilot, κ validation, planter |
+|---|---|---|---|---|---|
+| 100 | $336 | | | | |
+| 200 | **$444** | $137 | $180 | ≈ $62 | $25 |
+| 400 | $659 | | | | |
+
+**Predictions:**
+
+| Prediction | Verdict |
+|---|---|
+| A′-P8 (H3b ≥ 0.5 at C2) | **Not confirmed** (0.25). The ≤ 0.15 part at ρ1 = 1 holds (0.01) |
+| A′-P9 (matched McNemar ≤ 0.6) | **Confirmed** (0.35, vs 0.68 unmatched) |
+| A′-P10 (DiD width > 0.4) | **Confirmed** (1.00) |
+
+**Decision rules, applied literally:**
+
+| Rule | Outcome |
+|---|---|
+| n_e | No n_e qualifies at either range. **n_e = 200** |
+| RQ2 | **Estimation with intervals.** H3 and H3b are reported as secondary tests with their pre-computed power (H3b ≈ 0.25 at C2) |
+| H3 | Not unreachable. P(H3) for O reaches 0.98–1.00 at ρ1 = 0 |
+| RQ1 | Matched power is 0.35 < 0.6, so **H2 stays primary, as the plan states**. Detection-vs-rate curves and the matched McNemar test (power stated) are reported alongside |
+| RQ3 | **Labelled uninformative** at 4 designed configurations (width 1.00). It is reported as an estimate, not a test |
+| K1′ | **Does not fire.** Matched McNemar power reaches ≥ 0.5 when F1 is unrepresentative |
+
+### A′ closing summary (2026-10-21; 4 loops, the maximum)
+**What the planned design can decide:**
+- **H1 and H2: yes.** P ≥ 0.94 at r ∈ [0.05, 0.4] *if* the world resembles the simulation. Real flaws that fire below about 5% per opportunity will mostly be missed by any benchmark.
+- **Which kind of world the real study is in.** Whether F1 is representative shows up directly as F1's realised bias.
+
+**What it cannot decide:**
+- **Pricing superiority**, unless the generic pool turns out to be grossly unrepresentative (as in Study 2);
+- **the shared-assumption gap** (RQ3);
+- **underwriters vs benchmark** (RQ4, 3–5 people).
+
+These are reported as estimates with intervals.
+
+**Design carried into B′** (each item is still subject to Ishaan's decisions, below):
+- **Configurations:** 20 (4 clean + 4 per source).
+- **Runs:** **F1 and F2 both at 3 runs per task**, with F1₁ (first run) reported as the Study 2 equivalent.
+- **F2:** 60 trap tasks (≥ 10% floor per money-moving type) + 40 deployment-representative tasks. **Pricing comes from the representative arm only.**
+- **Experience:** n_e = 200.
+- **Flaw rates:** 5–40% per opportunity where the source sets them (designed, mechanical); external and natural flaws at whatever rate they have.
+- **Sign test:** per task.
+
+**Untested lever (for Ishaan):** a larger representative pricing arm is the obvious way to raise H3b power, for example 100 representative tasks. A′ did not simulate it, and the loop budget is spent.
+
+**Needs Ishaan before any paid B′ run:**
+1. **The budget cap.** The full design is ≈ $444 (≈ $336 at n_e = 100), against ≈ $126 left under $500.
+2. **Who builds F2**, and whether he accepts the F2 spec: ≥ 10% type floor, R = 3, a separate representative arm written to deployment frequencies, and possibly a larger representative arm.
+3. **Whether to accept that RQ2 and RQ3 are estimation, not tests, at this size.** Raising them to tests would need ≫ 20 configurations.

@@ -1,0 +1,85 @@
+{
+ "C2": {
+  "[0.05, 0.4] n_e=100": {
+   "rho1": 0.3,
+   "F1_1_bias": -0.8754,
+   "H3b": 0.1233,
+   "ceiling": 0.5967
+  },
+  "[0.05, 0.4] n_e=200": {
+   "rho1": 0.3,
+   "F1_1_bias": -0.9283,
+   "H3b": 0.2533,
+   "ceiling": 0.79
+  },
+  "[0.05, 0.4] n_e=400": {
+   "rho1": 0.3,
+   "F1_1_bias": -0.9213,
+   "H3b": 0.3367,
+   "ceiling": 0.8633
+  },
+  "[0.02, 0.15] n_e=100": {
+   "rho1": 0.3,
+   "F1_1_bias": -0.6456,
+   "H3b": 0.0167,
+   "ceiling": 0.2267
+  },
+  "[0.02, 0.15] n_e=200": {
+   "rho1": 0.3,
+   "F1_1_bias": -0.7659,
+   "H3b": 0.1167,
+   "ceiling": 0.44
+  },
+  "[0.02, 0.15] n_e=400": {
+   "rho1": 0.3,
+   "F1_1_bias": -0.7845,
+   "H3b": 0.1667,
+   "ceiling": 0.5467
+  }
+ },
+ "n_e_rule": {
+  "[0.05, 0.4]": {
+   "qualifying_n_e": null,
+   "n_e": 200,
+   "RQ2_form": "estimation with intervals"
+  },
+  "[0.02, 0.15]": {
+   "qualifying_n_e": null,
+   "n_e": 200,
+   "RQ2_form": "estimation with intervals"
+  }
+ },
+ "H3_unreachable": {
+  "[0.05, 0.4]": false,
+  "[0.02, 0.15]": false
+ },
+ "RQ1_form": {
+  "matched_mcnemar_power_r1_rho1_1": 0.3467,
+  "primary": "detection-vs-rate curves; H2 stays primary"
+ },
+ "RQ3": {
+  "[0.05, 0.4]": {
+   "did_w90": 1.0,
+   "label_uninformative": true
+  },
+  "[0.02, 0.15]": {
+   "did_w90": 1.0,
+   "label_uninformative": true
+  }
+ },
+ "P8": {
+  "C2_H3b_r1_200": 0.2533,
+  "rho1_1_H3b_r1_200": 0.01,
+  "holds": false
+ },
+ "P9": {
+  "matched": 0.3467,
+  "unmatched": 0.6833,
+  "holds": true
+ },
+ "P10": {
+  "did_w90": 1.0,
+  "holds": true
+ },
+ "K1prime_fires": false
+}
