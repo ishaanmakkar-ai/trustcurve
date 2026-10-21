@@ -531,3 +531,131 @@ These are reported as estimates with intervals.
 1. **The budget cap.** The full design is ≈ $444 (≈ $336 at n_e = 100), against ≈ $126 left under $500.
 2. **Who builds F2**, and whether he accepts the F2 spec: ≥ 10% type floor, R = 3, a separate representative arm written to deployment frequencies, and possibly a larger representative arm.
 3. **Whether to accept that RQ2 and RQ3 are estimation, not tests, at this size.** Raising them to tests would need ≫ 20 configurations.
+
+## S1. Insurance-economics layer (secondary analysis; pre-registered 2026-10-21, before any B′ work and before any forecast freeze)
+**Origin:** an amendment from Ishaan's parent session, relayed by a peer session on 2026-10-21. Its research base is the vault note "TrustCurve — Insurance Economics Research (2026-10-21)" (cited below as **IER §n**) and its source files.
+
+**Questions:**
+- (a) Would an insurer that prices from each forecaster make a profit?
+- (b) Would the buyer pay?
+- (c) What is the "premium for not being tested", measured against an outside-in rater that never looks at the agents?
+
+**Scope:**
+- $0. No paid runs.
+- A pure computation over the frozen forecasts and the experience results.
+- **No change to H1–H5, K1′–K4′ or any A′ decision.**
+
+**Parameter tags:**
+- **[V]:** IER's agent read the primary source.
+- **[S]:** secondary or unconfirmed.
+- **[D]:** derived arithmetic.
+- **[A]:** an assumption made here.
+
+The real-world costly-error frequency is **always a sweep, never asserted** (IER §5, §7: "No source: guess").
+
+### E0. Outside-in forecasters (frozen with F1–F3)
+- **F0, exposure-only.**
+  - It uses HSB's filed cyber structure: premium = exposure base × hazard class × schedule modifier (IER §2 [V]; HSB Total Cyber manual 12/2015).
+  - Every configuration is one "industry" with one per-conversation exposure unit, so **F0 is one flat rate per conversation**.
+  - That rate is the book-wide mean of **F1₃'s** frozen point forecasts. F1₃ is the real design's primary F1 since A′ loop 4; the request said "F1". This is the outside-in pricer's information: the market average [A].
+  - For rule (ii) below, F0's p75 is the book-wide mean of F1₃'s frozen p75s [A].
+- **F0q, questionnaire.**
+  - F0q = F0 × m_c / mean(m), so it is revenue-neutral against F0. This is the standard off-balance adjustment [A].
+  - m_c is a schedule modifier built **only** from description-card fields an applicant would declare. Each factor sits within HSB's 0.9–1.1 per-criterion range, and the product is capped to 0.35–3.5 (IER §2 [V]).
+  - The mapping, written now:
+
+    | Card field | Modifier |
+    |---|---|
+    | Model tier | frontier 0.9; mid-tier 1.0; small or older 1.1 |
+    | Money-moving tools present | yes 1.1; no 0.9 |
+    | Human approval required for refunds or compensation | yes 0.9; no 1.1 |
+    | A declared guardrail (policy-check step, refusal layer or harness) | yes 0.9; no 1.0 |
+
+  - It uses no transcripts and no benchmark results.
+  - Outdated policy documents and planted faults are not card-visible, by design.
+
+### E1. Premiums per forecaster f ∈ {F0, F0q, F1₃, F1₁, F2, F3}
+- **Pure premium** = the frozen point forecast in $ per conversation, total across the three perils. Per-peril premiums are also reported.
+- **Permissible loss ratio (PLR):** **0.60** base, swept over 0.50–0.65 (IER §7; CAS 65% [V]; cyber 35–73% [S]).
+  - It is consistent with acquisition 25% + admin 12% + about 5% profit, less 2.5% investment income [D]: 1 − 0.25 − 0.12 − 0.05 + 0.025 ≈ 0.60.
+- **Rule (i), naive:** gross = point ÷ PLR.
+- **Rule (ii), uncertainty-loaded:** gross = the 75th percentile of the forecaster's predictive distribution ÷ PLR.
+  - **F1 and F2:** the 75th percentile must be stored at freeze. **This is a freeze requirement.**
+  - **F3:** a lognormal fitted to the underwriters' median price and median 90% range.
+  - **F0 and F0q:** as in E0.
+
+### E2. The insurer's book per forecaster
+- **Book:** each of the 20 configurations is one insured with **V conversations a year**: V = 10M base; sweep 1M and 30M (IER §5, §7 [D]).
+- **Realised annual loss per insured** = the mean per-conversation loss of a bootstrap resample of its experience conversations, × V. B = 10,000 resamples [A]. The book loss distribution comes from the same bootstrap (insureds resampled independently).
+- **Reported per forecaster:**
+  - loss ratio (LR) = realised ÷ gross premium;
+  - **combined ratio (CR) = LR + 37%**, the expense ratio: acquisition 25% + admin 12% (IER §7; Lloyd's 22.6% + 11.8% [V]);
+  - underwriting profit;
+  - investment income of 2.5% of premium.
+- **Tail:**
+  - the bootstrap 99.5% book loss;
+  - **plus a correlated-flaw scenario** [A].
+    - Take the largest realised excess loss per conversation (realised − the clean controls' mean) among the flawed configurations on the modal base model.
+    - Apply it to **every** insured on that base model in the same year, × V.
+    - This is the one-shared-flaw-hits-many case (IER §1: catastrophe bonds priced at 5–10× EL [V]).
+- **Capital** = max(1.0 × gross premium, tail loss − expected loss), where the tail loss is the larger of the bootstrap 99.5% and the correlated-flaw scenario.
+  - Capital ÷ premium 1.0 (IER §7; NAIC 0.77 [V]; Solvency II ≈ 0.4 + catastrophe [D]).
+- **Return on capital** = (underwriting profit + investment income) ÷ capital, against a **10% cost of equity** (IER §7 [S]).
+- **"Profitable" = CR ≤ 95% and RoC ≥ 10%** (Gen Re 95% target [V]).
+- **Cross-subsidy map:** the loss ratio by configuration and forecaster.
+
+### E3. Competition and adverse selection
+- **Pairwise markets:** F0 vs F2, F0q vs F2, F1₃ vs F2, F3 vs F2.
+- **Base:** each insured buys the cheaper rule-(ii) quote.
+- **Sensitivity:** logit switching. P(buy from A) = 1 / (1 + exp(β·(log p_A − log p_B))), with **β = 5** [A].
+- **Reported:** each insurer's **won-book** LR and CR.
+- **Informed-buyer variant:** an insured whose realised loss is < 50% of its premium lapses with probability s ∈ {0, 0.3} [A]. This is selection like the telematics opt-in effect (IER §4 [V]).
+
+### E4. Premium for not being tested
+- **Per configuration:**
+  - P(F0) − P(F2) and P(F0q) − P(F2), in $ and as a % of P(F0), under rules (i) and (ii).
+- **Reported separately for:**
+  - clean controls and low-risk configurations (realised loss below the book median): the overpayment by a safe company that isn't tested;
+  - high-risk configurations: the outside-in insurer's underpricing, i.e. adverse selection.
+
+### E5. Buyer side (a real-world assumption, labelled as such)
+- **Premium ÷ saving:** premium per conversation ÷ (the saving per AI-resolved conversation × the resolution rate).
+  - Saving: **$4** base, $3–6 (IER §5 [V/D]).
+  - Resolution rate: **0.51** (Fin average [V]).
+- **Premium ÷ expected loss.**
+- Both are reported only at the E6 rescaled levels, never at raw Study 3 levels.
+
+### E6. Levels caveat
+**Study 3's $ levels come from trap-dense tasks.** So the headline is in **ratios**:
+- LR and CR;
+- relativities;
+- premium ÷ expected loss;
+- the F0 − F2 gap as a % of F0.
+
+**Real-world reading:**
+- Every configuration's realised and forecast loss is rescaled by one common factor k = f × E[severity] ÷ (the book-mean realised loss per conversation).
+  - E[severity] is Study 3's own pooled event-severity mean.
+  - **f** is a frequency sweep: **0.01%, 0.1%, 1%** costly errors per conversation (IER §5: "a guess, to sweep, not to assert").
+- Ratios don't change under k. Only E5 and the capital floor do.
+
+### Kill criteria for this layer (they end claims in this layer, not the study)
+- **KE1:** no forecaster reaches CR ≤ 95% under rule (ii) at the base PLR → "not insurable on these forecasts at this maturity".
+- **KE2:** F2's won-book LR in the F0-vs-F2 market is less than 10 LR points better than F0's → "testing adds little pricing value here". For comparison, Gallagher Re found that dropping the worst-scored 20% of cyber insureds cuts LR by up to 16.4% (IER §3 [V]).
+- **KE3:** with the correlated-flaw scenario's capital, RoC < 10% for every forecaster → "the tail, not per-insured pricing, is the binding constraint".
+
+### Case against (recorded before data)
+1. **Cyber is an imperfect analogue.** AI errors are endogenous and correlated through shared models, so cyber history probably understates the tail (IER §3, §6).
+2. **F0 vs F2 partly re-tests F1 vs F2 on levels,** because F0's flat rate is anchored on F1. The headline is therefore the cross-subsidy and selection *structure*, not levels.
+3. **About 20 insureds is a toy book.** Each per-configuration LR is noisy.
+4. **A′ already showed that F2's 40-task pricing arm is noisy** (loop 4: H3b power ≈ 0.25 at the Study-2-calibrated point). A cheapest-quote market rewards *underpricing* errors (the winner's curse). So E3 will penalise noise in every forecaster, F2 included. A KE2 "pass" or "fail" partly measures forecast precision, not only information.
+5. **The correlated-flaw scenario is one constructed draw, not an estimated tail.**
+
+### Implementation
+- **Code:** `src/trustcurve/study3/econ.py`.
+- **When:** written and given a known-truth smoke test on A′-style simulated forecasts during B′, **before** the forecast freeze. The freeze must store each forecaster's p75 and the description-card fields.
+- **Locked decisions this layer must respect** (none conflicts):
+  - 20 configurations;
+  - F1 at R = 3;
+  - F2 split pricing;
+  - n_e = 200.
+- **Noted for Ishaan:** F0 is anchored on F1₃, not F1₁.
