@@ -12,7 +12,12 @@ import json
 import sys
 from pathlib import Path
 
+from trustcurve.study2 import collect2
 from trustcurve.study2.collect2 import collect_runs, harness_cost, write_csv
+
+# Study 3 models missing from Study 2's price table (added here, not in Study 2's code). gpt-4o-mini: $0.15 / $0.60,
+# cached $0.075 per M tokens [S: third-party aggregators, 2026-10-22; OpenAI's own page not confirmed].
+collect2.PRICES2.setdefault("gpt-4o-mini-2024-07-18", (0.15, 0.60, 0.075))
 from trustcurve.study2.forecast import BASIC_LIMIT
 
 
@@ -49,4 +54,6 @@ if __name__ == "__main__":
     print(json.dumps({"runs": len(rows), "errors": sum(bool(r["error"]) for r in rows), "cost_usd": round(tot, 4),
                       "harness_cost_usd": round(hc, 4), "harness_checks": n,
                       "harm_events": sum(bool(r.get("harm_event")) for r in rows),
-                      "commission_events": sum(bool(r.get("commission_event")) for r in rows)}))
+                      "commission_events": sum(bool(r.get("commission_event")) for r in rows),
+                      "unpriced": sum(r.get("cost_agent_usd") is None or r.get("cost_user_usd") is None
+                                      for r in rows if not r.get("error"))}))

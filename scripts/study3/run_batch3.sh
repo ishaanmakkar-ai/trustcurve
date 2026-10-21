@@ -19,5 +19,8 @@ SUM=$(PYTHONPATH="$R/src" "$PY" -m trustcurve.study3.collect3 "$OUT/results.json
 echo "$SUM" >> "$LOG"
 COST=$(echo "$SUM" | "$PY" -c 'import json,sys; print(json.load(sys.stdin)["cost_usd"])')
 RUNS=$(echo "$SUM" | "$PY" -c 'import json,sys; print(json.load(sys.stdin)["runs"])')
+UNP=$(echo "$SUM" | "$PY" -c 'import json,sys; print(json.load(sys.stdin).get("unpriced", 0))')
 "$PY" "$R/scripts/study3/spend.py" add "$PHASE" "$NAME" "$RUNS" "$COST" "$CFG x $SIML" | tee -a "$LOG"
-exit ${PIPESTATUS[0]}
+RC=${PIPESTATUS[0]}
+if [[ "$UNP" != "0" ]]; then echo "STOP: $UNP unpriced runs in $NAME (spend undercounted); add the model's price" | tee -a "$LOG"; exit 4; fi
+exit $RC
