@@ -255,3 +255,33 @@ At pilot-like clustering:
 7. **Distinct tasks bind:** run each task once, not many variants many times, unless E2 shows variants are near-independent.
 
 **E2 correction (before any E2 run):** all 20 E2 parents are in the breadth set (same seed), so the existing breadth runs (2 per parent) serve as the unperturbed parent runs. No extra parent runs are needed. The pre-registration said 17 of 20, which was wrong.
+
+## Reference run: real-data check of the techniques, pre-registered 2026-10-21, before any reference run
+**Design:**
+- **REF-H:** all 50 airline tasks × 20 runs, Haiku agent and Haiku simulator, 1,000 runs.
+- **REF-S:** the 25 breadth tasks × 20 runs, Haiku agent and **Sonnet 5.5** simulator, 500 runs.
+- The reference estimand is framing (a), the finite task set: the rate over these tasks, which 20 runs per task pins down well.
+
+**Checks** (each could fail):
+1. **Small-slice coverage:** draw 200 random "small slices" from REF-H (25 tasks × 2 runs, matching the breadth design). For each, compute the T1 rate with its parent-clustered 90% log interval for DB mismatch. Coverage of the REF-H 50-task rate should be within 0.85–0.95.
+2. **Credibility per workflow:** from the same slices, compute per-stratum (request type) raw rates vs Bühlmann–Straub credibility estimates, scored by MSE against the REF-H per-stratum rates. Prediction: credibility MSE < raw MSE.
+3. **Clustering:** the observed ICC from REF-H at 20 runs per task, with a bootstrap CI, compared with the pilot's 0.42 (2 runs per task). Prediction: 0.3–0.6.
+4. **Simulator effect at scale:** REF-S vs REF-H on the same 25 tasks, as a paired per-task difference in failure and DB-mismatch rates. This is a higher-powered version of E1.
+5. **Insured-loss rate:** REF-H with the policy layer, reported with Wilson and the CP-on-tasks bound. Prediction: ≤ 2%.
+
+**Spend estimate:** REF-H about $15 and REF-S about $27, both on the personal key.
+
+## Phase 1b: second agent, pre-registered 2026-10-21, before any 1b run
+**Design:** the agent is `claude-sonnet-5-5`, the simulator Haiku (as in the pilot breadth, so only the agent changes), the judge Haiku. The 25 breadth tasks × 2, plus the 40 refusal tasks × 1, about 90 runs and about $23.
+
+**Question:** does the method separate the two agents' risk?
+
+**Outcomes vs the Haiku agent on the same tasks:**
+- paired per-task failure, DB-mismatch and omission rates
+- commission rate on refusal tasks
+
+**Predictions:**
+- **1b-P1:** Sonnet has fewer omissions and failures (difference −5 to −15 points on breadth).
+- **1b-P2:** on refusal tasks Sonnet commits less often, but the 90% intervals overlap at 40 tasks × 1 run.
+
+**Decision relevance:** if the intervals overlap, **the method can't yet separate agents at this sample size**, and the gate must say what size would.
