@@ -148,3 +148,108 @@ None of these were in the pre-registration:
 **Kill criterion:** if user_caused accounts for ≥ 30% of H's failures and drops to < 10% under S or O, the pilot's failure rates are **setup-inflated**, and every downstream estimate must use the stronger simulator.
 
 **Spend estimate:** about $1.3 for O (Hexa) and about $2.8 for S (personal).
+
+## E2: variant nesting (gate input), pre-registered 2026-10-21, before any E2 run
+**Design:**
+- 20 seeded parents × 5 validated variants (`tasks/e2_variants.json`; `tasks/e2_validation.json` shows all 100 valid) × 2 runs.
+- Agent and simulator: Haiku. If E1's kill rule fires, E2 is **re-run** with the winning simulator.
+- Parents are also run unperturbed: the existing breadth runs cover 17 of the 20 parents. The other 3 are run × 2.
+
+**Estimand:**
+- Variance components of the DB-mismatch (loss-relevant) indicator at three levels: parent, variant, run.
+- **ρ_parent** = σ²_parent / σ²_total (latent or observed), estimated by a 3-level ANOVA/MoM estimator, with a parent-level cluster bootstrap (B = 2,000).
+- Also the **cross-variant correlation**: the correlation between two different variants of the same parent.
+
+**Decision quantity:** effective independent tasks per parent when using V variants: V_eff = V / (1 + (V−1)·r_cross), where r_cross is the between-variant (same parent) correlation of variant means.
+
+**Predictions:**
+- **E2-P1:** r_cross is high (≥ 0.5). Rename and persona variants don't change the underlying task difficulty, so variants are mostly **not** independent tasks: V_eff ≤ 2 of 5.
+- **E2-P2:** the rename and top-up variants have failure rates within ±10 points of their parent. Persona variants (impatient or chatty) shift the failure rate more.
+
+**Gate rule:**
+- If V_eff ≥ 3 of 5, generating variants is a viable route to thousands of tasks.
+- If V_eff ≤ 2, it isn't. Phase 2 then needs **new parents**, not variants, or else a "not from benchmarks alone" conclusion.
+
+## E3: refusal set (commission peril), pre-registered 2026-10-21, before any E3 run
+**Design:** 40 policy-validated refusal tasks (`tasks/e3_refusal.json`: 16 A non-refundable cancellation, 12 B unowed compensation, 12 C social engineering) × 3 runs, Haiku agent and simulator.
+
+**Outcome:** commission (wrongful payout) = the dollar-diff payout_loss or customer_harm > 0 that the policy layer doesn't classify as permitted. Plus near-misses (RUBRICS B).
+
+**Predictions:**
+- **E3-P1:** commission rate 5–20% per run. Higher for social engineering C and non-refundable A; lower for compensation B.
+- **E3-P2:** commissions cluster by task (ICC > 0.3).
+- **E3-P3:** near-misses are ≥ 2× as common as commissions.
+
+**Report:**
+- the rate with a Wilson interval on runs
+- a robust bound on tasks (CP, 40 tasks)
+- per-type rates
+
+### Phase 0 v2 results (2026-10-21)
+Files: `results/phase0v2/grid.json` (120 cells × 300 reps) and `results/phase0v2/credibility_fine.json`. Figures pooled over q ≥ 2% unless stated; Monte Carlo SE of pooled coverage ≈ 0.002–0.003.
+
+| Arm | Pooled cov90 | Upper95 cov | Median abs. bias | Worst-cell cov | Runs vs PROP | Verdict |
+|---|---|---|---|---|---|---|
+| **T1 PROP** (sample at W) | 0.903 | 0.944 | 0.6% | 0.82 | 1.00 | ✓ **pass**: the recommended default |
+| T1 NEYMAN, oracle σ | 0.901 | 0.943 | 0.8% | 0.83 | 0.91 | ✓ upper bound on the gain (−9%) |
+| T1 NEYMAN, plug-in σ from a 300-run pilot | 0.878 | 0.922 | 1.1% | 0.77 | 1.03 | no gain in practice |
+| T1 IS_MIX (oversample risky) | 0.870 | 0.916 | 0.8% | 0.69 | **1.20** | ✓ P1 confirmed: **IS loses** for the mixed rate. Keep only for rare-stratum estimates |
+| T1 PROP, **wrong mix** (5 pts cancel → refusal) | 0.749 | 0.761 | **9.8%** | 0.07 | — | ✓ P6 confirmed: **no technique fixes a wrong W** |
+| Capped pure premium (PROP) | 0.892 | 0.931 | 0.6% | 0.76 | — | ✓ pass |
+| T4r control variate, pre-run score r = 0.3 | 0.903 | 0.946 | 0.6% | 0.83 | 1.00 | ✗ P2 partly wrong: **no gain** |
+| T4r, r = 0.6 | 0.903 | 0.946 | 0.6% | 0.83 | 0.99 | ✗ about 4.5% SE gain at high ICC only; check r = 0.95 → 18% |
+| T3p near-miss (Poisson), R known | 0.903 | 0.931 | 0.6% | 0.75 | **0.71** | ✓ unbiased and 29% fewer runs, **if R is known** |
+| T3p, R from a 2,000-run calibration sample | 0.851 | 0.905 | 7.7% | **0.00** | 1.10 | ✗ unstable ratio at low q (max +39%) |
+| T3p, R × 1.5 | 0.229 | 0.229 | 33.6% | 0.00 | — | ✓ P4 confirmed (−33%) |
+
+**Low-event arm (q ≤ 1%, T1 PROP):**
+- At q = 0.5% with 500 runs, 16% of samples had 0 events, yet two-sided cov90 was 0.94 and upper95 1.00, thanks to the CP-on-parents fallback.
+- At q = 0.5–1% with ≥ 2,000 runs, cov90 was 0.89–0.90 and upper95 0.94.
+- **P5 partly wrong (better than predicted):** coverage held because the zero-event bound is conservative.
+
+**Latent → observed ICC** (repeated runs of one task; q = 2% / 5%, parent share 0.9):
+
+| Latent | Observed |
+|---|---|
+| 0.1 | 0.03 / 0.05 |
+| 0.3 | 0.07 / 0.13 |
+| 0.6 | 0.21 / 0.29 |
+| 0.8 | **0.40 / 0.48** |
+| 0.9 | 0.57 / 0.63 |
+
+**The pilot's observed DB-mismatch ICC of 0.42 ≈ latent 0.8.**
+
+**Runs and distinct parents for ±20% (T1 PROP, worst over parent share), confirming P7:**
+
+| q | Latent ICC | 5 variants × 2 runs | 1 task × 2 runs | 1 task × 1 run |
+|---|---|---|---|---|
+| 2% | 0.8 (pilot-like) | 13,011 runs / 1,301 parents | 4,576 / 2,288 | **3,232 / 3,232** |
+| 2% | 0.9 | 15,939 / 1,593 | 5,078 / 2,539 | 3,220 / 3,220 |
+| 5% | 0.8 (pilot-like) | 5,788 / 578 | 1,874 / 937 | **1,261 / 1,261** |
+| 5% | 0.9 | 6,997 / 699 | 2,052 / 1,026 | 1,265 / 1,265 |
+
+At pilot-like clustering:
+- **±20% needs about 1,300–3,200 distinct tasks run once each** (about $20–50 of API on a Haiku simulator).
+- Nested 5-variant designs need 2.5–5× the runs, and only half as many parents **if** variants were as independent as the simulator assumes. **E2 tests exactly that.**
+
+**Credibility where it bites (T2f; 30 fine workflows, 2–8 parents each, 2 runs per parent):**
+
+| Between-workflow SD | Within SD | Per-workflow MSE, credibility ÷ raw | EB beta interval cov90 |
+|---|---|---|---|
+| 0.3 | 0.5 | **0.09** | 0.47 |
+| 0.3 | 1.5 | **0.09** | 0.48 |
+| 0.8 | 0.5 | **0.31** | 0.64 |
+| 0.8 | 1.5 | **0.28** | 0.61 |
+
+- **P3 split result:** credibility cuts per-workflow MSE by **69–91%**, a strong pass on accuracy.
+- But the naive empirical-Bayes beta interval **under-covers badly (0.47–0.64)**, because it treats runs as binomial and ignores parent clustering. **Use the credibility point estimate, not its naive interval.** Interval calibration is open and needs a cluster-aware bootstrap.
+- T2 on the 5 coarse strata ≈ post-stratification, as review 4 #3 said. That's "untested there", now **tested where it bites**.
+
+**Verdicts carried to phase 1:**
+1. Sample at the assumed mix (PROP). Plug-in Neyman isn't worth it.
+2. Report the capped pure premium.
+3. Use credibility point estimates per workflow.
+4. Near-miss only with an externally validated R.
+5. Drop the realistic control variate (no gain at plausible score quality).
+6. **The wrong-mix risk dominates every technique:** the real workflow mix must come from the insured's own data.
+7. **Distinct tasks bind:** run each task once, not many variants many times, unless E2 shows variants are near-independent.

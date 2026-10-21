@@ -57,3 +57,18 @@ Reviewers are fresh-context agents that see only the repo files. Each point is r
 
 ## Publication check — third-party name (2026-10-21)
 A `.gitignore` comment in the first commit named a third party. It was removed from the tree, then the history was rewritten and force-pushed with Ishaan's approval. No branch contains it. GitHub still serves the orphaned old commit by exact SHA until its garbage collection runs. Ishaan chose **not** to delete and recreate the repo. If needed, a GitHub Support purge request is the remaining route.
+
+## Review 4 — after Goal 3 v2 phase 0 (simulator, technique validation), 2026-10-21
+| # | Severity | Finding | Resolution |
+|---|---|---|---|
+| 1 | Blocker | The control variate used an oracle score with a known mean | **Fixed, and the verdict reversed.** The T4r pre-run task score uses an *estimated* pool mean (variance added) and cross-fitted β. At r = 0.3 or 0.6 there's **no gain** (runs ratio 1.00 / 0.99); only r = 0.95 gives 18%. Control variate dropped for phase 1 |
+| 2 | Major | IS loses to sampling at W; "1.7×" was against a weak baseline | **Accepted and confirmed.** PROP and Neyman arms added: IS needs **1.20×** PROP's runs, oracle Neyman 0.91×, plug-in Neyman 1.03×. PROP is now the default; IS only for rare-stratum estimates |
+| 3 | Major | Bühlmann as coded = post-stratification; credibility untested | **Accepted.** Tested where it bites (T2f, 30 fine workflows): MSE −69% to −91% vs raw. The naive EB interval under-covers (0.47–0.64), so it's flagged open. Coarse-strata T2 is relabelled "≈ post-stratification" |
+| 4 | Major | Runs-to-±20% understated; parents bind; means hide worst cells | **Fixed.** Worst cell over parent share reported, plus runs **and** parents for 5×2, 1×2 and 1×1 designs. Pilot-like q = 2%: 13,011 runs / 1,301 parents (5×2) vs 3,232 / 3,232 (1×1) |
+| 5 | Major | ICC grid is latent but was presented as observed; needs 0.8–0.9 | **Fixed.** Labelled latent, observed ICC reported, extended to 0.8/0.9. The pilot's 0.42 ≈ latent 0.8. "REL" renamed to logit offsets |
+| 6 | Major | Near-miss generator was a strawman | **Fixed.** Poisson counts: unbiased with R known (29% fewer runs). With R calibrated from a separate 2,000-run sample: unstable (bias up to +39%). Verdict: **usable only with externally validated R**, not "drop" |
+| 7 | Major | Pass rule missed upper-bound coverage, zero events, mix misspecification and width | **Fixed.** Upper95 coverage added (PROP 0.944). Zero-event arm q = 0.5/1% with a CP-on-parents fallback (upper95 ≥ 0.94). Mix-misspecification arm (−9.8% bias, cov 0.75). Worst cells reported |
+| 8 | Major/Minor | Monte Carlo error made some verdicts unrobust | **Fixed.** 300 reps per cell; pooled coverage reported with MC SE (≈ 0.002–0.003) |
+| 9 | Minor | Post-hoc changes not labelled | **Fixed.** "Post-hoc deviations" block added to EXPERIMENTS.md. Phase 0 v2 was pre-registered before any code change |
+| 10 | Minor | Multinomial allocation left strata empty | **Fixed.** Fixed stratified allocation, ≥ 2 parents per stratum |
+| 11 | Minor | Thin tests | **Partly fixed.** A numpy-int ICC regression test added (it found a real bug). The simstudy2 estimators are validated by the grid itself. A dedicated unit test of the zero-event fallback was added |

@@ -19,3 +19,9 @@ def test_importance_sampling_unbiased_at_large_n_and_naive_biased():
 def test_parent_clustering_wider_than_variant_clustering():
     sc = Scenario(0.05, 0.6, 0.9); mu = sc.mu(); s = draw_sample(sc, mu, IS_MIX, 4000, np.random.default_rng(5))
     assert est_is(s, "par")[1] > est_is(s, "var")[1]
+
+
+def test_zero_event_fallback_gives_cp_upper_on_parents():
+    from trustcurve.simstudy2 import interval
+    lo, hi = interval(0.0, 0.0, 30)
+    assert lo == 0.0 and abs(hi - (1 - 0.05 ** (1 / 30))) < 1e-12

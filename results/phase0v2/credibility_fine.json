@@ -1,0 +1,26 @@
+[
+ {
+  "between_sd": 0.3,
+  "within_sd": 0.5,
+  "mse_ratio_cred_over_raw": 0.09496878534706248,
+  "eb_interval_cov90": 0.46622222222222226
+ },
+ {
+  "between_sd": 0.3,
+  "within_sd": 1.5,
+  "mse_ratio_cred_over_raw": 0.0912037041205577,
+  "eb_interval_cov90": 0.47888888888888886
+ },
+ {
+  "between_sd": 0.8,
+  "within_sd": 0.5,
+  "mse_ratio_cred_over_raw": 0.30768243058654915,
+  "eb_interval_cov90": 0.635
+ },
+ {
+  "between_sd": 0.8,
+  "within_sd": 1.5,
+  "mse_ratio_cred_over_raw": 0.2775735775348172,
+  "eb_interval_cov90": 0.6115555555555555
+ }
+]

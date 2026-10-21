@@ -111,3 +111,12 @@ The review-1/2/3 resolutions re-analysed **existing** data and code. They ran no
 - **E2:** 20 seeded parents × 5 variants generated, all 100 valid (gold replays, and money matches the parent). Variant types: rename, impatient persona, chatty persona, gift-card top-up, rename+impatient. Distractor reservations and price changes were excluded on purpose.
 - **E3:** 40 refusal tasks (16 non-refundable cancellations, 12 unowed compensation, 12 social engineering), all validated against policy.md.
 - **Phase-0 review received:** 11 findings, not yet resolved; see the resume prompt in the goal note.
+
+## Phase 0, loop 4 (final): v2 re-run after review 4
+- **Pre-registered predictions P1–P7:**
+  - Confirmed: P1, P4, P6, P7.
+  - Wrong: P2 (the control variate gives no gain at a realistic r).
+  - Split: P3 (credibility MSE strongly better, but the naive interval under-covers).
+  - Better than predicted: P5 (the zero-event fallback keeps coverage).
+- **Bug found during the run:** `icc_binary` mis-computed on numpy ints (Python's `statistics.mean`). Fixed and tested; the pilot is unaffected (0.42).
+- Phase 0 iteration cap reached (4 of 4).
