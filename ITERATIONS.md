@@ -291,3 +291,28 @@ The review-1/2/3 resolutions re-analysed **existing** data and code. They ran no
   - ≥ 2 tasks on every money-moving action type (better: a 10% floor);
   - a 40-task representative subset kept separate for pricing;
 - the honest statement that, as currently powered, **Study 3 can test "designed benchmarks find more flaws, including undesigned ones" but probably not "designed benchmarks price better"**, unless loop 4 shows the real F1's unrepresentativeness gives enough room.
+
+## Study 3 — adapt memo after phase B′, infrastructure part (2026-10-22)
+**Done** ($1.54 of Study 3's $600):
+- Roster of 20 configurations; sealed fault interface; all three planted sources sealed (overall `5297f6be…`) with blind structural checks passing.
+- Experience pool sealed: 6 independent authors × 70, plus E7's 40 as the F2 pricing arm per Ishaan.
+- Loss accounting v3: ledger3 with 7 tests; judge rubric frozen; Haiku judge run on the validation sample, output sealed.
+- Audit packs, anonymised cards, the underwriter draft and the F2 build kit.
+- Fidelity pilot.
+
+**What broke, and the fixes:**
+1. **A mechanical author was stopped by a safety check** (harmful-text and personal-data operators). Outside-accounting flaws were restricted to non-monetary data-integrity errors, and the deviation is labelled.
+2. **ledger3's withheld-refund kind fired on simulator artefacts** in Study 2 transcripts (luna confirm-and-hang-up; transfers). Those cases now go to `uncertain`. Found by reading every event, the Study 2 lesson.
+3. **The pilot confirmed the artefact in Study 3:** G-trunc 10% for the luna customer. The pre-registered stop hint brought it to 0%.
+4. **The clean agent never fails on this pool (G1 0/80).** Reported, not waived. Study 3's loss signal comes almost entirely from flaws.
+5. **The analyst's own errors:** a G3 field-name bug (corrected), and labeller quotes from sealed pilot tasks pushed in efd4ef7 (contained; the 40 pilot tasks are excluded from the scored sample).
+6. **The cost estimate rose from $444 to $470** (Haiku judge), because of correct per-model run costs. N4 = gpt-4o-mini removed the expensive Haiku 4.5 fallback.
+
+**Strongest counter-consideration:** with G1 at 0%, any forecaster's ranking will be driven by whether it notices flaws at all. That favours detection-heavy benchmarks, and makes the pricing comparison mostly about flaw magnitude. It's a narrower test than "pricing real deployment risk", and the write-up must say so.
+
+**Waiting for Ishaan:**
+- **F2** (build kit in the vault);
+- **labels** on `results/study3/audit_packs/{statement,harm}` (κ gates);
+- **underwriter outreach** (draft in the vault).
+
+**C′ starts when F2 is frozen.**
