@@ -1,0 +1,179 @@
+{
+ "arms": {
+  "H_haiku_sim": {
+   "runs": 50,
+   "tasks": 25,
+   "failure": {
+    "count": 9,
+    "rate": 0.18,
+    "wilson90": [
+     0.1078,
+     0.285
+    ]
+   },
+   "db_mismatch": {
+    "count": 8,
+    "rate": 0.16,
+    "wilson90": [
+     0.0926,
+     0.2623
+    ]
+   },
+   "insured_loss": {
+    "count": 0,
+    "rate": 0.0,
+    "wilson90": [
+     0.0,
+     0.0513
+    ],
+    "robust_upper95_tasks": 0.1129
+   },
+   "omission_runs": 7,
+   "attribution": {
+    "agent_caused": 6,
+    "task_ambiguous": 2,
+    "mixed": 1
+   },
+   "icc_failure": 0.607,
+   "icc_db_mismatch": 0.422,
+   "cost_usd": 0.7347
+  },
+  "O_openai_sim": {
+   "runs": 50,
+   "tasks": 25,
+   "failure": {
+    "count": 7,
+    "rate": 0.14,
+    "wilson90": [
+     0.0777,
+     0.2392
+    ]
+   },
+   "db_mismatch": {
+    "count": 4,
+    "rate": 0.08,
+    "wilson90": [
+     0.0364,
+     0.1667
+    ]
+   },
+   "insured_loss": {
+    "count": 0,
+    "rate": 0.0,
+    "wilson90": [
+     0.0,
+     0.0513
+    ],
+    "robust_upper95_tasks": 0.1129
+   },
+   "omission_runs": 4,
+   "attribution": {
+    "task_ambiguous": 5,
+    "agent_caused": 2
+   },
+   "icc_failure": 0.84,
+   "icc_db_mismatch": 1.0,
+   "cost_usd": 0.9656
+  },
+  "S_sonnet_sim": {
+   "runs": 50,
+   "tasks": 25,
+   "failure": {
+    "count": 5,
+    "rate": 0.1,
+    "wilson90": [
+     0.0495,
+     0.1915
+    ]
+   },
+   "db_mismatch": {
+    "count": 5,
+    "rate": 0.1,
+    "wilson90": [
+     0.0495,
+     0.1915
+    ]
+   },
+   "insured_loss": {
+    "count": 0,
+    "rate": 0.0,
+    "wilson90": [
+     0.0,
+     0.0513
+    ],
+    "robust_upper95_tasks": 0.1129
+   },
+   "omission_runs": 4,
+   "attribution": {
+    "agent_caused": 5
+   },
+   "icc_failure": 0.786,
+   "icc_db_mismatch": 0.786,
+   "cost_usd": 2.0352
+  }
+ },
+ "paired_failure": {
+  "O_minus_H": {
+   "tasks": 25,
+   "mean_diff": -0.04,
+   "ci90": [
+    -0.1,
+    0.02
+   ],
+   "mde80_two_sided_alpha10": 0.0995,
+   "majority_flips": 4
+  },
+  "S_minus_H": {
+   "tasks": 25,
+   "mean_diff": -0.08,
+   "ci90": [
+    -0.14,
+    -0.02
+   ],
+   "mde80_two_sided_alpha10": 0.093,
+   "majority_flips": 3
+  },
+  "S_minus_O": {
+   "tasks": 25,
+   "mean_diff": -0.04,
+   "ci90": [
+    -0.08,
+    0
+   ],
+   "mde80_two_sided_alpha10": 0.0688,
+   "majority_flips": 1
+  }
+ },
+ "paired_db_mismatch": {
+  "O_minus_H": {
+   "tasks": 25,
+   "mean_diff": -0.08,
+   "ci90": [
+    -0.14,
+    -0.02
+   ],
+   "mde80_two_sided_alpha10": 0.093,
+   "majority_flips": 4
+  },
+  "S_minus_H": {
+   "tasks": 25,
+   "mean_diff": -0.06,
+   "ci90": [
+    -0.14,
+    0.0
+   ],
+   "mde80_two_sided_alpha10": 0.1093,
+   "majority_flips": 3
+  },
+  "S_minus_O": {
+   "tasks": 25,
+   "mean_diff": 0.02,
+   "ci90": [
+    -0.04,
+    0.1
+   ],
+   "mde80_two_sided_alpha10": 0.113,
+   "majority_flips": 1
+  }
+ }
+}

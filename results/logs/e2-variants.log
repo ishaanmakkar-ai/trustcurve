@@ -6,3 +6,150 @@
 5/100 (trial 1/2). Running task 1-v1_rename, trial 1
 6/100 (trial 1/2). Running task 1-v2_impatient, trial 1
 7/100 (trial 1/2). Running task 1-v3_chatty, trial 1
+8/100 (trial 1/2). Running task 1-v4_topup, trial 1
+Status: 1/200 complete. Avg reward: 1.00 (N=1). 8 running: 
+0-v2_impatient.0(30s), 0-v3_chatty.0(30s), 0-v4_topup.0(30s), 
+0-v1_rename.0(30s), 1-v1_rename.0(30s), 1-v2_impatient.0(30s), 
+1-v3_chatty.0(30s), 1-v4_topup.0(0s)
+9/100 (trial 1/2). Running task 1-v5_rename_impatient, trial 1
+10/100 (trial 1/2). Running task 3-v1_rename, trial 1
+11/100 (trial 1/2). Running task 3-v2_impatient, trial 1
+12/100 (trial 1/2). Running task 3-v3_chatty, trial 1
+13/100 (trial 1/2). Running task 3-v4_topup, trial 1
+14/100 (trial 1/2). Running task 3-v5_rename_impatient, trial 1
+Status: 7/200 complete. Avg reward: 1.00 (N=7). 8 running: 0-v3_chatty.0(61s), 
+1-v4_topup.0(31s), 1-v5_rename_impatient.0(27s), 3-v1_rename.0(25s), 
+3-v2_impatient.0(21s), 3-v3_chatty.0(18s), 3-v4_topup.0(15s), 
+3-v5_rename_impatient.0(11s)
+15/100 (trial 1/2). Running task 7-v1_rename, trial 1
+16/100 (trial 1/2). Running task 7-v2_impatient, trial 1
+17/100 (trial 1/2). Running task 7-v3_chatty, trial 1
+18/100 (trial 1/2). Running task 7-v4_topup_fallback_persona, trial 1
+19/100 (trial 1/2). Running task 7-v5_rename_impatient, trial 1
+20/100 (trial 1/2). Running task 14-v1_rename, trial 1
+21/100 (trial 1/2). Running task 14-v2_impatient, trial 1
+Status: 14/200 complete. Avg reward: 1.00 (N=14). 8 running: 
+3-v5_rename_impatient.0(41s), 7-v1_rename.0(29s), 7-v2_impatient.0(28s), 
+7-v3_chatty.0(22s), 7-v4_topup_fallback_persona.0(21s), 
+7-v5_rename_impatient.0(17s), 14-v1_rename.0(15s), 14-v2_impatient.0(9s)
+22/100 (trial 1/2). Running task 14-v3_chatty, trial 1
+23/100 (trial 1/2). Running task 14-v4_topup, trial 1
+24/100 (trial 1/2). Running task 14-v5_rename_impatient, trial 1
+Status: 17/200 complete. Avg reward: 0.88 (N=17). 8 running: 7-v3_chatty.0(52s),
+7-v4_topup_fallback_persona.0(51s), 7-v5_rename_impatient.0(47s), 
+14-v1_rename.0(45s), 14-v2_impatient.0(39s), 14-v3_chatty.0(27s), 
+14-v4_topup.0(19s), 14-v5_rename_impatient.0(5s)
+25/100 (trial 1/2). Running task 20-v1_rename, trial 1
+26/100 (trial 1/2). Running task 20-v2_impatient, trial 1
+27/100 (trial 1/2). Running task 20-v3_chatty, trial 1
+28/100 (trial 1/2). Running task 20-v4_topup_fallback_persona, trial 1
+Status: 21/200 complete. Avg reward: 0.71 (N=21). 8 running: 
+14-v1_rename.0(75s), 14-v3_chatty.0(57s), 14-v4_topup.0(49s), 
+14-v5_rename_impatient.0(35s), 20-v1_rename.0(15s), 20-v2_impatient.0(13s), 
+20-v3_chatty.0(6s), 20-v4_topup_fallback_persona.0(3s)
+29/100 (trial 1/2). Running task 20-v5_rename_impatient, trial 1
+30/100 (trial 1/2). Running task 24-v1_rename, trial 1
+31/100 (trial 1/2). Running task 24-v2_impatient, trial 1
+32/100 (trial 1/2). Running task 24-v3_chatty, trial 1
+Status: 25/200 complete. Avg reward: 0.72 (N=25). 8 running: 
+14-v5_rename_impatient.0(65s), 20-v1_rename.0(45s), 20-v3_chatty.0(36s), 
+20-v4_topup_fallback_persona.0(33s), 20-v5_rename_impatient.0(29s), 
+24-v1_rename.0(28s), 24-v2_impatient.0(25s), 24-v3_chatty.0(8s)
+33/100 (trial 1/2). Running task 24-v4_topup, trial 1
+34/100 (trial 1/2). Running task 24-v5_rename_impatient, trial 1
+35/100 (trial 1/2). Running task 25-v1_rename, trial 1
+36/100 (trial 1/2). Running task 25-v2_impatient, trial 1
+37/100 (trial 1/2). Running task 25-v3_chatty, trial 1
+38/100 (trial 1/2). Running task 25-v4_topup, trial 1
+39/100 (trial 1/2). Running task 25-v5_rename_impatient, trial 1
+40/100 (trial 1/2). Running task 30-v1_rename, trial 1
+Status: 33/200 complete. Avg reward: 0.76 (N=33). 8 running: 
+24-v3_chatty.0(38s), 24-v5_rename_impatient.0(24s), 25-v1_rename.0(20s), 
+25-v2_impatient.0(15s), 25-v3_chatty.0(10s), 25-v4_topup.0(8s), 
+25-v5_rename_impatient.0(5s), 30-v1_rename.0(3s)
+41/100 (trial 1/2). Running task 30-v2_impatient, trial 1
+42/100 (trial 1/2). Running task 30-v3_chatty, trial 1
+43/100 (trial 1/2). Running task 30-v4_topup, trial 1
+Status: 36/200 complete. Avg reward: 0.78 (N=36). 8 running: 
+24-v5_rename_impatient.0(54s), 25-v1_rename.0(50s), 25-v4_topup.0(39s), 
+25-v5_rename_impatient.0(36s), 30-v1_rename.0(34s), 30-v2_impatient.0(17s), 
+30-v3_chatty.0(10s), 30-v4_topup.0(9s)
+44/100 (trial 1/2). Running task 30-v5_rename_impatient, trial 1
+45/100 (trial 1/2). Running task 33-v1_rename, trial 1
+46/100 (trial 1/2). Running task 33-v2_impatient, trial 1
+47/100 (trial 1/2). Running task 33-v3_chatty, trial 1
+48/100 (trial 1/2). Running task 33-v4_topup, trial 1
+49/100 (trial 1/2). Running task 33-v5_rename_impatient, trial 1
+50/100 (trial 1/2). Running task 34-v1_rename, trial 1
+Status: 43/200 complete. Avg reward: 0.74 (N=43). 8 running: 30-v4_topup.0(39s),
+30-v5_rename_impatient.0(29s), 33-v1_rename.0(27s), 33-v2_impatient.0(26s), 
+33-v3_chatty.0(25s), 33-v4_topup.0(23s), 33-v5_rename_impatient.0(7s), 
+34-v1_rename.0(2s)
+51/100 (trial 1/2). Running task 34-v2_impatient, trial 1
+52/100 (trial 1/2). Running task 34-v3_chatty, trial 1
+53/100 (trial 1/2). Running task 34-v4_topup, trial 1
+54/100 (trial 1/2). Running task 34-v5_rename_impatient, trial 1
+Status: 47/200 complete. Avg reward: 0.72 (N=47). 8 running: 
+33-v1_rename.0(58s), 33-v2_impatient.0(56s), 33-v5_rename_impatient.0(37s), 
+34-v1_rename.0(32s), 34-v2_impatient.0(29s), 34-v3_chatty.0(27s), 
+34-v4_topup.0(16s), 34-v5_rename_impatient.0(13s)
+55/100 (trial 1/2). Running task 35-v1_rename, trial 1
+56/100 (trial 1/2). Running task 35-v2_impatient, trial 1
+Status: 49/200 complete. Avg reward: 0.73 (N=49). 8 running: 
+33-v1_rename.0(88s), 34-v1_rename.0(62s), 34-v2_impatient.0(59s), 
+34-v3_chatty.0(57s), 34-v4_topup.0(46s), 34-v5_rename_impatient.0(43s), 
+35-v1_rename.0(7s), 35-v2_impatient.0(1s)
+57/100 (trial 1/2). Running task 35-v3_chatty, trial 1
+58/100 (trial 1/2). Running task 35-v4_topup_fallback_persona, trial 1
+59/100 (trial 1/2). Running task 35-v5_rename_impatient, trial 1
+60/100 (trial 1/2). Running task 37-v1_rename, trial 1
+61/100 (trial 1/2). Running task 37-v2_impatient, trial 1
+62/100 (trial 1/2). Running task 37-v3_chatty, trial 1
+63/100 (trial 1/2). Running task 37-v4_topup_fallback_persona, trial 1
+Status: 56/200 complete. Avg reward: 0.75 (N=56). 8 running: 
+35-v2_impatient.0(31s), 35-v3_chatty.0(28s), 
+35-v4_topup_fallback_persona.0(24s), 35-v5_rename_impatient.0(20s), 
+37-v1_rename.0(17s), 37-v2_impatient.0(7s), 37-v3_chatty.0(4s), 
+37-v4_topup_fallback_persona.0(1s)
+64/100 (trial 1/2). Running task 37-v5_rename_impatient, trial 1
+65/100 (trial 1/2). Running task 38-v1_rename, trial 1
+66/100 (trial 1/2). Running task 38-v2_impatient, trial 1
+67/100 (trial 1/2). Running task 38-v3_chatty, trial 1
+Status: 60/200 complete. Avg reward: 0.77 (N=60). 8 running: 
+35-v3_chatty.0(58s), 35-v5_rename_impatient.0(50s), 37-v3_chatty.0(34s), 
+37-v4_topup_fallback_persona.0(31s), 37-v5_rename_impatient.0(12s), 
+38-v1_rename.0(7s), 38-v2_impatient.0(6s), 38-v3_chatty.0(3s)
+68/100 (trial 1/2). Running task 38-v4_topup_fallback_persona, trial 1
+69/100 (trial 1/2). Running task 38-v5_rename_impatient, trial 1
+70/100 (trial 1/2). Running task 40-v1_rename, trial 1
+71/100 (trial 1/2). Running task 40-v2_impatient, trial 1
+72/100 (trial 1/2). Running task 40-v3_chatty, trial 1
+73/100 (trial 1/2). Running task 40-v4_topup, trial 1
+Status: 66/200 complete. Avg reward: 0.77 (N=66). 8 running: 
+37-v3_chatty.0(64s), 38-v2_impatient.0(36s), 38-v3_chatty.0(33s), 
+38-v4_topup_fallback_persona.0(28s), 38-v5_rename_impatient.0(26s), 
+40-v2_impatient.0(5s), 40-v3_chatty.0(3s), 40-v4_topup.0(1s)
+74/100 (trial 1/2). Running task 40-v5_rename_impatient, trial 1
+75/100 (trial 1/2). Running task 41-v1_rename, trial 1
+76/100 (trial 1/2). Running task 41-v2_impatient, trial 1
+77/100 (trial 1/2). Running task 41-v3_chatty, trial 1
+78/100 (trial 1/2). Running task 41-v4_topup, trial 1
+79/100 (trial 1/2). Running task 41-v5_rename_impatient, trial 1
+80/100 (trial 1/2). Running task 42-v1_rename, trial 1
+Status: 73/200 complete. Avg reward: 0.79 (N=73). 8 running: 
+38-v2_impatient.0(66s), 40-v4_topup.0(31s), 41-v1_rename.0(19s), 
+41-v2_impatient.0(16s), 41-v3_chatty.0(13s), 41-v4_topup.0(12s), 
+41-v5_rename_impatient.0(8s), 42-v1_rename.0(5s)
+81/100 (trial 1/2). Running task 42-v2_impatient, trial 1
+82/100 (trial 1/2). Running task 42-v3_chatty, trial 1
+83/100 (trial 1/2). Running task 42-v4_topup, trial 1
+84/100 (trial 1/2). Running task 42-v5_rename_impatient, trial 1
+85/100 (trial 1/2). Running task 44-v1_rename, trial 1
+86/100 (trial 1/2). Running task 44-v2_impatient, trial 1
+87/100 (trial 1/2). Running task 44-v3_chatty, trial 1
+Status: 80/200 complete. Avg reward: 0.81 (N=80). 8 running: 
+42-v1_rename.0(36s), 42-v2_impatient.0(28s), 42-v3_chatty.0(26s), 
+42-v4_topup.0(20s), 42-v5_rename_impatient.0(18s), 44-v1_rename.0(12s), 
+44-v2_impatient.0(6s), 44-v3_chatty.0(5s)
+88/100 (trial 1/2). Running task 44-v4_topup, trial 1
+89/100 (trial 1/2). Running task 44-v5_rename_impatient, trial 1

@@ -149,6 +149,64 @@ None of these were in the pre-registration:
 
 **Spend estimate:** about $1.3 for O (Hexa) and about $2.8 for S (personal).
 
+## E1x: agent × user-simulator crossing (2 × 3), pre-registered 2026-10-21, before any E1x run
+
+**Why:** E1 varies only the simulator (agent fixed at Haiku), and phase 1b varies only the agent (simulator fixed at Haiku). Neither can show whether the simulator changes **how agents rank**, which is the claim insurers need ("the method separates agents' risk"). E1x completes the 2 × 3 grid.
+
+**Timing disclosure:** written at about 03:30 BST, when the E1-O arm (Haiku agent × OpenAI simulator) had 39 of 50 runs done and E2 had started. The author of this block had not inspected any E1-O outcomes. If the running session had already looked at E1-O outcomes, X2 and X3 below must be labelled as written after an interim look.
+
+**Timing disclosure, added when pasting (2026-10-21, about 03:40 BST, Claude Code):** before this block was pasted, the running session **had inspected E1-O and E1-S outcomes**. That covers E1-O's completion summary (43 of 50 passed), its collected runs and labels; E1-S's runs and labels; and the full E1 analysis (`results/phase1/e1_analysis.json`), all for the **Haiku-agent** cells only. No Sonnet-agent cell had been run or seen. Per the drafter's rule, **X2 and X3 are therefore labelled as written after an interim look** (marked † below). The hypotheses' wording was written by the drafter without seeing outcomes, and the pasting session didn't change them.
+
+**Design:**
+- The same 25 breadth tasks (`results/pilot/breadth_tasks.txt`), 2 runs each, provider-default sampling, judge Haiku, tau2 v2.0.0, unchanged policy layer and dollar diff v3.
+- Grid (agent × user simulator), 50 runs per cell:
+
+| Agent \ Simulator | Haiku (H) | OpenAI `gpt-6.1-sol` (O) | Sonnet 5.5 (S) |
+|---|---|---|---|
+| **Haiku 5.5** | pilot breadth (done) | E1-O (running) | E1-S (planned) |
+| **Sonnet 5.5** | phase 1b breadth part (planned) | **E1x-SO (new)** | **E1x-SS (new)** |
+
+- New runs: E1x-SO and E1x-SS, 100 runs in total.
+- Launch (same launcher as E1):
+  - `scripts/run_arm.sh e1x-SO openai/gpt-6.1-sol anthropic/claude-sonnet-5-5 2 "ids:0 1 2 3 7 9 13 14 20 24 25 30 32 33 34 35 37 38 40 41 42 44 45 46 48"`
+  - `scripts/run_arm.sh e1x-SS anthropic/claude-sonnet-5-5 anthropic/claude-sonnet-5-5 2 "ids:0 1 2 3 7 9 13 14 20 24 25 30 32 33 34 35 37 38 40 41 42 44 45 46 48"`
+- Rate-limit plan as in PILOT.md: on any 429, halve the concurrency and resume.
+
+**Outcomes:**
+- **Primary:** DB mismatch (the loss-relevant indicator, the same as E2 and the reference run).
+- **Secondary:**
+  - failure (reward < 1)
+  - omission
+  - share of failures attributed `user_caused` (RUBRICS A)
+  - insured loss event
+
+**Analysis** (all units are tasks; per-task cell rate = mean of 2 runs):
+1. **Agent gap per simulator:** Δ_c = rate(Sonnet agent, c) − rate(Haiku agent, c), for c ∈ {H, O, S}. Paired by task, with a task-level bootstrap 90% CI (B = 2,000, resampling tasks jointly across all 6 cells).
+2. **Interaction:** I_c = Δ_c − Δ_H for c ∈ {O, S}, with the same bootstrap.
+3. **Ranking stability:** the sign of Δ_c across the three simulators, and the bootstrap probability that the sign is the same under all three.
+4. **Simulator main effect averaged over agents:** reported for comparison with E1.
+5. **Power:** the MDE at 80% power for Δ_c is about 20 points (as in E1). For I_c it is about 28 points (difference of differences, ≈ √2 × the SE). **A null interaction means "no interaction this large", not "no interaction".** Resolving a 10-point interaction would need roughly 8× the tasks (~200), more than τ² airline's 50, so it can't be settled on this benchmark alone.
+
+**Hypotheses:**
+- **X1 (agent main effect):** Δ_c < 0 under every simulator (Sonnet fails less), −5 to −15 points, consistent with 1b-P1.
+- **X2 (interaction)** † *(written after an interim look; see the disclosure)*: |I_O| and |I_S| < 10 points. Simulator-caused failures hit both agents about equally.
+- **X3 (ranking)** † *(written after an interim look; see the disclosure)*: the point-estimate sign of Δ_c is the same under all three simulators.
+- **X4 (insured loss):** ≈ 0 in every cell.
+
+**Limitation stated in advance:** both agents are Claude models, so a difference between the O and S simulators **cannot** be read as same-family bias. Testing that needs a non-Claude agent (the full 3 × 3). That is deferred unless E2 and the main run are on track by Friday.
+
+**Kill criteria:**
+- **Hard:** Δ_c has 90% CIs excluding 0 **in opposite directions** under two simulators. Then agent risk scores depend on the simulator: report that, and don't price off any single simulator. Rating would need several simulators (average or worst case).
+- **Soft:** the point-estimate sign flips but the CIs overlap. Report "the ranking isn't shown to be robust at n = 25", with the task count needed to resolve it.
+
+**Spend estimate:**
+- Sonnet as agent ≈ $0.25 per run (20× Haiku's token price).
+- E1x-SO ≈ $13 (agent on the personal key, simulator on Hexa Agents OpenAI).
+- E1x-SS ≈ $15 (personal key).
+- Total ≈ $25–30, within the $300 cap. If this is drawn from the gated $150, ask Ishaan before launch.
+
+**Dependency:** if E1's kill rule fires (the Haiku simulator is setup-inflated), the S×S and S×O cells become the main basis for comparing agents, and the S×H cell is reported only for completeness.
+
 ## E2: variant nesting (gate input), pre-registered 2026-10-21, before any E2 run
 **Design:**
 - 20 seeded parents × 5 validated variants (`tasks/e2_variants.json`; `tasks/e2_validation.json` shows all 100 valid) × 2 runs.
