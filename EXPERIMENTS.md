@@ -117,3 +117,34 @@ None of these were in the pre-registration:
 - |bias| ≤ 10%
 - pooled coverage within 0.85–0.95, with Monte Carlo SE reported
 - plus the new criterion: **upper-bound coverage ≥ 0.93**
+
+## E1: user-simulator A/B (H-setup), pre-registered 2026-10-21, before any E1 run
+**Design:**
+- The same 25 breadth tasks (`results/pilot/breadth_tasks.txt`), 2 runs each, agent = `claude-haiku-5-5`, judge = Haiku.
+- Arms (user simulator):
+  - **H** = `claude-haiku-5-5` (the existing pilot breadth runs, 50)
+  - **O** = `openai/gpt-6.1-sol` (Hexa Agents credits)
+  - **S** = `claude-sonnet-5-5`
+- O and S both cost $2/$10 per MTok, so price is matched: O vs S isolates model **family**, and {O, S} vs H isolates **strength**.
+
+**Outcomes:**
+- failure (reward < 1)
+- DB mismatch
+- omission
+- insured loss event
+- attribution of each failure (RUBRICS A)
+
+**Analysis:**
+- Per-task paired difference in failure rate (arm − H), with a task-level bootstrap 90% CI.
+- McNemar-style exact test on task-level majority outcomes.
+- Minimum detectable effect at 80% power, given 25 paired tasks and the observed discordance.
+
+**Hypotheses:**
+- **H1:** failure rate S < H and O < H, driven by fewer **user_caused** failures. Expected direction: −5 to −15 points. Not significant is likely at n = 25 (MDE ≈ 20 points).
+- **H2:** the set of failing tasks differs between arms. Expect ≥ 3 tasks to flip, with the observed task-level ICC reported per arm.
+- **H3:** the insured-loss rate stays ≈ 0 in every arm (commission is agent-driven).
+- **H4 (family):** O and S don't differ by more than the MDE.
+
+**Kill criterion:** if user_caused accounts for ≥ 30% of H's failures and drops to < 10% under S or O, the pilot's failure rates are **setup-inflated**, and every downstream estimate must use the stronger simulator.
+
+**Spend estimate:** about $1.3 for O (Hexa) and about $2.8 for S (personal).
