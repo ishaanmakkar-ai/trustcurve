@@ -444,3 +444,23 @@ Either way, **G1/K3 and the go/no-go for phase C spend go to Ishaan before any p
 - Phase C remains **under-powered for K2**: about a coin flip on Spearman ≤ 0.3.
 - Its 90% predictive intervals would be about 6–8 × the pure premium wide: calibrated, but too wide to price with.
 - **Go/no-go and G1/K3 are put to Ishaan before any phase-C spend** (pre-registered in B-L1).
+
+### Corrections after review 7 (2026-10-21)
+- **G1 loop count:** only **1 of the 2** pre-registered difficulty loops had run (v3p). The capability probe (B-L2) is not a G1 loop. Earlier text saying "G1 fails twice" counted the original pilot.
+- **v3p gold error:** X3p-036's gold wrongly refused O3W0TY, which was booked 20.9 h before NOW and so is cancellable. Corrected. **v3p G1 recomputed: 2/40 = 5.0%** (Haiku simulator) and 0/40 (Sonnet).
+- **Ishaan's decision (2026-10-21):** run the **second difficulty loop** as pre-registered:
+  - addendum `EXPERIENCE_SPEC_ADDENDUM_HARD2.md`, focused on policy-boundary judgement;
+  - a new author writes 40 tasks (`v3q`);
+  - re-pilot B0 × Haiku simulator with the date hint.
+
+  If G1 (≥ 10%) still fails, **K3 fires per B3 and the study ends with that negative result.** If it passes, phase C runs at the "full" scope (≈ $295), which Ishaan approved.
+- **The first B5 table (M1, "coverage 0.998", width ≈ 1e7) is superseded.** It used M1 (no longer primary) and divided the width by a zero point. The B-L2 table (M2) replaces it.
+- **K2's coverage arm has little power** (intervals are 6–8 × θ). In practice the Spearman arm carries K2.
+- **Phase B spend** was **$44.60** (1.12 × the $40 budget; under the 1.5× stop). The baseline is **$83.00** (reconciled), not "≈ $87".
+- The tau2 COMMUNICATE judge (Haiku) is unpriced in the per-run CSVs. It is ≈ 1% of run cost (Goal 3) and carried as a +1% line.
+- **Known ledger gaps (documented):**
+  - the cancellation reason is per task, not per reservation;
+  - cancellations the customer never asked for aren't scored unless the policy forbids them;
+  - `breach_kinds` is a zero-loss diagnostic only.
+- **KNO-WI's first screening is void** (contradictory policy text). It is re-screened with both insurance lines edited (`uw1b-KNO-WI`).
+- **KB-CAPS's screening direction is untested:** screen30 excludes V-1, the only task that triggers KNO-WR.
