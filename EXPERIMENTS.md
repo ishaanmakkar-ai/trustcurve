@@ -60,3 +60,60 @@ Files: `results/phase0/grid_final.json`, `results/phase0/summary.json`. 36 cells
 **Implication for H-main:**
 - In simulation, ±20% is reachable with about 2,000–12,500 runs, roughly $30–185 on a Haiku simulator, **provided** there are about 200–1,250 genuinely independent parent tasks.
 - Phase 1 tests whether real variants and refusal tasks behave like the simulator assumes. In particular, E2 measures ρ_parent.
+
+### Post-hoc deviations in the phase-0 run above (labelled per review 4 #9)
+None of these were in the pre-registration:
+- 150 reps were run, not 200.
+- The capped pure-premium estimand was added after the uncapped one failed.
+- Log-scale intervals were chosen after Wald under-coverage was seen.
+- The "≥2,000 runs" qualifiers on T2 and capped PP were added after seeing results.
+- T1's max bias of −5.3% slightly exceeds the pre-registered < 5%.
+- The ICC grid values are **latent-scale**, which the pre-registration didn't state.
+
+## Phase 0 v2: re-run after review 4 (pre-registered 2026-10-21, before code changes)
+**Changes to the simulator and design (all decided before seeing new results):**
+1. **Fixed stratified allocation:** parents per stratum = round(n_par × mix), with a minimum of 2 per stratum. No empty strata. The variance uses the same clustered linearisation.
+2. **Sampling arms:**
+   - **PROP:** sample at the assumed real mix W.
+   - **NEYMAN:** allocation ∝ W_h·σ_h, where σ_h is the per-parent outcome SD. An oracle version gives the upper bound; a plug-in version uses σ_h from a 300-run pilot sample.
+   - **IS_MIX:** kept for comparison.
+3. **Realistic control variate (T4r):** a **pre-run, task-level** score s_p = sigmoid(c + r·z_p + √(1−r²)·ε), where z_p is the standardised parent logit, r ∈ {0.3, 0.6} and the calibration offset c ≠ 0.
+   - The pool mean is **estimated** from an independent sample of 1,000 pool tasks (their scores only; no runs needed), and its variance is added to the SE.
+   - β is **cross-fitted**: estimated on one half of the parents and applied to the other.
+4. **Credibility where it bites (T2f):** 30 fine workflows with 2–8 parents each and 2 runs per parent.
+   - The target is each workflow's rate.
+   - Raw per-workflow means are compared with the Bühlmann–Straub estimate (parents as the units within a workflow, workflows as classes, complement = pooled mean), using per-workflow MSE and the coverage of an empirical-Bayes interval.
+5. **Near-miss (T3p):** counts ~ Poisson(R·p), R = 10, so there's no saturation. Three ways of getting R:
+   - (i) R known;
+   - (ii) R estimated from an **independent calibration sample** of 2,000 runs on another stratum mix, with its uncertainty propagated;
+   - (iii) R misspecified × 1.5.
+6. **Grid:**
+   - q ∈ {0.5%, 1%, 2%, 5%}, with q = 0.5% and 1% as the zero/low-event arm
+   - **latent** ICC ∈ {0.1, 0.3, 0.6, 0.8, 0.9}; observed-scale ICCs are reported alongside
+   - parent share ∈ {0.5, 0.9}
+   - runs ∈ {500, 2,000, 8,000}
+   - **300 reps** per cell
+7. **Zero-event interval:** when the estimate is 0, the upper bound is the Clopper–Pearson one-sided 95% bound on n_eff = parents (the worst case over heterogeneity); the lower bound is 0.
+8. **Mix misspecification arm:** the truth uses W_true (5 points moved from cancel to refusal); the estimators use the assumed W.
+9. **Metrics:**
+   - relative bias
+   - two-sided 90% coverage
+   - **one-sided 95% upper-bound coverage** (truth ≤ upper)
+   - relative half-width
+   - pooled coverage across cells with Monte Carlo SE
+   - worst cell
+   - **runs and distinct parents** needed for ±20%, for designs with 1, 2 and 10 runs per parent
+
+**Predictions:**
+- **P1:** PROP and NEYMAN need fewer runs than IS_MIX for the *mixed* rate (ratio 0.7–0.9). IS only helps for **stratum-level** estimates of rare strata.
+- **P2:** the realistic T4r cuts the half-width by ≤ 10% at r = 0.3 and 10–25% at r = 0.6. At r = 0.3 it may not beat simply adding runs.
+- **P3:** T2f beats raw per-workflow means on MSE by ≥ 20% when workflows have few parents, with empirical-Bayes interval coverage of 0.85–0.95. T2 on 5 coarse strata ≈ post-stratification (rebutted as "untested", not "failed").
+- **P4:** T3p is unbiased with R known; with R from a calibration sample it's unbiased only if R is the same across strata. Under ×1.5 misspecification the bias is −33%.
+- **P5:** at q ≤ 1% with 500 runs, two-sided coverage drops below 0.85. The CP-on-parents upper bound keeps one-sided coverage ≥ 0.95.
+- **P6:** the mix-misspecification arm biases every estimator by roughly the size of the mix error (+10–20%). **No technique fixes a wrong W.**
+- **P7:** at latent ICC 0.8–0.9 (pilot-like), ±20% needs ≥ 10,000 runs, and **parents, not runs, bind**: at 1 run per parent the parent count is about 4,000.
+
+**Pass rule (unchanged):**
+- |bias| ≤ 10%
+- pooled coverage within 0.85–0.95, with Monte Carlo SE reported
+- plus the new criterion: **upper-bound coverage ≥ 0.93**

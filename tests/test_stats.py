@@ -28,3 +28,13 @@ def test_icc_bootstrap_brackets_point():
     cl = {str(i): ([1, 1] if i % 4 == 0 else [0, 0] if i % 4 == 1 else [1, 0]) for i in range(24)}
     med, lo, hi = icc_bootstrap(cl, B=1000)
     assert lo <= icc_binary(cl) <= hi
+
+
+def test_icc_handles_numpy_ints():
+    import numpy as np
+    rng = np.random.default_rng(0)
+    p = rng.uniform(0, 0.5, 500)
+    y = (rng.random((500, 10)) < p[:, None]).astype(int)
+    a = icc_binary({str(i): list(y[i]) for i in range(500)})
+    b = icc_binary({str(i): [int(v) for v in y[i]] for i in range(500)})
+    assert abs(a - b) < 1e-9 and abs(a - 0.111) < 0.04  # var(p)/(pbar(1-pbar)) = 0.0208/0.1875

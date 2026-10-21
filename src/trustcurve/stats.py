@@ -22,7 +22,7 @@ def wilson(x: int, n: int, z: float = Z95) -> tuple[float, float]:
 
 def icc_binary(clusters: dict[str, list[int]]) -> float:
     """One-way ANOVA ICC estimator (handles unequal cluster sizes via n0)."""
-    groups = [v for v in clusters.values() if v]
+    groups = [[float(x) for x in v] for v in clusters.values() if len(v)]  # float: numpy ints break statistics.mean
     k = len(groups); N = sum(len(g) for g in groups)
     if k < 2 or N <= k:
         return float("nan")
