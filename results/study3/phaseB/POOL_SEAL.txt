@@ -1,0 +1,9 @@
+Study 3 experience pool (sealed from the F2 designer). sha256(tasks.json || meta.json) per author.
+E1-E6 = experience pool (420); E7 = candidate F2 representative arm (held; Ishaan's decision 3).
+2026-10-21  E1  df4692715ef35fbb06f30dc8529d1888f2101f0e805c8f67e5639a6897019560  tasks=70
+2026-10-21  E2  55dae9b824f319542447491b361df9f201876a376081d1c705765ca40eca0f23  tasks=70
+2026-10-21  E3  eeab52b5e141814679cfbfe99676e80ecc9e6dd377be77a781b2d5ef571aba04  tasks=70
+2026-10-21  E4  1fbf10a5f3f62c83457c21cecaf20553e632fa3f0cfe49feccc4494aac71f9f9  tasks=70
+2026-10-21  E5  70cb8ff43640d024e30f547f05dc767e52bf1cd425fe75f20b67fd33f51e4fbf  tasks=70
+2026-10-21  E6  05cc29207a5e9cdbd7472fae47cd1bc16966b5cc08f4160ee92e518280f1f5c1  tasks=70
+2026-10-21  E7  b9125d6b359cdc0458bcd6b8ffd45ae4a157d6376a5622edbb9b6ba61df9e55e  tasks=40
