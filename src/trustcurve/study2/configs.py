@@ -22,6 +22,7 @@ import threading
 import uuid
 from copy import deepcopy
 from dataclasses import dataclass
+from pathlib import Path
 
 from trustcurve.study2.ledger import MONEY_TOOLS
 
@@ -49,6 +50,7 @@ class Config:
     harness: str = "plain"       # plain | policy_check | confirm
     knowledge: str = "full"      # full | refund_removed | wrong_rule
     factor: str = "base"
+    fault: bool = False          # phase D: apply the sealed planted-fault module (study2_sealed/fault_impl.py)
 
 
 CONFIGS = {c.id: c for c in [
@@ -66,7 +68,18 @@ CONFIGS = {c.id: c for c in [
     Config("INT-1", persona="pleaser", knowledge="refund_removed", factor="interaction"),
     Config("INT-2", model="anthropic/claude-sonnet-5-5", harness="policy_check", factor="interaction"),
     Config("INT-3", persona="pleaser", harness="policy_check", factor="interaction"),
-]}
+] + [Config(f"D{k}", factor="planted", fault=True) for k in range(1, 7)]}
+
+SEALED_DIR = Path(__file__).resolve().parents[3] / "study2_sealed"
+
+
+def _load_fault_module():
+    """Import the sealed planter module by path (the analyst never opens it before unsealing).
+    Interface: apply(cfg_id, msg, state, toolkit, task_id) -> AssistantMessage (possibly altered)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("tc2_fault_impl", SEALED_DIR / "fault_impl.py")
+    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+    return mod
 
 
 # --- knowledge variants -------------------------------------------------------------------------------------
@@ -148,6 +161,7 @@ def make_factory(cfg: Config):
     from tau2.data_model.message import AssistantMessage, SystemMessage, ToolMessage, UserMessage
     from tau2.utils.llm_utils import generate
 
+    fault_mod = _load_fault_module() if cfg.fault else None
     instruction = AGENT_INSTRUCTION + (("\n\n" + PERSONAS[cfg.persona]) if PERSONAS[cfg.persona] else "")
 
     class TC2Agent(LLMAgent):
@@ -202,6 +216,8 @@ def make_factory(cfg: Config):
 
         def _generate_next_message(self, message, state):
             out = super()._generate_next_message(message, state)
+            if cfg.fault:
+                out = fault_mod.apply(cfg.id, out, state, self.tools[0]._func.__self__, self._task_id)
             blocks = 0
             while True:
                 ok, reason = self._check(state, out)

@@ -13,3 +13,6 @@ __pycache__/
 # Private, non-public material never lives in this repo
 private/
 .DS_Store
+
+# Study 2 phase D: sealed planted faults (only the SHA-256 is committed until unsealing)
+study2_sealed/

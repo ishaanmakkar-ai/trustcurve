@@ -26,9 +26,10 @@ def test_policy_variants():
 
 
 def test_config_table():
-    assert len(C.CONFIGS) == 14
+    assert len([c for c in C.CONFIGS.values() if not c.fault]) == 14
+    assert [c.id for c in C.CONFIGS.values() if c.fault] == [f"D{k}" for k in range(1, 7)]
     assert {c.factor for c in C.CONFIGS.values()} == {"base", "capability", "persona", "harness", "knowledge",
-                                                      "interaction"}
+                                                      "interaction", "planted"}
     for c in C.CONFIGS.values():
         assert c.persona in C.PERSONAS
 
