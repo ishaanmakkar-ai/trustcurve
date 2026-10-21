@@ -237,6 +237,60 @@ Paired per-task differences (arm − H), task bootstrap 90% CI; MDE at 80% power
 - **The hard and soft rules are applied to the primary outcome (DB mismatch).** Failure and omission get the same three analyses as pre-registered secondaries, and their kill-rule status is shown but labelled secondary.
 - For the soft rule's "task count needed": n × (MDE / |Δ_c|)², with the MDE at 80% power, two-sided α = 0.10.
 
+### E1x results (2026-10-21; `results/phase1/e1x_analysis.json`, analysed with `phase1.e1x` exactly as committed in `186abae`)
+25 tasks in all 6 cells, 50 runs per cell, 0 infrastructure or rate-limit errors. New spend: S×O $8.51, S×S $10.58, S×H (phase-1b breadth) $12.61, labels $0.18.
+
+| Cell (agent × simulator) | DB mismatch (Wilson 90%) | Failure | Omission | Insured (flagged) | user_caused share of failures | Cost |
+|---|---|---|---|---|---|---|
+| Haiku × Haiku | 0.16 [0.09, 0.26] | 0.18 | 0.14 | 0 | 0.00 | $0.73 |
+| Haiku × OpenAI | 0.08 [0.04, 0.17] | 0.14 | 0.08 | 0 | 0.00 | $0.97 |
+| Haiku × Sonnet | 0.10 [0.05, 0.19] | 0.10 | 0.08 | 0 | 0.00 | $2.04 |
+| Sonnet × Haiku | 0.10 [0.05, 0.19] | 0.14 | 0.06 | 0 | 0.14 | $12.61 |
+| Sonnet × OpenAI | 0.16 [0.09, 0.26] | 0.20 | 0.16 | 1 | **0.60** | $8.51 |
+| Sonnet × Sonnet | 0.04 [0.01, 0.11] | 0.08 | 0.04 | 0 | 0.00 | $10.58 |
+
+**1. Agent gap Δ_c = Sonnet − Haiku, primary outcome DB mismatch** (task bootstrap 90% CI, B = 2,000, joint resampling):
+- Δ_H −0.06 [−0.14, 0.00]
+- **Δ_O +0.08 [+0.02, +0.16]**
+- Δ_S −0.06 [−0.14, 0.00]
+
+MDE 0.11–0.12. Secondary outcomes:
+- Failure: −0.04 [−0.10, 0.02], +0.06 [−0.02, 0.14], −0.02 [−0.06, 0.00]
+- Omission: −0.08 [−0.18, 0.00], +0.08 [+0.02, +0.16], −0.04 [−0.14, 0.02]
+
+**2. Interaction I_c = Δ_c − Δ_H:**
+- **I_O +0.14 [+0.06, +0.24]**; I_S 0.00 [−0.06, 0.06]
+- Failure: I_O +0.10 [+0.02, +0.20]
+- Omission: I_O +0.16 [+0.06, +0.28]
+
+**3. Ranking stability:** the point-estimate signs are (H −, O +, S −). The bootstrap probability that the sign is the same under all three simulators is **0.000** on DB mismatch (failure 0.044, omission 0.011).
+
+**4. Simulator main effect, averaged over agents:**
+- DB mismatch: O − H −0.01 [−0.06, 0.04]; S − H −0.06 [−0.12, −0.01]
+- Failure: S − H −0.07 [−0.12, −0.02], in line with E1
+
+**Hypotheses:**
+- **X1: refuted.** Δ_c < 0 under H and S (−6 points, inside −5 to −15), but **Δ_O > 0**.
+- **X2† (after an interim look): refuted.** |I_O| = 14 points ≥ 10, and its CI excludes 0. |I_S| = 0 holds.
+- **X3† (after an interim look): refuted.** The sign under O differs from the signs under H and S.
+- **X4:** 1 flagged event (S×O, task 14, trial 1). Transcript review shows it is **the same dollar-diff pairing artefact as E2's 14-v3_chatty**: the correct flights, passengers and price, but `destination: "JFK"`. **0 genuine insured events** in the 300 grid runs. The flag is reported as computed; the reclassification is a disclosed post-hoc reading, not a change to the outcome.
+
+**Kill criteria (applied as written, to DB mismatch):**
+- **Hard: does not fire, at the boundary.** Δ_O's CI excludes 0 upward, but the upper ends of Δ_H's and Δ_S's CIs are exactly 0.00, so they don't exclude 0 downward. The same holds on failure (no CI excludes 0). On omission, Δ_O excludes 0 upward and Δ_H's CI ends at 0.00.
+- **Soft: fires.** The point-estimate sign flips under the OpenAI simulator, and the CIs overlap. **The agent ranking isn't shown to be robust to the simulator at n = 25.** Resolving the observed gaps at 80% power needs about **54 tasks** (Δ_O) to **84 tasks** (Δ_H, Δ_S) on DB mismatch, and 119–155 on failure. That's more than τ² airline's 50.
+
+**Secondary, mechanism:** under the OpenAI simulator, **6 of the Sonnet agent's 10 failures are labelled user_caused**, against 0 of the Haiku agent's 7 under the same simulator. Examples:
+- the simulated customer invented a 2026/2027 date (task 24)
+- it sent an out-of-scope marker instead of payment details (task 35)
+- it countermanded upgrades its instructions asked for (task 44)
+
+The flip is therefore driven mostly by the OpenAI simulator departing from its instructions when facing the Sonnet agent. That is a simulator-fidelity failure, not agent risk. **Caveats:** attribution is from the Haiku labeller, not human-verified, with 10 failures in that cell. As stated in advance, both agents are Claude models, so the O-vs-S difference **cannot** be read as same-family bias.
+
+**Implication for pricing:**
+- Don't rate agents off a single simulator.
+- Every simulator needs a fidelity check: the user_caused share, plus spot-reading for instruction departures.
+- The soft rule's required task counts exceed the benchmark. Separating these two agents by simulator-robust ranking needs new task families, which agrees with E2's gate result.
+
 ## E2: variant nesting (gate input), pre-registered 2026-10-21, before any E2 run
 **Design:**
 - 20 seeded parents × 5 validated variants (`tasks/e2_variants.json`; `tasks/e2_validation.json` shows all 100 valid) × 2 runs.
