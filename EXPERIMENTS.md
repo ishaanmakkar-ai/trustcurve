@@ -530,3 +530,24 @@ Run-level Wilson intervals ignore task clustering (review 5 #8). Task-cluster bo
 E2 variants, parent-cluster: failure [0.135, 0.37], DB mismatch [0.13, 0.345], replacing Wilson [0.20, 0.30].
 
 **Shared baseline (review 5 #5):** H×H (the pilot breadth batch) ran at 01:49 on an earlier commit, with the same tau2 config. It is the baseline for E1, Δ_H, both I_c and E2-P2, and 0.06 of I_O's 0.14 comes from Δ_H. A labelled sensitivity analysis will replace H×H with REF-H's contemporaneous runs (and H×S with REF-S) when the reference run finishes.
+
+### Blinded second-rater attribution audit (review 5 #4, post-hoc)
+- **Design:** a fresh-context Claude agent re-attributed all 33 failed or mismatched runs in H×H, H×O, S×H and S×O. It applied RUBRICS A from the full transcripts, scenario and gold, **without seeing the Haiku labels**. Output: `results/phase1/audit/second_rater.csv`. **This is a second model rater, not the human audit review 5 asked for.** A human audit stays open for the gate.
+- **Agreement with the Haiku labeller:** 20/33 (61%), Cohen's κ = 0.45 (moderate). On "user_caused vs not", 27/33 agree.
+
+| Cell | Haiku labeller: user / agent / mixed / ambiguous | Second rater: user / agent / mixed / ambiguous |
+|---|---|---|
+| H×H | 0 / 6 / 1 / 2 | 2 / 3 / 1 / 3 |
+| H×O | 0 / 2 / 0 / 5 | 0 / 0 / 1 / 6 |
+| S×H | 1 / 1 / 2 / 3 | 3 / 0 / 0 / 4 |
+| S×O | 6 / 3 / 0 / 1 | 4 / 1 / 0 / 5 |
+
+**Findings:**
+1. **The "OpenAI simulator × Sonnet agent" mechanism is not supported.** On the second rater's labels, user_caused failures are 3/7 under the Haiku simulator and 4/10 under OpenAI for the Sonnet agent, against 2/9 and 0/7 for the Haiku agent. If anything, customers depart from their instructions more often with the Sonnet agent under **both** simulators. The OpenAI simulator does show one distinctive fault: twice it **invented the date "October 21, 2026"** (tasks 24 and 44) and refused correct 2024 flights.
+2. **18 of 33 failures (55%) are task_ambiguous, mainly because of benchmark gold problems:**
+   - Task 7: gold requires a "$1628" total that the instructions arguably exclude; the DB is correct in all 7 runs.
+   - Task 44: gold upgrades a 7-hour trip, but the instruction says "≤ 3 hours".
+   - Task 32: gold needs a $396 upfront payment, but the scenario caps spending at $100.
+   - **A large share of "failure" on τ² airline is benchmark noise, not agent risk.** DB mismatch, the primary outcome, is less affected (task 7 matches the DB), but tasks 32 and 44 hit it too.
+3. **E1's kill rule, re-checked:** the second rater gives H×H user_caused = 2/9 (22%), still below the 30% trigger. The kill rule still doesn't fire.
+4. **Scoring artefacts confirmed:** S×O 14/1 (substance matches gold; destination header only) and S×H 32/0 (right final flight and cabin, different payment route).

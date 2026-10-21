@@ -72,3 +72,25 @@ A `.gitignore` comment in the first commit named a third party. It was removed f
 | 9 | Minor | Post-hoc changes not labelled | **Fixed.** "Post-hoc deviations" block added to EXPERIMENTS.md. Phase 0 v2 was pre-registered before any code change |
 | 10 | Minor | Multinomial allocation left strata empty | **Fixed.** Fixed stratified allocation, ≥ 2 parents per stratum |
 | 11 | Minor | Thin tests | **Partly fixed.** A numpy-int ICC regression test added (it found a real bug). The simstudy2 estimators are validated by the grid itself. A dedicated unit test of the zero-event fallback was added |
+
+## Review 5 — after Goal 3 v2 phase 1 (E1, E1x, E2, E3, 1b), 2026-10-21
+Fresh-context reviewer, repo only, no paid calls. It recomputed every cell rate, Δ_c, I_c, the Wilson/CP bounds and the E2 components from the CSVs, and **all matched**. The findings concern interpretation.
+
+| # | Severity | Finding | Resolution |
+|---|---|---|---|
+| 1 | High | The E1x soft rule needs overlapping CIs, but they're disjoint. The text falsely said "CIs overlap", and the code dropped the clause | **Accepted, fixed.** The statement is struck through and corrected: neither rule fires as written. The code's deviation is disclosed. The adopted reading is labelled a judgment: "ranking not shown simulator-robust; don't price off one simulator" |
+| 2 | High | Δ_O rests on 3 tasks (sign test p = 0.25), and "P(same sign) = 0" is forced by construction. The robust signal is I_O. There are 21 contrasts | **Accepted, fixed.** Exact sign tests added for every contrast (`scripts/review5_checks.py`): no agent gap is significant, **I_O 6/0, p = 0.031**. Δ_O un-bolded, multiplicity note added |
+| 3 | High | E2 42-v1_rename is a policy breach but about $0 counterfactual: business class could be cancelled for a full refund and rebooked | **Accepted.** Relabelled "policy breach, gross $1,606, counterfactual ≈ $0". **Insured loss is effectively 0 across phase 1.** The E3 "peril sits in complex changes" inference is withdrawn. Policy-layer extension (compare change refunds with the permitted alternative) is **open**, a phase-2 to-do |
+| 4 | High | The mechanism claim rests on inconsistent Haiku labels | **Accepted; audited.** The blinded second model rater (33 runs) gives κ = 0.45. The O-specific mechanism **is not supported** (Sonnet-agent user_caused share is about 40% under both H and O). The claim is withdrawn; "consistent with" wording kept only for the date-invention fault. **The human audit is still open** |
+| 5 | Medium | The shared H×H baseline ran at a different time and commit | **Accepted; pending.** A labelled sensitivity analysis replacing H×H with REF-H (and H×S with REF-S) runs when the reference run finishes |
+| 6 | Medium | E2's V_eff was on the latent scale | **Accepted, fixed.** Observed scale: 1.58 (2 runs, CI 1.27–2.22) and 1.84 (1 run, CI 1.42–2.63; P(≥ 3) = 0.006). The verdict (not ≥ 3) stands |
+| 7 | Medium | The pairing artefact also inflates omission | **Accepted, fixed.** Omission Δ_O is +0.06 without it; footnoted. Pairing v4 is to be a labelled sensitivity analysis only |
+| 8 | Medium | Run-level Wilson intervals ignore clustering | **Accepted, fixed.** Cluster-bootstrap intervals added for every E1x cell and for E2 (variant failure [0.135, 0.37] vs Wilson [0.20, 0.30]) |
+| 9 | Medium | Data untracked; McNemar code uncommitted; wrong timestamp; timing unverifiable | **Accepted, fixed.** Data and code committed (`144a3c9`, `ea5513c`), McNemar reproduced exactly. Timestamp corrected to 03:35:46. That E1x-SO started 2 minutes before the analysis commit is disclosed as unverifiable from git |
+| 10 | Low | Hypotheses "confirmed" without a test | **Accepted, fixed.** E1 H4 → "not tested"; H1 → "consistent, not significant"; 1b-P2 → "untestable"; E2-P2 → "within noise" |
+
+**Gate implications accepted from review 5:**
+- **E3 is a ceiling result:** 160/160 generated refusal runs passed. Generated tasks must first pass a fidelity pilot, showing they fail like benchmark tasks, before any "thousands of new parents" phase 2.
+- **Insured loss is about 0 in about 675 runs.** The link from DB mismatch (the sizing proxy) to insured loss is unvalidated, and is the main open risk.
+- **Phase 2 needs ≥ 2 simulators, a simulator-fidelity audit and human-validated attribution.**
+- **Added from the audit:** 55% of failures are task_ambiguous (benchmark gold issues on tasks 7, 32 and 44), so failure rate on τ² airline is a noisy proxy.
