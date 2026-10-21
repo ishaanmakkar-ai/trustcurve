@@ -149,6 +149,29 @@ None of these were in the pre-registration:
 
 **Spend estimate:** about $1.3 for O (Hexa) and about $2.8 for S (personal).
 
+### E1 results (2026-10-21; `results/phase1/e1_analysis.json`)
+25 breadth tasks × 2 runs per arm; Haiku agent and Haiku judge throughout. H is the pilot breadth batch.
+
+| Arm (simulator) | Failure (Wilson 90%) | DB mismatch | Omission runs | Insured loss | Failure attribution (RUBRICS A) | Cost |
+|---|---|---|---|---|---|---|
+| H Haiku | 0.18 [0.11, 0.29] | 0.16 | 7 | 0 | agent 6, ambiguous 2, mixed 1, **user 0** | $0.73 |
+| O gpt-6.1-sol | 0.14 [0.08, 0.24] | 0.08 | 4 | 0 | ambiguous 5, agent 2 | $0.97 |
+| S Sonnet 5.5 | 0.10 [0.05, 0.19] | 0.10 | 4 | 0 | agent 5 | $2.04 |
+
+Paired per-task differences (arm − H), task bootstrap 90% CI; MDE at 80% power; exact McNemar on task-level majority outcomes:
+- Failure: O − H −0.04 [−0.10, 0.02] (MDE 0.10, p 0.63); **S − H −0.08 [−0.14, −0.02]** (MDE 0.09, p 0.25); S − O −0.04 [−0.08, 0.00].
+- DB mismatch: **O − H −0.08 [−0.14, −0.02]** (MDE 0.09, p 0.13); S − H −0.06 [−0.14, 0.00] (p 0.25); S − O +0.02 [−0.04, 0.10].
+
+**Hypotheses:**
+- **H1: direction confirmed, mechanism refuted.** Both stronger simulators lower failure (−4 and −8 points, inside the predicted −5 to −15 for S). But the Haiku simulator caused **0 user_caused failures**, so the drop doesn't come from fewer simulator-caused failures. One reading: a stronger customer makes the agent's job easier (clearer requests), which counts as a simulator effect on *agent* outcomes. This is what E1x tests.
+- **H2: partly confirmed.** Majority-outcome flips: 4 tasks (O vs H) and 3 (S vs H), meeting "≥ 3"; S vs O 1. Failure ICC per arm: H 0.61, O 0.84, S 0.79.
+- **H3: confirmed.** 0 insured-loss events in all 150 runs.
+- **H4: confirmed.** O and S differ by less than the MDE on both outcomes.
+
+**Kill criterion: does not fire** (user_caused is 0% of H's failures, not ≥ 30%). Downstream estimates keep the Haiku simulator, with the simulator gap reported as a known effect of about 4–8 points on these tasks.
+
+**Caveat:** the bootstrap CIs exclude 0 on two contrasts, but the exact task-level tests do not (p ≥ 0.13), and 25 tasks gives an MDE of about 9–11 points. Treat the effect as suggestive.
+
 ## E1x: agent × user-simulator crossing (2 × 3), pre-registered 2026-10-21, before any E1x run
 
 **Why:** E1 varies only the simulator (agent fixed at Haiku), and phase 1b varies only the agent (simulator fixed at Haiku). Neither can show whether the simulator changes **how agents rank**, which is the claim insurers need ("the method separates agents' risk"). E1x completes the 2 × 3 grid.

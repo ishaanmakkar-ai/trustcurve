@@ -47,6 +47,7 @@ def main():
         domain="airline", agent="llm_agent", user="user_simulator",
         llm_agent=a.agent_llm, llm_args_agent={}, llm_user=a.user_llm, llm_args_user={},
         num_trials=a.trials, seed=a.seed, max_concurrency=a.conc, max_retries=3, retry_delay=1.0,
+        auto_resume=True,  # rerunning into the same --out resumes from tau2's checkpoint (PILOT.md rate-limit plan)
         communicate_scoring=CommunicateScoring(judge=SemanticCommunicateSettings(model=a.judge_llm, model_args={})),
     )
     out = Path(a.out).resolve(); out.mkdir(parents=True, exist_ok=True)
