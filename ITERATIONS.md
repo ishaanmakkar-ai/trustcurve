@@ -104,3 +104,10 @@ The review-1/2/3 resolutions re-analysed **existing** data and code. They ran no
   - **drop** T3 near-miss (−21% bias even with the correct R; saturation)
   - T1-var confirms that errors must be clustered at the parent level
 - Iteration cap: 3 of 4 used in phase 0.
+
+## Phase 1 prep (2026-10-21)
+- **Runner:** `scripts/run_tasks.py` runs any task list with a chosen user simulator; the judge is fixed at Haiku.
+- **OpenAI smoke test** (task 7 × 1): our cost $0.0310 vs tau2's $0.0227. **Cause:** OpenAI cached input tokens (4,361) are billed at $0.10/M, but only appear in the raw usage. **Fix:** the collector reads cached and cache-write tokens from the raw usage. It now reconciles to the cent on the pilot (15 runs), breadth (50) and smoke (1) batches.
+- **E2:** 20 seeded parents × 5 variants generated, all 100 valid (gold replays, and money matches the parent). Variant types: rename, impatient persona, chatty persona, gift-card top-up, rename+impatient. Distractor reservations and price changes were excluded on purpose.
+- **E3:** 40 refusal tasks (16 non-refundable cancellations, 12 unowed compensation, 12 social engineering), all validated against policy.md.
+- **Phase-0 review received:** 11 findings, not yet resolved; see the resume prompt in the goal note.
