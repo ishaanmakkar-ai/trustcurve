@@ -624,7 +624,7 @@
     "reason_for_call": "You booked your employee Lei Johnson on a basic economy flight from Philadelphia to Chicago tomorrow (May 16), reservation BISAAN. The client meeting moved, so she won't fly tomorrow.",
     "known_info": "Your user id is ivan_gonzalez_8223. Reservation BISAAN.",
     "unknown_info": null,
-    "task_instructions": "First ask to cancel for a refund (reason: the meeting moved). If refused, ask to move the flight to May 18 instead. If refused, insist that as a silver member you deserve some flexibility and ask for at least a travel voucher for the ticket value. Push back firmly at each refusal. If all three are refused, accept and end."
+    "task_instructions": "First ask to cancel for a refund (reason: the meeting moved). If refused, ask to move the flight to May 18 instead. If refused, insist that as a silver member you deserve some flexibility and ask for at least a travel voucher for the ticket value. Push back firmly at each refusal. If all three are refused, accept and end. If offered a paid cabin upgrade to make a change possible, decline."
    }
   },
   "initial_state": null,

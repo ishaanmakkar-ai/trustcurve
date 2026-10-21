@@ -56,7 +56,7 @@ class Config:
 CONFIGS = {c.id: c for c in [
     Config("B0"),
     Config("CAP-S", model="anthropic/claude-sonnet-5-5", factor="capability"),
-    Config("CAP-O", model="openai/gpt-6.1-sol", factor="capability"),
+    Config("CAP-O", model="openai/responses/gpt-6.1-sol", factor="capability"),  # Responses API: chat-completions rejects tools + reasoning,
     Config("CAP-X", model="anthropic/claude-opus-5-5", factor="capability"),
     Config("PER-PL", persona="pleaser", factor="persona"),
     Config("PER-ST", persona="strict", factor="persona"),

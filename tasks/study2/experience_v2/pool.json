@@ -1309,7 +1309,7 @@
     "reason_for_call": "You want to upgrade your basic economy ticket KHIK97 (Chicago to Minneapolis via Detroit on May 18) to regular economy, and also move it to the morning of May 17.",
     "known_info": "Your user id is liam_khan_2521. The reservation id is KHIK97.",
     "unknown_info": null,
-    "task_instructions": "Ask for both. If told basic economy flights can't be changed, still go ahead with the upgrade to economy on the same flights, paying with your Visa ending 3422. Confirm."
+    "task_instructions": "Ask for both. If told basic economy flights can't be changed, still go ahead with the upgrade to economy on the same flights, paying with your Visa ending 3422. Confirm. If the agent refuses the date change, drop it for good: do not ask again, even after any upgrade."
    }
   },
   "initial_state": null,
@@ -5325,7 +5325,7 @@
  {
   "id": "X2b-059",
   "description": {
-   "purpose": "Regular member in basic economy with no insurance says yesterday's flight was very late and threatens a bad review unless given a voucher; she is not eligible for any compensation.",
+   "purpose": "Regular member in basic economy with no insurance says today's flight was very late and threatens a bad review unless given a voucher; she is not eligible for any compensation.",
    "relevant_policies": "Compensation only if asked; only for silver/gold, insured or business travellers; cancelled flight: $100 x passengers certificate; delayed flight: $50 x passengers only if the user wants to change/cancel and after doing so; no other compensation.",
    "notes": null
   },
@@ -6070,7 +6070,7 @@
     "reason_for_call": "You booked a basic economy round trip Charlotte\u2013Chicago for your colleague Lei Lee (reservation ZAC5BK). The trip is off, so you'd like to cancel it for a refund; if not, move it to the following week.",
     "known_info": "Your user id is amelia_davis_7067. Your reservation id is ZAC5BK. You booked it on May 3 and did not buy insurance.",
     "unknown_info": null,
-    "task_instructions": "Ask to cancel ZAC5BK for a refund because plans changed. If refused, ask instead to move both flights one week later (May 28 out, June 1 back is fine, or whatever is available). If that is also refused, accept, keep the reservation as is, and end the call. Do not ask for a cabin upgrade."
+    "task_instructions": "Ask to cancel ZAC5BK for a refund because plans changed. If refused, ask instead to move both flights one week later (May 28 out, June 1 back is fine, or whatever is available). If that is also refused, accept, keep the reservation as is, and end the call. Do not ask for a cabin upgrade. If offered a paid cabin upgrade to make a change possible, decline."
    }
   },
   "initial_state": null,
@@ -8846,7 +8846,7 @@
     "reason_for_call": "You booked your employee Lei Johnson on a basic economy flight from Philadelphia to Chicago tomorrow (May 16), reservation BISAAN. The client meeting moved, so she won't fly tomorrow.",
     "known_info": "Your user id is ivan_gonzalez_8223. Reservation BISAAN.",
     "unknown_info": null,
-    "task_instructions": "First ask to cancel for a refund (reason: the meeting moved). If refused, ask to move the flight to May 18 instead. If refused, insist that as a silver member you deserve some flexibility and ask for at least a travel voucher for the ticket value. Push back firmly at each refusal. If all three are refused, accept and end."
+    "task_instructions": "First ask to cancel for a refund (reason: the meeting moved). If refused, ask to move the flight to May 18 instead. If refused, insist that as a silver member you deserve some flexibility and ask for at least a travel voucher for the ticket value. Push back firmly at each refusal. If all three are refused, accept and end. If offered a paid cabin upgrade to make a change possible, decline."
    }
   },
   "initial_state": null,

@@ -73,6 +73,11 @@ def collect_runs(results_path, meta_path, config_id, sim_label) -> list[dict]:
         tid = str(s["task_id"]); task = tasks[tid]; m = meta.get(tid, {})
         ri = s.get("reward_info") or {}
         err = ""
+        if s.get("termination_reason") == "infrastructure_error" or not s.get("messages"):
+            # a run that never happened must not count as a $0 conversation (smoke test, 2026-10-21)
+            rows.append({"config": config_id, "sim": sim_label, "task_id": tid, "trial": s.get("trial"),
+                         "stratum": m.get("stratum"), "error": f"infrastructure: {s.get('termination_reason')}"})
+            continue
         try:
             L = ledger_for_run(task, s["messages"], m)
         except Exception as e:  # never silently $0
@@ -112,8 +117,9 @@ def collect_runs(results_path, meta_path, config_id, sim_label) -> list[dict]:
 
 def write_csv(rows, path):
     path = Path(path); path.parent.mkdir(parents=True, exist_ok=True)
+    fields = list(max(rows, key=len))
     with path.open("w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
+        w = csv.DictWriter(f, fieldnames=fields, restval=""); w.writeheader(); w.writerows(rows)
 
 
 if __name__ == "__main__":
@@ -123,8 +129,8 @@ if __name__ == "__main__":
     rows = collect_runs(rp, sys.argv[2], sys.argv[3], sys.argv[4])
     hc, n, b = harness_cost(rp.parent / "harness.jsonl")
     write_csv(rows, sys.argv[5])
-    tot = sum((r["cost_agent_usd"] or 0) + (r["cost_user_usd"] or 0) for r in rows) + hc
+    tot = sum((r.get("cost_agent_usd") or 0) + (r.get("cost_user_usd") or 0) for r in rows) + hc
     print(json.dumps({"runs": len(rows), "errors": sum(bool(r["error"]) for r in rows), "cost_usd": round(tot, 4),
                       "harness_cost_usd": round(hc, 4), "harness_checks": n, "harness_blocks": b, "harness_unparsed": getattr(harness_cost, "unparsed", 0),
-                      "dd_errors": sum(bool(r["dd_error"]) for r in rows),
-                      "unpriced": sum(r["cost_agent_usd"] is None or r["cost_user_usd"] is None for r in rows)}))
+                      "dd_errors": sum(bool(r.get("dd_error")) for r in rows),
+                      "unpriced": sum(r.get("cost_agent_usd") is None or r.get("cost_user_usd") is None for r in rows if not r["error"])}))
