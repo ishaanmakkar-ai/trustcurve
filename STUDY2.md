@@ -320,3 +320,11 @@ Key cells (n_e = 200):
 - The experience spec deliberately asked for harder, boundary-testing tasks, so an R6-like directional shift is likely.
 - If so, phase A predicts forecasts **too low** and coverage near or below K2's 0.70, with ranking (Spearman) intact.
 - A K2 firing on coverage would therefore be the expected signature of "the eval underprices harder real traffic". That is a substantive finding, not a pipeline bug, and it will be reported as such.
+
+### Phase B implementation notes before the pilot (labelled deviations, 2026-10-21)
+- **Smoke tests** (1 task per configuration, $0.76) found two problems before any analysed run:
+  1. **CAP-O:** OpenAI's chat-completions endpoint rejects function tools when gpt-6.1-sol runs with reasoning. It now runs through LiteLLM's Responses API route (`openai/responses/gpt-6.1-sol`) at the model's default reasoning. Same model, different endpoint.
+  2. **Silent $0 rows:** a run that ended in `infrastructure_error` was collected as a $0 conversation. `collect2` now marks such runs as errors, and errored runs are excluded and counted.
+- HAR-CF's confirmation step was verified live (CONFIRM on a permitted $644 refund, cost logged).
+- **Screening subset for CAP-S, CAP-O and INT-2:** a stratified 30 of the 45 screening tasks (seed 20261021): `tasks/study2/underwriting/screen30_ids.txt`.
+- **Experience pool v2 gold audit:** a random 52 of the 260 tasks went to two independent auditors. 46 OK, 5 minor, 1 ambiguous, 0 wrong. Fixes were applied (user instructions that close off alternative correct paths, plus one metadata clarification).
