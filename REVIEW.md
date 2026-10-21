@@ -94,3 +94,20 @@ Fresh-context reviewer, repo only, no paid calls. It recomputed every cell rate,
 - **Insured loss is about 0 in about 675 runs.** The link from DB mismatch (the sizing proxy) to insured loss is unvalidated, and is the main open risk.
 - **Phase 2 needs ≥ 2 simulators, a simulator-fidelity audit and human-validated attribution.**
 - **Added from the audit:** 55% of failures are task_ambiguous (benchmark gold issues on tasks 7, 32 and 44), so failure rate on τ² airline is a noisy proxy.
+
+## Review 6 — reference run and its audits, 2026-10-21
+Fresh-context reviewer, repo only. Every headline number reproduces. `phase1.reference` and the swap script predate the outcomes (git-verified).
+
+| # | Severity | Finding | Resolution |
+|---|---|---|---|
+| 1 | High | Check 2's −30% is pooling: VHM is floored in 164/200 slices, weights 0.04–0.10, and the grand mean beats credibility (0.0106 vs 0.0113); out of sample the ratio is 1.01 | **Accepted, verified (same numbers), fixed in the prose.** Phase-0 verdict 3 qualified. EPV-floor scale bug noted (non-binding). GATE updated |
+| 2 | High | Check 1 is uninformative for the rare-event regime (finite population, same data as truth, no zero-event slices); on 0.9% harm, coverage is 0.83 among non-zero slices | **Accepted, fixed.** Claim scoped to framing (a) at about 19%; the rare-event under-coverage is recorded. Validating rare-event intervals is a phase-2 prerequisite |
+| 3 | High | The audit covered flagged runs only; one rater; no CI; consequential loss ignored; 29/4 mislabelled | **Accepted. Partly resolved:** all 8 unflagged over-refunds checked (all permitted); clustered CI added (0.34–2.4%); scope, consequential-loss and 29/4 caveats added. **Open:** a random audit of about 50 of the 147 other unflagged mismatch runs and a second rater. Both are folded into dollar-diff v4 validation (GATE step 1) |
+| 4 | Medium | The baseline swap overclaims: Δ_O's CI is a sparse-bootstrap artefact; "contemporaneous" is wrong; designed after the fact | **Accepted, fixed.** "A reversal is not established"; I_O is the robust signal |
+| 5 | Medium | Check 4 had no pass/fail criterion; the sign test was mis-stated; the effect is concentrated; "stronger" is interpretive | **Accepted, fixed** |
+| 6 | Low | "About 4×" is 3.7×; check 1's band was weak by design | Noted; the 3.7× figure is shown alongside |
+
+**Gate implications accepted:**
+- Don't fund phase 2 yet.
+- Loss frequency will be set by how many "trap" tasks a generator produces: 3 of 50 τ² tasks carry all the genuine harm. At about 1% with 1 run per task, 3,000 tasks give ±32%, and ±16% needs about 10,000.
+- A cheap generated-task pilot (about 300 tasks) with dollar-diff v4 should come first.

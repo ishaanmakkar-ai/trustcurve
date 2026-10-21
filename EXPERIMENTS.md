@@ -479,12 +479,18 @@ At pilot-like clustering:
 - REF-S on its 25 tasks: DB mismatch 0.108, failure 0.118.
 
 **Checks:**
-1. **Small-slice coverage: fails as written, on the conservative side.** cov90 = **0.96** (200 slices), above the 0.85–0.95 band. Median width 0.25. This is the pre-stated direction: 25 of a finite 50 tasks, no finite-population correction. **The T1 clustered log interval doesn't under-cover on real data**; it is somewhat conservative for framing (a).
-2. **Credibility per workflow: passes.** Bühlmann–Straub MSE / raw MSE = **0.70** (30% lower error), on 4 request-type strata (cancel 28 tasks, change 18, book 2, other 2).
+1. **Small-slice coverage: fails as written, on the conservative side.** cov90 = **0.96** (200 slices), above the 0.85–0.95 band. Median width 0.25. This is the pre-stated direction: 25 of a finite 50 tasks, no finite-population correction. ~~The T1 clustered log interval doesn't under-cover on real data~~ **Corrected (review 6 #2):** this holds only for framing (a) at a ~19% rate. Each slice samples half the finite population, from the same runs that define the truth. With an approximate finite-population correction, coverage is 0.885, and across seeds 0–5 the uncorrected figure is 0.94–0.99, so "fails at 0.96" is within simulation noise. No slice had 0 events, so the CP fallback wasn't exercised. **On the rare genuine-harm indicator (0.9%), 65% of slices have 0 events, and coverage among slices with ≥ 1 event is 0.83.** The rare-event regime that pricing needs is **not** validated.
+2. **Credibility per workflow: passes as written (MSE ratio 0.70), but the gain is pooling, not credibility (review 6 #1).** Bühlmann–Straub MSE / raw MSE = 0.70 on 4 request-type strata (cancel 28 tasks, change 18, book 2, other 2). However:
+   - VHM hits its floor in 164 of 200 slices, and mean credibility weights are only 0.04–0.10.
+   - **The plain grand mean, ignoring strata, does better** (MSE 0.0106 vs credibility 0.0113 vs raw 0.0161).
+   - Scored out of sample (slices from runs 0–9 vs truth from runs 10–19), the ratio is 1.01.
+
+   **Workflow differences can't be detected at this design, and the estimates shrink to the book mean.** Phase-0 verdict 3 ("use credibility per workflow") is qualified: it helps only when between-workflow variance is detectable. A minor bug: the EPV floor should be p(1−p), not p(1−p)/r; it never binds here.
 3. **Clustering: passes.** DB-mismatch ICC **0.52** (bootstrap 95% CI 0.31–0.70) at 20 runs per task, against the pilot's 0.42 at 2 runs. Failure ICC 0.57 (0.35–0.73). Clustering is confirmed high: one task is worth about 2 runs.
-4. **Simulator effect at scale: confirmed and now significant.** Sonnet − Haiku customer, same 25 tasks, Haiku agent:
+4. **Simulator effect at scale: confirmed and now significant** (no pass/fail criterion was pre-registered for this check, and the sign tests are post-hoc, per review 6 #5). Sonnet − Haiku customer, same 25 tasks, Haiku agent:
    - failure **−0.106 [−0.162, −0.054]**, exact sign test 0/10 tasks, p = 0.002
-   - DB mismatch **−0.092 [−0.154, −0.032]**, 1/10, p = 0.012
+   - DB mismatch **−0.092 [−0.154, −0.032]**, 1 positive / 10 negative (11 untied), p = 0.012
+   - The effect is concentrated: 15 of 25 tasks are tied, and 4 tasks sit at −0.4 to −0.5. It is "lower failure on 10 of 25 tasks, mean −10.6 points". "Stronger" is interpretive: nothing shows which simulator is more realistic.
 
    E1's suggestive −6 to −8 points is real: **a stronger simulated customer lowers measured failure by about 10 points.** Simulator choice is a first-order pricing assumption.
 5. **Insured loss: the prediction fails as computed.** **33 / 1,000 flagged runs = 3.3%** (Wilson 90% 2.5–4.4%; task-level CP 95% upper 11.1%), on **9 of 50 tasks**, against the prediction ≤ 2%. The breadth slice (25 tasks × 2) had shown 0. 5 of the 9 tasks are in the breadth set, but on those 25 tasks REF-H flags only 10/500 runs (2.0%). The expected count in the breadth's 50 runs was about 1, so seeing 0 there was unremarkable (P ≈ 0.36). **The flags mix header artefacts, customer-requested bookings, gross-counted itinerary differences and plausibly genuine overcharges.** A per-event transcript audit (post-hoc) follows below.
@@ -500,7 +506,12 @@ At pilot-like clustering:
 | Unrequested change that policy forbids (LGA→JFK in place; customer keeps the $30 insurance) | 2 | +$30 each (upper bound) |
 | Genuine wrongful payout by the airline | 0 | — |
 
-- **Genuine harm: $145 in 9 of 1,000 runs (0.9%), on 3 tasks (15, 29, 35), each $9–$30.** It is all small overcharges from the agent quoting a non-cheapest fare or misreading a date. If the retained insurance is worth its price: $85 in 7 runs.
+- **Genuine harm among flagged runs: $145 in 9 of 1,000 runs (0.9%; task-clustered 90% CI 0.34–2.4%, Wilson 0.5–1.5%), on 3 tasks (15, 29, 35), each $9–$30.** Counting the 3 judgment calls: 1.2% (0.57–2.5%).
+  - **Scope (review 6 #3):** only flagged runs were audited, by one LLM rater who saw the v3 flags.
+  - The 8 unflagged `over_refund` runs were checked afterwards: task 42 × 7 at $4,418 (business-class cancellation the customer requested, as in review 2) and task 11/16 at $456 (business class, customer asked to cancel after declining the downgrade). All are permitted.
+  - **About 147 other unflagged DB-mismatch runs are unaudited.**
+  - Severity counts fare difference only. Wrong-date bookings (29/7, 33/11) and 23/4 (the agent refused a lawful split; the customer paid $500 more in cash) carry **unmeasured consequential loss**.
+  - 29/4 is better classed as "requested but forbidden by policy" (the customer asked for JFK). Its $30 is insurance the customer keeps, so arguably $0. It is all small overcharges from the agent quoting a non-cheapest fare or misreading a date. If the retained insurance is worth its price: $85 in 7 runs.
 - **Flagged $14,071 vs genuine $145.** The audit found **4 systematic dollar-diff v3 bugs**:
   1. A $0 change (a free bag) marks a reservation "agent-changed", so the whole gold gap becomes customer harm. This accounts for $4,095 on task 29.
   2. No netting across reservations: cancel-and-rebook vs modify-in-place, and split vs combined bookings, are scored at gross.
@@ -511,11 +522,11 @@ At pilot-like clustering:
 - **Simulator:** off-instruction in about 18 of 33 flagged runs, producing most of the "requested" flags.
 - **Reading:** on τ² airline with a Haiku agent, **agent-caused money harm is frequent-ish (≈ 1% of runs) but tiny ($9–$30)**, and **wrongful payouts are ~0**. The flagged "insured loss" metric overstated frequency about 4× (33 vs 9 runs) and total dollars about 100× ($14,071 vs $145). **Any phase-2 loss estimate needs dollar-diff v4, validated on these 33 cases plus E2's two, before it is trusted.**
 
-**Post-hoc sensitivity (review 5 #5): E1x with contemporaneous baselines** (H×H := REF-H on the breadth tasks, H×S := REF-S; `results/phase1/review5_baseline_sensitivity.json`):
+**Post-hoc sensitivity (review 5 #5): E1x with re-sourced baselines** (correction, review 6 #4: "contemporaneous" is wrong for Δ_H, which compares REF-H, run 04:35–06:12, against S×H at 03:49, 2 runs per task. The swap was designed after E1x landed at the boundary.) (H×H := REF-H on the breadth tasks, H×S := REF-S; `results/phase1/review5_baseline_sensitivity.json`):
 - DB-mismatch gaps: Δ_H −0.10 [−0.16, −0.05] (sign test 0/8, p = 0.008), Δ_O +0.08 [+0.02, +0.16] (unchanged, 3 tasks, p = 0.25), Δ_S −0.07 [−0.14, −0.01].
 - I_O +0.18 [+0.08, +0.29].
 - **Under this swap the hard rule's condition is met** (CIs excluding 0 in opposite directions under H and O). Two caveats: Δ_O still rests on 3 tasks, and the swap isn't pre-registered. On failure, Δ_O's CI includes 0.
-- **Reading:** with better baselines the evidence that **the simulator can reverse the agent ranking gets stronger, not weaker**. It still rests on 3 tasks in the O cell.
+- ~~**Reading:** … gets stronger, not weaker.~~ **Corrected (review 6 #4):** the hard rule's condition is met arithmetically, but Δ_O is unchanged. Its CI excluding 0 is a sparse-bootstrap artefact: 3/25 non-zero tasks, P(resample has none) = (22/25)^25 = 0.041. Δ_H narrows mainly because one arm has 10× the runs. **A reversal is not established.** The robust signal remains the interaction I_O (0.14 → 0.18).
 
 ## Phase 1b: second agent, pre-registered 2026-10-21, before any 1b run
 **Design:** the agent is `claude-sonnet-5-5`, the simulator Haiku (as in the pilot breadth, so only the agent changes), the judge Haiku. The 25 breadth tasks × 2, plus the 40 refusal tasks × 1, about 90 runs and about $23.
