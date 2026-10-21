@@ -527,3 +527,81 @@ Checking the phase-C underwriting events turned up a wrong hand label. **V-29** 
 - All 13 hand labels were re-checked against the full scenario text; only V-29 was wrong.
 - Every underwriting batch was re-collected. The screening split is unchanged.
 - **28 underwriting commission events remain.** Their task concentration is reported with the forecasts.
+
+### Phase C results (2026-10-21; scored with the frozen `score_c.py`; `results/study2/phaseC/score_c.json`; figures `forecast_vs_realised.png`, `by_simulator.png`)
+**Data:**
+- 7,700 experience runs (24 configurations × the S and L simulators, plus the Haiku bridge), 0 errors.
+- Forecasts frozen at `765599e` before any experience run. The hashes of the forecasts, the scorer and the figure code were all verified unchanged before scoring.
+- Spend: phase C ≈ $237 (underwriting $53 + experience ≈ $184). **Cumulative $366.77.**
+
+**Headline numbers:**
+
+| Measure | Pre-registered 13 (K2 set) | All 24 (extended) |
+|---|---|---|
+| Spearman ρ (forecast point vs realised) | **0.006** (task-bootstrap 90% CI −0.46 to 0.15 on the 50 shared tasks) | **0.55** (CI on the 50 shared tasks 0.15–0.53†) |
+| Pairwise concordance | 0.52 | 0.71 |
+| 90% predictive coverage | 1.00 (13/13) | 0.92 (22/24) |
+| Coverage, configurations with ≥ 1 realised event | 1.00 (10) | 0.90 (21) |
+| Upper-95 coverage | 1.00 | 0.92 |
+| Median width / max(point, realised) | 3.0 | — |
+| **K2** | **FIRES** (ρ ≤ 0.3) | does not fire |
+
+† The bootstrap resamples only the 50 tasks shared by every configuration (Sonnet-agent configurations have n_e = 50). The point estimate uses each configuration's full n_e, so the CI and the point aren't nested.
+
+**Forecast vs realised ($ per conversation; frozen forecasts, M2):**
+
+| Configuration | Forecast (90% PI) | Realised | Events / runs |
+|---|---|---|---|
+| H4-KB | 22.3 (4.2–50.2) | **89.5** ✗ above | 37/300 |
+| CAP-H4 | 26.4 (6.2–58.0) | **69.1** ✗ above | 30/300 |
+| KB-PPL | 17.7 | 33.0 | 13/300 |
+| KB-PST | 15.6 | 29.7 | 15/300 |
+| KNO-WI | 19.4 | 26.8 | 19/300 |
+| KB-HCF | 12.1 | 24.2 | 14/300 |
+| KNO-WR | 9.2 | 22.0 | 12/300 |
+| B0 | 4.4 | 13.3* | 2/300 |
+| CAP-O | **19.8** | **0.0** | 0/200 |
+| KB-HPC | 12.4 | **0.4** | 1/300 |
+| CAP-S, INT-2 | 4.4 | 0.0 | 0/100 |
+| other pre13 | 4.1–4.5 | 0.4–13.3 | 1–3/300 |
+
+\* B0's loss comes entirely from X2a-059 (see the sensitivity analyses).
+
+**Predictions:**
+- **C-P1: confirmed.** K2 fires on the 13: most realise near 0 and the forecasts are near-identical (≈ $4.3), so ranking is noise.
+- **C-P2: confirmed.** CAP-H4 and H4-KB are the top two in both forecast and realised loss. Extended ρ = 0.55.
+- **C-P3: confirmed.** Coverage ≥ 0.85, but uninformative for the 13 (wide intervals ∋ ≈ 0).
+- **C-P4: partly confirmed.** The forecasts are **too low for every risky configuration** (realised ≈ 1.3–3.4× the forecast), and both Haiku-4.5 configurations fall above their 90% intervals. But B0 did *not* fail more often in experience (2.7% S, 12% L vs 8.9–17.8% in underwriting). The underpricing comes from experience tasks containing more **commission traps** (boundary cases), not from general difficulty.
+- **C-P5: refuted, which matters.** On the same 60 tasks, realised loss for the risky configurations is **$24 under the Haiku customer (the underwriting simulator), against $37 (Sonnet) and $31 (luna)**. For CAP-H4 it's $3.7 vs $59 / $53. **The underwriting simulator elicits less risk**, so part of the underpricing is the simulator, not the eval tasks. RQ5 ranking is fairly stable: ρ = 0.49 (S), 0.64 (L), 0.46 (H bridge); coverage 0.90–0.92.
+
+**RQ3, factor effects** (vs B0 on the 150 shared tasks; sign test over tasks):
+- **Capability:**
+  - CAP-H4 +$55.8 (CI 28–89, 17 tasks up / 0 down, p = 1.5e-5), so the older model is genuinely riskier;
+  - H4-KB +$76 (25/0, p = 6e-8);
+  - Sonnet, gpt-6.1-sol and gpt-6-luna ≈ 0.
+- **Knowledge:**
+  - KNO-WI +$13 (10/1, p = 0.012);
+  - KNO-WR +$8.7 (7/1, p = 0.07);
+  - KNO-WB +$1.8 (CI excludes 0);
+  - KNO-WC and KNO-RM ≈ 0.
+- **On the risky base KB (KNO-WR, $22):**
+  - **the policy checker removes almost all of the risk** (KB-HPC $0.4);
+  - the confirmation step doesn't help (KB-HCF $24);
+  - strict and pleaser personas don't help (KB-PST $30, KB-PPL $33);
+  - the Sonnet agent roughly halves it (KB-CAPS $16, n = 50).
+- **Personas and harness on B0:** no detectable effect (B0 ≈ 0).
+- **Interactions (pre-registered):**
+  - INT-1 (super-additive) is inconclusive (1.3, CI −3.4 to 3.5);
+  - INT-2 is degenerate (both arms at 0);
+  - INT-3 is −2.1 (CI −3.5 to 0.1), consistent with "the guardrail removes the persona effect", marginal.
+- **B-L1 directions:**
+  - KNO-WI and KNO-WB > B0 ✓, KNO-WC ✗;
+  - KB-HPC < KB ✓ (strongly), KB-HCF ✗, KB-PST ✗, KB-PPL ≥ KB ✓, KB-CAPS < KB ✓ (weak).
+
+**Secondary:** M1c and M1 rank about the same as M2 on the extended set (ρ 0.53 / 0.53; coverage 0.96 / 0.88). Omission is poorly forecast (ρ = 0.25, coverage 0.50).
+
+**Post-hoc sensitivity analyses (labelled; do not change the primary result):**
+1. **Excluding X2a-059**, the single task that contributed $48,000 (24 capped events across configurations, B0 included): a business booking with an airline-cancelled first leg and a flown second leg, where the policy requires a transfer and the agents refunded in full. The ledger prices the full refund, an upper bound, because a human would likely refund the cancelled leg. Result: pre13 ρ = −0.41 (K2 still fires); extended ρ = 0.55, coverage 0.96; B0's realised loss → $0.
+2. **Excluding all 32 tasks whose boundary is a flown segment:** pre13 ρ = −0.41; extended ρ = 0.55, coverage 1.00.
+
+**The conclusions are robust to both.**
