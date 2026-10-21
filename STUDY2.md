@@ -747,3 +747,6 @@ The +1% tau2 judge line is unpriced in the per-run CSVs (≈ $3.6).
 - **Result:** agreement **29/30, Cohen's κ = 0.92**. The confusion is YY 9, NN 20, ledger-only Y 1, rater-only Y 0. On all 9 shared Y the rater's dollar estimate equals the ledger's exactly.
 - **The one disagreement (A25)** is the flown-segment class already disclosed: the first leg was airline-cancelled and the DB shows the second as "landed". The ledger scores the refund as wrongful; the rater judges the customer couldn't have flown it.
 - **Reading:** independent support that the ledger's event labels and amounts are reproducible from the policy. **It is a model rater, not the human check.** Ishaan's audit (the same pack, scored by the same script) remains the pre-registered human validation, and its κ will be appended here when it returns.
+
+### Closure (2026-10-21, per Ishaan)
+Ishaan closed Study 2 with the human loss-label audit as a **follow-up**, consistent with the goal's "prepare it without blocking on it". When his sheet (`results/study2/audit_pack/audit_sheet.csv`) is returned, it is scored by the committed `scripts/study2/score_audit.py` against the sealed key, and κ and the disagreements are appended here. Until then, label validity rests on the interim blind model rater (29/30, κ = 0.92).
