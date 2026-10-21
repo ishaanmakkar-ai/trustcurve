@@ -240,6 +240,87 @@ def e1x(cells, B=2000, seed=1):
     return out
 
 
+def _clustered_rate(task_vals):
+    """T1 PROP at equal task weights: run-level mean, task-clustered SE (as simstudy2.wmean_se), log 90% interval."""
+    ys = [y for v in task_vals for y in v]; n = len(ys); m = sum(ys) / n
+    C = len(task_vals)
+    z = [sum(y - m for y in v) / n for v in task_vals]
+    se = math.sqrt(C / max(C - 1, 1) * sum(x * x for x in z))
+    if m <= 0:
+        return m, (0.0, 1 - 0.05 ** (1 / C))
+    f = math.exp(Z90 * se / m)
+    return m, (m / f, m * f)
+
+
+def _buhlmann_straub(groups):
+    """groups: {stratum: [per-task lists of 0/1]} -> {stratum: (raw, credibility)}; same estimator as simstudy2.credibility_fine."""
+    keys = list(groups)
+    runs = {k: sum(len(v) for v in groups[k]) for k in keys}; tot = {k: sum(sum(v) for v in groups[k]) for k in keys}
+    raw = {k: tot[k] / runs[k] for k in keys}
+    M = sum(runs.values()); grand = sum(tot.values()) / M
+    r = len(groups[keys[0]][0]) if groups[keys[0]] else 2
+    epv_num = sum(sum((sum(v) / len(v) - raw[k]) ** 2 for v in groups[k]) * r for k in keys)
+    epv_den = sum(len(groups[k]) - 1 for k in keys)
+    epv = max(epv_num / max(epv_den, 1), grand * (1 - grand) / r)
+    vhm = (sum(runs[k] * (raw[k] - grand) ** 2 for k in keys) - (len(keys) - 1) * epv) / (M - sum(x * x for x in runs.values()) / M)
+    vhm = max(vhm, 1e-8)
+    return {k: (raw[k], (runs[k] / (runs[k] + epv / vhm)) * raw[k] + (1 - runs[k] / (runs[k] + epv / vhm)) * grand) for k in keys}
+
+
+def reference(refh_rows, refs_rows, n_slices=200, slice_tasks=25, slice_runs=2, seed=11):
+    """Reference-run checks 1-5 as pre-registered in EXPERIMENTS.md (implementation notes there)."""
+    from scipy.stats import beta as BETA
+    from trustcurve.stats import icc_bootstrap
+    rng = random.Random(seed)
+    tasks = sorted({r["task_id"] for r in refh_rows}, key=int)
+    by = defaultdict(list); strat = {}
+    for r in sorted(refh_rows, key=lambda r: int(r["trial"])):
+        by[r["task_id"]].append(dbm(r)); strat[r["task_id"]] = r["stratum"]
+    truth = mean(mean(by[t]) for t in tasks)
+    truth_s = {s: mean(mean(by[t]) for t in tasks if strat[t] == s) for s in set(strat.values())}
+    out = {"refh_runs": len(refh_rows), "refh_tasks": len(tasks), "refh_db_mismatch_rate": round(truth, 4),
+           "refh_strata": {s: [round(v, 4), sum(strat[t] == s for t in tasks)] for s, v in truth_s.items()}}
+    # 1 + 2: small slices
+    cov = 0; widths = []; se_raw = []; se_cred = []; zero = 0
+    for _ in range(n_slices):
+        ts = rng.sample(tasks, slice_tasks)
+        vals = {t: rng.sample(by[t], slice_runs) for t in ts}
+        m, (lo, hi) = _clustered_rate(list(vals.values()))
+        cov += lo <= truth <= hi; widths.append(hi - lo); zero += m == 0
+        g = defaultdict(list)
+        for t in ts:
+            g[strat[t]].append(vals[t])
+        bs = _buhlmann_straub(g)
+        for s, (rw, cr) in bs.items():
+            se_raw.append((rw - truth_s[s]) ** 2); se_cred.append((cr - truth_s[s]) ** 2)
+    out["check1_slice_coverage"] = {"slices": n_slices, "cov90": round(cov / n_slices, 3), "pass_0.85_0.95": 0.85 <= cov / n_slices <= 0.95,
+                                    "median_width": round(sorted(widths)[len(widths) // 2], 4), "zero_event_slices": zero}
+    out["check2_credibility"] = {"mse_raw": round(mean(se_raw), 5), "mse_cred": round(mean(se_cred), 5),
+                                 "ratio": round(mean(se_cred) / mean(se_raw), 3), "pass_cred_lt_raw": mean(se_cred) < mean(se_raw)}
+    # 3: clustering
+    fb = defaultdict(list)
+    for r in refh_rows:
+        fb[r["task_id"]].append(fail(r))
+    out["check3_icc"] = {"db_mismatch": [round(x, 3) for x in (icc_binary(by),) + icc_bootstrap(by, B=2000)],
+                         "failure": [round(x, 3) for x in (icc_binary(fb),) + icc_bootstrap(fb, B=2000)],
+                         "format": "[point, boot median, 2.5%, 97.5%]", "pilot_db_mismatch": 0.42,
+                         "pass_0.3_0.6": 0.3 <= icc_binary(by) <= 0.6}
+    # 4: simulator effect at scale (same 25 tasks)
+    s_tasks = {r["task_id"] for r in refs_rows}
+    hsub = [r for r in refh_rows if r["task_id"] in s_tasks]
+    out["check4_sim_effect_S_minus_H"] = {"failure": paired(hsub, refs_rows, fail), "db_mismatch": paired(hsub, refs_rows, dbm),
+                                         "refs_summary": rate_summary(refs_rows)}
+    # 5: insured loss on REF-H
+    x = sum(insured(r) for r in refh_rows); n = len(refh_rows); T = len(tasks)
+    xe = x / n * T
+    cp_tasks = (1 - 0.05 ** (1 / T)) if x == 0 else float(BETA.ppf(0.95, xe + 1, T - xe))
+    out["check5_insured"] = {"events": x, "runs": n, "rate": round(x / n, 5), "wilson90": [round(v, 5) for v in wilson(x, n, Z90)],
+                             "cp_on_tasks_upper95": round(cp_tasks, 4), "tasks_with_event": len({r["task_id"] for r in refh_rows if insured(r)}),
+                             "pass_le_2pct": x / n <= 0.02}
+    out["refh_summary"] = rate_summary(refh_rows)
+    return out
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1]
     if cmd == "e1":
@@ -248,6 +329,8 @@ if __name__ == "__main__":
         print(json.dumps(e2(sys.argv[2], sys.argv[3]), indent=1))
     elif cmd == "e3":
         print(json.dumps(e3(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else None), indent=1))
+    elif cmd == "reference":
+        print(json.dumps(reference(load(sys.argv[2]), load(sys.argv[3])), indent=1))
     elif cmd == "e1x":
         # args: six "AxC=runs.csv[:labels.csv]" pairs, e.g. HxH=results/pilot/breadth_runs.csv:results/phase1/e1_H_labels.csv
         cells = {}

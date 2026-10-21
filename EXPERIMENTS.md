@@ -460,6 +460,16 @@ At pilot-like clustering:
 
 **Spend estimate:** REF-H about $15 and REF-S about $27, both on the personal key.
 
+**Implementation notes (written 2026-10-21 while REF-H and REF-S were running, before any reference outcome was seen; `phase1.reference`, tests in `tests/test_phase1_reference.py`):**
+- **Truth:** the REF-H DB-mismatch rate, the mean of 50 per-task means (equal to the run mean at 20 runs per task). Per-stratum truth uses the same calculation within each `stratum` (request type).
+- **Slices:** 200 slices (seed 11). Each draws 25 of the 50 tasks without replacement and 2 of each task's 20 runs without replacement.
+  - The T1 rate uses equal task weights (framing (a)), a task-clustered SE and the log 90% interval, with the CP-on-tasks fallback at 0 events (as in `simstudy2.interval`).
+  - Sampling 25 of a finite 50 tasks without a finite-population correction makes coverage conservative. That is a known direction, so no correction is applied.
+- **Credibility:** Bühlmann–Straub with strata as classes and tasks as units, using the same EPV/VHM estimator as `simstudy2.credibility_fine`. Squared errors are pooled over strata present in each slice, raw vs credibility.
+- **Clustering:** one-way ANOVA ICC (`icc_binary`) with a task-bootstrap 95% CI (B = 2,000), for DB mismatch (primary, matching the pilot's 0.42) and failure. The pass check is on the point estimate.
+- **Simulator effect:** `phase1.paired` (task bootstrap, B = 5,000) on the 25 shared tasks.
+- **Insured loss:** Wilson 90% on runs. The task-level CP 95% upper uses n = 50 tasks, with x = rate × 50 (or 1 − 0.05^(1/50) at 0 events).
+
 ## Phase 1b: second agent, pre-registered 2026-10-21, before any 1b run
 **Design:** the agent is `claude-sonnet-5-5`, the simulator Haiku (as in the pilot breadth, so only the agent changes), the judge Haiku. The 25 breadth tasks × 2, plus the 40 refusal tasks × 1, about 90 runs and about $23.
 
