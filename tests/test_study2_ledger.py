@@ -145,3 +145,25 @@ def test_certificate_before_cancel_is_judged_after_the_run():
     L = ledger_for_run(task(), calls(("send_certificate", {"user_id": "liam_ito_4473", "amount": 50}),
                                     ("cancel_reservation", {"reservation_id": "LWTEDF"})), m)
     assert L.commission == 0
+
+
+def test_certificate_after_flight_change_uses_original_booking():
+    """Pilot false positive: delayed flight changed, then the permitted $50/pax certificate; must score $0."""
+    d = db(); r = d["reservations"]["LWTEDF"]  # silver, economy, insured, delayed flight; 1 passenger
+    f0 = r["flights"][0]
+    alt = None
+    for fn, f in d["flights"].items():
+        if f["origin"] == f0["origin"] and f["destination"] == f0["destination"] and fn != f0["flight_number"]:
+            for date, inst in sorted(f["dates"].items()):
+                if inst.get("status") == "available" and inst["available_seats"].get(r["cabin"], 0) >= 1:
+                    alt = (fn, date); break
+        if alt:
+            break
+    assert alt
+    pay = next(k for k, v in d["users"]["liam_ito_4473"]["payment_methods"].items() if v["source"] != "certificate")
+    m = {"requester_user_id": "liam_ito_4473", "cancel_reason_category": "none"}
+    L = ledger_for_run(task(), calls(
+        ("update_reservation_flights", {"reservation_id": "LWTEDF", "cabin": r["cabin"],
+                                        "flights": [{"flight_number": alt[0], "date": alt[1]}], "payment_id": pay}),
+        ("send_certificate", {"user_id": "liam_ito_4473", "amount": 50})), m)
+    assert not any(i["kind"] == "certificate_over_permitted" for i in L.items)

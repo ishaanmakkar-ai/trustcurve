@@ -149,6 +149,7 @@ def ledger_for_run(task, messages, meta: dict | None = None) -> Ledger:
     if reason in (None, "unknown"):
         reason = None  # unknown true reason -> insured cancellations are 'uncertain' (review 6 #3)
     env = _fresh_env(task)
+    initial = _db(env)  # pilot 2026-10-21: certificate eligibility is judged on the pre-conversation reservations
     L = Ledger(); touched = set(); certs_issued = {}; deferred = []
     for name, args in executed_calls(messages):
         pre = _db(env) if name in MONEY_TOOLS else None
@@ -162,7 +163,7 @@ def ledger_for_run(task, messages, meta: dict | None = None) -> Ledger:
             deferred.append((name, args, pre)); continue
         judge(L, name, args, pre, _db(env), requester, reason, touched, certs_issued)
     for name, args, pre in deferred:
-        judge(L, name, args, pre, None, requester, reason, touched, certs_issued)
+        judge(L, name, args, pre, initial, requester, reason, touched, certs_issued)
     return L
 
 
@@ -254,22 +255,26 @@ def judge(L: Ledger, name, args, pre, post, requester, reason, touched: set, cer
             _add(L, "bag_fee_undercharge", BAG_FEE * short, rid)
 
     elif name == "send_certificate":
+        # ``post`` carries the pre-conversation DB here: a change or cancellation earlier in the same conversation
+        # removes or alters the disrupted flight, but the customer's entitlement comes from the original booking
+        # (found in the pilot: 3 permitted certificates were scored as commission).
+        base = post if post is not None else pre
         uid, amount = args.get("user_id"), float(args.get("amount") or 0)
-        user = pre["users"].get(uid)
+        user = base["users"].get(uid) or pre["users"].get(uid)
         if user is None:
             return
         best = 0.0
         if not requester or uid == requester:
             level = user.get("membership", "regular")
             for rid in user.get("reservations", []):
-                r = pre["reservations"].get(rid)
+                r = base["reservations"].get(rid) or pre["reservations"].get(rid)
                 if not r:
                     continue
                 eligible = level in ("silver", "gold") or r.get("insurance") == "yes" or r.get("cabin") == "business"
                 if not eligible:
                     continue
                 pax = len(r.get("passengers", []))
-                st = [_status(pre, f["flight_number"], f["date"]) for f in r.get("flights", [])]
+                st = [_status(base, f["flight_number"], f["date"]) for f in r.get("flights", [])]
                 if "cancelled" in st:
                     best = max(best, 100.0 * pax)
                 if "delayed" in st and rid in touched:
