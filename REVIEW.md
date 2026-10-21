@@ -221,3 +221,29 @@ The problems are in interpretation.
 | 12 | Medium | The design costs $246–285+ against ≈ $126 left. The formula omits the judge, κ validation, planter, pilot and retries | **Accepted.** A full cost table goes to Ishaan before B′ |
 | 13 | Low | Some rule cells were chosen in code. φ was evaluated on 100 trap tasks. "Not evaluable ⇒ fires" is post-hoc | **Labelled** in STUDY3.md |
 | 14 | Low | The deployment rate is min(q, r) for about 20% of flaws; F3 counts any event; "below ~0.15" wording | **Fixed** in wording. Loop 4 draws r ≤ q, so the deployment rate is exactly r |
+
+## Review 11 — after Study 3 phase A′ loop 4 and the closing summary, 2026-10-21
+A fresh-context reviewer found that:
+- sim_a4 implements pre-registration 9bbf26c faithfully;
+- one recomputed cell matches sim_a4.json exactly;
+- the cost arithmetic checks out;
+- the decision rules were applied literally;
+- the per-slice choice of C2 changes nothing (every slice picks ρ1 = 0.3).
+
+The closing summary overclaimed and left items off the PI list. Resolved by the **revised closing summary** in STUDY3.md, which replaces the first version (kept above it, with a marker).
+
+| # | Severity | Finding | Resolution |
+|---|---|---|---|
+| 1 | High | When F1 is representative, the F2-vs-F1 detection comparison can't be decided: matched McNemar power is 0.35 (0.17–0.45 across ρ2). The generic F1₃ itself passes H2 63% of the time, so "H1/H2 decidable" says nothing about design. The RQ1-form decision was missing from the PI list | **Accepted.** Added to "cannot decide" and to the PI list |
+| 2 | High | ρ1 and ρ2 are partly set by whoever writes the experience scenarios. Writing F2's representative arm "to deployment frequencies" needs knowledge of that mix | **Accepted.** PI list: freeze the experience-scenario generator before F2 is built; its author must be independent of the F2 builder; the representative arm is drawn from the frozen generator by a third party. This is stated as making F2's pricing advantage partly true by construction |
+| 3 | Med-High | One ρ1 can't match both Study 2's bias (ρ1 ≈ 0.3) and its Spearman (ρ1 ≈ 0). C2 is a near-tie, and interpolating gives ρ1 ≈ 0.45 with H3b ≈ 0.1–0.15 | **Accepted.** H3b at the calibrated point is reported as "≈ 0.04–0.25, bracketed by grid points". "As in Study 2" is replaced with "the simulation cannot locate Study 2's world on this grid" |
+| 4 | Medium | "H3 not unreachable" takes a maximum over ρ1, a choice made in code. At C2, O's P(H3) is 0.16 | **Accepted.** Restated as "unreachable even for a perfect forecaster unless ρ1 ≈ 0"; the slice choice is labelled |
+| 5 | Medium | The quoted ranges were selective (the ρ2 = 0.3 cell and the narrow rate range were left out) | **Fixed:** full ranges quoted |
+| 6 | Medium | P ≥ 0.94 for H1/H2 holds only at r ∈ [0.05, 0.4]. At [0.02, 0.15], P(H2) = 0.69–0.72 and P(H1) ≈ 0.64–0.71 (reviewer's unregistered check, 200 reps), which is undecidable. Loop 4 never computed P(H1). The planted rates largely decide H2 | **Accepted** and stated. The P(H1) value is cited as the reviewer's check |
+| 7 | Medium | A Wilcoxon signed-rank test gives H3b power 0.56 at C2 (ceiling 0.96), against 0.25 for the sign test (unregistered check) | **Listed for the PI** as an unregistered lever. It needs its own pre-registration before B′; A′ does not adopt it |
+| 8 | Medium | Missing from the PI list:<br>• the RQ3 difference-in-differences redefinition (a change to a plan RQ);<br>• that no simulated design is affordable at ≈ $126, while loop 4's K1′ ignores affordability;<br>• cost levers: F1 at R = 3 is ≈ $63 for a power-0.35 contrast; the n_e = 200 rule fell back to its default;<br>• the $25 fixed cost and the judge price are guesses | **Added** to the PI list. S0's K1′ (affordability) is put to Ishaan instead of being declared |
+| 9 | Low-Med | "The bottleneck is the precision of F2's arm" is unverified, and the ceiling caps power at 0.79 | **Reworded** as a hypothesis, with the ceiling noted |
+| 10 | Low | Under-representation (ρ2 = 0.3) destroys the advantage, not over-trapping | **Reworded** |
+| 11 | Low | O leaves out the statement judge and forecasts the mean | O is called an **approximate** ceiling. A judge-aware O changes nothing material (ceiling 0.19 → 0.26 at ρ1 = 1) |
+| 12 | Low | False-positive maximum over all 96 cells is 0.027; the rate curve pools all ρ2 and r ranges; choices made in code were unlabelled | **Labelled** |
+| 13 | Low | Authoring order is mitigated, not proven. "Exposure-matched" is 300 vs 270 task-runs | **Accepted.** Wording changed to "approximately matched" |

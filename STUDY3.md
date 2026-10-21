@@ -506,6 +506,7 @@ The loop-1/2 simulation does not model that: within-type trigger conditions, and
 | K1′ | **Does not fire.** Matched McNemar power reaches ≥ 0.5 when F1 is unrepresentative |
 
 ### A′ closing summary (2026-10-21; 4 loops, the maximum)
+> **Superseded** by the revised closing summary below (review 11). It is kept for the record.
 **What the planned design can decide:**
 - **H1 and H2: yes.** P ≥ 0.94 at r ∈ [0.05, 0.4] *if* the world resembles the simulation. Real flaws that fire below about 5% per opportunity will mostly be missed by any benchmark.
 - **Which kind of world the real study is in.** Whether F1 is representative shows up directly as F1's realised bias.
@@ -659,3 +660,60 @@ The real-world costly-error frequency is **always a sweep, never asserted** (IER
   - F2 split pricing;
   - n_e = 200.
 - **Noted for Ishaan:** F0 is anchored on F1₃, not F1₁.
+
+### A′ closing summary, revised after review 11 (2026-10-21; this replaces the first version above)
+**Labels and corrections to the loop-4 results:**
+- Choices made in code: C2 is chosen per (r, n_e) slice; the decisions are evaluated at n_e = 200 and ρ2 = 1; the "H3 not unreachable" verdict takes a maximum over ρ1.
+- The detection-vs-rate curve pools all ρ2 values, both r ranges and all n_e (ρ1 = 1).
+- False positives: ≤ 0.027 over all 96 cells.
+- "Exposure-matched" means **approximately** matched (300 vs 270 task-runs).
+- O is an **approximate** ceiling: it leaves out the statement judge and forecasts the mean.
+
+**What the planned design (20 configurations, R = 3, n_e = 200, ≈ $444) can decide:**
+- **H1 and H2:** only at r ∈ [0.05, 0.4].
+  - There, P ≥ 0.94 if the world resembles the simulation.
+  - At r ∈ [0.02, 0.15], P(H2) is 0.69–0.72 and P(H1) ≈ 0.64–0.71 (the latter from review 11's unregistered check). Both are undecidable under the A′ 0.8/0.2 rule.
+  - **Even where H2 is decidable, it says little about design.** The generic F1₃ passes H2 itself 63% of the time when it is representative. The planted firing rates largely decide H2.
+- **Whether F1 is representative:** this is directly observable as F1's realised bias.
+
+**What it cannot decide:**
+- **"F2 detects more than F1", if F1 is representative.** Approximately matched McNemar power is 0.35 (0.17–0.45 across ρ2).
+- **Pricing superiority, if F1 is representative.** H3b power is ≤ 0.01.
+- **Pricing superiority at a Study-2-like underpricing point.** H3b power is ≈ 0.04–0.25, bracketed by grid points (C2 is a near-tie between ρ1 = 0.3 and 0.6).
+  - The simulation **cannot locate Study 2's world on this grid**: Study 2's bias fits ρ1 ≈ 0.3, but its Spearman fits ρ1 ≈ 0.
+  - H3 is unreachable even for a perfect forecaster unless ρ1 ≈ 0.
+- **RQ3** (90% width ≈ 1.0) and **RQ4** (3–5 underwriters). Both are reported as estimates with intervals.
+
+**In plain terms:** at this size, the money buys an informative test only if the generic pool turns out to be badly unrepresentative of the experience period. Otherwise it buys estimates.
+
+**Things the experimenters control:**
+- How representative each pool is (ρ1, ρ2) depends on who writes the experience scenarios relative to F1's pool and F2's representative arm.
+- If F2's representative arm is "written to deployment frequencies" by someone who knows the experience mix, F2's pricing advantage is **partly true by construction**.
+- **Under-representation** (ρ2 = 0.3) removes F2's advantage entirely (error 1.00 vs F1₃'s 1.01 at C2). Over-representation (ρ2 = 1.5) costs about 0.1 log.
+
+**Levers A′ did not test (each needs its own pre-registration before B′):**
+- **A Wilcoxon signed-rank test** for H3b. In review 11's unregistered check, its power is 0.56 at C2 (ceiling 0.96), against 0.25 for the sign test. It still fails the "≥ 0.7 × ceiling" condition.
+- **A larger representative pricing arm.** That it would help is a hypothesis. The perfect forecaster's own power (0.79 at n_e = 200) caps what any arm can reach with 20 configurations.
+
+**Ishaan's decisions before any paid B′ run:**
+1. **The budget and S0's K1′.**
+   - No simulated design is affordable within the ≈ $126 left under $500. The full design is ≈ $444; at n_e = 100 it is ≈ $336.
+   - S0's K1′ ("no affordable design → resize before any spend") is therefore **his call**, not a mechanical verdict. Loop 4's K1′ variant ignores affordability.
+2. **Who builds F2, and the spec:** a ≥ 10% type floor, R = 3, and a separate representative arm.
+3. **Independence of the experience generator.**
+   - Freeze the experience-scenario generator before F2 is built.
+   - Its author must be independent of the F2 builder.
+   - F2's representative arm is drawn from that frozen generator by a third party, which openly makes ρ2 ≈ 1 by construction. **Or** Ishaan writes the representative arm blind to the generator, which is the honest test of representativeness.
+4. **The RQ1 form.**
+   - Keep H2 primary, as the plan states and the literal loop-4 rule gives.
+   - **Or** make the approximately matched McNemar test primary, with its power stated (0.35 if F1 is representative).
+5. **Accepting the RQ changes:**
+   - RQ2 becomes estimation, with H3/H3b secondary and their powers stated;
+   - RQ3 is redefined as a difference-in-differences against F1₃, reported as an estimate;
+   - H5 becomes descriptive;
+   - RQ4 is descriptive.
+6. **Cost levers:**
+   - F1 at R = 3 costs ≈ $63, including judge and retries, and buys only the power-0.35 matched contrast;
+   - n_e = 200 came from the rule's fallback default, so n_e = 100 saves ≈ $108 at some loss of precision;
+   - the $25 fixed cost and the $0.004 judge price are guesses, to be priced before spend.
+7. **Whether to pre-register the Wilcoxon H3b and/or a larger representative arm** before B′.
