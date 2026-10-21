@@ -6,7 +6,7 @@ U=tasks/study2/underwriting
 rm -f results/study2/STOP_FLAG
 run_one() {
   [[ -f "$R/results/study2/STOP_FLAG" ]] && { echo "skip $1"; return; }
-  CONC=4 "$R/scripts/study2/run_batch.sh" D "d-$1" "$1" "$R/$U/pool.json" "$R/$U/meta.json" anthropic/claude-haiku-5-5 H > /dev/null 2>&1
+  CONC=4 "$R/scripts/study2/run_batch.sh" D "d-$1" "$1" "$R/tasks/study2/underwriting/pool.json" "$R/tasks/study2/underwriting/meta.json" anthropic/claude-haiku-5-5 H > /dev/null 2>&1
   rc=$?; [[ $rc -eq 3 ]] && touch "$R/results/study2/STOP_FLAG"
   echo "d-$1 rc=$rc $(tail -1 "$R/results/study2/logs/d-$1.log")"
 }
