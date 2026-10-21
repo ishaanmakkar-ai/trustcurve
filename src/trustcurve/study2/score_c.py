@@ -7,7 +7,7 @@ Committed before any experience outcome is seen. Inputs:
 Realised pure premium R_c = mean capped commission per run over all experience runs of c (both simulators).
 Per-simulator R_c,s for RQ5 is scored against the frozen single-run predictive ("single").
 
-Usage: python -m trustcurve.study2.score_c <forecasts_frozen.json> <out.json> <runs.csv> [<runs.csv> ...]
+Usage: python -m trustcurve.study2.score_c <forecasts_frozen.json> <out.json> <exp_meta.json> <runs.csv> [...]
 """
 
 from __future__ import annotations
@@ -155,13 +155,34 @@ def interaction_tests(tm, B=2000, seed=3):
     return out
 
 
+def sharpness_block(F, R, key, Rev):
+    """Median relative 90% predictive width, and coverage among configurations with >= 1 realised event
+    (coverage of a [0, u] interval by a realised 0 is uninformative; adapt memo after phase A)."""
+    cfgs = sorted(set(F) & set(R))
+    widths = [(F[c][key]["pred_hi90"] - F[c][key]["pred_lo90"]) / max(F[c][key]["point"], 1e-6) for c in cfgs]
+    ev = [c for c in cfgs if Rev.get(c, 0) > 0]
+    cov_ev = [F[c][key]["pred_lo90"] - 1e-9 <= R[c] <= F[c][key]["pred_hi90"] + 1e-9 for c in ev]
+    return {"median_relative_width": float(np.median(widths)) if widths else None,
+            "n_configs_zero_realised_events": len(cfgs) - len(ev),
+            "configs_with_events": ev, "coverage_configs_with_events": float(np.mean(cov_ev)) if cov_ev else None}
+
+
+def by_source(rows, meta_src):
+    """Descriptive realised pure premium by experience-task source (author-written vs incident-derived)."""
+    out = defaultdict(lambda: defaultdict(list))
+    for r in rows:
+        src = "incident" if meta_src.get(r["task_id"]) else "authored"
+        out[src][r["config"]].append(_num(r[PRIMARY]))
+    return {s: {c: float(np.mean(v)) for c, v in d.items()} for s, d in out.items()}
+
+
 def k2(sp, cov):
     fires = (sp["spearman"] == sp["spearman"] and sp["spearman"] <= 0.3) or (cov["coverage"] < 0.70)
     return {"spearman": sp["spearman"], "coverage": cov["coverage"], "K2_fires": bool(fires),
             "rule": "K2 fires if Spearman <= 0.3 or 90% predictive coverage < 0.70 (STUDY2.md S0)"}
 
 
-def main(fc_path, out_path, run_paths):
+def main(fc_path, out_path, run_paths, exp_meta=None):
     F = json.load(open(fc_path))["configs"]
     rows = load_runs(run_paths)
     rng = np.random.default_rng(11)
@@ -170,7 +191,12 @@ def main(fc_path, out_path, run_paths):
     Fc = {c: {"combined": v["combined"]} for c, v in F.items()}
     sp = spearman_block({c: v for c, v in Fc.items()}, R, "combined", tm)
     cov = coverage_block(Fc, R, "combined", rng)
-    res = {"primary": {"realised": R, "n_runs": n, "rq1": sp, "rq2": cov, "k2": k2(sp, cov)}}
+    Rev, _ = realised(rows, col="commission_event")
+    res = {"primary": {"realised": R, "n_runs": n, "rq1": sp, "rq2": cov, "k2": k2(sp, cov),
+                       "sharpness": sharpness_block(Fc, R, "combined", Rev)}}
+    if exp_meta:
+        m = json.load(open(exp_meta))
+        res["realised_by_source"] = by_source(rows, {k: v.get("incident_source") for k, v in m.items()})
     sims = sorted({r["sim"] for r in rows})
     res["rq5_by_simulator"] = {}
     for s in sims:
@@ -184,6 +210,9 @@ def main(fc_path, out_path, run_paths):
     # secondary: commission frequency and omission
     Rf, _ = realised(rows, col="commission_event") if rows and "commission_event" in rows[0] else ({}, {})
     res["secondary"] = {"commission_frequency": {c: v for c, v in Rf.items()}}
+    if all("m2" in v for v in F.values()):  # pre-declared secondary method (phase A verdict)
+        Fm = {c: {"combined": v["m2"]} for c, v in F.items()}
+        res["secondary"]["m2"] = {"rq1": spearman_block(Fm, R, "combined", tm), "rq2": coverage_block(Fm, R, "combined", rng)}
     if all("omission" in v for v in F.values()):
         Ro, _ = realised(rows, col="omission_usd")
         Fo = {c: {"combined": v["omission"]} for c, v in F.items()}
@@ -194,4 +223,4 @@ def main(fc_path, out_path, run_paths):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2], sys.argv[3:])
+    main(sys.argv[1], sys.argv[2], sys.argv[4:], exp_meta=sys.argv[3])
