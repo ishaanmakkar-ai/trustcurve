@@ -236,9 +236,11 @@ def main(fc_path, out_path, run_paths, exp_meta=None):
     # secondary: commission frequency and omission
     Rf, _ = realised(rows, col="commission_event") if rows and "commission_event" in rows[0] else ({}, {})
     res["secondary"] = {"commission_frequency": {c: v for c, v in Rf.items()}}
-    if all("m2" in v for v in F.values()):  # pre-declared secondary method (phase A verdict)
-        Fm = {c: {"combined": v["m2"]} for c, v in F.items()}
-        res["secondary"]["m2"] = {"rq1": spearman_block(Fm, R, "combined", tm), "rq2": coverage_block(Fm, R, "combined", rng)}
+    for sec in ("m1c", "m1", "m2"):  # pre-declared secondary methods (phase-A loop 3 decision: primary = M2)
+        if all(sec in v for v in F.values()):
+            Fm = {c: {"combined": v[sec]} for c, v in F.items()}
+            res["secondary"][sec] = {"rq1": spearman_block(Fm, R, "combined", tm),
+                                     "rq2": coverage_block(Fm, R, "combined", rng)}
     if all("omission" in v for v in F.values()):
         Ro, _ = realised(rows, col="omission_usd")
         Fo = {c: {"combined": v["omission"]} for c, v in F.items()}
