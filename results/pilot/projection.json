@@ -436,6 +436,72 @@
       }
     ]
   },
+  "workflow_reweighting": {
+    "note": "ASSUMED real-world workflow mix (not data). Per-workflow credibility Z = sqrt(n_claims/n_full) with n_full = claims for +/-20% pure premium (q=5%, CV2=1); Z=0 => price entirely from the complement (manual/scenario rate). Strata absent from the sample cannot be priced from data.",
+    "n_full_claims": 132,
+    "strata": {
+      "cancel": {
+        "assumed_mix_weight": 0.35,
+        "runs": 32,
+        "tasks": 16,
+        "insured_events": 0,
+        "benchmark_share_of_runs": 0.64,
+        "Z_limited_fluctuation": 0.0,
+        "upper95_robust": 0.171
+      },
+      "change": {
+        "assumed_mix_weight": 0.35,
+        "runs": 14,
+        "tasks": 7,
+        "insured_events": 0,
+        "benchmark_share_of_runs": 0.28,
+        "Z_limited_fluctuation": 0.0,
+        "upper95_robust": 0.348
+      },
+      "book": {
+        "assumed_mix_weight": 0.2,
+        "runs": 2,
+        "tasks": 1,
+        "insured_events": 0,
+        "benchmark_share_of_runs": 0.04,
+        "Z_limited_fluctuation": 0.0,
+        "upper95_robust": 0.95
+      },
+      "compensation": {
+        "assumed_mix_weight": 0.05,
+        "runs": 0,
+        "tasks": 0,
+        "insured_events": 0,
+        "benchmark_share_of_runs": 0.0,
+        "Z_limited_fluctuation": 0.0,
+        "upper95_robust": null
+      },
+      "info": {
+        "assumed_mix_weight": 0.03,
+        "runs": 0,
+        "tasks": 0,
+        "insured_events": 0,
+        "benchmark_share_of_runs": 0.0,
+        "Z_limited_fluctuation": 0.0,
+        "upper95_robust": null
+      },
+      "other": {
+        "assumed_mix_weight": 0.02,
+        "runs": 2,
+        "tasks": 1,
+        "insured_events": 0,
+        "benchmark_share_of_runs": 0.04,
+        "Z_limited_fluctuation": 0.0,
+        "upper95_robust": 0.95
+      }
+    },
+    "kish_weighting_design_effect": 2.037
+  },
+  "rate_limit_plan": {
+    "observed": "concurrency 8, 50 runs, 0 errors/retries",
+    "plan": "start at 8 concurrent sims; tau2 --max-retries 3 --retry-delay 1; if any 429, halve concurrency and resume with --auto-resume; Sonnet user simulator needs a separate per-model limit check",
+    "throughput_runs_per_hour_at_8": 791
+  },
   "costs": {
     "api_per_run_haiku_user_sim": 0.0147,
     "api_per_run_sonnet_user_sim_est": 0.0546,

@@ -86,6 +86,32 @@ def main(breadth_path, pilot_path=None, n_tasks=50):
         "note": "Tasks treated as a random sample from a large pool. Variants nested in a parent task are NOT "
                 "independent new tasks: effective n is capped near P/rho_parent (unmeasured).",
         "rho_used_[lo,point,hi]": [rho_lo, rho, rho_hi], "scenarios": scen}
+    # Workflow mix (labelled ASSUMPTION) and per-workflow partial credibility (review 1 #5, goal step 7)
+    ASSUMED_MIX = {"cancel": 0.35, "change": 0.35, "book": 0.20, "compensation": 0.05, "info": 0.03, "other": 0.02}
+    strata = group(b, "stratum", lambda x: x)
+    n_full = eff_runs_needed(0.05, 1.0, 0.20) * 0.05  # claims for +/-20% pure premium at q=5%, CV2=1
+    per = {}
+    for st, w in ASSUMED_MIX.items():
+        rows = strata.get(st, [])
+        ev = sum(x["insured_loss_event"] == "True" for x in rows)
+        tasks = len({x["task_id"] for x in rows})
+        per[st] = {"assumed_mix_weight": w, "runs": len(rows), "tasks": tasks, "insured_events": ev,
+                   "benchmark_share_of_runs": round(len(rows) / len(b), 3),
+                   "Z_limited_fluctuation": round(min(1.0, math.sqrt(ev / n_full)) if ev else 0.0, 3),
+                   "upper95_robust": round(zero_event_upper(tasks), 3) if (tasks and ev == 0) else None}
+    wts = [ASSUMED_MIX[st] / max(per[st]["benchmark_share_of_runs"], 1e-9) for st in ASSUMED_MIX if per[st]["runs"]]
+    mw = mean(wts); cvw2 = mean([(x - mw) ** 2 for x in wts]) / mw ** 2 if wts else float("nan")
+    out["workflow_reweighting"] = {
+        "note": "ASSUMED real-world workflow mix (not data). Per-workflow credibility Z = sqrt(n_claims/n_full) "
+                "with n_full = claims for +/-20% pure premium (q=5%, CV2=1); Z=0 => price entirely from the "
+                "complement (manual/scenario rate). Strata absent from the sample cannot be priced from data.",
+        "n_full_claims": round(n_full), "strata": per,
+        "kish_weighting_design_effect": round(1 + cvw2, 3) if wts else None}
+    out["rate_limit_plan"] = {
+        "observed": "concurrency 8, 50 runs, 0 errors/retries",
+        "plan": "start at 8 concurrent sims; tau2 --max-retries 3 --retry-delay 1; if any 429, halve concurrency "
+                "and resume with --auto-resume; Sonnet user simulator needs a separate per-model limit check",
+        "throughput_runs_per_hour_at_8": round(8 * 3600 / s["sec_per_run_mean"])}
     c = s["cost_per_run_usd"]
     out["costs"] = {"api_per_run_haiku_user_sim": c,
                     "api_per_run_sonnet_user_sim_est": round(c * ((1 - s["user_sim_cost_share"]) + s["user_sim_cost_share"] * 20), 4),
