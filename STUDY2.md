@@ -390,3 +390,33 @@ Budget: ≈ $15 more in phase B (projected total ≈ $40). This is loop 1 of at 
 - **The Anthropic experience simulator becomes `claude-sonnet-5-5`**, which had the highest fidelity in Goal 3 E1 (0 user_caused), *conditional on* passing G3 in a date-repaired pilot (B0 × 70 v1 tasks, running now).
 - Underwriting keeps the Haiku simulator, unchanged. So **the simulator changes between underwriting and experience for both experience families**: RQ5 becomes a test of the full setup change, not just a swap within one family.
 - If Sonnet fails G3, the fallback is gpt-6-luna plus gpt-6.1-sol. Both are OpenAI models, so that would be two models, not two families, and the plan's "≥ 2 simulator families" would then be reported as unmet.
+
+### B5 power analysis on the screening + pilot rates (2026-10-21; `results/study2/phaseB/power.json`)
+- **Truth model:** the multiplicative rating model fitted to 21 configurations' screening runs plus the pilot runs.
+- **Implied commission frequency under W:** KNO-WR 1.1%; KB-HCF and KB-PPL 0.6%; everything else 0.1–0.2%. The last range comes from half-event smoothing; 0 is equally consistent.
+
+| Design | Median Spearman | p10 | P(ρ ≤ 0.3) | Predictive coverage | Zero-event configurations |
+|---|---|---|---|---|---|
+| A: all 21, Haiku n_e = 200, Sonnet 100 | 0.18 | −0.12 | 0.73 | 0.998 | 9.2 |
+| B: all 21, n_e = 150 / 60 | 0.14 | −0.11 | 0.72 | 0.998 | 11.0 |
+| C: the pre-registered 13 only | 0.19 | −0.16 | 0.67 | 0.998 | 6.3 |
+
+**Reading:**
+- No affordable design reaches the 0.7 target. Under the B5 rule, phase C would proceed at the budget cap, pre-declared **under-powered for K2**: it fires on Spearman with about 70% probability.
+- The binding constraint is the **underwriting** side. About 1 of 90 underwriting tasks triggers the only observed risk channel.
+- Coverage would be near 1 but trivial (zero-event intervals).
+
+## B-L2. Phase B loop 2: a capability gradient below Haiku 5.5 (pre-registered 2026-10-21, before any run)
+The plan's capability factor includes "any weaker model if available". Two are available on the project keys:
+- **CAP-H4:** `claude-haiku-4-5` (previous-generation Haiku);
+- **CAP-L:** `openai/gpt-6-luna` as the **agent** (price-matched to Haiku 5.5).
+
+**Probe:** each runs on the 45 screening tasks, Haiku simulator, ≈ $5 in total.
+
+**Prediction:** commission > B0 for both (direction only).
+
+**Decision rule (fixed now):**
+- If either shows ≥ 2 commission events in 45, it joins the phase-C configuration set (with its KB variant, if affordable), and the power analysis is re-run.
+- Otherwise the capability gradient adds nothing, and phase C proceeds (or not) on the rates above.
+
+Either way, **G1/K3 and the go/no-go for phase C spend go to Ishaan before any phase-C run**. This is loop 2 of 4 in phase B.
