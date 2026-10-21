@@ -43,7 +43,7 @@ class Config3:
     card: dict = field(default_factory=dict, hash=False, compare=False)
 
 
-def _card(model, guardrail=False, policy_version="tau2-airline (current)"):
+def _card(model, guardrail=False, policy_version="Airline policy, current revision"):
     vendor, name = model.split("/")[0], model.split("/")[-1]
     tier = {"claude-sonnet-5-5": "frontier", "claude-haiku-5-5": "mid", "claude-haiku-4-5-20251001": "small",
             "gpt-6-luna": "small"}.get(name, "mid")
@@ -65,9 +65,9 @@ CONFIGS3 = {c.id: c for c in [
     *[Config3(f"M{k}", "mechanical", fault_source="mechanical", card=_card(HAIKU)) for k in range(1, 5)],
     Config3("N1", "natural", model=HAIKU4, designer_known=True, card=_card(HAIKU4)),
     Config3("N2", "natural", model=LUNA, study2_exposed=True, card=_card(LUNA)),
-    Config3("N3", "natural", policy_doc="tau_bench_v1_airline.md", card=_card(HAIKU, policy_version="tau-bench v1 airline")),
+    Config3("N3", "natural", policy_doc="tau_bench_v1_airline.md", card=_card(HAIKU, policy_version="Airline policy, earlier revision (since superseded)")),
     Config3("N4", "natural", model=N4_MODEL, policy_doc=N4_POLICY,
-            card=_card(N4_MODEL, policy_version="tau-bench v1 airline" if N4_POLICY else "tau2-airline (current)")),
+            card=_card(N4_MODEL, policy_version="Airline policy, earlier revision (since superseded)" if N4_POLICY else "Airline policy, current revision")),
 ]}
 
 H2_SET = [c.id for c in CONFIGS3.values() if c.source in ("external", "mechanical", "natural") and not c.designer_known]
