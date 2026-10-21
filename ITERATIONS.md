@@ -48,3 +48,11 @@ Each loop records the expectation before checking, what broke, and the fix. A re
   - the commission share of failures is low (<25%)
   - the loss-event rate is at most 10%
   - the failure ICC across 25 clusters is clearly above 0
+- **Loop 3 result:** 50 runs, 9 failures (18%; Wilson 10–31%), failure ICC 0.61, 1 raw commission divergence and **0 insured loss events**. The expectations held: ≥10 failures ✗ (9, close), commission share low ✓, loss rate ≤10% ✓, ICC clearly above 0 ✓.
+- **What broke:** task 42's $4,418 "over-refund" was a **customer-requested, policy-permitted** business-class cancellation. The user simulator said the extra trip was "from my assistant's mess". A divergence from gold is not a wrongful act.
+- **Fix:** `policy.py` checks the tau2 cancellation rules (24 h, business class, airline-cancelled flight; insurance is "uncertain") and splits wrongful payouts from permitted divergences. 6 new tests; 28/28 pass. Re-scored: 0 insured events in 65 runs.
+
+## Loop 4 — projection (step 7)
+- **Expected:** the τ² airline clustering ceiling makes a credible frequency impossible by repetition.
+- **Checked:** with ρ = 0.59, the ceiling is about 85 effective runs. No scenario in `results/pilot/projection.json` is feasible with 50 tasks. The loosest (±20%, q = 20%) needs 484 distinct tasks.
+- **Result:** the main-run recommendation shifts from "more repeats" to "more distinct tasks + refusal/adversarial tasks + credibility blending". Iteration cap reached (4 loops), so the report follows.

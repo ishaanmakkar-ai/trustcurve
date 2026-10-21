@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 
 from trustcurve.dollar_diff import dollar_diff, gold_and_agent_dbs
+from trustcurve.policy import classify_items, insured_amounts
 
 # Official Anthropic list prices, USD per million tokens (prompts <= 100K tokens).
 # Source: Anthropic model price table (cached 2026-10-06). Prompts above 100K are priced
@@ -55,9 +56,10 @@ def collect(results_path: Path) -> list[dict]:
         try:
             gold, agent = gold_and_agent_dbs(task, msgs)
             dd = dollar_diff(gold, agent)
+            pol = insured_amounts(classify_items(dd.items, agent))
             diff_error = ""
         except Exception as e:  # replay failure must be visible, never silently $0
-            dd, diff_error = None, f"{type(e).__name__}: {e}"[:300]
+            dd, pol, diff_error = None, None, f"{type(e).__name__}: {e}"[:300]
         a_in, a_out, a_calls, a_long = _usage(s["messages"], "assistant")
         u_in, u_out, u_calls, u_long = _usage(s["messages"], "user")
         pa, pu = PRICES[agent_model], PRICES[user_model]
@@ -74,6 +76,11 @@ def collect(results_path: Path) -> list[dict]:
             "customer_harm_usd": None if dd is None else dd.customer_harm,
             "severity_usd": None if dd is None else dd.severity,
             "omission_usd": None if dd is None else dd.omission,
+            "wrongful_payout_usd": None if pol is None else pol["wrongful_payout"],
+            "uncertain_payout_usd": None if pol is None else pol["uncertain_payout"],
+            "permitted_divergence_usd": None if pol is None else pol["permitted_divergence"],
+            "insured_loss_event": None if pol is None else (pol["wrongful_payout"] + pol["customer_harm"]) > 1e-6,
+            "insured_loss_event_incl_uncertain": None if pol is None else (pol["wrongful_payout"] + pol["uncertain_payout"] + pol["customer_harm"]) > 1e-6,
             "loss_kinds": "" if dd is None else ";".join(sorted({i["kind"] for i in dd.items})),
             "position_delta_legacy": None if dd is None else dd.position_delta,
             "diff_error": diff_error,
