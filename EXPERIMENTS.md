@@ -253,3 +253,5 @@ At pilot-like clustering:
 5. Drop the realistic control variate (no gain at plausible score quality).
 6. **The wrong-mix risk dominates every technique:** the real workflow mix must come from the insured's own data.
 7. **Distinct tasks bind:** run each task once, not many variants many times, unless E2 shows variants are near-independent.
+
+**E2 correction (before any E2 run):** all 20 E2 parents are in the breadth set (same seed), so the existing breadth runs (2 per parent) serve as the unperturbed parent runs. No extra parent runs are needed. The pre-registration said 17 of 20, which was wrong.

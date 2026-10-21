@@ -25,3 +25,24 @@ Status: 6/50 complete. Avg reward: 1.00 (N=6). 8 running: 7.0(60s), 14.0(60s),
 Status: 12/50 complete. Avg reward: 0.83 (N=12). 8 running: 24.0(55s), 
 33.0(42s), 34.0(25s), 35.0(21s), 37.0(18s), 38.0(16s), 40.0(9s), 41.0(8s)
 20/25 (trial 1/2). Running task 42, trial 1
+21/25 (trial 1/2). Running task 44, trial 1
+22/25 (trial 1/2). Running task 45, trial 1
+23/25 (trial 1/2). Running task 46, trial 1
+24/25 (trial 1/2). Running task 48, trial 1
+0/25 (trial 2/2). Running task 0, trial 2
+1/25 (trial 2/2). Running task 1, trial 2
+Status: 19/50 complete. Avg reward: 0.89 (N=19). 8 running: 35.0(51s), 
+42.0(27s), 44.0(18s), 45.0(17s), 46.0(13s), 48.0(10s), 0.1(4s), 1.1(2s)
+2/25 (trial 2/2). Running task 2, trial 2
+3/25 (trial 2/2). Running task 3, trial 2
+4/25 (trial 2/2). Running task 7, trial 2
+5/25 (trial 2/2). Running task 9, trial 2
+6/25 (trial 2/2). Running task 13, trial 2
+7/25 (trial 2/2). Running task 14, trial 2
+8/25 (trial 2/2). Running task 20, trial 2
+Status: 26/50 complete. Avg reward: 0.88 (N=26). 8 running: 44.0(48s), 1.1(32s),
+2.1(26s), 7.1(19s), 9.1(15s), 13.1(6s), 14.1(2s), 20.1(1s)
+9/25 (trial 2/2). Running task 24, trial 2
+10/25 (trial 2/2). Running task 25, trial 2
+11/25 (trial 2/2). Running task 30, trial 2
+12/25 (trial 2/2). Running task 32, trial 2
