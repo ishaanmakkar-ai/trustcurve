@@ -1,0 +1,35 @@
+{
+ "A'-P7 / size": {
+  "P7_holds": false,
+  "choice": 18,
+  "H3b_power": {
+   "18": 0.0675,
+   "30": 0.08
+  },
+  "H2_discrimination": {
+   "18": 0.605,
+   "30": 0.75
+  }
+ },
+ "A'-P5": {
+  "holds": false,
+  "gap_by_lambda": {
+   "0.8": 0.0413,
+   "0.5": 0.0571,
+   "0.2": 0.1013
+  }
+ },
+ "A'-P6": {
+  "holds": false,
+  "P_H5_by_lambda": {
+   "0.8": 0.975,
+   "0.5": 0.945,
+   "0.2": 0.8875
+  }
+ },
+ "H5_informative": false,
+ "H3b": {
+  "power_at_lambda_0.5": 0.0675,
+  "recommend_as_test": false
+ }
+}

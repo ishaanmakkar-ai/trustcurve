@@ -250,3 +250,44 @@ The review-1/2/3 resolutions re-analysed **existing** data and code. They ran no
 1. Measure **action coverage** of an eval (which money-moving tools and arguments it exercises) before pricing.
 2. Add a **statement-level liability check** (misinformation about refunds and compensation).
 3. Price customer harm as a separate peril.
+
+## Study 3 — adapt memo after phase A′, loops 1–3 (2026-10-21)
+**Findings (all from known-truth simulation, $0):**
+1. **Detection is testable, and opportunity count is the lever.**
+   - With 3 runs per task, a designed benchmark with a coverage floor detects 0.82–0.92 of non-designed flaws, against 0.38–0.47 for the generic pool at 1 run.
+   - Paired power for F2 > F1 is 0.82–0.99.
+   - Flaw firing rates below ~0.15 per opportunity are undetectable at 1 run per task for *any* benchmark (≤ 0.35).
+2. **The shared-assumption effect is real but small, and exposure masks it.**
+   - Unanticipated triggers cost ≈ 0.25–0.30 of detection at R = 1, but only ≈ 0.10–0.15 at R = 3.
+   - **Brute-force repetition substitutes for designer insight.** So "my tests are well designed" and "my tests are run many times" are confounded unless exposure is matched across forecasters.
+3. **Pricing superiority is not testable at an affordable n.**
+   - With 18 configurations, the best comparative pricing test reaches power ≤ 0.42 (loop 2) or ≤ 0.09 (loop 3). P(H3) is ≤ 0.07 in every one of 324 cells.
+   - In the simulated worlds the generic pool already prices the dominant risks well.
+   - Study 2's real loss mix supports that structure: 94.5% of realised commission dollars came from wrongful cancellation refunds.
+4. **Trap-dense benchmarks overprice** (+0.7 log) if used directly for pricing. The adopted split (traps for detection, representative tasks for pricing) removes the bias at little detection cost.
+
+**Surprises:**
+- I predicted large shared-assumption effects (A′-P1, P5, P6). They were small. Coverage floors barely moved total non-designed detection.
+- **Most of what my pre-registration called "decidable" was decided by firing rate, not by test design** (loop 1's literal rules). Detection thresholds like "≥ 50%" are statements about the flaw sources' firing rates as much as about the benchmark. The informative quantities are **paired comparisons on the same flaws** (McNemar F2 vs F1) and **detection conditional on exposure**.
+
+**Strongest counter-explanation (the case against these conclusions):**
+- The simulation makes F1's tasks *representative of deployment* by construction (triggers at deployment prevalence). Study 2's real F1 was not:
+  - its underwriting event rate was 1.2% against 2.3% in experience;
+  - Spearman was 0.006.
+- If real generic pools are systematically unrepresentative and a designed benchmark's representative tasks are not, pricing differences could be large. They would then be testable, because F1's Spearman ≈ 0 leaves room.
+- So "pricing superiority is untestable" may be an artefact of a generous F1. **That is exactly Ishaan's hypothesis, and A′ can't rule it out.** It can only say that the lever would be representativeness, not coverage.
+- Second: the F2-vs-F1 detection comparison in loops 2–3 gives F2 three runs per task and F1 one. Part of the "design" advantage is exposure.
+
+**Proposed for loop 4** (pre-register after the review):
+1. **Exposure-matched F1:** F1 at R = 3, so that the design effect is separated from the exposure effect.
+2. **Representativeness sensitivity:** F1 trigger prevalence and mix shifted from deployment (calibrated to Study 2's 1.2% vs 2.3% rate gap and Spearman ≈ 0). This finds the smallest real-world F1 misrepresentation at which H3 or H3b becomes decidable at 18 configurations.
+3. Decide whether RQ2 and RQ4 are tests or estimates.
+
+**What goes to Ishaan before any spend:**
+- the budget cap;
+- who builds F2;
+- the design requirements from A′:
+  - R = 3 runs per benchmark task;
+  - ≥ 2 tasks on every money-moving action type (better: a 10% floor);
+  - a 40-task representative subset kept separate for pricing;
+- the honest statement that, as currently powered, **Study 3 can test "designed benchmarks find more flaws, including undesigned ones" but probably not "designed benchmarks price better"**, unless loop 4 shows the real F1's unrepresentativeness gives enough room.

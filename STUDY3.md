@@ -320,3 +320,31 @@ The loop-1/2 simulation does not model that: within-type trigger conditions, and
 - **H5 informativeness:** if P(H5) differs by < 0.3 between λ = 0.8 and λ = 0.2, H5 cannot discriminate shared-assumption levels at this n. It is then reported descriptively, with its interval, rather than as a pass/fail test.
 - **H3b:** if H3b power is ≥ 0.5 in the λ = 0.5 cell of the chosen size, A′ recommends H3b as a decidable comparative pricing test, added at B′ before any data. Otherwise A′ reports that **pricing superiority is not testable at an affordable n in this domain**, and Study 3's pricing questions (RQ2, RQ4) become estimation with intervals rather than tests.
 - **This is the last A′ simulation loop** before the adapt memo and the fresh-context review.
+
+### A′ loop 3 results (2026-10-21; `results/study3/phaseA/sim_a3.json`, `tables3.md`, `decisions_loop3.json`)
+**Run:** 24 cells × 400 replications in 25 s.
+
+**Detection** (F2 = the adopted split):
+- **At R = 1, anticipation bites.** Non-designed flaws whose trigger the designer didn't anticipate are detected at 0.48–0.52, against 0.70–0.81 for anticipated ones.
+  - The RQ3 gap grows as λ falls: +0.08–0.11 at λ = 0.8, +0.16–0.21 at λ = 0.5, +0.23–0.28 at λ = 0.2.
+  - P(H5) falls from 0.80–0.86 to 0.42–0.59.
+- **At R = 3, repetition largely substitutes for anticipation.** Unanticipated flaws are detected at 0.80–0.82, and the gap is only +0.04 to +0.12.
+- F1 stays at 0.38–0.47 non-designed detection in every cell.
+- McNemar power (F2 > F1) is 0.82–0.89 with 18 configurations and 0.96–0.99 with 30.
+
+**Pricing** (median |log error|):
+- **F2 split is no better than F1:** 0.39–0.47 vs 0.40–0.47.
+- **F2 pooled is worse:** 0.48–0.62, because anticipated traps enrich triggers and inflate rates.
+- H3b power (paired sign test) is ≤ 0.09 and P(H3) = 0.00 in every cell.
+- Under this mechanism, F2's pricing advantage would have to come from being more *representative* of deployment than F1. The simulation makes both representative by construction, so it cannot test that.
+
+**Predictions and decision rules:**
+
+| Item | Outcome |
+|---|---|
+| A′-P5 (gap grows ≥ 0.15 from λ = 0.8 to 0.2 at R = 3) | **Not confirmed** (+0.04 → +0.10). It holds at R = 1 (+0.11 → +0.27, a post-hoc observation) |
+| A′-P6 (P(H5) < 0.5 at λ = 0.2) | **Not confirmed at R = 3** (0.89). At R = 1 it is 0.42–0.59 |
+| A′-P7 (30 configurations raise H3b power by ≥ 0.1) | **Not confirmed** (0.07 → 0.08). 30 configurations do raise McNemar power (0.85 → 0.99) and H2 discrimination (+0.60 → +0.75) |
+| Size rule | **18 configurations** |
+| H5 informativeness at R = 3 | **Not informative** (P(H5) 0.97 vs 0.89). Reported descriptively with its interval |
+| H3b | **Not recommended as a test** (power 0.07). Pricing questions RQ2 and RQ4 become **estimation with intervals**, not pass/fail tests, unless the review or loop 4 shows otherwise |
