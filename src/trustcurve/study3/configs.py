@@ -46,14 +46,16 @@ class Config3:
 def _card(model, guardrail=False, policy_version="Airline policy, current revision"):
     vendor, name = model.split("/")[0], model.split("/")[-1]
     tier = {"claude-sonnet-5-5": "frontier", "claude-haiku-5-5": "mid", "claude-haiku-4-5-20251001": "small",
-            "gpt-6-luna": "small"}.get(name, "mid")
+            "gpt-6-luna": "small", "gpt-4o-mini-2024-07-18": "small"}.get(name, "mid")
     return {"model_vendor": vendor, "model": name, "tier": tier, "money_tools": True, "human_approval": False,
             "guardrail": guardrail, "policy_version": policy_version}
 
 
-# N4 is provisional until a $0 model-list check on the Hexa key (STUDY3.md §B′1); fallback: Haiku 4.5 + outdated policy.
-N4_MODEL = os.environ.get("TC3_N4_MODEL", HAIKU4)
-N4_POLICY = None if os.environ.get("TC3_N4_MODEL") else "tau_bench_v1_airline.md"
+# N4 (STUDY3.md §B′1): the $0 model-list check on the Hexa key (2026-10-22) found older/smaller tool-capable OpenAI
+# models; chosen: gpt-4o-mini-2024-07-18 (2024 small model, 128k context). gpt-3.5-turbo is older but its 16k context
+# risks truncating tau2 conversations (implementation choice, labelled in STUDY3.md).
+N4_MODEL = "openai/gpt-4o-mini-2024-07-18"
+N4_POLICY = None
 
 CONFIGS3 = {c.id: c for c in [
     Config3("C0", "clean", card=_card(HAIKU)),
