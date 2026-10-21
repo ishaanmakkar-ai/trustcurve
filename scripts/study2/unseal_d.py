@@ -47,6 +47,8 @@ def main(blind_path, out_path):
                 r = json.loads(line)
             except json.JSONDecodeError:
                 continue
+            if r.get("event", "draw") != "draw":  # review 9 #1: the log also writes an "applied" line per firing
+                continue
             c = r.get("cfg_id"); fires[c]["opportunities"] += 1; fires[c]["fired"] += bool(r.get("fired"))
             if r.get("fired"):
                 fires[c]["tasks"].add(r.get("task_id"))

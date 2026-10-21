@@ -171,3 +171,28 @@ A fresh-context reviewer recomputed every headline from the run CSVs and frozen 
 | 10 | Low | Charts mix 150- and 60-task bars; some points are unlabelled; the title shows the pooled ρ | **Fixed post-hoc:** `scripts/study2/fig_phaseC_v2.py` (same-task bars, every point labelled, within-group ρ in the title). The frozen figures are kept unchanged |
 | 11 | Low | "No run before the freeze" rests on filesystem timestamps | **Recorded:** first experience log `exp-B0-S.log` created 16:45:55 BST; freeze commit 16:45:39 BST. Runner guard: `run_phaseC_exp.sh` refuses to start without the hash in a commit message |
 | 12 | Low | The judge line and agent labour are not in spend.csv | **Accepted:** +1% judge ≈ $2.4 noted. The authoring, audit and review agents ran in Claude Code, not on the API keys |
+
+## Review 9 — after Study 2 phase D and the write-up, 2026-10-21
+A fresh-context reviewer verified the blinding:
+- The seal recomputes to `327e358f…`, committed at 06:53, before any D run.
+- The blind report (`2cad9047…`) was written and committed 7–9 s before `unsealed.json` was written, and its flags come from code committed earlier.
+- The fault module behaved as specified: realised per-opportunity rates were 0.28 / 0.13 / 0.27 against planted 0.30 / 0.10 / 0.25.
+- All 8 figures regenerate **byte-identically** from HEAD.
+
+| # | Severity | Finding | Resolution |
+|---|---|---|---|
+| 1 | High | `unseal_d.py` double-counted: one `draw` line plus one `applied` line per firing. True opportunities/firings are D1 173/48, D3 174/22, D5 11/3 | **Fixed** (counts `draw` only); re-run. Mutation score unchanged (flags come from the blind report). The D table is corrected in STUDY2 |
+| 2 | High | D1 overstated: the agent retracts the inserted sentence in ≥ 35 of 48 fired conversations, so ≈ 13/90 end with an uncorrected misstatement. The fault is invisible only to the action ledger | **Accepted.** Reported as fired 48 times (in 53% of tasks), with about 13 uncorrected (reviewer's transcript count). Self-correction is an artefact of injecting into the agent's own context, now listed as a limitation |
+| 3 | High | K4's headline misattributes the misses: D2 and D6 had 0 opportunities (untested), and D5 had 3 firings (no power) | **Accepted.** K4 fires as pre-registered (0.20). Exposure-conditional scores are reported alongside: 1/3 among exercised faults, 1/2 among faults with any power. The headline is reworded: "the eval missed what it didn't exercise; only an action-level ledger with exposure catches faults" |
+| 4 | Medium | Deviation: the pre-registration named the M1 lower bound; the code used M2 (fitted on {B0, D1–D6}) | **Labelled post-hoc** in STUDY2. Outcome unchanged (D3 is flagged by the sign test, p = 9.5e-7) |
+| 5 | Medium | Blind recovery compared per-task incidence, not the planted rate | **Restated:** per-task event incidence 0.222 vs firing incidence 0.244. 19 of 22 fired tasks produced a ledger event; 1 event (E3B-3) came from no firing. Per opportunity: planted 0.10, realised 0.126 |
+| 6 | Medium | "The agent never issued a certificate" is false (1 call in 630 underwriting runs) | **Accepted.** Reworded to "rarely (1 in 630 runs)", against 11–12% of experience tasks (B0 issued certificates on 18/150 and 16/150) |
+| 7 | Medium | D-P2 and D-P1 for D2, D5 and D6 are untested, not confirmed or refuted | **Accepted** and relabelled |
+| 8 | Medium | "Repricing cuts levels 10–20%" is wrong: it's 0–44% (≈ 25% typical), and ext11 coverage moves from 0.82 to 0.91 | **Fixed** in E |
+| 9 | Medium | ext11 ρ 0.75 is post-hoc and unlabelled; without the two H4 configurations ρ = 0.55 (p = 0.125, n = 9, verified) | **Fixed** in E: labelled post-hoc, with the leave-out figure |
+| 10 | Medium | "Phase A predicted exactly this (R6)" overclaims (R6 kept the ranking), and K1 omits the M1→M2 history | **Fixed** in E |
+| 11 | Medium | The spend table was stale (phase B $46.73) | **Fixed** from spend.csv: B $46.73, C $237.01, D $6.88, total **$373.63** |
+| 12 | Low | Missing limitations: 1 run per task in D; planter-defined opportunities; context injection; the bridge's date hint; the Haiku simulator failed G3; G1 passed by 1 task under Haiku | **Added** to E |
+| 13 | Low | Author count (6 main + 3 burned = 9) | **Fixed** (the vault log said 7, now corrected) |
+| 14 | Low | The human label check was listed as met | **Fixed:** marked pending |
+| 15 | Low | "Intervals 3–8×": the observed median relative width is 3.0 (pre13) and 2.5 (all 24) | **Fixed** |
