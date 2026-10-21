@@ -205,3 +205,32 @@ The review-1/2/3 resolutions re-analysed **existing** data and code. They ran no
 1. **G1/K3:** the gate failed twice. My B3 text maps this to K3, but the plan's K3 condition ("no commission opportunities or failures") is not met: B0 fails 7–9% and has opportunities, and knowledge errors cause real loss. This touches a study-ending criterion, so it is **put to Ishaan** with a recommendation to proceed, labelling G1 as failed and miscalibrated.
 2. **Phase C pool:** v2 (260) + v3p is burned. The v3 main supplement is moot, because harder tasks didn't change the failure rate. Proposal: phase C uses **v2 (260 tasks)** as written.
 3. **Sizing:** from the power analysis (running). Spend extra on experience n for the knowledge-defect family, where events exist, not on the zero-risk capability axis. Drop CAP-X (Opus), as the B4 rule allows: there's no budget case for it, and its expected realised loss is 0 like every other capability level.
+
+## Adapt memo after phase C (2026-10-21)
+**Findings**
+1. **K2 fires on the pre-registered 13 (ρ = 0.006).**
+   - Under correct knowledge and a current model, insured loss is too rare and too similar across configurations for a 90-task eval to rank it.
+   - Forecasts collapse to the credibility prior (≈ $4.3), and realised losses are a few events each.
+2. **Across all 24 configurations the eval ranks moderately (ρ = 0.55).** It separates the configurations with real defects (an older model, stale policy knowledge) from the rest, and puts the two worst at the top.
+3. **It underprices the risky configurations by about 1.3–3.4×,** and the two worst fall above their 90% intervals. That is the direction phase A's R6 scenario predicted.
+4. **Two mechanisms, and the bridge separates them:**
+   - (a) experience tasks carry more boundary-case commission traps than the benchmark-derived underwriting pool;
+   - (b) the underwriting simulator (Haiku) elicits less risk than the experience simulators ($24 vs $31–37 on the same tasks for risky configurations).
+5. **The one big actionable effect is the policy-checker guardrail.** It removed about 98% of stale-rule risk ($22 → $0.4). The confirmation step and the personas did nothing.
+
+**Surprises**
+- One experience task (X2a-059) produced 24 capped events, including for B0 and both guardrails. So realised loss is heavy-tailed at the *task* level, and one scenario type (refund after an airline-cancelled leg with a flown second leg) dominates.
+- CAP-O's forecast ($19.8, from 2 social-engineering events in underwriting) realised $0: a false alarm from an eval-specific trap (E3C).
+
+**Strongest counter-explanation**
+- The extended-set ρ = 0.55 is partly a construction. The extended configurations were chosen *because* screening showed risk. Their forecasts were made from a disjoint underwriting half, so there's no winner's curse in the numbers, but the set itself is enriched with risky configurations.
+- The pre-registered set, chosen a priori, is the honest test, and it fails.
+- Also, realised loss comes from the ledger's policy model. If its counterfactuals are wrong for a whole scenario class (flown segments), every number moves. Sensitivity analyses excluding those tasks leave the conclusions unchanged, but the human audit (pack prepared) is the real check.
+
+**Proposed changes** (for a Study 3, not this study; phase C is frozen):
+1. Price underwriting from an eval enriched with **boundary-case traps**, under **several simulators**.
+2. Report forecasts as **ranges with an explicit "traffic harder than eval" loading**.
+3. Treat the **policy checker as a rating factor worth pricing**.
+4. Get Ishaan's 30-transcript audit to validate the ledger, especially the flown-segment class.
+
+**Next:** a fresh-context review of phase C, then phase D (planted faults; runs only after this review is resolved).
