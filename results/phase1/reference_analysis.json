@@ -1,0 +1,159 @@
+{
+ "refh_runs": 1000,
+ "refh_tasks": 50,
+ "refh_db_mismatch_rate": 0.188,
+ "refh_strata": {
+  "cancel": [
+   0.1804,
+   28
+  ],
+  "change": [
+   0.225,
+   18
+  ],
+  "book": [
+   0.15,
+   2
+  ],
+  "other": [
+   0,
+   2
+  ]
+ },
+ "check1_slice_coverage": {
+  "slices": 200,
+  "cov90": 0.96,
+  "pass_0.85_0.95": false,
+  "median_width": 0.2454,
+  "zero_event_slices": 0
+ },
+ "check2_credibility": {
+  "mse_raw": 0.01615,
+  "mse_cred": 0.01129,
+  "ratio": 0.699,
+  "pass_cred_lt_raw": true
+ },
+ "check3_icc": {
+  "db_mismatch": [
+   0.521,
+   0.509,
+   0.31,
+   0.695
+  ],
+  "failure": [
+   0.571,
+   0.562,
+   0.349,
+   0.733
+  ],
+  "format": "[point, boot median, 2.5%, 97.5%]",
+  "pilot_db_mismatch": 0.42,
+  "pass_0.3_0.6": true
+ },
+ "check4_sim_effect_S_minus_H": {
+  "failure": {
+   "tasks": 25,
+   "mean_diff": -0.106,
+   "ci90": [
+    -0.162,
+    -0.054
+   ],
+   "mde80_two_sided_alpha10": 0.0832,
+   "majority_flips": 2
+  },
+  "db_mismatch": {
+   "tasks": 25,
+   "mean_diff": -0.092,
+   "ci90": [
+    -0.154,
+    -0.032
+   ],
+   "mde80_two_sided_alpha10": 0.0943,
+   "majority_flips": 3
+  },
+  "refs_summary": {
+   "runs": 500,
+   "tasks": 25,
+   "failure": {
+    "count": 59,
+    "rate": 0.118,
+    "wilson90": [
+     0.0963,
+     0.1438
+    ]
+   },
+   "db_mismatch": {
+    "count": 54,
+    "rate": 0.108,
+    "wilson90": [
+     0.0872,
+     0.133
+    ]
+   },
+   "insured_loss": {
+    "count": 1,
+    "rate": 0.002,
+    "wilson90": [
+     0.0004,
+     0.0089
+    ],
+    "robust_upper95_tasks": null
+   },
+   "omission_runs": 46,
+   "attribution": {
+    "unlabelled": 59
+   },
+   "icc_failure": 0.676,
+   "icc_db_mismatch": 0.569,
+   "cost_usd": 20.0472
+  }
+ },
+ "check5_insured": {
+  "events": 33,
+  "runs": 1000,
+  "rate": 0.033,
+  "wilson90": [
+   0.0249,
+   0.04362
+  ],
+  "cp_on_tasks_upper95": 0.1107,
+  "tasks_with_event": 9,
+  "pass_le_2pct": false
+ },
+ "refh_summary": {
+  "runs": 1000,
+  "tasks": 50,
+  "failure": {
+   "count": 201,
+   "rate": 0.201,
+   "wilson90": [
+    0.181,
+    0.2226
+   ]
+  },
+  "db_mismatch": {
+   "count": 188,
+   "rate": 0.188,
+   "wilson90": [
+    0.1685,
+    0.2092
+   ]
+  },
+  "insured_loss": {
+   "count": 33,
+   "rate": 0.033,
+   "wilson90": [
+    0.0249,
+    0.0436
+   ],
+   "robust_upper95_tasks": null
+  },
+  "omission_runs": 149,
+  "attribution": {
+   "unlabelled": 201
+  },
+  "icc_failure": 0.571,
+  "icc_db_mismatch": 0.521,
+  "cost_usd": 16.0839
+ }
+}

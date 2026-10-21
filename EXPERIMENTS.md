@@ -472,6 +472,29 @@ At pilot-like clustering:
 - **Simulator effect:** `phase1.paired` (task bootstrap, B = 5,000) on the 25 shared tasks.
 - **Insured loss:** Wilson 90% on runs. The task-level CP 95% upper uses n = 50 tasks, with x = rate × 50 (or 1 − 0.05^(1/50) at 0 events).
 
+### Reference run results (2026-10-21; `results/phase1/reference_analysis.json`, code `198a90c`)
+- **REF-H:** 1,000 runs, $16.08. The first pass stopped at 997/1,000 when the **disk filled** (`OSError: No space left on device` while saving; the machine's disk is 99% full for reasons unrelated to this repo). It was resumed from tau2's checkpoint for the 3 missing runs (tasks 14, 16, 18). Logs: `ref-H.part0-enospc.log`, `ref-H.log`.
+- **REF-S:** 500 runs, $20.05. No errors in either arm.
+- REF-H: DB mismatch **0.188**, failure 0.201, 149 omission runs.
+- REF-S on its 25 tasks: DB mismatch 0.108, failure 0.118.
+
+**Checks:**
+1. **Small-slice coverage: fails as written, on the conservative side.** cov90 = **0.96** (200 slices), above the 0.85–0.95 band. Median width 0.25. This is the pre-stated direction: 25 of a finite 50 tasks, no finite-population correction. **The T1 clustered log interval doesn't under-cover on real data**; it is somewhat conservative for framing (a).
+2. **Credibility per workflow: passes.** Bühlmann–Straub MSE / raw MSE = **0.70** (30% lower error), on 4 request-type strata (cancel 28 tasks, change 18, book 2, other 2).
+3. **Clustering: passes.** DB-mismatch ICC **0.52** (bootstrap 95% CI 0.31–0.70) at 20 runs per task, against the pilot's 0.42 at 2 runs. Failure ICC 0.57 (0.35–0.73). Clustering is confirmed high: one task is worth about 2 runs.
+4. **Simulator effect at scale: confirmed and now significant.** Sonnet − Haiku customer, same 25 tasks, Haiku agent:
+   - failure **−0.106 [−0.162, −0.054]**, exact sign test 0/10 tasks, p = 0.002
+   - DB mismatch **−0.092 [−0.154, −0.032]**, 1/10, p = 0.012
+
+   E1's suggestive −6 to −8 points is real: **a stronger simulated customer lowers measured failure by about 10 points.** Simulator choice is a first-order pricing assumption.
+5. **Insured loss: the prediction fails as computed.** **33 / 1,000 flagged runs = 3.3%** (Wilson 90% 2.5–4.4%; task-level CP 95% upper 11.1%), on **9 of 50 tasks**, against the prediction ≤ 2%. The breadth slice (25 tasks × 2) had shown 0. These events are concentrated on tasks the 25-task breadth sample mostly missed, or hit too rarely to show at 2 runs per task. **The flags mix header artefacts, customer-requested bookings, gross-counted itinerary differences and plausibly genuine overcharges.** A per-event transcript audit (post-hoc) follows below.
+
+**Post-hoc sensitivity (review 5 #5): E1x with contemporaneous baselines** (H×H := REF-H on the breadth tasks, H×S := REF-S; `results/phase1/review5_baseline_sensitivity.json`):
+- DB-mismatch gaps: Δ_H −0.10 [−0.16, −0.05] (sign test 0/8, p = 0.008), Δ_O +0.08 [+0.02, +0.16] (unchanged, 3 tasks, p = 0.25), Δ_S −0.07 [−0.14, −0.01].
+- I_O +0.18 [+0.08, +0.29].
+- **Under this swap the hard rule's condition is met** (CIs excluding 0 in opposite directions under H and O). Two caveats: Δ_O still rests on 3 tasks, and the swap isn't pre-registered. On failure, Δ_O's CI includes 0.
+- **Reading:** with better baselines the evidence that **the simulator can reverse the agent ranking gets stronger, not weaker**. It still rests on 3 tasks in the O cell.
+
 ## Phase 1b: second agent, pre-registered 2026-10-21, before any 1b run
 **Design:** the agent is `claude-sonnet-5-5`, the simulator Haiku (as in the pilot breadth, so only the agent changes), the judge Haiku. The 25 breadth tasks × 2, plus the 40 refusal tasks × 1, about 90 runs and about $23.
 

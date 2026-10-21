@@ -1,0 +1,454 @@
+{
+ "tasks": 25,
+ "cells": {
+  "HxH": {
+   "runs": 500,
+   "db_mismatch": {
+    "count": 100,
+    "rate": 0.2,
+    "wilson90": [
+     0.1722,
+     0.231
+    ]
+   },
+   "failure": {
+    "count": 112,
+    "rate": 0.224,
+    "wilson90": [
+     0.1949,
+     0.2561
+    ]
+   },
+   "omission_rate": 0.156,
+   "insured_loss": {
+    "count": 10,
+    "rate": 0.02,
+    "wilson90": [
+     0.012,
+     0.0332
+    ],
+    "robust_upper95_tasks": null
+   },
+   "attribution": {
+    "unlabelled": 112
+   },
+   "user_caused_share_of_failures": 0.0,
+   "cost_usd": 8.0196
+  },
+  "HxO": {
+   "runs": 50,
+   "db_mismatch": {
+    "count": 4,
+    "rate": 0.08,
+    "wilson90": [
+     0.0364,
+     0.1667
+    ]
+   },
+   "failure": {
+    "count": 7,
+    "rate": 0.14,
+    "wilson90": [
+     0.0777,
+     0.2392
+    ]
+   },
+   "omission_rate": 0.08,
+   "insured_loss": {
+    "count": 0,
+    "rate": 0.0,
+    "wilson90": [
+     0.0,
+     0.0513
+    ],
+    "robust_upper95_tasks": 0.1129
+   },
+   "attribution": {
+    "unlabelled": 7
+   },
+   "user_caused_share_of_failures": 0.0,
+   "cost_usd": 0.9656
+  },
+  "HxS": {
+   "runs": 500,
+   "db_mismatch": {
+    "count": 54,
+    "rate": 0.108,
+    "wilson90": [
+     0.0872,
+     0.133
+    ]
+   },
+   "failure": {
+    "count": 59,
+    "rate": 0.118,
+    "wilson90": [
+     0.0963,
+     0.1438
+    ]
+   },
+   "omission_rate": 0.092,
+   "insured_loss": {
+    "count": 1,
+    "rate": 0.002,
+    "wilson90": [
+     0.0004,
+     0.0089
+    ],
+    "robust_upper95_tasks": null
+   },
+   "attribution": {
+    "unlabelled": 59
+   },
+   "user_caused_share_of_failures": 0.0,
+   "cost_usd": 20.0472
+  },
+  "SxH": {
+   "runs": 50,
+   "db_mismatch": {
+    "count": 5,
+    "rate": 0.1,
+    "wilson90": [
+     0.0495,
+     0.1915
+    ]
+   },
+   "failure": {
+    "count": 7,
+    "rate": 0.14,
+    "wilson90": [
+     0.0777,
+     0.2392
+    ]
+   },
+   "omission_rate": 0.06,
+   "insured_loss": {
+    "count": 0,
+    "rate": 0.0,
+    "wilson90": [
+     0.0,
+     0.0513
+    ],
+    "robust_upper95_tasks": 0.1129
+   },
+   "attribution": {
+    "unlabelled": 7
+   },
+   "user_caused_share_of_failures": 0.0,
+   "cost_usd": 12.6095
+  },
+  "SxO": {
+   "runs": 50,
+   "db_mismatch": {
+    "count": 8,
+    "rate": 0.16,
+    "wilson90": [
+     0.0926,
+     0.2623
+    ]
+   },
+   "failure": {
+    "count": 10,
+    "rate": 0.2,
+    "wilson90": [
+     0.1235,
+     0.3073
+    ]
+   },
+   "omission_rate": 0.16,
+   "insured_loss": {
+    "count": 1,
+    "rate": 0.02,
+    "wilson90": [
+     0.0045,
+     0.0848
+    ],
+    "robust_upper95_tasks": null
+   },
+   "attribution": {
+    "unlabelled": 10
+   },
+   "user_caused_share_of_failures": 0.0,
+   "cost_usd": 8.5057
+  },
+  "SxS": {
+   "runs": 50,
+   "db_mismatch": {
+    "count": 2,
+    "rate": 0.04,
+    "wilson90": [
+     0.0133,
+     0.1139
+    ]
+   },
+   "failure": {
+    "count": 4,
+    "rate": 0.08,
+    "wilson90": [
+     0.0364,
+     0.1667
+    ]
+   },
+   "omission_rate": 0.04,
+   "insured_loss": {
+    "count": 0,
+    "rate": 0.0,
+    "wilson90": [
+     0.0,
+     0.0513
+    ],
+    "robust_upper95_tasks": 0.1129
+   },
+   "attribution": {
+    "unlabelled": 4
+   },
+   "user_caused_share_of_failures": 0.0,
+   "cost_usd": 10.5848
+  }
+ },
+ "db_mismatch": {
+  "agent_gap": {
+   "H": {
+    "delta": -0.1,
+    "ci90": [
+     -0.162,
+     -0.048
+    ],
+    "excludes_0": true,
+    "mde80": 0.0864,
+    "tasks_to_resolve_point_estimate": 19
+   },
+   "O": {
+    "delta": 0.08,
+    "ci90": [
+     0.02,
+     0.16
+    ],
+    "excludes_0": true,
+    "mde80": 0.1175,
+    "tasks_to_resolve_point_estimate": 54
+   },
+   "S": {
+    "delta": -0.068,
+    "ci90": [
+     -0.14,
+     -0.014
+    ],
+    "excludes_0": true,
+    "mde80": 0.0949,
+    "tasks_to_resolve_point_estimate": 49
+   }
+  },
+  "interaction": {
+   "O": {
+    "I": 0.18,
+    "ci90": [
+     0.08,
+     0.29
+    ]
+   },
+   "S": {
+    "I": 0.032,
+    "ci90": [
+     -0.022,
+     0.082
+    ]
+   }
+  },
+  "sim_main_effect_avg_over_agents": {
+   "O_minus_H": {
+    "effect": -0.03,
+    "ci90": [
+     -0.073,
+     0.008
+    ]
+   },
+   "S_minus_H": {
+    "effect": -0.076,
+    "ci90": [
+     -0.131,
+     -0.027
+    ]
+   }
+  },
+  "ranking": {
+   "point_signs": {
+    "H": -1,
+    "O": 1,
+    "S": -1
+   },
+   "same_sign_all_three": false,
+   "boot_p_same_sign": 0.0,
+   "boot_p_all_negative": 0.0,
+   "boot_p_all_positive": 0.0
+  },
+  "kill": {
+   "hard": true,
+   "soft": false
+  }
+ },
+ "failure": {
+  "agent_gap": {
+   "H": {
+    "delta": -0.084,
+    "ci90": [
+     -0.14,
+     -0.034
+    ],
+    "excludes_0": true,
+    "mde80": 0.0811,
+    "tasks_to_resolve_point_estimate": 24
+   },
+   "O": {
+    "delta": 0.06,
+    "ci90": [
+     -0.02,
+     0.14
+    ],
+    "excludes_0": false,
+    "mde80": 0.1308,
+    "tasks_to_resolve_point_estimate": 119
+   },
+   "S": {
+    "delta": -0.038,
+    "ci90": [
+     -0.084,
+     0.0
+    ],
+    "excludes_0": false,
+    "mde80": 0.0635,
+    "tasks_to_resolve_point_estimate": 70
+   }
+  },
+  "interaction": {
+   "O": {
+    "I": 0.144,
+    "ci90": [
+     0.036,
+     0.258
+    ]
+   },
+   "S": {
+    "I": 0.046,
+    "ci90": [
+     0.002,
+     0.09
+    ]
+   }
+  },
+  "sim_main_effect_avg_over_agents": {
+   "O_minus_H": {
+    "effect": -0.012,
+    "ci90": [
+     -0.058,
+     0.029
+    ]
+   },
+   "S_minus_H": {
+    "effect": -0.083,
+    "ci90": [
+     -0.137,
+     -0.038
+    ]
+   }
+  },
+  "ranking": {
+   "point_signs": {
+    "H": -1,
+    "O": 1,
+    "S": -1
+   },
+   "same_sign_all_three": false,
+   "boot_p_same_sign": 0.062,
+   "boot_p_all_negative": 0.062,
+   "boot_p_all_positive": 0.0
+  },
+  "kill": {
+   "hard": false,
+   "soft": true
+  }
+ },
+ "omission": {
+  "agent_gap": {
+   "H": {
+    "delta": -0.096,
+    "ci90": [
+     -0.17,
+     -0.038
+    ],
+    "excludes_0": true,
+    "mde80": 0.1,
+    "tasks_to_resolve_point_estimate": 28
+   },
+   "O": {
+    "delta": 0.08,
+    "ci90": [
+     0.02,
+     0.16
+    ],
+    "excludes_0": true,
+    "mde80": 0.1175,
+    "tasks_to_resolve_point_estimate": 54
+   },
+   "S": {
+    "delta": -0.052,
+    "ci90": [
+     -0.122,
+     0.0
+    ],
+    "excludes_0": false,
+    "mde80": 0.0923,
+    "tasks_to_resolve_point_estimate": 79
+   }
+  },
+  "interaction": {
+   "O": {
+    "I": 0.176,
+    "ci90": [
+     0.076,
+     0.29
+    ]
+   },
+   "S": {
+    "I": 0.044,
+    "ci90": [
+     -0.002,
+     0.09
+    ]
+   }
+  },
+  "sim_main_effect_avg_over_agents": {
+   "O_minus_H": {
+    "effect": 0.012,
+    "ci90": [
+     -0.023,
+     0.059
+    ]
+   },
+   "S_minus_H": {
+    "effect": -0.042,
+    "ci90": [
+     -0.081,
+     -0.008
+    ]
+   }
+  },
+  "ranking": {
+   "point_signs": {
+    "H": -1,
+    "O": 1,
+    "S": -1
+   },
+   "same_sign_all_three": false,
+   "boot_p_same_sign": 0.0,
+   "boot_p_all_negative": 0.0,
+   "boot_p_all_positive": 0.0
+  },
+  "kill": {
+   "hard": true,
+   "soft": false
+  }
+ },
+ "primary_outcome": "db_mismatch",
+ "note": "post-hoc sensitivity (review 5 #5): HxH := REF-H on breadth tasks, HxS := REF-S; not pre-registered"
+}
