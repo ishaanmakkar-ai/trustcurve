@@ -646,3 +646,88 @@ Checking the phase-C underwriting events turned up a wrong hand label. **V-29** 
 - **D-P1: partly refuted.** The in-design faults at 35–50% (D2, D6) were missed, for lack of exposure rather than of power.
 - **D-P2: confirmed.** The out-of-design fault was missed, and no secondary signal caught it.
 - **D-P3: refuted.** The score was 0.20, not 0.5–0.8.
+
+# E. Study 2 write-up (2026-10-21)
+
+## Question and answer
+**Question:** can a small, cheap pre-deployment eval forecast the loss an agent configuration actually incurs in a separate, larger, deployment-like experience period, well enough to price it?
+
+**Answer from this study: no, not in the form tested, and the reason is informative.**
+- For the 13 configurations fixed in advance, the 90-task eval's frozen forecasts did not rank realised commission loss at all (Spearman 0.006). **K2 fires.**
+- The eval does separate configurations with a gross defect (a previous-generation model, a stale policy rule) from the rest: ρ 0.75 among the 11 added configurations.
+- But it **underprices the worst ones by up to 4×**. The 90% intervals are wide enough to cover most configurations only because they are 3–8× the premium. That is too wide to price with.
+
+## What made it non-circular (as the plan required)
+| Requirement | How it was met | Evidence |
+|---|---|---|
+| Held-out experience tasks by a separate author | 400 experience tasks by 6 fresh-context authors (3 more wrote burned pilot batches) who never saw the underwriting tasks, results or the loss code. Gold-audited by independent agents: 0 wrong in the 80 main-pool tasks audited (52 + 28); one wrong gold was found and fixed in a burned pilot batch | `tasks/study2/experience_*`, `GOLD_AUDIT*.md` |
+| Incident-derived scenarios | 76 of 400 (Moffatt v Air Canada, the $1 Chevrolet chatbot, EU261/UK261, the DOT refund rule, account takeover, chargeback threats) | `meta.json` incident_source |
+| ≥ 2 simulator families | Experience: Sonnet 5.5 (Anthropic) + gpt-6-luna (OpenAI), chosen by a pre-registered fidelity gate after a date repair. Underwriting: Haiku. Bridge: Haiku on 60 experience tasks | STUDY2 B-L1 |
+| Forecasts frozen before any experience run | SHA-256 in commit `765599e`; the runner refuses to start without it; hashes re-verified before scoring | `run_phaseC_exp.sh`, REVIEW 8 #11 |
+| Analysis code committed before outcomes | `score_c.py` and `fig_phaseC.py` hashes are in the freeze commit | — |
+| Blinded, sealed planted faults incl. one outside the ledger's design | A separate planter; SHA-256 committed (`7e0f187`) before any D run; unsealed only after the blind report was committed | §D results |
+| Human label check | 30-transcript blinded audit pack, key sealed | `results/study2/audit_pack/` (pending Ishaan) |
+
+## Kill criteria
+| Criterion | Outcome |
+|---|---|
+| K1 (A): intervals under-cover < 80% with known truth | **Not fired.** M2 predictive coverage 0.87 on the real-pool DGM (3 loops) |
+| K3 (B): the world can't generate insurable risk | **Not fired.** G1 passed on Ishaan's chosen second difficulty loop (12.5%); real commission exists |
+| **K2 (C): ρ ≤ 0.3 or coverage < 0.70** | **FIRED** on the pre-registered 13 (ρ = 0.006) |
+| **K4 (D): mutation score < 50%** | **FIRED.** 0.20 (1 of 5 planted fault types detected; 0 false positives) |
+
+## What the study shows
+1. **Insured loss in this world is rare and concentrated.** Under correct policy knowledge, current models (Haiku 5.5, Sonnet 5.5, gpt-6.1-sol, gpt-6-luna) caused almost no wrongful payouts.
+   - Personas (pleaser, strict, fast) and the confirmation step made no measurable difference.
+   - The loss came from a **previous-generation model (Haiku 4.5: +$56/conversation vs B0)** and **stale policy knowledge**. Only the two Haiku-4.5 contrasts survive Holm correction.
+2. **A small eval can't rank agents whose risk is a few dollars per conversation.** The credibility method pulls every zero-event configuration to the same prior (≈ $4), and realised losses are a handful of events each.
+3. **When risk exists, the eval flags it but underprices it.**
+   - ρ 0.75 among the added configurations, but both Haiku-4.5 configurations realised 2.6–4× their forecast, above their 90% intervals.
+   - Phase A predicted exactly this signature for experience traffic with more traps than the eval (R6).
+4. **The simulator change between underwriting and experience had no detectable effect** on commission events (paired p = 0.24 / 0.86). That is inconclusive at this n, not a proof of no effect.
+5. **An oracle policy checker removed stale-rule commission ($22 → $0.4)** but raised omission, netting about $8 per conversation. This is the most actionable rating-factor finding, and it needs a non-oracle checker to confirm.
+6. **The eval has a coverage gap (phase D, K4).** Of 5 blinded planted faults, it detected 1.
+   - Two were on actions the 90-task eval never exercised (certificates, paid bags).
+   - One was a spoken misstatement about refunds (the Moffatt liability class), which fired in 53% of conversations and was invisible to an action-based ledger.
+   - One was customer harm the ledger doesn't price.
+   - The one exercised, in-scope fault was found, and its rate was recovered blind to within about 10%.
+
+## What it can't show
+- **It's a constructed world.** τ² airline DB and policy, LLM customers, and LLM-written tasks. Seven independent authors and a held-out pool reduce shared assumptions; they don't remove them. These are not production traces.
+- **The experience pool's trap density was partly shaped after screening:** the boundary-judgement addendum asks for 25–30 h bookings, exactly where the stale rule bites. **Realised levels of stale-rule loss are not deployment estimates.**
+- **The ledger defines loss.** Its flown-segment pricing is an upper bound: repricing cuts levels by 10–20%, but rankings are unchanged. It is unvalidated by a human until Ishaan's audit returns.
+- **Few independent events:** 13 distinct event tasks for the pre-registered set, 36 for the extended set. One task (X2a-059) carried 31% of realised dollars.
+- **Power:** phase C was pre-declared under-powered (projected P(ρ ≤ 0.3) ≈ 0.55–0.7). The K2 firing was likely before the run, which makes it a confirmation of the power analysis as much as a discovery.
+
+## Next step (recommended)
+1. **Underwrite from an eval built to probe the rating factors that matter** (model generation, knowledge staleness, guardrails), not from benchmark tasks. Add explicit "traffic harder than eval" loadings, priced from a trap-density estimate of the insured's real traffic.
+2. **Get production-like traces.** The external test this study can't provide: even 1,000 real conversations would anchor trap density.
+3. **Finish the human audit (30 transcripts)** before quoting any dollar level.
+4. **Test a non-oracle policy checker** (one with the same stale policy as the agent) to see whether the guardrail effect survives.
+5. **Measure eval action coverage and add statement-level liability checks** before any premium is quoted (phase D).
+
+## Spend
+| Phase | Spend | Budget |
+|---|---|---|
+| Pre-Study-2 (Goal 3) | $83.00 | — |
+| A | $0 | $0 |
+| B | $44.60 | $40 |
+| C | $237.01 | $250 |
+| D | $6.88 | $40 |
+| **Cumulative project** | **$373.65** | stop at $450 |
+
+The +1% tau2 judge line is unpriced in the per-run CSVs (≈ $3.6).
+
+## Reproduce
+- All figures: `scripts/study2/regenerate_figures.sh` (no API calls).
+- Phase C scoring: `python -m trustcurve.study2.score_c results/study2/forecasts_frozen.json results/study2/phaseC/score_c.json tasks/study2/experience_main/meta.json results/study2/runs/exp-*.csv`.
+- Post-hoc readings: `scripts/study2/posthoc_c.py`.
+- Phase A: `python -m trustcurve.study2.sim_a3 <out> 400 7`.
+- Phase D: `scripts/study2/analyse_d_blind.py`, then `scripts/study2/unseal_d.py`.
+
+## Figures (all regenerate via `scripts/study2/regenerate_figures.sh`)
+- `results/study2/phaseC/forecast_vs_realised.png`: **the forecast-vs-realised chart** (frozen code, pooled view).
+- `results/study2/phaseC/forecast_vs_realised_v2.png`: the same data in within-group panels (post-hoc layout, review 8).
+- `results/study2/phaseC/by_simulator_same_tasks.png`: realised loss on the same 60 tasks under three customer simulators.
+- `results/study2/phaseC/by_simulator.png`: frozen v1 (mixes 150- and 60-task bars; superseded by the same-task version).
+- `results/study2/phaseA/coverage_loop3.png`, `coverage.png`, `spearman.png`, `pit_S0.png`: phase A, the known-truth simulation.
