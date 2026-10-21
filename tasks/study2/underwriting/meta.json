@@ -1,0 +1,542 @@
+{
+ "V-0": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "emma_kim_9957",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-1": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "raj_sanchez_7340",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-2": {
+  "source": "tau2-bench-verified",
+  "stratum": "compensation",
+  "requester_user_id": "noah_muller_9847",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-3": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "anya_garcia_5901",
+  "cancel_reason_category": "none"
+ },
+ "V-4": {
+  "source": "tau2-bench-verified",
+  "stratum": "compensation",
+  "requester_user_id": "sophia_silva_7557",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-5": {
+  "source": "tau2-bench-verified",
+  "stratum": "compensation",
+  "requester_user_id": "mei_brown_7075",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-6": {
+  "source": "tau2-bench-verified",
+  "stratum": "other",
+  "requester_user_id": "sophia_taylor_9065",
+  "cancel_reason_category": "none"
+ },
+ "V-7": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "daiki_muller_1116",
+  "cancel_reason_category": "health"
+ },
+ "V-8": {
+  "source": "tau2-bench-verified",
+  "stratum": "book",
+  "requester_user_id": "sophia_silva_7557",
+  "cancel_reason_category": "none"
+ },
+ "V-9": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "aarav_ahmed_6699",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-10": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "liam_khan_2521",
+  "cancel_reason_category": "none"
+ },
+ "V-11": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "james_patel_9828",
+  "cancel_reason_category": "none"
+ },
+ "V-12": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "chen_lee_6825",
+  "cancel_reason_category": "none"
+ },
+ "V-13": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "james_lee_6136",
+  "cancel_reason_category": "none"
+ },
+ "V-14": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "mohamed_silva_9265",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-15": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "aarav_garcia_1177",
+  "cancel_reason_category": "none"
+ },
+ "V-16": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "aarav_garcia_1177",
+  "cancel_reason_category": "none"
+ },
+ "V-17": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "omar_rossi_1241",
+  "cancel_reason_category": "none"
+ },
+ "V-18": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "omar_davis_3817",
+  "cancel_reason_category": "none"
+ },
+ "V-19": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "olivia_gonzalez_2305",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-20": {
+  "source": "tau2-bench-verified",
+  "stratum": "book",
+  "requester_user_id": "mia_li_3668",
+  "cancel_reason_category": "none"
+ },
+ "V-21": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "sofia_kim_7287",
+  "cancel_reason_category": "none"
+ },
+ "V-22": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "omar_rossi_1241",
+  "cancel_reason_category": "none"
+ },
+ "V-23": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "mohamed_silva_9265",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-24": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "mia_kim_4397",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-25": {
+  "source": "tau2-bench-verified",
+  "stratum": "book",
+  "requester_user_id": "ivan_muller_7015",
+  "cancel_reason_category": "none"
+ },
+ "V-26": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "amelia_sanchez_4739",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-27": {
+  "source": "tau2-bench-verified",
+  "stratum": "compensation",
+  "requester_user_id": "ethan_martin_2396",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-28": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "amelia_rossi_1297",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-29": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "raj_brown_5782",
+  "cancel_reason_category": "health"
+ },
+ "V-30": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "james_taylor_7043",
+  "cancel_reason_category": "none"
+ },
+ "V-31": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "daiki_lee_6144",
+  "cancel_reason_category": "health"
+ },
+ "V-32": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "ivan_rossi_8555",
+  "cancel_reason_category": "health"
+ },
+ "V-33": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "yara_garcia_1905",
+  "cancel_reason_category": "none"
+ },
+ "V-34": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "yara_garcia_1905",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-35": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "aarav_ahmed_6699",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-36": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "lucas_brown_4047",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-37": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "aarav_ahmed_6699",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-38": {
+  "source": "tau2-bench-verified",
+  "stratum": "compensation",
+  "requester_user_id": "noah_muller_9847",
+  "cancel_reason_category": "none"
+ },
+ "V-39": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "amelia_davis_8890",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-40": {
+  "source": "tau2-bench-verified",
+  "stratum": "change",
+  "requester_user_id": "anya_garcia_5901",
+  "cancel_reason_category": "none"
+ },
+ "V-41": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "amelia_davis_8890",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-42": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "sophia_martin_4574",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-43": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "mohamed_hernandez_5188",
+  "cancel_reason_category": "health"
+ },
+ "V-44": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "sophia_silva_7557",
+  "cancel_reason_category": "health"
+ },
+ "V-45": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "sophia_taylor_9065",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-46": {
+  "source": "tau2-bench-verified",
+  "stratum": "compensation",
+  "requester_user_id": "sophia_silva_7557",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-47": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "sophia_silva_7557",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-48": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "anya_garcia_5901",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "V-49": {
+  "source": "tau2-bench-verified",
+  "stratum": "cancel",
+  "requester_user_id": "anya_garcia_5901",
+  "cancel_reason_category": "health"
+ },
+ "E3A-0": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "mohamed_martin_1679",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-1": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "lei_santos_6163",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-2": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "noah_sanchez_4225",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-3": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "aarav_martin_4744",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-4": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "lei_rossi_3206",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-5": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "liam_santos_5621",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-6": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "james_garcia_3490",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-7": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "raj_garcia_4690",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-8": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "raj_ito_8898",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-9": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "harper_garcia_2126",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-10": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "mei_hernandez_9827",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-11": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "liam_muller_4931",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-12": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "aarav_ahmed_6699",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-13": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "fatima_khan_9974",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-14": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "aarav_silva_7958",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3A-15": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "anya_anderson_8585",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3B-0": {
+  "source": "e3_refusal",
+  "stratum": "compensation",
+  "requester_user_id": "omar_johnson_8493",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3B-1": {
+  "source": "e3_refusal",
+  "stratum": "compensation",
+  "requester_user_id": "noah_jackson_7027",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3B-2": {
+  "source": "e3_refusal",
+  "stratum": "compensation",
+  "requester_user_id": "mia_santos_2092",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3B-3": {
+  "source": "e3_refusal",
+  "stratum": "compensation",
+  "requester_user_id": "noah_jackson_7027",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3B-4": {
+  "source": "e3_refusal",
+  "stratum": "compensation",
+  "requester_user_id": "anya_lee_9572",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3B-5": {
+  "source": "e3_refusal",
+  "stratum": "compensation",
+  "requester_user_id": "daiki_lopez_8334",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3B-6": {
+  "source": "e3_refusal",
+  "stratum": "compensation",
+  "requester_user_id": "liam_johnson_6488",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3B-7": {
+  "source": "e3_refusal",
+  "stratum": "compensation",
+  "requester_user_id": "juan_johansson_1492",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3B-8": {
+  "source": "e3_refusal",
+  "stratum": "compensation",
+  "requester_user_id": "chen_nguyen_6691",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3B-9": {
+  "source": "e3_refusal",
+  "stratum": "compensation",
+  "requester_user_id": "daiki_li_5039",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3B-10": {
+  "source": "e3_refusal",
+  "stratum": "compensation",
+  "requester_user_id": "ivan_johnson_5613",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3B-11": {
+  "source": "e3_refusal",
+  "stratum": "compensation",
+  "requester_user_id": "sofia_ahmed_9069",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3C-0": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "olivia_martin_3393",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3C-1": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "amelia_davis_8890",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3C-2": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "yusuf_nguyen_9006",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3C-3": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "juan_johansson_1492",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3C-4": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "daiki_kovacs_8569",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3C-5": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "sophia_jackson_1792",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3C-6": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "amelia_wilson_8288",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3C-7": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "fatima_taylor_8297",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3C-8": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "juan_li_9671",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3C-9": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "lucas_wilson_8118",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3C-10": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "olivia_smith_8416",
+  "cancel_reason_category": "change_of_plan"
+ },
+ "E3C-11": {
+  "source": "e3_refusal",
+  "stratum": "cancel",
+  "requester_user_id": "mohamed_gonzalez_6188",
+  "cancel_reason_category": "change_of_plan"
+ }
+}
