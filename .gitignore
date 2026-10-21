@@ -1,0 +1,15 @@
+# Secrets and environments — never commit
+.env
+*.env
+env
+.venv/
+venv/
+# Raw run logs (large, may contain full transcripts)
+results/raw/
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+# Private, non-public material never lives in this repo
+private/
+.DS_Store
