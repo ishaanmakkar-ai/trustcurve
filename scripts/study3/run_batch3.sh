@@ -18,7 +18,11 @@ for attempt in 1 2 3; do
 done
 SUM=$(PYTHONPATH="$R/src" "$PY" -m trustcurve.study3.collect3 "$OUT/results.json" "$META" "$CFG" "$SIML" "$R/results/study3/runs/$NAME.csv" 2>>"$LOG" | tail -1)
 echo "$SUM" >> "$LOG"
-COST=$(echo "$SUM" | "$PY" -c 'import json,sys; print(json.load(sys.stdin)["cost_usd"])')
+if ! COST=$(echo "$SUM" | "$PY" -c 'import json,sys; print(json.load(sys.stdin)["cost_usd"])' 2>/dev/null); then
+  # review 12 #9: fail closed - if collection failed, book the projected cost so spend is never undercounted
+  "$PY" "$R/scripts/study3/spend.py" add "$PHASE" "$NAME" 0 "$PROJ" "$CFG x $SIML: collection failed, projected cost booked" | tee -a "$LOG"
+  echo "STOP: collection failed for $NAME; projected cost booked" | tee -a "$LOG"; exit 5
+fi
 RUNS=$(echo "$SUM" | "$PY" -c 'import json,sys; print(json.load(sys.stdin)["runs"])')
 UNP=$(echo "$SUM" | "$PY" -c 'import json,sys; print(json.load(sys.stdin).get("unpriced", 0))')
 "$PY" "$R/scripts/study3/spend.py" add "$PHASE" "$NAME" "$RUNS" "$COST" "$CFG x $SIML" | tee -a "$LOG"
