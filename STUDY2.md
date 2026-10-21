@@ -469,3 +469,54 @@ Either way, **G1/K3 and the go/no-go for phase C spend go to Ishaan before any p
 - **Run:** B0 × the 40 v3q tasks × Haiku simulator with the date hint. This is the pre-registered G1 test. The same 40 under the Sonnet simulator are reported for information only.
 - **G1 = B0 failures / 40 ≥ 10% (≥ 4 failures)**, where every failed task is checked by an independent fresh-context gold auditor. **A failure caused by a verified gold error does not count**, and that task's gold is corrected. (Review 7 #3 found exactly such an error in v3p.)
 - **Pass → phase C** (full scope, per Ishaan). **Fail → K3 fires (B3) and the study ends with that negative result.** Phase D (planted faults) and the write-up E still run, because the plan's RQ4 and the write-up don't depend on phase C.
+
+### G1 loop-2 result (2026-10-21; `results/study2/runs/pilot4-*.csv`, `tasks/study2/experience_v3q/GOLD_CHECK_FAILED.md`)
+- **B0 × Haiku simulator (date hint) on v3q:** 6/40 failures. The independent gold check of all 6 found 5 OK and 1 AMBIGUOUS (X3q-006: the opening line "plans have changed" lets an agent refuse), with 0 WRONG.
+- **Conservatively excluding the ambiguous task: 5/40 = 12.5% ≥ 10%. G1 passes. K3 does not fire.**
+- For information: B0 × Sonnet simulator 1/40; commission 0 under both simulators.
+- **Consequence (B-L1 #2):** two new fresh authors write the **v3 main supplement** (2 × 70 tasks) under `EXPERIENCE_SPEC_ADDENDUM_HARD2.md`, the addendum that passed. **The phase-C experience pool is v2 (260) ∪ v3 (140).**
+  - v3 users: the 90 DB users never used as callers, plus the 70 callers of the burned v1 pilot, on different tasks (labelled; the user supply is finite).
+  - A random 20% of v3 is gold-audited before freezing.
+
+## C. Main study: underwriting → frozen forecasts → experience (pre-registered 2026-10-21, before any phase-C run)
+**Scope:** "full", per Ishaan (≈ $295; cumulative stop rule $450 unchanged).
+
+**Configurations (24).** CAP-X (Opus) is dropped under the B4 rule: no budget case, and every capability level at or above Haiku 5.5 had 0 risk.
+
+| Group | Configurations | Underwriting used for the forecast | n_e per experience simulator | Bridge (Haiku sim) |
+|---|---|---|---|---|
+| **pre13 (K2 set)** | B0, PER-PL, PER-ST, PER-FA, HAR-PC, HAR-CF, KNO-RM, KNO-WR, INT-1, INT-3 | all 90 tasks | 150 | 60 |
+| pre13 | CAP-S, INT-2 | all 90 | 50 | — |
+| pre13 | CAP-O | all 90 | 100 | — |
+| extended | KNO-WC, KNO-WI, KNO-WB, KB-HPC, KB-HCF, KB-PPL, KB-PST, CAP-L | **rest half (45) only** (review 7 #1) | 150 | 60 |
+| extended | CAP-H4, H4-KB | rest half only | 150 | 60 |
+| extended | KB-CAPS | rest half only | 50 | — |
+
+**Runs:**
+- **Underwriting:** the remaining underwriting tasks per configuration, Haiku simulator, no date hint.
+- **Forecasts:** `scripts/study2/make_forecasts.py` with the design above, output `results/study2/forecasts_frozen.json`. That file is committed **with its SHA-256 in the commit message before any experience run.** M2 is fitted separately on the pre13 group and the extended group.
+- **Experience:** each configuration runs the first n_e tasks of a nested stratified order over v2 ∪ v3 (`experience_order.py`, seed 20261024), under **Sonnet 5.5** and **gpt-6-luna** simulators, 1 run each, date hint on.
+- **Bridge:** the first 60 tasks under the Haiku simulator with the date hint.
+
+**Scoring:** `src/trustcurve/study2/score_c.py`, committed before any experience outcome. Its hash is recorded in the freeze commit.
+- **Primary (K2): the pre13 set.**
+  - Realised loss R_c = mean capped ledger commission per run over the S + L runs.
+  - RQ1: Spearman with a task-bootstrap CI, and concordance.
+  - RQ2: 90% predictive coverage (all configurations, and those with ≥ 1 realised event), upper-95, interval score, CRPS, PIT and sharpness.
+  - **K2 fires** if Spearman ≤ 0.3 or is NaN, or coverage < 0.70 (the event-configuration version when there are ≥ 5).
+- **Extended set:** the same measures, reported separately.
+- **RQ3:** factor contrasts vs B0 on shared tasks, the three pre-registered interactions, and the KB family vs KNO-WR (the B-L1 directions).
+- **RQ5:**
+  - per simulator: S and L against the single-run forecast, and the bridge H against the bridge forecast;
+  - same-task realised loss under H, S and L for the bridge configurations;
+  - **this separates the simulator change from the author change.**
+- **Secondary:** M1c and M1 secondaries; omission; commission frequency; realised loss by task source.
+
+**Predictions (from the B-L2 power analysis, stated before any experience run):**
+- **C-P1:** pre13 Spearman ≤ 0.3, so **K2 probably fires** (projected P ≈ 0.55–0.7). Most pre13 configurations realise ≈ 0.
+- **C-P2:** in the extended set, CAP-H4 and H4-KB rank highest in both forecast and realised loss, and extended-set Spearman is higher (≈ 0.3–0.5).
+- **C-P3:** coverage ≥ 0.85, but uninformative (width ≈ 6–8 × θ).
+- **C-P4:** if experience tasks are harder (B0 fails more often in experience than its 7–9% in underwriting), forecasts are too low for the risky configurations (A3's R6 signature).
+- **C-P5:** the same-task bridge shows the simulator effect on commission is small relative to the configuration effect.
+
+**Not allowed after this point:** changing the configuration sets, sizes, scoring code or K2 definition. Any deviation is appended and labelled post-hoc.
