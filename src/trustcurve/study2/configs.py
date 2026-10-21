@@ -78,6 +78,9 @@ CONFIGS = {c.id: c for c in [
     Config("KB-PPL", knowledge="wrong_rule", persona="pleaser", factor="kb"),
     Config("KB-PST", knowledge="wrong_rule", persona="strict", factor="kb"),
     Config("KB-CAPS", model="anthropic/claude-sonnet-5-5", knowledge="wrong_rule", factor="kb"),
+    # B-L2: capability levels below Haiku 5.5 ("any weaker model if available", plan)
+    Config("CAP-H4", model="anthropic/claude-haiku-4-5-20251001", factor="capability-"),
+    Config("CAP-L", model="openai/responses/gpt-6-luna", factor="capability-"),
 ] + [Config(f"D{k}", factor="planted", fault=True) for k in range(1, 7)]}
 
 SEALED_DIR = Path(__file__).resolve().parents[3] / "study2_sealed"

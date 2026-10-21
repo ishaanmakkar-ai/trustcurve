@@ -20,7 +20,8 @@ from trustcurve.study2.ledger import ledger_for_run
 
 PRICES2 = {"claude-haiku-5-5": (0.10, 0.50, 0.01), "claude-sonnet-5-5": (2.00, 10.00, 0.10),
            "claude-opus-5-5": (4.00, 20.00, 0.20), "gpt-6.1-sol": (2.00, 10.00, 0.10),
-           "gpt-6-luna": (0.10, 0.50, 0.01)}
+           "gpt-6-luna": (0.10, 0.50, 0.01),
+           "claude-haiku-4-5-20251001": (1.00, 5.00, 0.10)}  # Anthropic pricing page, checked 2026-10-21
 LONG2 = {"claude-haiku-5-5": (0.50, 2.50, 0.05)}
 CACHE_WRITE_MULT = 1.25
 
