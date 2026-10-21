@@ -4,7 +4,7 @@ Truth for each configuration = its screening estimate per stratum (Jeffreys-smoo
 severities, lognormal fallback), with shared latent task difficulty (sigma_u = 1.0, as phase A) and optionally an
 author shift between underwriting and experience pools (phase-A S2, delta_h ~ N(0, 0.5^2)).
 For a candidate design {config: (n_u, n_e)} it simulates underwriting + experience, forecasts with M1 (the frozen
-primary) and reports median / p10 Spearman, predictive coverage (all configs and configs with >=1 realised event),
+primary, M2 since phase-A loop 3) and reports median / p10 Spearman, predictive coverage (all configs and configs with >=1 realised event),
 sharpness and the expected number of zero-event configurations.
 
 Usage: python -m trustcurve.study2.power <screen_runs.csv> [...] --design design.json --out power.json
@@ -23,6 +23,7 @@ from scipy.optimize import brentq
 from trustcurve.study2.forecast import (BASIC_LIMIT, STRATA, W_DEPLOY, allocation, forecast, spearman)
 
 SIGMA_U = 1.0
+METHOD = "M2"  # the frozen phase-C primary (phase-A loop 3 decision); was M1 before that decision
 GH_X, GH_W = np.polynomial.hermite_e.hermegauss(40)
 GH_W = GH_W / GH_W.sum()
 
@@ -78,6 +79,8 @@ def simulate(truth, sev, design, reps=200, shift=0.0, seed=0, U_mix=None):
         uu, eu = rng.normal(0, SIGMA_U, len(us)), rng.normal(0, SIGMA_U, len(es))
         rng.shuffle(perm_u := np.arange(len(us))); rng.shuffle(perm_e := np.arange(len(es)))
         obs, R, Rev = {}, {}, {}
+        theta = {c: sum(W_DEPLOY[h] * truth[c][h] for h in STRATA) * float(np.mean(sev if sev is not None and len(sev) >= 3 else [300.0]))
+                 for c in cfgs}  # approximate true pure premium (for relative width only)
         for c in cfgs:
             nu, ne = design[c]
             iu = perm_u[:nu]; ie = perm_e[:ne]
@@ -91,13 +94,13 @@ def simulate(truth, sev, design, reps=200, shift=0.0, seed=0, U_mix=None):
                 e2 = rng.random(ne) < _sig(ae + eu[ie])
                 tot += float(np.where(e2, sev_draw(ne), 0.0).sum()); k += int(e2.sum())
             R[c] = tot / (2 * ne); Rev[c] = k
-        f = forecast(obs, n_e={c: design[c][1] for c in cfgs}, method="M1", B=400, seed=int(rng.integers(1e9)))
+        f = forecast(obs, n_e={c: design[c][1] for c in cfgs}, method=METHOD, B=400, seed=int(rng.integers(1e9)))
         pts = np.array([f[c].point for c in cfgs]); ys = np.array([R[c] for c in cfgs])
         cov = [f[c].pred_lo90 - 1e-9 <= R[c] <= f[c].pred_hi90 + 1e-9 for c in cfgs]
         cov_ev = [cv for cv, c in zip(cov, cfgs) if Rev[c] > 0]
         out.append(dict(spear=spearman(pts, ys), cov=float(np.mean(cov)),
                         cov_ev=float(np.mean(cov_ev)) if cov_ev else np.nan, zero=sum(Rev[c] == 0 for c in cfgs),
-                        width=float(np.median([(f[c].pred_hi90 - f[c].pred_lo90) / max(f[c].point, 1e-6) for c in cfgs]))))
+                        width=float(np.median([(f[c].pred_hi90 - f[c].pred_lo90) / max(theta[c], 1e-6) for c in cfgs]))))
     sp = np.array([o["spear"] for o in out], float); sp = sp[~np.isnan(sp)]
     return {"reps": reps, "shift": shift, "spearman_median": float(np.median(sp)) if sp.size else None,
             "spearman_p10": float(np.quantile(sp, 0.1)) if sp.size else None,

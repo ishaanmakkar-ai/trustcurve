@@ -62,3 +62,5 @@ timestamp,phase,batch,runs,cost_usd,cumulative_project_usd,note
 2026-10-21T08:35,B,pilot3-B0-H,40,0.5004,121.88,B0 x H
 2026-10-21T08:36,B,labels-pilot3-B0-H,40,0.0498,121.93,labeller
 2026-10-21T08:40,B,uw1-KB-PPL,45,1.7008,123.63,KB-PPL x H
+2026-10-21T08:52,B,uw1-CAP-H4,45,3.7880,127.42,CAP-H4 x H
+2026-10-21T08:55,B,uw1-CAP-L,45,0.2100,127.63,CAP-L x H

@@ -420,3 +420,27 @@ The plan's capability factor includes "any weaker model if available". Two are a
 - Otherwise the capability gradient adds nothing, and phase C proceeds (or not) on the rates above.
 
 Either way, **G1/K3 and the go/no-go for phase C spend go to Ishaan before any phase-C run**. This is loop 2 of 4 in phase B.
+
+### B-L2 results (2026-10-21)
+| Configuration (45 screening tasks) | Failure | Commission events | Pure premium $/conv | Cost per run |
+|---|---|---|---|---|
+| **CAP-H4** (claude-haiku-4-5) | 0.178 | **4** (E3A-12, V-37, V-42 wrongful cancellations; V-38 a delay certificate without a change; all four read and genuine) | **64.2** | $0.084 |
+| CAP-L (gpt-6-luna agent) | 0.111 | 0 | 0 | $0.005 |
+
+- **Decision rule:** CAP-H4 joins phase C (≥ 2 events); CAP-L doesn't change the answer. **The capability axis separates risk once it reaches one model generation down.**
+- The power analysis was re-run with CAP-H4 and a guardrail variant **H4-HPC** (truth stand-in = CAP-H4), using **M2 (the frozen primary)**. Correction: the first power run used M1 and divided width by a zero point. Both are fixed in `power.py`.
+
+| Design (`results/study2/phaseB/power2.json`) | Median Spearman (p10) | P(ρ ≤ 0.3) | Predictive coverage | Median width / θ |
+|---|---|---|---|---|
+| D: all 24 configurations incl. CAP-H4 and H4-HPC (Haiku n_e 150, Sonnet 50, H4 150) | 0.33 (0.08) | 0.46 | 0.97 | 6.5 |
+| E: the pre-registered 13 + CAP-H4 | 0.28 (−0.03) | 0.55 | 0.97 | 8.0 |
+
+**Projected phase-C cost** (measured per-run costs):
+- full ≈ $295 (cumulative ≈ $423 before D);
+- lean ≈ $247;
+- larger ≈ $404, which breaches the $450 stop.
+
+**Projection:**
+- Phase C remains **under-powered for K2**: about a coin flip on Spearman ≤ 0.3.
+- Its 90% predictive intervals would be about 6–8 × the pure premium wide: calibrated, but too wide to price with.
+- **Go/no-go and G1/K3 are put to Ishaan before any phase-C spend** (pre-registered in B-L1).
