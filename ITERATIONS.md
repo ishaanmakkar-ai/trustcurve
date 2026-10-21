@@ -120,3 +120,16 @@ The review-1/2/3 resolutions re-analysed **existing** data and code. They ran no
   - Better than predicted: P5 (the zero-event fallback keeps coverage).
 - **Bug found during the run:** `icc_binary` mis-computed on numpy ints (Python's `statistics.mean`). Fixed and tested; the pilot is unaffected (0.42).
 - Phase 0 iteration cap reached (4 of 4).
+
+## Phase 1 (2026-10-21): E1, E1x, E2, E3, phase 1b, reference run
+- All arms ran as pre-registered, with the analysis code committed before outcomes for E1x and the reference run. **Spend ≈ $80.**
+- **What broke:**
+  1. My E1x write-up mis-stated the soft kill rule (review 5 #1).
+  2. Dollar-diff v3 flagged $14,071 of "insured loss" where transcripts show $145. There are 4 systematic bugs (REF-H audit).
+  3. The "credibility −30%" on real strata was pooling, not credibility (review 6 #1).
+  4. The disk filled during REF-H's final save. It was resumed from the checkpoint.
+- **Fixes:**
+  - Corrections are struck through and replaced in EXPERIMENTS.md.
+  - Dollar-diff v4 is specified, not built (GATE step 1).
+  - A blinded second rater (κ 0.45) and transcript audits were added.
+- **Result:** GATE.md. The recommendation is no-go on phase 2 as specified, with a staged validation path instead.

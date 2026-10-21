@@ -2,7 +2,7 @@
 
 **Status:** phase 0, phase 1 (E1, E1x, E2, E3, labels, reference run) and phase 1b are complete, pre-registered in EXPERIMENTS.md, reviewed (REVIEW.md reviews 4–6) and pushed. **Phase 2 has not started. It needs an explicit go.**
 
-**Spend:** ≈ $82 of the $300 cap (pilot ≈ $1; phase 1 ≈ $81, of which the reference run was $36). Remaining ≈ $218.
+**Spend:** ≈ $81 of the $300 cap (pilot ≈ $1; phase 1 ≈ $80: runs $79.44, labels $0.77; the reference run was $36). Remaining ≈ $219.
 
 ## Recommendation: NO-GO on phase 2 as specified; GO on a staged validation path instead (≈ $10 to validate, then ≈ $90 to scale only if validation passes)
 
@@ -12,7 +12,7 @@ Phase 2 as written assumed **variants of benchmark tasks can stand in for new ta
 
 Spending ≈ $120 on a 7,600-run credibility run now would produce a precise-looking number on the wrong unit, measured with a broken ruler.
 
-**Strongest case against this recommendation:** the budget is there, and the infrastructure works. A 7,600-run run on τ² variants would produce a headline "N effective failures" figure for Fulcrum, and DB mismatch (the sizing proxy) isn't affected by the dollar-diff bugs. The counter-argument: with ρ_parent ≈ 0.43 and 50 parents, the effective sample tops out at about 100 runs (≈ 18 effective failures) however many variants are run. So the headline would be false precision.
+**Strongest case against this recommendation:** the budget is there, and the infrastructure works. A 7,600-run run on τ² variants would produce a headline "N effective failures" figure for Fulcrum, and DB mismatch (the sizing proxy) isn't affected by the dollar-diff bugs. The counter-argument: with ρ_parent ≈ 0.43 and 50 parents, the effective sample tops out at about 100–120 runs (≈ 18–22 effective failures) however many variants are run. So the headline would be false precision.
 
 ## The four questions the gate asks
 
@@ -39,7 +39,7 @@ Spending ≈ $120 on a 7,600-run credibility run now would produce a precise-loo
 | Haiku LLM labeller for attribution | — | moderate: κ = 0.45 vs a blinded second rater | Use with a human audit |
 | Dollar-diff v3 + policy layer (severity) | — | ✗ flagged $14,071 vs $145 genuine; 4 systematic bugs | **Fix (v4) before any loss estimate** |
 
-### 3. Effective failures reachable under the remaining ≈ $218
+### 3. Effective failures reachable under the remaining ≈ $219
 A Haiku-agent/Haiku-customer run costs **$0.016** (REF-H: $16.08 / 1,000).
 
 | Route | Ceiling | Effective failures (DB mismatch, q ≈ 0.19) | Effective money-harm events (q ≈ 0.9%) |
@@ -65,7 +65,7 @@ A Haiku-agent/Haiku-customer run costs **$0.016** (REF-H: $16.08 / 1,000).
 3. **Generator fidelity pilot** (≈ $6–8 including generation; review 6 suggests scaling this to about 300 tasks, ≈ $15–20, once v4 exists): 50 new LLM-generated airline tasks (not templates), validated against policy, × 2 runs, under the Haiku and Sonnet customers.
    - Pass: failure rate 10–35% and DB-mismatch ICC 0.3–0.7, i.e. benchmark-like.
    - Kill: failure < 5% (the E3 ceiling again) or > 50%, or validation yield < 50%.
-4. **Only if 1–3 pass:** about 1,300 distinct generated tasks × 1 run with two simulators: Haiku customer ≈ $21, Sonnet customer ≈ $52, plus generation (≈ $90 total). That reaches ±20% on DB-mismatch frequency and a first credible money-harm frequency with an upper bound, priced with PROP + credibility + capped pure premium.
+4. **Only if 1–3 pass:** about 1,300 distinct generated tasks × 1 run with two simulators: Haiku customer ≈ $21, Sonnet customer ≈ $52, plus generation (≈ $90 total). At q ≈ 0.19, ±20% on DB-mismatch frequency needs only about 300 tasks per simulator, so 1,300 also supports per-workflow estimates. Money harm at about 1% gives about 13 events, a first frequency of roughly ±45%. **That isn't credible for pricing**, so a priced premium would still rest mostly on the complement. Pricing would use PROP + capped pure premium, with credibility only where workflows separate.
 
 **Kill criteria for the whole approach:**
 - v4 can't match a human reading of the 35 audited cases.
