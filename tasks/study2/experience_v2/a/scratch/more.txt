@@ -1,0 +1,177 @@
+HAT163 SFO-LAX 20:00:00-21:30:00 2024-05-15 {'status': 'delayed', 'estimated_departure_time_est': '2024-05-15T22:11:00', 'estimated_arrival_time_est': '2024-05-15T23:41:00'}
+HAT150 LGA-PHX 19:00:00-23:30:00 2024-05-15 {'status': 'delayed', 'estimated_departure_time_est': '2024-05-15T20:47:00', 'estimated_arrival_time_est': '2024-05-16T01:17:00'}
+HAT002 LGA-PHX 21:00:00-01:30:00+1 2024-05-15 {'status': 'delayed', 'estimated_departure_time_est': '2024-05-15T22:59:00', 'estimated_arrival_time_est': '2024-05-16T03:29:00'}
+HAT259 PHX-LAS 17:00:00-18:00:00 2024-05-15 {'status': 'delayed', 'estimated_departure_time_est': '2024-05-15T17:50:00', 'estimated_arrival_time_est': '2024-05-15T18:50:00'}
+HAT253 SEA-BOS 20:00:00-01:30:00+1 2024-05-15 {'status': 'on time', 'estimated_departure_time_est': '2024-05-15T20:27:00', 'estimated_arrival_time_est': '2024-05-16T02:00:00'}
+HAT139 ORD-PHL 17:00:00-19:00:00 2024-05-15 {'status': 'on time', 'estimated_departure_time_est': '2024-05-15T16:50:00', 'estimated_arrival_time_est': '2024-05-15T19:09:00'}
+HAT172 LGA-PHL 23:00:00-00:00:00+1 2024-05-15 {'status': 'on time', 'estimated_departure_time_est': '2024-05-15T22:56:00', 'estimated_arrival_time_est': '2024-05-15T23:44:00'}
+HAT183 DFW-SEA 05:00:00-09:00:00 2024-05-15 {'status': 'landed', 'actual_departure_time_est': '2024-05-15T05:10:00', 'actual_arrival_time_est': '2024-05-15T09:19:00'}
+HAT114 LGA-PHX 21:00:00-01:30:00+1 2024-05-14 {'status': 'landed', 'actual_departure_time_est': '2024-05-14T21:01:00', 'actual_arrival_time_est': '2024-05-15T01:06:00'}
+ATL-ORD 27 [('HAT227', '11:00:00', '13:00:00', {'basic_economy': 94, 'economy': 117, 'business': 497}, {'basic_economy': 7, 'economy': 13, 'business': 16})]
+PHX-LAS 18 [('HAT027', '13:00:00', '14:00:00', {'basic_economy': 84, 'economy': 144, 'business': 229}, {'basic_economy': 4, 'economy': 8, 'business': 4}), ('HAT173', '09:00:00', '10:00:00', {'basic_economy': 73, 'economy': 164, 'business': 265}, {'basic_economy': 4, 'economy': 7, 'business': 7}), ('HAT259', '17:00:00', '18:00:00', {'basic_economy': 54, 'economy': 188, 'business': 494}, {'basic_economy': 1, 'economy': 18, 'business': 1})]
+james_lee_6136 {'first_name': 'James', 'last_name': 'Lee'} regular 1995-06-11 gift_card_1712795($88.0) gift_card_4643416($113.0) gift_card_3166319($223.0)
+  saved: [{'first_name': 'Mia', 'last_name': 'Lee', 'dob': '1996-06-04'}, {'first_name': 'Mason', 'last_name': 'Lopez', 'dob': '1966-03-13'}]
+  75JYBV business one_way pax=1 created=2024-05-11T10:46:14 ins=no bags=1/0 st=None | HAT098@2024-05-16[MSP-MCO $1771 available] HAT048@2024-05-16[MCO-PHX $1537 available] | pay gift_card_3166319:3308
+    pax: [{'first_name': 'James', 'last_name': 'Lee', 'dob': '1995-06-11'}]
+  50651P economy one_way pax=1 created=2024-05-05T19:04:09 ins=no bags=0/0 st=None | HAT025@2024-05-26[IAH-JFK $184 available] HAT014@2024-05-26[JFK-MIA $110 available] | pay gift_card_4643416:294
+    pax: [{'first_name': 'James', 'last_name': 'Lee', 'dob': '1995-06-11'}]
+  OKHV5C basic_economy one_way pax=1 created=2024-05-04T09:08:00 ins=no bags=0/0 st=None | HAT204@2024-05-23[SFO-SEA $91 available] HAT100@2024-05-23[SEA-JFK $93 available] | pay gift_card_4643416:184
+    pax: [{'first_name': 'James', 'last_name': 'Lee', 'dob': '1995-06-11'}]
+  5LA9CB business round_trip pax=3 created=2024-05-01T11:59:16 ins=no bags=6/0 st=None | HAT061@2024-05-09[LAS-ATL $1870 landed] HAT293@2024-05-09[ATL-MCO $649 cancelled] HAT299@2024-05-19[MCO-LAS $991 available] | pay gift_card_4643416:10530
+    pax: [{'first_name': 'James', 'last_name': 'Lee', 'dob': '1995-06-11'}, {'first_name': 'Mia', 'last_name': 'Lee', 'dob': '1996-06-04'}, {'first_name': 'Mason', 'last_name': 'Lopez', 'dob': '1966-03-13'}]
+  ASMUHC basic_economy one_way pax=1 created=2024-05-03T02:42:23 ins=no bags=0/0 st=None | HAT264@2024-05-06[LGA-PHL $62 landed] HAT076@2024-05-07[PHL-DEN $74 landed] | pay gift_card_4643416:136
+    pax: [{'first_name': 'James', 'last_name': 'Lee', 'dob': '1995-06-11'}]
+  XEWRD9 basic_economy round_trip pax=2 created=2024-05-07T19:17:06 ins=yes bags=0/0 st=None | HAT030@2024-05-13[LAX-ORD $92 landed] HAT223@2024-05-14[ORD-ATL $100 landed] HAT252@2024-05-21[ATL-DFW $75 available] HAT124@2024-05-21[DFW-LAX $96 available] | pay gift_card_4643416:786
+    pax: [{'first_name': 'James', 'last_name': 'Lee', 'dob': '1995-06-11'}, {'first_name': 'Mason', 'last_name': 'Lopez', 'dob': '1966-03-13'}]
+  U5VILT economy one_way pax=2 created=2024-05-06T20:02:42 ins=yes bags=1/0 st=None | HAT264@2024-05-16[LGA-PHL $170 available] | pay gift_card_1712795:400
+    pax: [{'first_name': 'Mason', 'last_name': 'Lopez', 'dob': '1966-03-13'}, {'first_name': 'Raj', 'last_name': 'Johnson', 'dob': '1974-12-10'}]
+  8UNKKU basic_economy one_way pax=2 created=2024-05-07T15:18:05 ins=no bags=0/0 st=None | HAT235@2024-05-08[BOS-MCO $56 landed] HAT298@2024-05-09[MCO-MSP $89 cancelled] | pay gift_card_1712795:290
+    pax: [{'first_name': 'Mia', 'last_name': 'Lee', 'dob': '1996-06-04'}, {'first_name': 'Aarav', 'last_name': 'Moore', 'dob': '1958-07-05'}]
+  0Y0TH3 business round_trip pax=3 created=2024-05-06T15:15:46 ins=yes bags=2/0 st=None | HAT083@2024-05-14[JFK-SEA $1429 cancelled] HAT089@2024-05-18[SEA-JFK $1017 available] | pay gift_card_1712795:7428
+    pax: [{'first_name': 'James', 'last_name': 'Lee', 'dob': '1995-06-11'}, {'first_name': 'Harper', 'last_name': 'Jackson', 'dob': '1968-06-22'}, {'first_name': 'Mia', 'last_name': 'Lee', 'dob': '1996-06-04'}]
+  H64BP6 economy one_way pax=2 created=2024-05-13T19:09:12 ins=yes bags=1/0 st=None | HAT168@2024-05-18[DTW-CLT $107 available] | pay gift_card_4643416:274
+    pax: [{'first_name': 'Lucas', 'last_name': 'Kovacs', 'dob': '1956-08-03'}, {'first_name': 'Juan', 'last_name': 'Nguyen', 'dob': '1970-11-20'}]
+  KBE052 business one_way pax=2 created=2024-05-07T01:38:30 ins=yes bags=4/0 st=None | HAT164@2024-05-12[ATL-LGA $856 landed] HAT132@2024-05-12[LGA-PHL $1944 cancelled] | pay gift_card_3166319:5660
+    pax: [{'first_name': 'James', 'last_name': 'Lee', 'dob': '1995-06-11'}, {'first_name': 'Mason', 'last_name': 'Lopez', 'dob': '1966-03-13'}]
+chen_gonzalez_5516 {'first_name': 'Chen', 'last_name': 'Gonzalez'} regular 1961-08-10 credit_card_9588108(visa 6589) certificate_9371471($250.0) credit_card_2870431(visa 7388) credit_card_2191342(mastercard 1323) credit_card_2231237(mastercard 2477) credit_card_9615868(mastercard 5038)
+  saved: [{'first_name': 'Mia', 'last_name': 'Davis', 'dob': '1951-05-23'}, {'first_name': 'Raj', 'last_name': 'Li', 'dob': '1972-04-19'}]
+  SNB279 business one_way pax=1 created=2024-05-05T00:25:23 ins=no bags=0/0 st=None | HAT198@2024-05-18[MIA-JFK $1658 available] HAT069@2024-05-18[JFK-SEA $993 available] | pay credit_card_2870431:2651
+    pax: [{'first_name': 'Chen', 'last_name': 'Gonzalez', 'dob': '1961-08-10'}]
+  RFIG45 economy round_trip pax=1 created=2024-05-03T23:01:06 ins=yes bags=0/0 st=None | HAT169@2024-05-07[DTW-JFK $172 landed] HAT023@2024-05-07[JFK-SFO $169 landed] HAT144@2024-05-10[SFO-PHX $194 landed] HAT073@2024-05-10[PHX-DTW $194 cancelled] | pay credit_card_2191342:759
+    pax: [{'first_name': 'Chen', 'last_name': 'Gonzalez', 'dob': '1961-08-10'}]
+  5OY9I3 basic_economy round_trip pax=1 created=2024-05-12T22:05:26 ins=yes bags=0/0 st=None | HAT163@2024-05-15[SFO-LAX $78 delayed] HAT034@2024-05-23[LAX-SFO $60 available] | pay credit_card_2191342:168
+    pax: [{'first_name': 'Chen', 'last_name': 'Gonzalez', 'dob': '1961-08-10'}]
+  RDYIPN economy one_way pax=3 created=2024-05-06T00:43:11 ins=yes bags=3/0 st=None | HAT004@2024-05-09[ATL-DFW $189 landed] HAT142@2024-05-09[DFW-EWR $156 cancelled] | pay credit_card_2191342:1125
+    pax: [{'first_name': 'Chen', 'last_name': 'Gonzalez', 'dob': '1961-08-10'}, {'first_name': 'Raj', 'last_name': 'Li', 'dob': '1972-04-19'}, {'first_name': 'Mia', 'last_name': 'Davis', 'dob': '1951-05-23'}]
+mohamed_ahmed_3350 {'first_name': 'Mohamed', 'last_name': 'Ahmed'} regular 1967-06-26 certificate_7027116($250.0) gift_card_9022024($101.0) certificate_4314329($250.0)
+  saved: [{'first_name': 'Lucas', 'last_name': 'Taylor', 'dob': '1954-06-24'}, {'first_name': 'Ava', 'last_name': 'Moore', 'dob': '1993-11-10'}]
+  ZND99F basic_economy round_trip pax=1 created=2024-05-09T11:52:59 ins=no bags=0/0 st=None | HAT248@2024-05-20[MSP-DTW $78 available] HAT254@2024-05-20[DTW-MSP $80 available] HAT127@2024-05-23[MSP-DTW $81 available] HAT210@2024-05-24[DTW-MSP $92 available] | pay gift_card_9022024:331
+    pax: [{'first_name': 'Mohamed', 'last_name': 'Ahmed', 'dob': '1967-06-26'}]
+  S0HGIK basic_economy round_trip pax=2 created=2024-05-03T09:09:33 ins=yes bags=0/0 st=None | HAT202@2024-05-25[EWR-MIA $58 available] HAT224@2024-05-25[MIA-JFK $85 available] HAT060@2024-05-29[JFK-MIA $51 available] HAT192@2024-05-29[MIA-EWR $98 available] | pay gift_card_9022024:644
+    pax: [{'first_name': 'Sofia', 'last_name': 'Rossi', 'dob': '1962-06-04'}, {'first_name': 'Lucas', 'last_name': 'Silva', 'dob': '1961-01-26'}]
+  K1S4G0 basic_economy one_way pax=1 created=2024-05-13T02:24:09 ins=no bags=0/0 st=None | HAT203@2024-05-22[ATL-MCO $62 available] HAT298@2024-05-22[MCO-MSP $55 available] | pay gift_card_9022024:117
+    pax: [{'first_name': 'Mohamed', 'last_name': 'Ahmed', 'dob': '1967-06-26'}]
+  IFRGGJ basic_economy one_way pax=3 created=2024-05-09T16:14:00 ins=yes bags=0/0 st=None | HAT262@2024-05-18[CLT-DEN $83 available] HAT140@2024-05-18[DEN-DFW $52 available] | pay gift_card_9022024:495
+    pax: [{'first_name': 'Mohamed', 'last_name': 'Ahmed', 'dob': '1967-06-26'}, {'first_name': 'Ava', 'last_name': 'Moore', 'dob': '1993-11-10'}, {'first_name': 'Mohamed', 'last_name': 'Davis', 'dob': '1983-08-12'}]
+  N8MRIM economy round_trip pax=4 created=2024-05-05T16:39:11 ins=yes bags=1/0 st=None | HAT214@2024-05-09[MCO-PHX $177 landed] HAT073@2024-05-10[PHX-DTW $149 cancelled] HAT111@2024-05-13[DTW-MSP $134 landed] HAT071@2024-05-13[MSP-MCO $120 landed] | pay gift_card_9022024:2440
+    pax: [{'first_name': 'Lei', 'last_name': 'Smith', 'dob': '1973-04-27'}, {'first_name': 'Chen', 'last_name': 'Nguyen', 'dob': '1964-10-08'}, {'first_name': 'Lucas', 'last_name': 'Taylor', 'dob': '1954-06-24'}, {'first_name': 'Liam', 'last_name': 'Kim', 'dob': '1955-06-26'}]
+fatima_anderson_7848 {'first_name': 'Fatima', 'last_name': 'Anderson'} silver 1998-12-21 credit_card_4739824(mastercard 8730)
+  saved: [{'first_name': 'Isabella', 'last_name': 'Wilson', 'dob': '1977-02-01'}]
+  TH87DD economy round_trip pax=1 created=2024-05-07T00:23:02 ins=yes bags=1/0 st=None | HAT013@2024-05-08[BOS-MCO $139 landed] HAT028@2024-05-13[MCO-BOS $199 landed] | pay credit_card_4739824:368
+    pax: [{'first_name': 'Fatima', 'last_name': 'Anderson', 'dob': '1998-12-21'}]
+  Z2OQZK economy one_way pax=1 created=2024-05-02T00:24:14 ins=yes bags=0/0 st=None | HAT241@2024-05-09[DEN-DFW $104 landed] HAT282@2024-05-10[DFW-ATL $135 cancelled] | pay credit_card_4739824:269
+    pax: [{'first_name': 'Fatima', 'last_name': 'Anderson', 'dob': '1998-12-21'}]
+ethan_garcia_8768 {'first_name': 'Ethan', 'last_name': 'Garcia'} regular 1956-06-20 certificate_8739675($500.0) credit_card_2576367(visa 8244) gift_card_5027962($83.0)
+  saved: [{'first_name': 'Sophia', 'last_name': 'Patel', 'dob': '1999-11-18'}]
+  IYD1YP economy round_trip pax=2 created=2024-05-06T06:36:32 ins=yes bags=2/0 st=None | HAT083@2024-05-27[JFK-SEA $143 available] HAT253@2024-05-27[SEA-BOS $160 available] HAT086@2024-05-28[BOS-MIA $118 available] HAT224@2024-05-28[MIA-JFK $147 available] | pay gift_card_5027962:1196
+    pax: [{'first_name': 'Ethan', 'last_name': 'Garcia', 'dob': '1956-06-20'}, {'first_name': 'Sophia', 'last_name': 'Patel', 'dob': '1999-11-18'}]
+  2F8AQI business round_trip pax=1 created=2024-05-05T02:37:29 ins=no bags=2/0 st=None | HAT216@2024-05-22[CLT-BOS $630 available] HAT277@2024-05-23[BOS-CLT $943 available] | pay credit_card_2576367:1573
+    pax: [{'first_name': 'Ethan', 'last_name': 'Garcia', 'dob': '1956-06-20'}]
+  LLNC0G business one_way pax=2 created=2024-05-08T15:39:29 ins=no bags=0/0 st=None | HAT072@2024-05-09[IAH-SFO $1517 landed] HAT026@2024-05-09[SFO-BOS $1661 landed] | pay credit_card_2576367:6356
+    pax: [{'first_name': 'Ethan', 'last_name': 'Garcia', 'dob': '1956-06-20'}, {'first_name': 'Sophia', 'last_name': 'Patel', 'dob': '1999-11-18'}]
+  HGJDR0 business one_way pax=1 created=2024-05-03T17:05:09 ins=yes bags=0/0 st=None | HAT128@2024-05-14[DFW-ATL $942 cancelled] HAT010@2024-05-14[ATL-MCO $1162 landed] | pay credit_card_2576367:2134
+    pax: [{'first_name': 'Ethan', 'last_name': 'Garcia', 'dob': '1956-06-20'}]
+  W8DUJ8 basic_economy round_trip pax=1 created=2024-05-04T19:51:53 ins=no bags=0/0 st=None | HAT149@2024-05-14[IAH-EWR $76 landed] HAT043@2024-05-14[EWR-CLT $53 landed] HAT015@2024-05-18[CLT-EWR $92 available] HAT056@2024-05-18[EWR-IAH $58 available] | pay gift_card_5027962:279
+    pax: [{'first_name': 'Ethan', 'last_name': 'Garcia', 'dob': '1956-06-20'}]
+  Y7MBM4 business one_way pax=2 created=2024-05-07T01:55:17 ins=no bags=2/0 st=None | HAT286@2024-05-13[IAH-LAS $814 landed] HAT137@2024-05-14[LAS-MCO $1572 landed] | pay credit_card_2576367:4772
+    pax: [{'first_name': 'Ethan', 'last_name': 'Garcia', 'dob': '1956-06-20'}, {'first_name': 'Aarav', 'last_name': 'Lopez', 'dob': '1958-10-02'}]
+  MGM5IZ basic_economy one_way pax=2 created=2024-05-01T08:52:05 ins=no bags=0/0 st=None | HAT152@2024-05-13[PHX-IAH $85 landed] | pay gift_card_5027962:170
+    pax: [{'first_name': 'Sophia', 'last_name': 'Patel', 'dob': '1999-11-18'}, {'first_name': 'Chen', 'last_name': 'Garcia', 'dob': '1987-08-12'}]
+amelia_ito_8544 {'first_name': 'Amelia', 'last_name': 'Ito'} gold 1960-03-07 gift_card_5891189($117.0) gift_card_7594049($27.0) gift_card_1791920($113.0) credit_card_2540841(visa 5300) certificate_4381655($500.0) gift_card_4259408($300.0)
+  saved: [{'first_name': 'Mason', 'last_name': 'Kim', 'dob': '1976-06-10'}]
+  5K63ST business round_trip pax=2 created=2024-05-10T23:19:39 ins=no bags=0/0 st=None | HAT070@2024-05-23[LAS-ATL $1397 available] HAT285@2024-05-24[ATL-JFK $1688 available] HAT069@2024-05-24[JFK-SEA $1391 available] HAT018@2024-05-24[SEA-LAS $1040 available] | pay gift_card_7594049:11032
+    pax: [{'first_name': 'Amelia', 'last_name': 'Ito', 'dob': '1960-03-07'}, {'first_name': 'Sophia', 'last_name': 'Wilson', 'dob': '1973-02-24'}]
+  SGU5KR economy round_trip pax=2 created=2024-05-14T17:48:06 ins=no bags=0/0 st=None | HAT243@2024-05-21[PHL-CLT $122 available] HAT157@2024-05-21[CLT-EWR $141 available] HAT270@2024-05-23[EWR-CLT $104 available] HAT205@2024-05-23[CLT-PHL $151 available] | pay gift_card_1791920:1036
+    pax: [{'first_name': 'Amelia', 'last_name': 'Ito', 'dob': '1960-03-07'}, {'first_name': 'Chen', 'last_name': 'Jackson', 'dob': '1988-02-17'}]
+  K4J0ER business one_way pax=1 created=2024-05-08T03:15:25 ins=no bags=2/0 st=None | HAT152@2024-05-28[PHX-IAH $1473 available] | pay gift_card_4259408:1473
+    pax: [{'first_name': 'Amelia', 'last_name': 'Ito', 'dob': '1960-03-07'}]
+  7WGE88 basic_economy round_trip pax=3 created=2024-05-11T17:27:00 ins=yes bags=0/0 st=None | HAT169@2024-05-12[DTW-JFK $60 cancelled] HAT279@2024-05-12[JFK-IAH $64 landed] HAT116@2024-05-16[IAH-ORD $90 available] HAT020@2024-05-16[ORD-DTW $65 available] | pay gift_card_7594049:927
+    pax: [{'first_name': 'Mason', 'last_name': 'Kim', 'dob': '1976-06-10'}, {'first_name': 'Noah', 'last_name': 'Silva', 'dob': '1979-08-26'}, {'first_name': 'Fatima', 'last_name': 'Johansson', 'dob': '1970-04-19'}]
+  EP5RQO business one_way pax=1 created=2024-05-02T03:46:31 ins=yes bags=1/0 st=None | HAT232@2024-05-12[MIA-LAX $1171 cancelled] HAT155@2024-05-12[LAX-SFO $1463 landed] | pay gift_card_5891189:2664
+    pax: [{'first_name': 'Amelia', 'last_name': 'Ito', 'dob': '1960-03-07'}]
+noah_taylor_9942 {'first_name': 'Noah', 'last_name': 'Taylor'} silver 1982-08-22 gift_card_1591340($145.0) gift_card_8593365($78.0) certificate_4922656($250.0) gift_card_6821034($146.0) certificate_9230641($500.0)
+  saved: [{'first_name': 'Mia', 'last_name': 'Silva', 'dob': '1968-08-14'}, {'first_name': 'Mason', 'last_name': 'Moore', 'dob': '1993-12-15'}]
+  OC1C3C business round_trip pax=3 created=2024-05-04T00:25:32 ins=no bags=2/0 st=None | HAT176@2024-05-11[CLT-DTW $1831 landed] HAT053@2024-05-14[DTW-CLT $1309 landed] | pay gift_card_1591340:9420
+    pax: [{'first_name': 'Noah', 'last_name': 'Taylor', 'dob': '1982-08-22'}, {'first_name': 'Yara', 'last_name': 'Silva', 'dob': '1987-11-11'}, {'first_name': 'Mia', 'last_name': 'Silva', 'dob': '1968-08-14'}]
+  86ANSB economy one_way pax=1 created=2024-05-05T04:02:41 ins=yes bags=0/0 st=None | HAT114@2024-05-14[LGA-PHX $138 landed] HAT259@2024-05-15[PHX-LAS $123 delayed] | pay gift_card_6821034:291
+    pax: [{'first_name': 'Mason', 'last_name': 'Moore', 'dob': '1993-12-15'}]
+harper_garcia_2126 {'first_name': 'Harper', 'last_name': 'Garcia'} silver 1957-03-06 gift_card_6099624($84.0)
+  saved: [{'first_name': 'Liam', 'last_name': 'Johansson', 'dob': '1974-02-11'}]
+  I6OR8M business round_trip pax=3 created=2024-05-03T14:19:33 ins=yes bags=5/0 st=None | HAT086@2024-05-23[BOS-MIA $1764 available] HAT288@2024-05-23[MIA-LAS $803 available] HAT040@2024-05-24[LAS-SEA $1518 available] HAT194@2024-05-24[SEA-BOS $1299 available] | pay gift_card_6099624:16242
+    pax: [{'first_name': 'Harper', 'last_name': 'Garcia', 'dob': '1957-03-06'}, {'first_name': 'Liam', 'last_name': 'Ito', 'dob': '1994-05-11'}, {'first_name': 'Liam', 'last_name': 'Johansson', 'dob': '1974-02-11'}]
+  JSX3XI economy one_way pax=2 created=2024-05-01T10:16:51 ins=no bags=1/0 st=None | HAT102@2024-05-21[ATL-LAS $150 available] HAT003@2024-05-22[LAS-DEN $100 available] | pay gift_card_6099624:500
+    pax: [{'first_name': 'Harper', 'last_name': 'Garcia', 'dob': '1957-03-06'}, {'first_name': 'Lei', 'last_name': 'Gonzalez', 'dob': '1979-01-28'}]
+  5SFHBN basic_economy one_way pax=2 created=2024-05-13T10:09:23 ins=no bags=0/0 st=None | HAT282@2024-05-28[DFW-ATL $74 available] HAT164@2024-05-28[ATL-LGA $99 available] | pay gift_card_6099624:346
+    pax: [{'first_name': 'Harper', 'last_name': 'Garcia', 'dob': '1957-03-06'}, {'first_name': 'Liam', 'last_name': 'Johansson', 'dob': '1974-02-11'}]
+  W1GUTK business one_way pax=1 created=2024-05-01T14:44:41 ins=no bags=0/0 st=None | HAT115@2024-05-27[LAS-MIA $1084 available] | pay gift_card_6099624:1084
+    pax: [{'first_name': 'Harper', 'last_name': 'Garcia', 'dob': '1957-03-06'}]
+  2T4XFJ business round_trip pax=1 created=2024-05-03T01:48:35 ins=no bags=2/0 st=None | HAT130@2024-05-04[DEN-MIA $1620 landed] HAT050@2024-05-04[MIA-LAX $1371 landed] HAT030@2024-05-05[LAX-ORD $1870 landed] HAT118@2024-05-06[ORD-DEN $945 landed] | pay gift_card_6099624:5806
+    pax: [{'first_name': 'Harper', 'last_name': 'Garcia', 'dob': '1957-03-06'}]
+  09C1XI business round_trip pax=3 created=2024-05-14T23:27:31 ins=yes bags=0/0 st=None | HAT034@2024-05-20[LAX-SFO $523 available] HAT123@2024-05-20[SFO-PHX $590 available] HAT032@2024-05-22[PHX-SFO $893 available] HAT273@2024-05-22[SFO-LAX $850 available] | pay gift_card_6099624:8658
+    pax: [{'first_name': 'Harper', 'last_name': 'Garcia', 'dob': '1957-03-06'}, {'first_name': 'Liam', 'last_name': 'Johansson', 'dob': '1974-02-11'}, {'first_name': 'Mason', 'last_name': 'Gonzalez', 'dob': '1962-04-06'}]
+  X8MDZ2 basic_economy one_way pax=1 created=2024-05-08T03:59:26 ins=yes bags=0/0 st=None | HAT183@2024-05-15[DFW-SEA $57 landed] HAT253@2024-05-15[SEA-BOS $100 on time] | pay gift_card_6099624:187
+    pax: [{'first_name': 'Daiki', 'last_name': 'Muller', 'dob': '1959-04-09'}]
+  4WOP8E economy round_trip pax=3 created=2024-05-03T01:57:26 ins=yes bags=2/0 st=None | HAT109@2024-05-11[LAX-ORD $147 landed] HAT223@2024-05-11[ORD-ATL $100 cancelled] HAT252@2024-05-13[ATL-DFW $128 landed] HAT124@2024-05-13[DFW-LAX $193 landed] | pay gift_card_6099624:1794
+    pax: [{'first_name': 'Ivan', 'last_name': 'Khan', 'dob': '1996-01-06'}, {'first_name': 'Evelyn', 'last_name': 'Lee', 'dob': '1988-06-09'}, {'first_name': 'Liam', 'last_name': 'Johansson', 'dob': '1974-02-11'}]
+chen_nguyen_6691 {'first_name': 'Chen', 'last_name': 'Nguyen'} regular 1973-09-23 gift_card_9031491($28.0) gift_card_8462123($2.0) credit_card_9491838(visa 6205) gift_card_7144561($209.0) credit_card_9800418(mastercard 4526)
+  saved: [{'first_name': 'Aarav', 'last_name': 'Taylor', 'dob': '1980-05-19'}]
+  5PQ0HT business round_trip pax=3 created=2024-05-09T05:08:29 ins=yes bags=1/0 st=None | HAT178@2024-05-24[ATL-LAS $1767 available] HAT162@2024-05-24[LAS-DEN $1533 available] HAT046@2024-05-28[DEN-DFW $1734 available] HAT177@2024-05-28[DFW-ATL $473 available] | pay gift_card_7144561:16611
+    pax: [{'first_name': 'Chen', 'last_name': 'Nguyen', 'dob': '1973-09-23'}, {'first_name': 'Aarav', 'last_name': 'Taylor', 'dob': '1980-05-19'}, {'first_name': 'Anya', 'last_name': 'Santos', 'dob': '1990-12-16'}]
+  ULFY27 business round_trip pax=1 created=2024-05-09T03:01:33 ins=no bags=2/0 st=None | HAT227@2024-05-21[ATL-ORD $417 available] HAT020@2024-05-21[ORD-DTW $1521 available] HAT240@2024-05-22[DTW-JFK $1264 available] HAT136@2024-05-22[JFK-ATL $1857 available] | pay credit_card_9800418:5059
+    pax: [{'first_name': 'Aarav', 'last_name': 'Lopez', 'dob': '1986-10-14'}]
+  JU7PH1 economy round_trip pax=3 created=2024-05-06T04:17:27 ins=yes bags=0/0 st=None | HAT093@2024-05-24[ORD-ATL $124 available] HAT239@2024-05-24[ATL-SEA $158 available] HAT276@2024-05-28[SEA-JFK $182 available] HAT261@2024-05-29[JFK-ORD $115 available] | pay gift_card_7144561:1827
+    pax: [{'first_name': 'Chen', 'last_name': 'Nguyen', 'dob': '1973-09-23'}, {'first_name': 'Anya', 'last_name': 'Thomas', 'dob': '1992-01-26'}, {'first_name': 'Aarav', 'last_name': 'Taylor', 'dob': '1980-05-19'}]
+  78ULOP business one_way pax=1 created=2024-05-04T22:55:54 ins=no bags=2/0 st=None | HAT113@2024-05-24[SEA-DFW $1040 available] HAT067@2024-05-24[DFW-SEA $973 available] | pay credit_card_9800418:2013
+    pax: [{'first_name': 'Chen', 'last_name': 'Nguyen', 'dob': '1973-09-23'}]
+  AX3OXQ basic_economy round_trip pax=2 created=2024-05-14T08:03:49 ins=no bags=0/0 st=None | HAT139@2024-05-15[ORD-PHL $51 on time] HAT197@2024-05-16[PHL-ORD $68 available] | pay gift_card_7144561:238
+    pax: [{'first_name': 'Lucas', 'last_name': 'Patel', 'dob': '1976-08-07'}, {'first_name': 'Aarav', 'last_name': 'Taylor', 'dob': '1980-05-19'}]
+  URDQZK basic_economy one_way pax=3 created=2024-05-02T22:40:15 ins=no bags=0/0 st=None | HAT094@2024-05-13[LAX-SFO $96 landed] | pay credit_card_9491838:288
+    pax: [{'first_name': 'Chen', 'last_name': 'Nguyen', 'dob': '1973-09-23'}, {'first_name': 'Aarav', 'last_name': 'Taylor', 'dob': '1980-05-19'}, {'first_name': 'Ivan', 'last_name': 'Ito', 'dob': '1961-03-27'}]
+  AEQA05 business round_trip pax=1 created=2024-05-05T04:23:28 ins=no bags=1/0 st=None | HAT020@2024-05-16[ORD-DTW $1085 available] HAT119@2024-05-17[DTW-ORD $1230 available] | pay gift_card_8462123:2315
+    pax: [{'first_name': 'Chen', 'last_name': 'Nguyen', 'dob': '1973-09-23'}]
+  NE20IR basic_economy round_trip pax=1 created=2024-05-11T03:18:15 ins=yes bags=0/0 st=None | HAT275@2024-05-12[DTW-PHX $79 landed] HAT027@2024-05-12[PHX-LAS $70 landed] HAT284@2024-05-18[LAS-PHX $99 available] HAT106@2024-05-18[PHX-DTW $99 available] | pay credit_card_9491838:377
+    pax: [{'first_name': 'Chen', 'last_name': 'Nguyen', 'dob': '1973-09-23'}]
+  JFWMAI basic_economy round_trip pax=1 created=2024-05-11T21:04:16 ins=yes bags=0/0 st=None | HAT298@2024-05-12[MCO-MSP $62 landed] HAT054@2024-05-17[MSP-MCO $76 available] | pay gift_card_9031491:168
+    pax: [{'first_name': 'Chen', 'last_name': 'Nguyen', 'dob': '1973-09-23'}]
+liam_johnson_6488 {'first_name': 'Liam', 'last_name': 'Johnson'} regular 1962-11-05 certificate_9510509($500.0) certificate_5070760($150.0) certificate_5291966($150.0) credit_card_7726435(mastercard 1271) credit_card_2015111(mastercard 4328)
+  saved: [{'first_name': 'James', 'last_name': 'Brown', 'dob': '1980-05-19'}]
+  88COJP economy one_way pax=2 created=2024-05-11T06:54:05 ins=no bags=0/0 st=None | HAT145@2024-05-21[BOS-MCO $154 available] HAT214@2024-05-21[MCO-PHX $127 available] | pay credit_card_7726435:562
+    pax: [{'first_name': 'Liam', 'last_name': 'Johnson', 'dob': '1962-11-05'}, {'first_name': 'Noah', 'last_name': 'Smith', 'dob': '1979-11-11'}]
+  4K1GOC basic_economy one_way pax=3 created=2024-05-04T04:48:22 ins=yes bags=0/0 st=None | HAT078@2024-05-23[IAH-ORD $64 available] HAT020@2024-05-23[ORD-DTW $57 available] | pay credit_card_2015111:453
+    pax: [{'first_name': 'Liam', 'last_name': 'Johnson', 'dob': '1962-11-05'}, {'first_name': 'James', 'last_name': 'Brown', 'dob': '1980-05-19'}, {'first_name': 'Aarav', 'last_name': 'Patel', 'dob': '1976-11-03'}]
+  8DBK6R basic_economy one_way pax=2 created=2024-05-03T11:28:51 ins=no bags=0/0 st=None | HAT065@2024-05-26[LGA-CLT $80 available] HAT064@2024-05-26[CLT-BOS $82 available] | pay credit_card_7726435:324
+    pax: [{'first_name': 'Liam', 'last_name': 'Johnson', 'dob': '1962-11-05'}, {'first_name': 'Harper', 'last_name': 'Khan', 'dob': '1996-06-19'}]
+  BWHHHG business round_trip pax=2 created=2024-05-05T00:25:16 ins=yes bags=0/0 st=None | HAT077@2024-05-18[LAS-ATL $1797 available] HAT010@2024-05-18[ATL-MCO $1380 available] HAT299@2024-05-28[MCO-LAS $1705 available] | pay credit_card_7726435:9824
+    pax: [{'first_name': 'Liam', 'last_name': 'Johnson', 'dob': '1962-11-05'}, {'first_name': 'Juan', 'last_name': 'Lee', 'dob': '1993-01-20'}]
+  GAOUDL basic_economy one_way pax=4 created=2024-05-04T22:29:47 ins=no bags=0/0 st=None | HAT295@2024-05-12[SFO-BOS $71 cancelled] HAT145@2024-05-12[BOS-MCO $79 landed] | pay credit_card_7726435:600
+    pax: [{'first_name': 'Liam', 'last_name': 'Johnson', 'dob': '1962-11-05'}, {'first_name': 'Mia', 'last_name': 'Nguyen', 'dob': '1984-07-14'}, {'first_name': 'James', 'last_name': 'Brown', 'dob': '1980-05-19'}, {'first_name': 'Sofia', 'last_name': 'Hernandez', 'dob': '1969-12-01'}]
+  P2YRA6 business one_way pax=2 created=2024-05-14T11:18:00 ins=no bags=3/0 st=None | HAT065@2024-05-17[LGA-CLT $1122 available] HAT205@2024-05-17[CLT-PHL $657 available] | pay credit_card_2015111:3558
+    pax: [{'first_name': 'Liam', 'last_name': 'Johnson', 'dob': '1962-11-05'}, {'first_name': 'Harper', 'last_name': 'Brown', 'dob': '1971-11-08'}]
+  3UG0IW basic_economy one_way pax=2 created=2024-05-12T19:08:07 ins=no bags=0/0 st=None | HAT263@2024-05-12[DTW-JFK $100 landed] HAT209@2024-05-12[JFK-MIA $72 landed] | pay credit_card_7726435:344
+    pax: [{'first_name': 'Liam', 'last_name': 'Johnson', 'dob': '1962-11-05'}, {'first_name': 'Isabella', 'last_name': 'Moore', 'dob': '1958-11-17'}]
+mei_ito_6207 {'first_name': 'Mei', 'last_name': 'Ito'} silver 1989-03-16 credit_card_8547862(mastercard 4474) credit_card_4134857(mastercard 1276)
+  saved: [{'first_name': 'James', 'last_name': 'Li', 'dob': '1972-07-09'}]
+  5QGJJ1 basic_economy round_trip pax=2 created=2024-05-03T13:04:20 ins=yes bags=0/0 st=None | HAT033@2024-05-20[JFK-DTW $85 available] HAT125@2024-05-20[DTW-MSP $89 available] HAT248@2024-05-22[MSP-DTW $71 available] HAT240@2024-05-22[DTW-JFK $93 available] | pay credit_card_8547862:736
+    pax: [{'first_name': 'James', 'last_name': 'Li', 'dob': '1972-07-09'}, {'first_name': 'Mason', 'last_name': 'Garcia', 'dob': '1972-12-17'}]
+  Q8YZY1 economy round_trip pax=2 created=2024-05-07T07:49:23 ins=no bags=1/0 st=None | HAT133@2024-05-16[ATL-SEA $129 available] HAT220@2024-05-17[SEA-ATL $126 available] | pay credit_card_8547862:510
+    pax: [{'first_name': 'James', 'last_name': 'Li', 'dob': '1972-07-09'}, {'first_name': 'Amelia', 'last_name': 'Santos', 'dob': '1958-08-15'}]
+  I9GT07 basic_economy one_way pax=1 created=2024-05-02T02:59:58 ins=yes bags=0/0 st=None | HAT034@2024-05-07[LAX-SFO $70 landed] HAT026@2024-05-07[SFO-BOS $62 landed] | pay credit_card_4134857:162
+    pax: [{'first_name': 'Mei', 'last_name': 'Ito', 'dob': '1989-03-16'}]
+mei_hernandez_8984 {'first_name': 'Mei', 'last_name': 'Hernandez'} gold 1981-01-11 gift_card_5309492($98.0) credit_card_2140654(mastercard 1698) certificate_7502997($250.0) certificate_3321326($250.0) credit_card_6082923(visa 3202)
+  saved: [{'first_name': 'Anya', 'last_name': 'Anderson', 'dob': '1959-05-28'}]
+  R9QDGB economy round_trip pax=3 created=2024-05-01T00:33:44 ins=yes bags=0/0 st=None | HAT034@2024-05-28[LAX-SFO $143 available] HAT026@2024-05-28[SFO-BOS $194 available] HAT247@2024-05-30[BOS-MIA $126 available] HAT232@2024-05-30[MIA-LAX $144 available] | pay credit_card_6082923:1911
+    pax: [{'first_name': 'Mei', 'last_name': 'Hernandez', 'dob': '1981-01-11'}, {'first_name': 'Liam', 'last_name': 'Kovacs', 'dob': '1996-08-21'}, {'first_name': 'Anya', 'last_name': 'Anderson', 'dob': '1959-05-28'}]
+  07S7FC business round_trip pax=2 created=2024-05-04T05:12:00 ins=yes bags=3/0 st=None | HAT286@2024-05-28[IAH-LAS $917 available] HAT175@2024-05-29[LAS-IAH $1112 available] | pay credit_card_6082923:4118
+    pax: [{'first_name': 'Anya', 'last_name': 'Anderson', 'dob': '1959-05-28'}, {'first_name': 'Sophia', 'last_name': 'Jackson', 'dob': '1965-03-19'}]
+  79G8A9 economy round_trip pax=2 created=2024-05-07T06:57:51 ins=yes bags=2/0 st=None | HAT292@2024-05-16[MIA-JFK $197 available] HAT088@2024-05-16[JFK-DTW $153 available] HAT169@2024-05-17[DTW-JFK $168 available] HAT126@2024-05-17[JFK-MIA $152 available] | pay gift_card_5309492:1400
+    pax: [{'first_name': 'Mei', 'last_name': 'Hernandez', 'dob': '1981-01-11'}, {'first_name': 'Anya', 'last_name': 'Anderson', 'dob': '1959-05-28'}]
+  1AKIA8 economy one_way pax=2 created=2024-05-01T21:48:11 ins=no bags=1/0 st=None | HAT070@2024-05-22[LAS-ATL $196 available] HAT297@2024-05-23[ATL-DFW $169 available] | pay credit_card_6082923:730
+    pax: [{'first_name': 'Mei', 'last_name': 'Hernandez', 'dob': '1981-01-11'}, {'first_name': 'Anya', 'last_name': 'Anderson', 'dob': '1959-05-28'}]
+james_ito_7657 {'first_name': 'James', 'last_name': 'Ito'} gold 1991-05-17 credit_card_9712053(visa 9421) certificate_7949562($100.0) gift_card_3484893($41.0) gift_card_2049139($181.0) certificate_4327009($100.0)
+  saved: [{'first_name': 'Aarav', 'last_name': 'Sanchez', 'dob': '1988-12-04'}]
+  PLRJB9 basic_economy round_trip pax=2 created=2024-05-05T10:17:07 ins=yes bags=0/0 st=None | HAT176@2024-05-12[CLT-DTW $71 landed] HAT191@2024-05-21[DTW-CLT $99 available] | pay credit_card_9712053:400
+    pax: [{'first_name': 'James', 'last_name': 'Ito', 'dob': '1991-05-17'}, {'first_name': 'Aarav', 'last_name': 'Sanchez', 'dob': '1988-12-04'}]
+  LVVTRZ business round_trip pax=1 created=2024-05-13T19:28:35 ins=yes bags=2/0 st=None | HAT172@2024-05-15[LGA-PHL $1973 on time] HAT096@2024-05-18[PHL-LGA $1322 available] | pay credit_card_9712053:3325
+    pax: [{'first_name': 'Aarav', 'last_name': 'Sanchez', 'dob': '1988-12-04'}]
+  BK8BS0 business one_way pax=3 created=2024-05-09T11:30:10 ins=yes bags=3/0 st=None | HAT021@2024-05-13[SEA-JFK $936 landed] HAT279@2024-05-14[JFK-IAH $609 landed] | pay gift_card_3484893:4725
+    pax: [{'first_name': 'James', 'last_name': 'Ito', 'dob': '1991-05-17'}, {'first_name': 'Aarav', 'last_name': 'Sanchez', 'dob': '1988-12-04'}, {'first_name': 'Yusuf', 'last_name': 'Muller', 'dob': '1966-10-25'}]
