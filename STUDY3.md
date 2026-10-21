@@ -975,3 +975,12 @@ All with the date hint, 0 infrastructure errors, 0 unpriced runs.
   2. **labels** on the two 30-transcript audit packs, which gate the judge and the harm ledger (κ);
   3. **underwriter outreach** (F3), drafted in the vault.
 - **C′ cannot start until F2 is frozen,** because F1 runs are deferred for blinding.
+
+**Corrections to the pilot results above** (2026-10-22, post-hoc; found by checking the analyst's own script):
+1. **G3 count.** `pilot_gates.py` read a non-existent field (`lab_attribution`), so G3 showed 0/4. The labeller's real attributions for the 4 luna failures are **1 user_caused and 3 agent_caused (25%)**, under the 30% bar.
+   - Finding 2 stands, corrected: the labeller attributed 3 of the 4 customer cut-offs to the agent.
+   - G3 alone would still have passed the artefact, so G-trunc remains the operative gate.
+2. **Containment of sealed pool content.** The labels CSV contains quotes from the 40 sealed pilot tasks. It was committed and pushed in efd4ef7, then removed from tracking. No history rewrite (no force-push).
+   - Labels now go to `study3_sealed/labels/` until F2 is frozen.
+   - **Pre-registered consequence:** the 40 pilot tasks are excluded from C′'s scored experience sample. The 200 tasks per configuration come from the other 380.
+   - Ishaan should not open commit efd4ef7's `results/study3/labels/` before freezing F2. If he has, he says so at freeze, and the exposure is recorded.

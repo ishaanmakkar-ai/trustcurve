@@ -34,13 +34,13 @@ def gates(name):
         done = [tc["name"] for m in s["messages"] if m["role"] == "assistant" for tc in (m.get("tool_calls") or []) if tc["name"] in WRITES]
         if talk and talk[-1]["role"] == "user" and "###STOP###" in (talk[-1].get("content") or "") and len(done) < len(gold):
             cut += 1
-    lab = ROOT / "results/study3/labels" / f"{name}.csv"
+    lab = ROOT / "study3_sealed/labels" / f"{name}.csv"
     uc = None
     if lab.exists():
         L = {(x["task_id"], x.get("trial")): x for x in csv.DictReader(open(lab))}
         fl = [L.get((r["task_id"], r["trial"])) for r in fails]
         fl = [x for x in fl if x]
-        uc = (sum(x.get("lab_attribution") == "user_caused" for x in fl), len(fl))
+        uc = (sum(x.get("attribution") == "user_caused" for x in fl), len(fl))
     return {"batch": name, "runs": len(ok), "errors": len(rows) - len(ok), "G1_failure_rate": round(len(fails) / max(len(ok), 1), 4),
             "failures": len(fails), "G_trunc_rate": round(cut / max(len(ok), 1), 4), "cutoffs": cut,
             "G3_user_caused_of_failures": uc}

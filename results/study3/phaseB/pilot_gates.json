@@ -18,7 +18,7 @@
   "G_trunc_rate": 0.1,
   "cutoffs": 4,
   "G3_user_caused_of_failures": [
-   0,
+   1,
    4
   ]
  },
