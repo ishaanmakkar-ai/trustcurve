@@ -289,3 +289,34 @@ This is loop 2 of at most 4.
 - **A3-P5:** at n_u = 45 (screening only), every method under-covers.
 
 This is loop 3 of at most 4.
+
+### Phase A loop 3 results (2026-10-21; `results/study2/phaseA/grid_loop3.json`, code `0228d75`, 16 cells × 400 reps)
+Key cells (n_e = 200):
+
+| Scenario, n_u | Method | Param cov | Pred cov | Upper-95 | Mean bias | Median bias | Interval score / θ | CRPS / θ | Spearman median (p10) |
+|---|---|---|---|---|---|---|---|---|---|
+| R0, 90 | M1 | 0.70 | 0.76 | 0.81 | −0.07 | −0.21 | 3.21 | 0.40 | 0.86 (0.73) |
+| R0, 90 | M1c | 0.78 | 0.83 | 0.86 | −0.08 | −0.15 | 2.44 | 0.33 | 0.90 (0.78) |
+| R0, 90 | **M2** | **0.85** | **0.87** | **0.91** | **+0.11** | −0.02 | 2.44 | 0.32 | 0.89 (0.79) |
+| R0, 45 | M2 | 0.88 | 0.88 | 0.93 | +0.25 | +0.04 | 3.00 | 0.38 | 0.84 (0.69) |
+| R2 symmetric shift, 90 | M2 | 0.81 | 0.84 | 0.89 | +0.10 | −0.05 | 2.64 | 0.34 | 0.88 (0.78) |
+| **R6 directional (+0.5), 90** | M1 | 0.45 | 0.52 | 0.55 | −0.35 | −0.45 | 4.27 | 0.44 | 0.85 (0.70) |
+| R6, 90 | M2 | 0.65 | **0.71** | 0.71 | −0.25 | −0.32 | 2.63 | 0.32 | 0.90 (0.78) |
+| R5 rare, 90 | M2 | 0.89 | 0.89 | 0.93 | +0.46 | +0.11 | 4.42 | 0.56 | 0.75 (0.56) |
+
+**Predictions:**
+- **A3-P1: confirmed.** M1 fails under the real mix (0.76).
+- **A3-P2: refuted.** M1c improves on M1 (0.83, upper-95 0.86) but doesn't pass. Cluster resampling and sparse pooling help less than credibility does.
+- **A3-P3: confirmed.** M2 covers (0.85 / 0.87) but fails mean bias (+11%), and here also upper-95 (0.91 < 0.92).
+- **A3-P4: confirmed, and it's the central threat.** A directional shift (harder experience tasks, +0.5 logit) cuts every method to 0.52–0.71 coverage and makes all forecasts too low (median bias −30% to −45%). Spearman is unaffected (0.85–0.90): the ranking survives, the level doesn't.
+- **A3-P5: partly refuted.** At n_u = 45, M2 still covers (0.88). M1 and M1c under-cover (0.83–0.85).
+
+**Decision (rule as pre-registered in A3):**
+- No method passes, so the fallback applies. **Phase C freezes M2 as primary** (the highest R0 predictive coverage ≥ 0.85), with **pre-declared limitations**: mean bias +11% (it overprices low-risk configurations) and upper-95 coverage 0.91 (the target was 0.92).
+- M1c and M1 are frozen as secondaries.
+- K1 does not fire (0.87 ≥ 0.80).
+
+**What this means for phase C, stated before any experience run:**
+- The experience spec deliberately asked for harder, boundary-testing tasks, so an R6-like directional shift is likely.
+- If so, phase A predicts forecasts **too low** and coverage near or below K2's 0.70, with ranking (Spearman) intact.
+- A K2 firing on coverage would therefore be the expected signature of "the eval underprices harder real traffic". That is a substantive finding, not a pipeline bug, and it will be reported as such.

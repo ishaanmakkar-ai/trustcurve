@@ -167,3 +167,9 @@ The review-1/2/3 resolutions re-analysed **existing** data and code. They ran no
 3. The power analysis (B5) uses the screening rates, including near-zero configurations, so the expected Spearman under ties is known before spending.
 4. Report RQ2 separately for author-written vs incident-derived experience tasks, because S2 is the threat that bit hardest.
 5. Freeze a "single-run" predictive per configuration for RQ5 (per-simulator scoring).
+
+## Phase A, loop 3 (after review 6): the real underwriting pool
+- **Expected (A3):** M1 fails; M1c passes; M2 fails bias; the directional shift breaks every method.
+- **Observed:** M1 fails (0.76), M1c fails (0.83), M2 covers (0.87) but fails bias (+11%) and upper-95 (0.91). Directional shift: every method ≤ 0.71.
+- **Decision (pre-registered fallback):** M2 primary, M1c and M1 secondary. K1 not fired. Phase A has used 3 of 4 loops.
+- **Strongest counter-explanation:** the R-scenario DGM is still mine. It has template effects of mean −0.5, configurations spanning 40×, and lognormal severity. If real configurations are closer together or rarer, the ranking (Spearman) will degrade as in R5 (0.75). The directional-shift result depends on δ = +0.5. I picked that size; it wasn't measured. The phase-B fidelity pilot measures the actual underwriting-vs-experience gap for B0 (failure rates on both pools), which tells us whether R6 is the relevant regime **before** forecasts are frozen.
