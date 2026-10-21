@@ -9,6 +9,7 @@ PY="$HOME/.local/share/trustcurve/.venv/bin/python"
 OUT="$R/results/raw/study2/$NAME"; LOG="$R/results/study2/logs/$NAME.log"; mkdir -p "$R/results/study2/logs" "$R/results/study2/runs"
 ARGS=(--config "$CFG" --tasks "$TASKS" --user-llm "$SIM" --trials 1 --conc "${CONC:-6}" --out "$OUT")
 [[ -n "$IDS" ]] && ARGS+=(--task-ids-file "$IDS")
+[[ "${DATE_HINT:-0}" == "1" ]] && ARGS+=(--date-hint)
 for attempt in 1 2 3; do
   PYTHONDONTWRITEBYTECODE=1 "$R/scripts/with_keys.sh" "$PY" "$R/scripts/study2/run_config.py" "${ARGS[@]}" >> "$LOG" 2>&1 && break
   echo "attempt $attempt failed; resuming from checkpoint" >> "$LOG"; sleep 20

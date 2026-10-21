@@ -31,6 +31,8 @@ def main():
     ap.add_argument("--conc", type=int, default=6)
     ap.add_argument("--seed", type=int, default=20261021)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--date-hint", action="store_true",
+                    help="append the world's date to the customer's known_info (experience runs; STUDY2.md B-L1)")
     a = ap.parse_args()
 
     out = Path(a.out).resolve(); out.mkdir(parents=True, exist_ok=True)
@@ -53,6 +55,11 @@ def main():
         keep = [x.strip() for x in Path(a.task_ids_file).read_text().split() if x.strip()]
         by = {str(t["id"]): t for t in raw}
         raw = [by[i] for i in keep]
+    if a.date_hint:
+        for t in raw:
+            ins = t["user_scenario"]["instructions"]
+            if isinstance(ins, dict):
+                ins["known_info"] = ((ins.get("known_info") or "").rstrip() + " Today's date is Wednesday, 15 May 2024.").strip()
     tasks = [Task.model_validate(t) for t in raw]
     run_cfg = TextRunConfig(
         domain="airline", agent=agent_name, user="user_simulator",

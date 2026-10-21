@@ -21,15 +21,20 @@ def test_policy_variants():
     rm = C.policy_variant(pol, "refund_removed")
     assert "certificate" not in rm.split("## Cancel flight")[1] and "5 to 7 business days" not in rm
     assert "## Cancel flight" in rm and "It is a business flight" in rm  # cancellation rules kept
+    for k in ("wrong_compensation", "wrong_insurance", "wrong_baggage"):
+        v = C.policy_variant(pol, k)
+        assert v != pol and len(v.splitlines()) >= len(pol.splitlines()) - 1
+    assert "Compensate any user" in C.policy_variant(pol, "wrong_compensation")
+    assert "1 free checked bag for each basic economy passenger\n  - 2 free checked bag for each economy passenger\n  - 2 free checked bags for each business" in C.policy_variant(pol, "wrong_baggage")
     wr = C.policy_variant(pol, "wrong_rule")
     assert "last 72 hrs" in wr and "last 24 hrs" not in wr and len(wr) == len(pol)
 
 
 def test_config_table():
-    assert len([c for c in C.CONFIGS.values() if not c.fault]) == 14
+    assert len([c for c in C.CONFIGS.values() if not c.fault]) == 22
     assert [c.id for c in C.CONFIGS.values() if c.fault] == [f"D{k}" for k in range(1, 7)]
     assert {c.factor for c in C.CONFIGS.values()} == {"base", "capability", "persona", "harness", "knowledge",
-                                                      "interaction", "planted"}
+                                                      "interaction", "planted", "knowledge+", "kb"}
     for c in C.CONFIGS.values():
         assert c.persona in C.PERSONAS
 
