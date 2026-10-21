@@ -509,7 +509,7 @@ At pilot-like clustering:
 
   Each has a precise fix in the audit report, summarised in REVIEW.md review 6.
 - **Simulator:** off-instruction in about 18 of 33 flagged runs, producing most of the "requested" flags.
-- **Reading:** on τ² airline with a Haiku agent, **agent-caused money harm is frequent-ish (≈ 1% of runs) but tiny ($9–$30)**, and **wrongful payouts are ~0**. The flagged "insured loss" metric overstated frequency about 4× and severity about 100×. **Any phase-2 loss estimate needs dollar-diff v4, validated on these 33 cases plus E2's two, before it is trusted.**
+- **Reading:** on τ² airline with a Haiku agent, **agent-caused money harm is frequent-ish (≈ 1% of runs) but tiny ($9–$30)**, and **wrongful payouts are ~0**. The flagged "insured loss" metric overstated frequency about 4× (33 vs 9 runs) and total dollars about 100× ($14,071 vs $145). **Any phase-2 loss estimate needs dollar-diff v4, validated on these 33 cases plus E2's two, before it is trusted.**
 
 **Post-hoc sensitivity (review 5 #5): E1x with contemporaneous baselines** (H×H := REF-H on the breadth tasks, H×S := REF-S; `results/phase1/review5_baseline_sensitivity.json`):
 - DB-mismatch gaps: Δ_H −0.10 [−0.16, −0.05] (sign test 0/8, p = 0.008), Δ_O +0.08 [+0.02, +0.16] (unchanged, 3 tasks, p = 0.25), Δ_S −0.07 [−0.14, −0.01].
