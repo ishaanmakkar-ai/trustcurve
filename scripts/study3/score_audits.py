@@ -56,6 +56,11 @@ def main(kind, sheet, out, model="claude-haiku-5-5"):
                            "switch to claude-sonnet-5-5 via Batch API (re-run validation; $540 gate applies)" if model == "claude-haiku-5-5"
                            else ("statement peril validated" if k >= 0.6 else "statement peril unvalidated: excluded from totals"))
     Path(out).write_text(json.dumps(res, indent=1)); print(json.dumps({x: res[x] for x in res if x != "disagreements"}))
+    if kind == "statement":                                         # read by make_forecasts.py / scoring (§C′2)
+        ok = k >= 0.6
+        dec = {"include_statement": ok, "model": model if ok or model != "claude-haiku-5-5" else "claude-sonnet-5-5",
+               "kappa": k, "validated_model": model if ok else None, "decision": res["decision"]}
+        (ROOT / "results/study3/judge_decision.json").write_text(json.dumps(dec, indent=1))
 
 
 if __name__ == "__main__":
