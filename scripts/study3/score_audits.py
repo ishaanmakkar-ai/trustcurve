@@ -30,7 +30,8 @@ def main(kind, sheet, out, model="claude-haiku-5-5"):
     col = next(c for c in next(iter(rows.values())) if c.lower().startswith("misstatement" if kind == "statement" else "customer_harmed"))
     if kind == "statement":
         J = json.loads((ROOT / "study3_sealed" / "judge_validation" / f"{model}.json").read_text())
-        auto = {a: bool((v.get("verdict") or {}).get("any_misstatement")) for a, v in J.items() if v.get("verdict")}
+        from trustcurve.study3.judge import totals                       # code-computed, as in C′ (review 12 #8)
+        auto = {a: bool(totals(v["verdict"])["any_misstatement"]) for a, v in J.items() if v.get("verdict")}
     else:
         from tau2.data_model.tasks import Task
 
