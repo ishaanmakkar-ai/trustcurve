@@ -247,3 +247,31 @@ The closing summary overclaimed and left items off the PI list. Resolved by the 
 | 11 | Low | O leaves out the statement judge and forecasts the mean | O is called an **approximate** ceiling. A judge-aware O changes nothing material (ceiling 0.19 → 0.26 at ρ1 = 1) |
 | 12 | Low | False-positive maximum over all 96 cells is 0.027; the rate curve pools all ρ2 and r ranges; choices made in code were unlabelled | **Labelled** |
 | 13 | Low | Authoring order is mitigated, not proven. "Exposure-matched" is 300 vs 270 task-runs | **Accepted.** Wording changed to "approximately matched" |
+
+## Review 12 — after Study 3 phase B′ (infrastructure), 2026-10-22
+A fresh-context reviewer, who opened no sealed content:
+- recomputed every seal and pool hash, and all match;
+- confirmed the flaw seal predates any benchmark run (none exists yet);
+- reproduced the pilot numbers;
+- ran the 18 Study 3 tests, which passed.
+
+It found two loss-accounting defects and several blinding and pre-registration gaps.
+
+| # | Severity | Finding | Resolution |
+|---|---|---|---|
+| 1 | Critical | ledger3's cut-off rule made withheld refunds impossible to record, because every τ² run ends on the customer's ###STOP### | **Fixed.** `is_cutoff` now requires an affirming final message that directly answers an agent request to confirm or proceed. Tests use realistic STOP endings, and G-trunc uses the same function. Re-checked on Study 2 B0: all cut-offs and transfers are uncertain, and the one primary event was read (genuine) |
+| 2 | High | Missing harm kinds: fare and cabin overcharge on changes and bookings | **Fixed:** `fare_overcharge`, `cabin_upgrade_unrequested`, `withheld_change_refund`, with tests. Labelled a pre-data correction |
+| 3 | High | The card map could be rebuilt from the committed seed and the public roster | **Fixed.** Cards were redrawn with a secret 128-bit seed, sealed with the mapping (new seal `5661742f…`) |
+| 4 | High | The repo is public; efd4ef7's quotes are permanent | **Put to Ishaan** (make the repo private until D′?). Recorded as a limitation. efd4ef7 is on the attestation list |
+| 5 | High | The F2 kit's do-not-open list was incomplete and out of date | **Fixed.** The kit is rewritten as an allow-list with a freeze attestation. STUDY3 §C′0 pre-registers the designer-exposed H2 primary set (X + M, 8 configurations) |
+| 6 | Med-High | No 3-peril forecast or detection pipeline pre-registered | **Pre-registered** in §C′2–C′4 (code is written before any F1/F2 run): perils, caps, primary total, events, secondary failure flag, E7's role, the statement-excluded variant |
+| 7 | Med-High | Nobody had checked that the flaws fire | **Done:** blind replay (`replay_faults.py`, $0, no keys in the environment). All 12 modules are clean. D4 and M3 (Study 2 conversations), and D1, D2, D4, X3 and M3 (Study 3 pilot), never fired. **Exposure-conditional H2 pre-registered** |
+| 8 | Medium | Judge: temperature, batch path, parse failures, totals | **Fixed.** Totals are computed in code (caps and de-duplication) with tests; a "missing" rule; a Batch API path at 50% pricing. The temperature deviation is labelled: Haiku and Sonnet 5.5 reject non-default sampling |
+| 9 | Medium | Spend-guard races and fail-open | **Fixed:** a file lock, cumulative recomputed from all rows, collection failures book the projected cost, C′ batches run one at a time |
+| 10 | Medium | Stale budget mixing scenarios | **Recomputed** with pilot-measured costs and N4 = gpt-4o-mini: **≈ $377 with a Haiku judge, ≈ $511 with a Sonnet batch judge**, both under the $540 gate. F2 trap tasks are capped at 70 |
+| 11 | Medium | No F2 freeze protocol | **Pre-registered** (§C′0): meta fields, validator, hash, drop-never-edit, no runs before the freeze, E7 merge |
+| 12 | Medium | F3 transcript selection; designer-known matching rule | **Fixed:** F3 task IDs are fixed by seed and committed before any F1 run (`f3_transcript_ids.txt`). A blind matching rule for designer-known types at D′ is pre-registered (§C′6) |
+| 13 | Medium | Contradiction about pilot tasks; sampling undefined | **Resolved:** the pilot tasks are excluded (the later correction governs). 200 tasks from the 380, disjoint Sonnet and luna halves, and the order are pre-registered (§C′5) |
+| 14 | Low-Med | The G-trunc code didn't match its definition; not measured for the Haiku customer | **Fixed:** it uses `is_cutoff`, and the luna pilot result is unchanged (4/40). The Haiku underwriting customer is 1.5% on 585 Study 2 runs (passes) |
+| 15 | Low | Housekeeping | B′ check 5 (G1) is recorded as **unmet**. Commits 703610c and a8342ef mixed pre-registration text with code; both were before any paid call (**labelled**). The policies README was updated for N4. The commission audit pack is Study 2's. An `unrequested_bags` test was added |
+| 16 | Low | Process-global state; exec of the LLM-written module with keys in the environment | **Documented:** one configuration per process (`run_config3.py`). Replay ran without API keys. C′ runs need keys for the agent itself, and a module that exfiltrates them would be visible in the code read at D′. This residual risk is accepted and noted |
