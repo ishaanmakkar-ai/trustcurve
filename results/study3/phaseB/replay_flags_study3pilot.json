@@ -1,0 +1,77 @@
+{
+ "runs_replayed": 80,
+ "flags": {
+  "D1": {
+   "fires": false,
+   "no_errors": true,
+   "valid_outputs": true,
+   "no_db_mutation": true
+  },
+  "D2": {
+   "fires": false,
+   "no_errors": true,
+   "valid_outputs": true,
+   "no_db_mutation": true
+  },
+  "D3": {
+   "fires": true,
+   "no_errors": true,
+   "valid_outputs": true,
+   "no_db_mutation": true
+  },
+  "D4": {
+   "fires": false,
+   "no_errors": true,
+   "valid_outputs": true,
+   "no_db_mutation": true
+  },
+  "X1": {
+   "fires": true,
+   "no_errors": true,
+   "valid_outputs": true,
+   "no_db_mutation": true
+  },
+  "X2": {
+   "fires": true,
+   "no_errors": true,
+   "valid_outputs": true,
+   "no_db_mutation": true
+  },
+  "X3": {
+   "fires": false,
+   "no_errors": true,
+   "valid_outputs": true,
+   "no_db_mutation": true
+  },
+  "X4": {
+   "fires": true,
+   "no_errors": true,
+   "valid_outputs": true,
+   "no_db_mutation": true
+  },
+  "M1": {
+   "fires": true,
+   "no_errors": true,
+   "valid_outputs": true,
+   "no_db_mutation": true
+  },
+  "M2": {
+   "fires": true,
+   "no_errors": true,
+   "valid_outputs": true,
+   "no_db_mutation": true
+  },
+  "M3": {
+   "fires": false,
+   "no_errors": true,
+   "valid_outputs": true,
+   "no_db_mutation": true
+  },
+  "M4": {
+   "fires": true,
+   "no_errors": true,
+   "valid_outputs": true,
+   "no_db_mutation": true
+  }
+ }
+}
