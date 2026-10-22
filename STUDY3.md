@@ -1139,3 +1139,20 @@ Both are under the $540 gate. The superseded $470 / $590 figures priced N4 as Ha
 - underwriters, and anyone else, could read the roster, the seal notes, the planter brief and commit history, including efd4ef7;
 - blinding relies on the cards' instruction ("use only the card and transcripts; don't try to identify the agents") and on Ishaan's freeze attestation;
 - the card mapping itself is sealed with a secret seed.
+
+## Ishaan's decision (2026-10-22): F2 built from his taxonomy by a design agent (pre-registered amendment)
+- **Ishaan fills the risk-taxonomy table** in the F2 Build Kit (vault, §3).
+- **A fresh-context Claude design agent writes the ≤ 70 trap tasks from it.** The agent is blind to:
+  - every flaw catalogue;
+  - the roster;
+  - the experience pool and spec;
+  - all Study 3 notes.
+
+  It sees only the kit's allow-list, Ishaan's taxonomy and the validator.
+- **The freeze protocol (§C′0) applies unchanged:**
+  - E7 is merged as the pricing arm;
+  - the validator must report 0 invalid;
+  - the hash is committed before any F1 or F2 run.
+  - Ishaan's attestation covers what *he* saw while writing the taxonomy, since his taxonomy is what F2 inherits.
+- **What this tests:** the question becomes "does a benchmark designed from Ishaan's risk taxonomy, by a designer blind to the flaws, beat the generic one". The write-up states this.
+- The designed-flaw planter is an OpenAI model, so it is a different family from the Claude design agent, as the plan requires.
