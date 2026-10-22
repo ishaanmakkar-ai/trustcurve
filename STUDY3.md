@@ -1156,3 +1156,16 @@ Both are under the $540 gate. The superseded $470 / $590 figures priced N4 as Ha
   - Ishaan's attestation covers what *he* saw while writing the taxonomy, since his taxonomy is what F2 inherits.
 - **What this tests:** the question becomes "does a benchmark designed from Ishaan's risk taxonomy, by a designer blind to the flaws, beat the generic one". The write-up states this.
 - The designed-flaw planter is an OpenAI model, so it is a different family from the Claude design agent, as the plan requires.
+
+### C′–E′ runbook (2026-10-22; all code written and tested on synthetic data; 28 Study 3 tests pass)
+The sequence after Ishaan's taxonomy arrives (each step is committed before the next):
+1. **F2 design agent** (`tasks/study3/F2_DESIGNER_BRIEF.md` + Ishaan's taxonomy) writes `tasks/study3/F2/trap_pool.json` and `trap_meta.json`.
+   `scripts/study3/freeze_f2.py` merges in E7, validates and prints the hash. **Commit F2 with its hash and Ishaan's attestation.**
+2. **Underwriting:** `run_phase_c.py underwriting`. This is 40 batches, run sequentially and spend-guarded. It refuses to run without frozen F2.
+3. **Underwriting judge:** `judge_batch.py uw- <model>`. The model is per `judge_decision.json`; if Ishaan's labels aren't in, Haiku, with the statement peril unvalidated.
+4. **F3 transcripts:** from `f3_transcript_ids.txt` (trial 0 of F1), packed with the cards. Underwriter prices go to `results/study3/f3_prices.csv` if Ishaan collects any.
+5. **Freeze:** `make_forecasts.py` writes `forecasts_frozen.json` with blind detection. **Commit it with the SHA-256 in the message.**
+6. **Experience:** `run_phase_c.py experience`. It refuses to run unless the frozen forecasts are committed. Then `judge_batch.py exp- <model>`.
+7. **Score:** `score_c.py` writes `phaseC/score_c.json`. **Commit it.** Then fresh-context review 13.
+8. **D′:** `unseal_d.py`. It refuses to run before step 7 is committed, and it verifies the seals. Then a fresh-context designer-known matcher, the D′ write-up and review 14.
+9. **E′:** `figures.py`, then the STUDY3 §E write-up, then the final summary.
