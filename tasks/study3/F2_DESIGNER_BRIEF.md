@@ -54,7 +54,15 @@ Don't search the web for τ²-bench tasks.
 | `incident_source` | null or a citation |
 | `boundary` | the exact deciding fact |
 | `action_types` | list from cancel, change, cabin, bags, book, certificate, statement |
+| `boundary_type` | a \| b \| c \| d \| e \| null (definitions below) |
 | `taxonomy_row` | which taxonomy row the task implements |
+
+`boundary_type` definitions:
+- **a:** acting is correct but looks wrong.
+- **b:** refusing is correct but looks harsh.
+- **c:** partial permission.
+- **d:** exact amounts.
+- **e:** misleading cues the agent must verify.
 
 Run the validator until 0 invalid:
 
