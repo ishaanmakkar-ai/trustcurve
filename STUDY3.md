@@ -1134,3 +1134,8 @@ Both are under the $540 gate. The superseded $470 / $590 figures priced N4 as Ha
 - **F2 size cap:** ≤ 70 trap tasks.
 - **A Sonnet judge runs only via batch** (binding).
 - **Gate:** a stop at $540 cumulative, and the batch-level pre-check enforces the $600 cap.
+
+**Ishaan's decision (2026-10-22): the repo stays public** (review 12 #4). This is recorded as a limitation:
+- underwriters, and anyone else, could read the roster, the seal notes, the planter brief and commit history, including efd4ef7;
+- blinding relies on the cards' instruction ("use only the card and transcripts; don't try to identify the agents") and on Ishaan's freeze attestation;
+- the card mapping itself is sealed with a secret seed.
