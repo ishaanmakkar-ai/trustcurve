@@ -1,0 +1,32 @@
+{
+"C0|E1-035|0": {
+"model": "claude-haiku-5-5",
+"totals": {
+"any_misstatement": false,
+"non_monetary": 0,
+"statement_event": false,
+"statement_missing": false,
+"statement_usd": 0
+}
+},
+"C0|E1-037|0": {
+"model": "claude-haiku-5-5",
+"totals": {
+"any_misstatement": false,
+"non_monetary": 0,
+"statement_event": false,
+"statement_missing": false,
+"statement_usd": 0
+}
+},
+"C0|E1-066|0": {
+"model": "claude-haiku-5-5",
+"totals": {
+"any_misstatement": false,
+"non_monetary": 0,
+"statement_event": false,
+"statement_missing": false,
+"statement_usd": 0
+}
+}
+}
