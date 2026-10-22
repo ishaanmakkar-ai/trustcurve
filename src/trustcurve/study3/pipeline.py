@@ -85,3 +85,40 @@ def forecasts(recs_by_cfg: dict, W: dict, tasks: set | None = None, n_e: int = 2
     return {c: {"point": f.point, "p75": float(np.quantile(f.pred_draws, 0.75)), "lo90": f.pred_lo90,
                 "hi90": f.pred_hi90, "theta_lo90": f.lo90, "theta_hi90": f.hi90, "n_tasks": f.n_tasks,
                 "n_events": f.n_events, "notes": f.notes} for c, f in fc.items()}
+
+
+def f3_from_prices(rows: list[dict], card_map: dict) -> dict:
+    """Underwriter prices (rows: agent, total_per_1000_usd, total_low_90_usd, total_high_90_usd) -> per config
+    {point, p75, lo90, hi90} in $/conversation: median across underwriters, lognormal p75 from the median range."""
+    from trustcurve.study3.econ import f3_from_range
+    by = defaultdict(list)
+    for r in rows:
+        try:
+            by[card_map[r["agent"].strip()]].append((float(r["total_per_1000_usd"]) / 1000,
+                                                     float(r["total_low_90_usd"]) / 1000,
+                                                     float(r["total_high_90_usd"]) / 1000))
+        except (KeyError, ValueError):
+            continue
+    out = {}
+    for c, v in by.items():
+        med, lo, hi = (float(np.median([x[i] for x in v])) for i in range(3))
+        d = f3_from_range(med, max(lo, 1e-6), max(hi, 1e-6))
+        out[c] = {"point": d["point"], "p75": d["p75"], "lo90": lo, "hi90": hi, "n_underwriters": len(v)}
+    return out
+
+
+def freeze_all(f1_rows, f2_rows, statements: dict, include_statement: bool, W: dict, e7_ids: set, cards: dict,
+               f3_rows: list | None = None, card_map: dict | None = None, seed: int = 20261026) -> dict:
+    """Everything frozen before the experience period (STUDY3.md §C′3–C′4): blind detection and all forecasters."""
+    from trustcurve.study3.econ import add_outside_in
+    f1 = assemble(f1_rows, statements, include_statement)
+    f1_1 = {c: [r for r in recs if r["trial"] == "0"] for c, recs in f1.items()}
+    f2 = assemble(f2_rows, statements, include_statement)
+    det = {"F1_1": detection(f1_1), "F1_3": detection(f1), "F2": detection(f2)}
+    fc = {"F1_3": forecasts(f1, W, seed=seed), "F1_1": forecasts(f1_1, W, seed=seed + 1),
+          "F2": forecasts(f2, W, tasks=set(e7_ids), seed=seed + 2), "F2p": forecasts(f2, W, seed=seed + 3)}
+    fc, mods = add_outside_in(fc, cards, anchor="F1_3")
+    if f3_rows and card_map:
+        fc["F3"] = f3_from_prices(f3_rows, card_map)
+    return {"include_statement": include_statement, "W": W, "detection": det, "forecasts": fc, "card_modifiers": mods,
+            "n_runs": {"F1": sum(map(len, f1.values())), "F2": sum(map(len, f2.values()))}, "e7_tasks": len(e7_ids)}

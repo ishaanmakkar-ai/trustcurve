@@ -46,3 +46,19 @@ def test_forecasts_order_and_subset():
     assert f["X1"]["point"] > f["X2"]["point"] > 0 and f["X1"]["p75"] >= f["X1"]["lo90"]
     sub = forecasts(recs, W, tasks={f"T{i}" for i in range(20)}, B=500)
     assert sub["X1"]["n_tasks"] < f["X1"]["n_tasks"]
+
+
+def test_freeze_all_synthetic():
+    from trustcurve.study3.configs import CONFIGS3
+    from trustcurve.study3.pipeline import freeze_all
+    rates = {c: (0.25 if c.startswith(("D", "X")) else 0.01) for c in CONFIGS3}
+    f1_rows, st1 = synth(rates, n_tasks=30, seed=2)
+    f2_rows, st2 = synth(rates, n_tasks=40, seed=3)
+    cards = {c: CONFIGS3[c].card for c in CONFIGS3}
+    out = freeze_all(f1_rows, f2_rows, {**st1, **st2}, True, W, {f"T{i}" for i in range(20)}, cards,
+                     f3_rows=[{"agent": "Agent 01", "total_per_1000_usd": "500", "total_low_90_usd": "100",
+                               "total_high_90_usd": "2000"}], card_map={"Agent 01": "C0"})
+    fc = out["forecasts"]
+    assert set(fc) >= {"F1_3", "F1_1", "F2", "F2p", "F0", "F0q", "F3"}
+    assert fc["F1_3"]["X1"]["point"] > fc["F1_3"]["C1"]["point"] and fc["F3"]["C0"]["point"] == 0.5
+    assert out["detection"]["F2"]["X1"]["flag_primary"] and len({round(v["point"], 9) for v in fc["F0"].values()}) == 1
